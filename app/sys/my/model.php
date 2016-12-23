@@ -34,6 +34,11 @@ class myModel extends model
             {
                 if(isset($this->lang->my->{$method}->menu->$name)) $moduleMenus->$name = $this->lang->my->{$method}->menu->$name;
             }
+
+            foreach($this->lang->my->{$method}->menu as $key => $value)
+            {
+                if(!isset($moduleMenus->$key)) $moduleMenus->$key = $value;
+            }
         }
         else
         {

@@ -356,6 +356,11 @@ class commonModel extends model
             {
                 if(isset($lang->menu->{$app->appName}->$name)) $allMenus->$name = $lang->menu->{$app->appName}->$name;
             }
+
+            foreach($lang->menu->{$app->appName} as $key => $value)
+            {
+                if(!isset($allMenus->$key)) $allMenus->$key = $value;
+            }
         }
         else
         {
@@ -443,6 +448,11 @@ class commonModel extends model
             {
                 if(isset($lang->{$currentModule}->menu->$name)) $moduleMenus->$name = $lang->{$currentModule}->menu->$name;
             }
+
+            foreach($lang->{$currentModule}->menu as $key => $value)
+            {
+                if(!isset($moduleMenus->$key)) $moduleMenus->$key = $value;
+            }
         }
         else
         {
@@ -524,6 +534,11 @@ class commonModel extends model
             foreach($menuOrder as $name)
             {
                 if(isset($lang->menu->dashboard->$name)) $allMenus->$name = $lang->menu->dashboard->$name;
+            }
+
+            foreach($lang->menu->dashboard as $key => $value)
+            {
+                if(!isset($allMenus->$key)) $allMenus->$key = $value;
             }
         }
         else
