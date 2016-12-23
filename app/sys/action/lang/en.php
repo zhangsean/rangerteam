@@ -252,6 +252,7 @@ $lang->action->objectTypes['contract']  = 'Contract';
 $lang->action->objectTypes['project']   = 'Project';
 $lang->action->objectTypes['user']      = 'User';
 $lang->action->objectTypes['resume']    = 'Resume';
+$lang->action->objectTypes['leave']     = 'Leave';
 $lang->action->objectTypes['lieu']      = 'Lieu';
 $lang->action->objectTypes['overtime']  = 'Overtime';
 $lang->action->objectTypes['refund']    = 'Reimburse';

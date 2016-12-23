@@ -73,7 +73,6 @@ $lang->link           = 'Links';
 $lang->frontHome      = 'Front';
 $lang->forumHome      = 'Forum';
 $lang->bookHome       = 'Book';
-$lang->dashboard      = 'Dashboard';
 $lang->register       = 'Register';
 $lang->logout         = 'Logout';
 $lang->login          = 'Login';

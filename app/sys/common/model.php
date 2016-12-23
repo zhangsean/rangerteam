@@ -42,19 +42,19 @@ class commonModel extends model
         $this->config->system   = isset($config['system']) ? $config['system'] : new stdclass();
         $this->config->personal = isset($config[$account]) ? $config[$account] : new stdclass();
 
-        //foreach($this->config->system as $module => $records)
-        //{
-        //    /* Overide the items defined in config/config.php and config/my.php. */
-        //    if(!isset($this->config->$module)) $this->config->$module = new stdclass();
-        //    if(isset($this->config->system->$module)) helper::mergeConfig($this->config->system->$module, $module);
-        //}
+        foreach($this->config->system as $module => $records)
+        {
+            /* Overide the items defined in config/config.php and config/my.php. */
+            if(!isset($this->config->$module)) $this->config->$module = new stdclass();
+            if(isset($this->config->system->$module)) helper::mergeConfig($this->config->system->$module, $module);
+        }
 
-        //foreach($this->config->personal as $module => $records)
-        //{
-        //    /* Overide the items defined in config/config.php and config/my.php. */
-        //    if(!isset($this->config->$module)) $this->config->$module = new stdclass();
-        //    if(isset($this->config->personal->$module)) helper::mergeConfig($this->config->personal->$module, $module);
-        //}
+        foreach($this->config->personal as $module => $records)
+        {
+            /* Overide the items defined in config/config.php and config/my.php. */
+            if(!isset($this->config->$module)) $this->config->$module = new stdclass();
+            if(isset($this->config->personal->$module)) helper::mergeConfig($this->config->personal->$module, $module);
+        }
         /* Overide the items defined in config/config.php and config/my.php. */
         if(isset($this->config->system->common)) helper::mergeConfig($this->config->system->common, 'common');
         if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
