@@ -27,7 +27,8 @@ class doc extends control
         $this->loadModel('tree');
         $this->loadModel('action');
 
-        $this->lang->doc->menu = $this->doc->getSubMenus($this->libs);
+        $this->lang->doc->menu      = $this->doc->getSubMenus($this->libs);
+        $this->lang->doc->menuOrder = $this->doc->getSubMenusOrder($this->libs);
     }
 
     /**

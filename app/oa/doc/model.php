@@ -72,6 +72,29 @@ class docModel extends model
     }
 
     /**
+     * Get left menus order.
+     * 
+     * @param  mix    $libs 
+     * @access public
+     * @return void
+     */
+    public function getSubMenusOrder($libs = null)
+    {
+        if(empty($libs)) $libs = $this->getLibList();
+
+        $libMenuOrder = array();
+        foreach($libs as $id => $libName)
+        {
+            $libID = isset($this->lang->doc->systemLibs[$id]) ? $id : 'lib' . $id;
+            $libMenuOrder[] = $libID;
+        }
+
+        foreach($this->lang->doc->menuOrder as $menu) $libMenuOrder[] = $menu;
+
+        return $libMenuOrder;
+    }
+
+    /**
      * Create a library.
      * 
      * @access public
