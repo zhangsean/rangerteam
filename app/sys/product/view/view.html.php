@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../common/view/header.html.php'; ?>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php'; ?>
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('product', 'browse', '', $lang->product->list);?></li>
   <li class='divider angle'></li>

@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php js::set('status', $status);?>
 <div id='menuActions'>
   <?php commonModel::printLink('product', 'create', '', '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal' data-width='600'");?>
