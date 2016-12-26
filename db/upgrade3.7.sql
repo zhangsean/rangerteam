@@ -8,6 +8,7 @@ ALTER TABLE `cash_trade` ADD INDEX `investID` (`investID`);
 ALTER TABLE `cash_trade` ADD INDEX `loanID` (`loanID`);
 ALTER TABLE `cash_trade` ADD INDEX `dept` (`dept`);
 
-UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='product' AND `section`='lineList';
+UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='product';
+UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='customer';
 
 DELETE FROM `sys_grouppriv` WHERE `module`='leave' AND `method`='reviewBack';
