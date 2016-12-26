@@ -81,6 +81,7 @@ $lang->trade->compare      = '年度对比表';
 $lang->trade->report = new stdclass();
 $lang->trade->report->common      = '报表'; 
 $lang->trade->report->annual      = '年度收支表'; 
+$lang->trade->report->month       = '月度收支表'; 
 $lang->trade->report->compare     = '年度对比表';
 $lang->trade->report->create      = '生成报表';
 $lang->trade->report->selectYears = '选择年份';
