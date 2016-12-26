@@ -11,12 +11,6 @@
  */
 class customerModel extends model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->app->loadLang('customer', 'sys');
-    }
-
     /**
      * Get customer by id.
      * 
