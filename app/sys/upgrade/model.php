@@ -40,7 +40,8 @@ class upgradeModel extends model
             foreach($deleteFiles as $file)
             {
                 $fullPath = $basePath . str_replace('/', DIRECTORY_SEPARATOR, $file);
-                if(file_exists($fullPath) and !unlink($fullPath)) $result[] = sprintf($this->lang->upgrade->deleteFile, $fullPath);
+                if(is_dir($fullPath)  and !rmdir($fullPath))  $result[] = sprintf($this->lang->upgrade->deleteDir, $fullPath);
+                if(is_file($fullPath) and !unlink($fullPath)) $result[] = sprintf($this->lang->upgrade->deleteFile, $fullPath);
             }
         }
         if(!empty($result)) return array('' => $this->lang->upgrade->deleteTips) + $result;

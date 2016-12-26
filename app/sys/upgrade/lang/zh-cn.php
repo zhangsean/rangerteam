@@ -76,5 +76,6 @@ $lang->upgrade->fromVersions['3_5']      = '3.5';
 $lang->upgrade->fromVersions['3_6']      = '3.6';
 
 $lang->upgrade->deleteTips   = '需要删除部分文件。linux下面命令为：<br />';
+$lang->upgrade->deleteDir    = '<code>rm -fr %s</code>';
 $lang->upgrade->deleteFile   = '<code>rm %s</code>';
 $lang->upgrade->afterDeleted = '<br />删除以上文件后刷新！';
