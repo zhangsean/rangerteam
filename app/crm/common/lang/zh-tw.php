@@ -70,12 +70,12 @@ $lang->contract->menu->report       = '報表|report|browse|module=contract';
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->product        = '產品狀態|setting|lang|module=product&field=statusList';
-$lang->setting->menu->productLine    = '產品綫|setting|lang|module=product&field=lineList';
-$lang->setting->menu->customerType   = '客戶類型|setting|lang|module=customer&field=typeList';
-$lang->setting->menu->customerSize   = '客戶規模|setting|lang|module=customer&field=sizeNameList';
-$lang->setting->menu->customerLevel  = '客戶等級|setting|lang|module=customer&field=levelNameList';
-$lang->setting->menu->customerStatus = '客戶狀態|setting|lang|module=customer&field=statusList';
+$lang->setting->menu->product        = '產品狀態|setting|lang|module=product&field=statusList&appName=sys';
+$lang->setting->menu->productLine    = '產品綫|setting|lang|module=product&field=lineList&appName=sys';
+$lang->setting->menu->customerType   = '客戶類型|setting|lang|module=customer&field=typeList&appName=sys';
+$lang->setting->menu->customerSize   = '客戶規模|setting|lang|module=customer&field=sizeNameList&appName=sys';
+$lang->setting->menu->customerLevel  = '客戶等級|setting|lang|module=customer&field=levelNameList&appName=sys';
+$lang->setting->menu->customerStatus = '客戶狀態|setting|lang|module=customer&field=statusList&appName=sys';
 $lang->setting->menu->area           = '區域設置|tree|browse|type=area|';
 $lang->setting->menu->industry       = '行業設置|tree|browse|type=industry|';
 $lang->setting->menu->currency       = '貨幣設置|setting|lang|module=common&field=currencyList';
