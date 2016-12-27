@@ -143,6 +143,7 @@ $config->rights->member['leave']['create']       = 'create';
 $config->rights->member['leave']['edit']         = 'edit';
 $config->rights->member['leave']['delete']       = 'delete';
 $config->rights->member['leave']['switchstatus'] = 'switchstatus';
+$config->rights->member['leave']['back']         = 'back';
 
 $config->rights->member['lieu']['personal']     = 'personal';
 $config->rights->member['lieu']['create']       = 'create';
