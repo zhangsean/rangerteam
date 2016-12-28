@@ -163,6 +163,11 @@ $config->rights->member['trip']['create']   = 'create';
 $config->rights->member['trip']['edit']     = 'edit';
 $config->rights->member['trip']['delete']   = 'delete';
 
+$config->rights->member['egress']['personal'] = 'personal';
+$config->rights->member['egress']['create']   = 'create';
+$config->rights->member['egress']['edit']     = 'edit';
+$config->rights->member['egress']['delete']   = 'delete';
+
 $config->rights->member['out']['personal'] = 'personal';
 $config->rights->member['out']['create']   = 'create';
 $config->rights->member['out']['edit']     = 'edit';
