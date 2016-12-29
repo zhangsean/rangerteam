@@ -403,7 +403,7 @@ class attendModel extends model
         $account = $this->app->user->account;
         $today   = helper::today();
         if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false ||
-           strpos(',' . $this->config->attend->readers->{$today} . ',', ',' . $account . ',') !== false) return '';
+           (isset($this->config->attend->readers->{$today}) and strpos(',' . $this->config->attend->readers->{$today} . ',', ',' . $account . ',') !== false)) return '';
 
         $link    = helper::createLink('oa.attend', 'personal');
         $misc    = "class='app-btn alert-link' data-id='oa'";
