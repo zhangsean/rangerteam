@@ -81,8 +81,8 @@ class trip extends control
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
-        $monthList    = $this->trip->getAllMonth($this->type);
-        $yearList     = array_reverse(array_keys($monthList));
+        $monthList    = $this->trip->getAllMonth($this->type, $mode);
+        $yearList     = array_keys($monthList);
         $deptList     = array();
 
         if($mode == 'personal')

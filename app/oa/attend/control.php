@@ -29,8 +29,8 @@ class attend extends control
         $weekNum      = (int)ceil($dayNum / 7);
 
         $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate > helper::today() ? helper::today() : $endDate);
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
+        $monthList = $this->attend->getAllMonth($type = 'personal');
+        $yearList  = array_keys($monthList);
 
         $this->view->title        = $this->lang->attend->personal;
         $this->view->attends      = $attends;
@@ -85,8 +85,8 @@ class attend extends control
 
         $dayNum    = (int)date('d', strtotime("$endDate -1 day"));
         $weekNum   = (int)ceil($dayNum / 7);
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
+        $monthList = $this->attend->getAllMonth($type = $company ? 'company' : 'department');
+        $yearList  = array_keys($monthList);
 
         /* Get deptList. */
         if($company) 
@@ -687,8 +687,8 @@ class attend extends control
             }
         }
 
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
+        $monthList = $this->attend->getAllMonth($type = 'stat');
+        $yearList  = array_keys($monthList);
 
         $this->view->title        = $this->lang->attend->stat;
         $this->view->mode         = $mode;

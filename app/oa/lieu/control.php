@@ -71,8 +71,8 @@ class lieu extends control
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
-        $monthList    = $this->lieu->getAllMonth();
-        $yearList     = array_reverse(array_keys($monthList));
+        $monthList    = $this->lieu->getAllMonth($type);
+        $yearList     = array_keys($monthList);
         $deptList     = $this->loadModel('tree')->getPairs(0, 'dept');
         $lieuList     = array();
 
