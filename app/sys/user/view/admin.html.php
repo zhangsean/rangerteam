@@ -27,6 +27,9 @@ js::set('from', 'admin');
               <div class="pull-right panel-actions search">
                 <form method='post' class='form-inline form-search w-300px'>
                   <div class="input-group">
+                    <span class='input-group-btn'>
+                      <?php echo html::a(inlink('admin', 'dept=&mode=forbid'), $lang->user->forbidList, "class='btn btn-primary'");?>
+                    </span>
                     <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputAccount}'"); ?>
                     <span class="input-group-btn">
                       <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>

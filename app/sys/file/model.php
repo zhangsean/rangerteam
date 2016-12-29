@@ -368,7 +368,8 @@ class fileModel extends model
 
         if(!$this->checkSavePath()) return false;
 
-        ini_set('pcre.backtrack_limit', strlen($data));
+        $dataLength = strlen($data);
+        if(ini_get('pcre.backtrack_limit') < $dataLength) ini_set('pcre.backtrack_limit', $dataLength);
         preg_match_all('/<img src="(data:image\/(\S+);base64,(\S+))".*\/>/U', $data, $out);
         foreach($out[3] as $key => $base64Image)
         {

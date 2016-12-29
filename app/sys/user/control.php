@@ -296,6 +296,7 @@ class user extends control
      *  Admin users list.
      *
      * @param  int    $deptID
+     * @param  string $mode
      * @param  srting $query
      * @param  srting $orderBy
      * @param  int    $recTotal
@@ -304,16 +305,16 @@ class user extends control
      * @access public
      * @return void
      */
-    public function admin($deptID = 0, $query = '', $orderBy = 'id_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($deptID = 0, $mode = 'normal', $query = '', $orderBy = 'id_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
-        if($this->post->query) die($this->locate(inlink('admin', "deptID=$deptID&query={$this->post->query}&orderBy=$orderBy&recTotal=0&recPerPage=$recPerPage&pageID=1")));
+        if($this->post->query) die($this->locate(inlink('admin', "deptID=$deptID&mode=&query={$this->post->query}&orderBy=$orderBy&recTotal=0&recPerPage=$recPerPage&pageID=1")));
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
-        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
+        $this->view->users    = $this->user->getList($deptID, $mode, $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
@@ -345,7 +346,7 @@ class user extends control
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptColleagueLink'));
         $this->view->depts    = $this->tree->getPairs(0, 'dept');
-        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
+        $this->view->users    = $this->user->getList($deptID, $mode = 'normal', $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
