@@ -234,7 +234,15 @@ class lieuModel extends model
      */
     public function delete($id, $null = null)
     {
+        $oldLieu = $this->getByID($id);
         $this->dao->delete()->from(TABLE_LIEU)->where('id')->eq($id)->exec();
+
+        if(!dao::isError())
+        {
+            $oldDates = range(strtotime($oldLieu->begin), strtotime($oldLieu->end), 60*60*24);
+            $this->loadModel('attend', 'oa')->batchUpdate($oldDates, $oldLieu->createdBy, '');
+        }
+
         return !dao::isError();
     }
 

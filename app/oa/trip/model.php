@@ -150,6 +150,12 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->exec();
 
+        if(!dao::isError())
+        {
+            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $trip->createdBy, 'trip', '', $trip);
+        }
+
         return $this->dao->lastInsertID();
     }
 
@@ -182,6 +188,12 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->where('id')->eq($id)
             ->exec();
+
+        if(!dao::isError())
+        {
+            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $trip->createdBy, 'trip', '', $trip);
+        }
 
         return !dao::isError();
     }
