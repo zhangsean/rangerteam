@@ -31,17 +31,12 @@ $(document).ready(function()
         var money = 0;
         $('input[name^=moneyList]').each(function()
         {
-            if($(this).val() != '')
+            if($.isNumeric($(this).val()))
             {
-                var value = parseFloat($(this).val());
-                if(isNaN(value))
-                {
-                  $(this).val('');
-                  $.zui.messager.show('money must a number.');
-                }
-                else money += value;
+                money += parseFloat($(this).val());
             }
         });
+        money = Math.round(money * 100) / 100;
         $('#money').val(money);
         return false;
     }

@@ -21,6 +21,20 @@ helper::import(dirname(dirname(__FILE__)) . '/base/pager/pager.class.php');
 class pager extends basePager
 {
     /**
+     * 创建limit语句。
+     * Create the limit string.
+     * 
+     * @access public
+     * @return string
+     */
+    public function limit()
+    {
+        $limit = '';
+        if($this->pageTotal > 1) $limit = ' limit ' . ($this->pageID - 1) * $this->recPerPage . ", $this->recPerPage";
+        return $limit;
+    }
+
+    /**
      * Print show more link
      *
      * @access public

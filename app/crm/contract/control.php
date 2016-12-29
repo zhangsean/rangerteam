@@ -591,13 +591,17 @@ class contract extends control
             $contractOrderList = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchGroup('contract');
             foreach($contracts as $id => $contract)
             {
-                $contract->order = array();
                 if(isset($contractOrderList[$id]))
                 {
+                    $contract->order = array();
                     foreach($contractOrderList[$id] as $contractOrder)
                     {
                         $contract->order[] = $contractOrder->order;
                     }
+                }
+                else
+                {
+                    $contract->order = '';
                 }
             }
 
@@ -608,7 +612,7 @@ class contract extends control
             foreach($orders as $key => $order)
             {
                 $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
-                $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $productName, date('Y-m-d', strtotime($order->createdDate))); 
+                $orderPairs[$key] = sprintf($this->lang->order->titleLBL, zget($customers, $order->customer), $productName, date('Y-m-d', strtotime($order->createdDate))); 
             }
 
             foreach($contracts as $contract)
