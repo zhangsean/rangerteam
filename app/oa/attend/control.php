@@ -857,7 +857,7 @@ class attend extends control
         }
         $fileName .= $currentYear . $this->lang->year . $currentMonth . $this->lang->month . $this->lang->attend->detail;
 
-        $this->view->title        = $this->lang->attend->department;
+        $this->view->title        = $this->lang->attend->detail;
         $this->view->dept         = $deptID;
         $this->view->account      = $account;
         $this->view->date         = "{$currentYear}-{$currentMonth}-01";

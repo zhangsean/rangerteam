@@ -9,3 +9,7 @@
 #fixedHeader thead tr .headerSortUp:after,#fixedHeader thead tr .headerSortDown:after{color: #fff!important;}
 .categoryButton .icon, .categoryMenu li .app-btn .icon{border-radius:0 !important;}
 td i.icon-default{border-radius:0 !important;}
+
+.my-time-picker table {width: 100%}
+.my-time-picker table td{width: 150px}
+.my-time-picker table > tfoot .today, .my-time-picker table > thead {display: none !important;}
