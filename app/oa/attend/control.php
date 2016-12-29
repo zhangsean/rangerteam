@@ -939,4 +939,19 @@ class attend extends control
         $this->view->fileName = $fileName;
         $this->display('attend', 'export');
     }
+
+    /**
+     * Read attend notice.
+     * 
+     * @access public
+     * @return void
+     */
+    public function read()
+    {
+        $today = helper::today();
+        if(!isset($this->config->attend->readers->$today)) $this->loadModel('setting')->deleteItems("owner=system&app=oa&module=attend&section=readers");
+
+        $readers = isset($this->config->attend->readers->$today) ? $this->config->attend->readers->$today . ',' . $this->app->user->account : $this->app->user->account;
+        $this->loadModel('setting')->setItem("system.oa.attend.readers.{$today}", $readers);
+    }
 }

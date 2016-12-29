@@ -383,7 +383,9 @@ class attendModel extends model
     public function getNotice()
     {
         $account = $this->app->user->account;
-        if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false) return '';
+        $today   = helper::today();
+        if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false ||
+           strpos(',' . $this->config->attend->readers->{$today} . ',', ',' . $account . ',') !== false) return '';
 
         $link    = helper::createLink('oa.attend', 'personal');
         $misc    = "class='app-btn alert-link' data-id='oa'";
@@ -391,7 +393,6 @@ class attendModel extends model
 
         $this->lang->attend->statusList['absent'] = $this->lang->attend->notice['absent'];
 
-        $today  = helper::today();
         $attend = $this->getByDate($today, $account);
         if(empty($attend)) $notice .= sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
         if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false and empty($attend->reason)) 
