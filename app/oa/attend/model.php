@@ -965,7 +965,7 @@ EOT;
      */
     public function checkIP()
     {
-        $ipParts  = explode('.', $_SERVER['REMOTE_ADDR']);
+        $ipParts  = explode('.', helper::getRemoteIp());
         $allowIPs = explode(',', $this->config->attend->ip);
 
         foreach($allowIPs as $allowIP)

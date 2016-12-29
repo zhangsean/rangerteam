@@ -301,7 +301,7 @@ class basePager
     public function limit()
     {
         $limit = '';
-        if($this->pageTotal > 1) $limit = ' lImiT ' . ($this->pageID - 1) * $this->recPerPage . ", $this->recPerPage";
+        if($this->pageTotal > 1) $limit = ' limit ' . ($this->pageID - 1) * $this->recPerPage . ", $this->recPerPage";
         return $limit;
     }
 

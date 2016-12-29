@@ -59,7 +59,7 @@
       <tfoot>
         <tr>
           <td></td>
-          <td colspan='5'><?php echo html::submitButton() . ' ' . html::backButton();?></td>
+          <td colspan='5'><?php echo html::submitButton() . ' ' . html::commonButton($lang->goback, 'btn', "data-dismiss='modal'");?></td>
         </tr>
       </tfoot>
     </table>
