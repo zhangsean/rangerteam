@@ -33,7 +33,7 @@
             <span class='input-group-addon'><?php echo $lang->$type->date?></span>
             <?php echo html::input('begin', date('Y-m-d'), "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->$type->time?></span>
-            <?php echo html::input('start', $config->attend->signInLimit, "class='form-control form-time'")?>
+            <?php echo html::input('start', $config->attend->signInLimit, "class='form-control form-time' data-ele-class='my-time-picker'")?>
           </div>
         </td>
         <td></td>
@@ -45,7 +45,7 @@
             <span class='input-group-addon'><?php echo $lang->$type->date?></span>
             <?php echo html::input('end', $type == 'egress' ? date('Y-m-d') : '', "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->$type->time?></span>
-            <?php echo html::input('finish', $config->attend->signOutLimit, "class='form-control form-time'")?>
+            <?php echo html::input('finish', $config->attend->signOutLimit, "class='form-control form-time' data-ele-class='my-time-picker'")?>
           </div>
         </td>
         <td></td>

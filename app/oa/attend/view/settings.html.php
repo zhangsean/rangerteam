@@ -30,14 +30,14 @@
           <table class='table table-form table-condensed w-p70'>
             <tr>
               <th class='w-100px'><?php echo $lang->attend->signInLimit?></th>
-              <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td>
+              <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time' data-ele-class='my-time-picker'")?></td>
               <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->signOutLimit?></th>
               <td>
                 <div class='input-group'>
-                  <?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?>
+                  <?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time' data-ele-class='my-time-picker'")?>
                   <span class='input-group-addon'><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut);?></span>
                 </div>
               </td>

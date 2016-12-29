@@ -597,3 +597,7 @@ td #aliasLabel {display: table-row;}
 #fixedHeader thead th, #fixedHeader thead td{background: #145ccd; color: #ddd; font-weight: normal;}
 #fixedHeader thead th a, #fixedHeader thead td a{color: #ddd; font-weight: normal;}
 #fixedHeader thead tr .headerSortUp:after,#fixedHeader thead tr .headerSortDown:after{color: #fff!important;}
+
+.my-time-picker table {width: 100%}
+.my-time-picker table td{width: 150px}
+.my-time-picker table > tfoot .today, .my-time-picker table > thead {display: none !important;}

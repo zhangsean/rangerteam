@@ -37,7 +37,7 @@
             <span class='input-group-addon'><?php echo $lang->leave->date?></span>
             <?php echo html::input('begin', $leave->begin, "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->leave->time?></span>
-            <?php echo html::input('start', $leave->start, "class='form-control form-time'")?>
+            <?php echo html::input('start', $leave->start, "class='form-control form-time' data-ele-class='my-time-picker'")?>
           </div>
         </td>
         <td></td>
@@ -49,7 +49,7 @@
             <span class='input-group-addon'><?php echo $lang->leave->date?></span>
             <?php echo html::input('end', $leave->end, "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->leave->time?></span>
-            <?php echo html::input('finish', $leave->finish, "class='form-control form-time'")?>
+            <?php echo html::input('finish', $leave->finish, "class='form-control form-time' data-ele-class='my-time-picker'")?>
           </div>
         </td>
         <td></td>

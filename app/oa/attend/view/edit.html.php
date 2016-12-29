@@ -32,13 +32,13 @@
       <?php if(strpos(',late,both,absent', $attend->status) !== false):?>
       <tr id='trIn'>
         <th><?php echo $lang->attend->manualIn?></th>
-        <td><?php echo html::input('manualIn', empty($attend->manualIn) ? $this->config->attend->signInLimit : $attend->manualIn, "class='form-control form-time'")?></td>
+        <td><?php echo html::input('manualIn', empty($attend->manualIn) ? $this->config->attend->signInLimit : $attend->manualIn, "class='form-control form-time' data-ele-class='my-time-picker'")?></td>
       </tr>
       <?php endif;?>
       <?php if(strpos(',early,both,absent', $attend->status) !== false):?>
       <tr id='trOut'>
         <th><?php echo $lang->attend->manualOut?></th>
-        <td><?php echo html::input('manualOut', empty($attend->manualOut) ? $this->config->attend->signOutLimit : $attend->manualOut, "class='form-control form-time'")?></td>
+        <td><?php echo html::input('manualOut', empty($attend->manualOut) ? $this->config->attend->signOutLimit : $attend->manualOut, "class='form-control form-time' data-ele-class='my-time-picker'")?></td>
       </tr> 
       <?php endif;?>
       <tr>
