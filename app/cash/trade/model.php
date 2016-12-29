@@ -1098,10 +1098,16 @@ class tradeModel extends model
             {
                 if($money['invest'] == 0 and $money['redeem'] == 0 and $money['in'] == 0 and $money['out'] == 0) continue;
 
+                $money['invest'] = round($money['invest'], 2);
+                $money['redeem'] = round($money['redeem'], 2);
+
                 $tidyMoneyInvest   = "<span title='" . $money['invest'] . "'>" . commonModel::tidyMoney($money['invest']) . '</span>';
                 $tidyMoneyRedeem   = "<span title='" . $money['redeem'] . "'>" . commonModel::tidyMoney($money['redeem']) . '</span>';
                 $tidyUnRedeemMoney = "<span title='" . ($money['invest'] - $money['redeem']) . "'>" .  commonModel::tidyMoney($money['invest'] - $money['redeem']) . '</span>';
             }
+
+            $money['in']  = round($money['in'], 2);
+            $money['out'] = round($money['out'], 2);
 
             $tidyMoneyIn  = "<span title='" . $money['in'] . "'>" . commonModel::tidyMoney($money['in']) . '</span>';
             $tidyMoneyOut = "<span title='" . $money['out'] . "'>" . commonModel::tidyMoney($money['out']) . '</span>';
@@ -1111,7 +1117,7 @@ class tradeModel extends model
 
             if($mode == 'all' or $mode == 'bysearch' or $mode == 'invest') 
             {
-                $profitsMoney = $money['in'] - $money['out'];
+                $profitsMoney = round(($money['in'] - $money['out']), 2);
                 if($profitsMoney > 0)  $profits = "<span title='$profitsMoney'>" . $this->lang->trade->profit . commonModel::tidyMoney($profitsMoney) . '</span>';
                 if($profitsMoney < 0)  $profits = "<span title='" . -$profitsMoney . "'>" . $this->lang->trade->loss . commonModel::tidyMoney(-$profitsMoney) . '</span>';
                 if($profitsMoney == 0) $profits = $this->lang->trade->balance;
