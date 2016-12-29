@@ -357,12 +357,30 @@ class attendModel extends model
      * Get all month data.
      * return array[year][month]
      * 
+     * @param  string $type
      * @access public
      * @return array
      */
-    public function getAllMonth()
+    public function getAllMonth($type = '')
     {
-        $dateList = $this->dao->select('date')->from(TABLE_ATTEND)->groupBy('date')->orderBy('date_asc')->fetchAll();
+        if($type == 'department')
+        {
+            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+            $dateList = $this->dao->select('date')->from(TABLE_ATTEND)->alias('t1')
+                ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account=t2.account')
+                ->where('t2.dept')->in(array_keys($deptList))
+                ->groupBy('date')
+                ->orderBy('date_desc')
+                ->fetchAll();
+        }
+        else
+        {
+            $dateList = $this->dao->select('date')->from(TABLE_ATTEND)
+                ->beginIF($type == 'personal')->where('account')->eq($this->app->user->account)->fi()
+                ->groupBy('date')
+                ->orderBy('date_desc')
+                ->fetchAll();
+        }
 
         $monthList = array();
         foreach($dateList as $date)

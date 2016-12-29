@@ -71,13 +71,18 @@ class overtimeModel extends model
     /**
      * Get all month of overtime's begin.
      * 
+     * @param  string $type
      * @access public
      * @return array
      */
-    public function getAllMonth()
+    public function getAllMonth($type)
     {
         $monthList = array();
-        $dateList  = $this->dao->select('begin')->from(TABLE_OVERTIME)->groupBy('begin')->orderBy('begin_asc')->fetchAll('begin');
+        $dateList  = $this->dao->select('begin')->from(TABLE_OVERTIME)
+            ->beginIF($type == 'personal')->where('createdBy')->eq($this->app->user->account)->fi()
+            ->groupBy('begin')
+            ->orderBy('begin_desc')
+            ->fetchAll('begin');
         foreach($dateList as $date)
         {
             $year  = substr($date->begin, 0, 4);
