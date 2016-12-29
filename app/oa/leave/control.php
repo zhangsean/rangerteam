@@ -263,6 +263,7 @@ class leave extends control
 
         if($_POST)
         {
+            if($this->post->backDate < ($leave->begin . ' ' . $leave->start)) $this->send(array('result' => 'fail', 'message' => array('backDate' => $this->lang->leave->wrongBackDate)));
             $this->leave->back($id);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
