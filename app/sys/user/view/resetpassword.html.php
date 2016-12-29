@@ -19,7 +19,7 @@
         <form method='post' id='ajaxForm'>
           <table> 
             <tr>
-              <td><?php echo html::input('account', '', "class='text-box' placeholder='{$lang->user->inputAccountOrEmail}'");?></td>
+              <td><?php echo html::input('account', '', "class='text-box' placeholder='{$lang->user->inputAccount}'");?></td>
             </tr>
             <tr>
               <td><?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block');?></td>

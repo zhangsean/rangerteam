@@ -80,11 +80,10 @@ $lang->user->thread      = 'My threads';
 $lang->user->reply       = 'My replies';
 $lang->user->message     = 'My message';
 
-$lang->user->inputUserName       = 'Please enter username';
-$lang->user->inputColleague      = "Please enter colleauge's name";
-$lang->user->inputAccountOrEmail = 'Please enter account or Email';
-$lang->user->inputPassword       = 'Please enter password';
-$lang->user->searchUser          = 'Search';
+$lang->user->inputAccount   = 'Please enter account';
+$lang->user->inputColleague = "Please enter colleauge's name";
+$lang->user->inputPassword  = 'Please enter password';
+$lang->user->searchUser     = 'Search';
 
 $lang->user->errorDeny     = "Sorry, you don't have the permission to access <b>%s</b>'s<b>%s</b>. Please contact the administrator.<br/> This page will jump to homepage after 5 seconds";
 $lang->user->loginFailed   = "Login failed. Check you account and password.";

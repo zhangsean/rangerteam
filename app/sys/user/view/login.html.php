@@ -44,7 +44,7 @@ css::internal('body{background-color:#f6f5f5}');
             <table class='table table-form'>
               <tr>
                 <th><?php echo $lang->user->account;?></th>
-                <td><?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?></td>
+                <td><?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccount}'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->user->password;?></th>

@@ -51,10 +51,11 @@ $lang->leave->statusList['pass']   = 'Pass';
 $lang->leave->statusList['reject'] = 'Reject';
 $lang->leave->statusList['back']   = 'Back';
 
-$lang->leave->denied    = 'Access denied.';
-$lang->leave->unique    = 'There was a record of Leave in %s.';
-$lang->leave->sameMonth = 'Leave must be in the same month.';
-$lang->leave->wrongEnd  = 'End time should be greater than begin time.';
+$lang->leave->denied        = 'Access denied.';
+$lang->leave->unique        = 'There was a record of Leave in %s.';
+$lang->leave->sameMonth     = 'Leave must be in the same month.';
+$lang->leave->wrongEnd      = 'End time should be greater than begin time.';
+$lang->leave->wrongBackDate = 'Back time should be greater than begin time.';
 
 $lang->leave->confirmReview['pass']   = 'Do you want to pass it?';
 $lang->leave->confirmReview['reject'] = 'Do you want to reject it?';

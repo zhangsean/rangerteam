@@ -80,11 +80,10 @@ $lang->user->thread      = '我的主题';
 $lang->user->reply       = '我的回贴';
 $lang->user->message     = '我的消息';
 
-$lang->user->inputUserName       = '请输入成员名';
-$lang->user->inputColleague      = '请输入同事姓名';
-$lang->user->inputAccountOrEmail = '请输入成员名或Email';
-$lang->user->inputPassword       = '请输入密码';
-$lang->user->searchUser          = '搜索';
+$lang->user->inputAccount   = '请输入用户名';
+$lang->user->inputColleague = '请输入同事姓名';
+$lang->user->inputPassword  = '请输入密码';
+$lang->user->searchUser     = '搜索';
 
 $lang->user->errorDeny     = "抱歉，您无权访问『<b>%s</b>』模块的『<b>%s</b>』功能。请联系管理员获取权限。点击后退返回上页。<br/> 5秒钟后将自动返回首页...";
 $lang->user->loginFailed   = "登录失败，请检查您的成员名或密码是否填写正确。";
