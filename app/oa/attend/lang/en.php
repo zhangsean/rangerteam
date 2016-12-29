@@ -21,7 +21,6 @@ $lang->attend->export       = 'Export';
 $lang->attend->stat         = 'Stats';
 $lang->attend->saveStat     = 'Save';
 $lang->attend->exportStat   = 'Export Stats';
-$lang->attend->detail       = 'Details';
 $lang->attend->exportDetail = 'Export Details';
 $lang->attend->browseReview = 'Review List';
 
