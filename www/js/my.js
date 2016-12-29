@@ -67,6 +67,11 @@ $(document).ready(function()
 
     setMenu();
     initSearch();
+
+    $(document).on('click', '#noticeAttend .close', function()
+    {
+        $.get(createLink('oa.attend', 'read'));
+    });
 });
 
 $(document).on('keyup', function(e)
