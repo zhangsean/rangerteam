@@ -38,9 +38,9 @@
           <th class='w-60px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->customer->status);?></th>
           <th class='w-80px visible-lg'><?php commonModel::printOrderLink('size', $orderBy, $vars, $lang->customer->size);?></th>
           <th class='w-80px'> <?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->customer->type);?></th>
+          <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
           <th class='w-100px visible-lg'><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->customer->contactedDate);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->customer->nextDate);?></th>
-          <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
           <th class='w-200px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
@@ -54,9 +54,9 @@
           <td class='<?php echo "customer-{$customer->status}";?>'><?php if($customer->status) echo $lang->customer->statusList[$customer->status];?></td>
           <td class='visible-lg'><?php echo $lang->customer->sizeNameList[$customer->size];?></td>
           <td><?php echo $lang->customer->typeList[$customer->type];?></td>
+          <td class='visible-lg'><?php echo substr($customer->createdDate, 0, 10);?></td>
           <td class='visible-lg'><?php echo formatTime($customer->contactedDate, DT_DATE1);?></td>
           <td><?php echo $customer->nextDate;?></td>
-          <td class='visible-lg'><?php echo substr($customer->createdDate, 0, 10);?></td>
           <td class='actions'>
             <?php
             commonModel::printLink('action',   'createRecord', "objectType=customer&objectID=$customer->id&customer=$customer->id", $lang->customer->record, "data-toggle='modal' data-width='860'");
