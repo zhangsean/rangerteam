@@ -70,6 +70,7 @@ $(document).ready(function()
     /* hide side. */
     $('.side-handle').click(function()
     {
+        $('#fixedHeader').remove();
         if($(this).parents('.with-side').hasClass('hide-side'))
         {
             $('.with-side').removeClass('hide-side');
