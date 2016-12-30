@@ -147,15 +147,18 @@ $lang->block->default['sys']['8'] = $lang->block->default['team']['2'];
 $lang->block->default['sys']['8']['source'] = 'team';
 
 $lang->block->moreLinkList = new stdclass();
-$lang->block->moreLinkList->order['assinedTo'] = 'Assigned To Me|sys|my|order|type=assinedTo';
-$lang->block->moreLinkList->order['createdBy'] = 'Created By Me|sys|my|order|type=createdBy';
-$lang->block->moreLinkList->order['signedBy']  = 'Signed By Me|sys|my|order|type=signedBy';
+$lang->block->moreLinkList->order['assinedTo']    = 'Assigned To Me|sys|my|order|type=assinedTo';
+$lang->block->moreLinkList->order['createdBy']    = 'Created By Me|sys|my|order|type=createdBy';
+$lang->block->moreLinkList->order['signedBy']     = 'Signed By Me|sys|my|order|type=signedBy';
+$lang->block->moreLinkList->order['normalstatus'] = 'All|crm|order|browse|mode=all';
+$lang->block->moreLinkList->order['signedstatus'] = 'All|crm|order|browse|mode=all';
+$lang->block->moreLinkList->order['closedstatus'] = 'All|crm|order|browse|mode=all';
 
 $lang->block->moreLinkList->contract['returnedBy']     = 'Returned By Me|sys|my|contract|type=returnedBy';
 $lang->block->moreLinkList->contract['deliveredBy']    = 'Delivered By Me|sys|my|contract|type=deliveredBy';
-$lang->block->moreLinkList->contract['normalstatus']   = 'Unfinished|sys|my|contract|type=unfinished';
-$lang->block->moreLinkList->contract['closedstatus']   = 'Finished|sys|my|contract|type=finished';
-$lang->block->moreLinkList->contract['canceledstatus'] = 'Cancelled|sys|my|contract|type=canceled';
+$lang->block->moreLinkList->contract['normalstatus']   = 'Unfinished|crm|contract|browse|mode=unfinished';
+$lang->block->moreLinkList->contract['closedstatus']   = 'Finished|crm|contract|browse|mode=finished';
+$lang->block->moreLinkList->contract['canceledstatus'] = 'Cancelled|crm|contract|browse|mode=canceled';
 
 $lang->block->moreLinkList->customer['today']    = 'Today|crm|customer|browse|type=today';
 $lang->block->moreLinkList->customer['thisweek'] = 'This Week|crm|customer|browse|type=thisweek';
