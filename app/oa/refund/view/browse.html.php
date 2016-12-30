@@ -76,8 +76,8 @@
         <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID={$refund->id}&mode={$mode}");?>'>
           <td><?php echo $refund->id;?></td>
           <td class='visible-lg'><?php echo zget($userDept, $refund->createdBy);?></td>
-          <td class='text-left'><?php echo $refund->name?></td>
-          <td><?php echo zget($categories, $refund->category, ' ');?></td>
+          <td class='text-left' title='<?php echo $refund->name;?>'><?php echo $refund->name?></td>
+          <td title='<?php echo zget($categories, $refund->category);?>'><?php echo zget($categories, $refund->category, ' ');?></td>
           <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money?></td>
           <td class='<?php echo $refund->status?>'><?php echo zget($lang->refund->statusList, $refund->status)?></td>
           <td><?php echo zget($userPairs, $refund->createdBy);?></td>

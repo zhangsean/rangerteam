@@ -58,8 +58,8 @@
         <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID={$refund->id}&mode=review");?>'>
           <td><?php echo $refund->id;?></td>
           <td><?php echo zget($deptList, $currentDept);?></td>
-          <td class='text-left'><?php echo $refund->name;?></td>
-          <td><?php echo zget($categories, $refund->category, ' ');?></td>
+          <td class='text-left' title='<?php echo $refund->name;?>'><?php echo $refund->name;?></td>
+          <td title='<?php echo zget($categories, $refund->category);?>'><?php echo zget($categories, $refund->category, ' ');?></td>
           <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
           <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money;?></td>
           <td><?php echo $refund->date;?></td>
