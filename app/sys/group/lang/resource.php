@@ -60,6 +60,7 @@ $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'setting';
 $lang->appModule->sys[] = 'report';
 $lang->appModule->sys[] = 'my';
+$lang->appModule->sys[] = 'file';
 
 /* Module order. */
 $lang->moduleOrder[0]   = 'order';
@@ -102,6 +103,7 @@ $lang->moduleOrder[125] = 'tree';
 $lang->moduleOrder[130] = 'setting';
 $lang->moduleOrder[135] = 'report';
 $lang->moduleOrder[140] = 'my';
+$lang->moduleOrder[145] = 'file';
 
 $lang->resource = new stdclass();
 
@@ -613,6 +615,18 @@ $lang->resource->tree->edit     = 'edit';
 $lang->resource->tree->children = 'children';
 $lang->resource->tree->delete   = 'delete';
 $lang->resource->tree->merge    = 'merge';
+
+$lang->tree->methodOrder[0]  = 'browse';
+$lang->tree->methodOrder[5]  = 'edit';
+$lang->tree->methodOrder[10] = 'children';
+$lang->tree->methodOrder[15] = 'delete';
+$lang->tree->methodOrder[20] = 'merge';
+
+/* File. */
+$lang->resource->file = new stdclass();
+$lang->resource->file->download = 'download';
+$lang->resource->file->edit     = 'edit';
+$lang->resource->file->delete   = 'delete';
 
 $lang->tree->methodOrder[0]  = 'browse';
 $lang->tree->methodOrder[5]  = 'edit';

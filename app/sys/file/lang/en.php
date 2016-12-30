@@ -36,6 +36,7 @@ $lang->file->edit          = 'Edit';
 $lang->file->editFile      = 'Change file';
 $lang->file->sizeLimit     = "<p class='text-danger'>File must be less than %sM.</p>";
 $lang->file->maxUploadSize = "<span class='red'>%s</span>";
+$lang->file->delete        = 'Delete';
 
 $lang->file->errorUnwritable = 'Upload directory is not writable.';
 $lang->file->errorNoFile     = 'No file selected.';
