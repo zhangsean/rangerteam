@@ -82,6 +82,10 @@
             </div>
           </td>
         </tr>
+        <tr class='customer-depositor hide'>
+          <th><?php echo $lang->customer->depositor;?></th>
+          <td><?php echo html::input('customerDepositor', '', "class='form-control' disabled='disabled'");?></td>
+        </tr>
         <?php endif;?>
         <?php if($trade->type == 'in'):?>
         <tr>

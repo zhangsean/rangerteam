@@ -61,6 +61,24 @@ $(document).ready(function()
             $('#mainNavbar li').find('[href*=' + v.mode + ']').parent().addClass('active');
         }
     }
+
+    $(document).on('change', '#customer,#trader', function()
+    {
+        if($(this).val())
+        {
+            $.get(createLink('trade', 'ajaxGetDepositor', 'customer=' + $(this).val()), function(depositor)
+            {
+                if(depositor)  $('tr.customer-depositor').show().find('#customerDepositor').val(depositor);
+                if(!depositor) $('tr.customer-depositor').hide();
+            });
+        }
+        else
+        {
+            $('tr.customer-depositor').hide();
+        }
+    })
+
+    $('#customer,#trader').change();
 })
 
 /**

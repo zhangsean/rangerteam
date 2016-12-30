@@ -1034,4 +1034,18 @@ class trade extends control
         $this->view->currencyList = $currencyList;
         $this->display();
     }
+
+    /**
+     * Ajax get depositor of customer.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return string
+     */
+    public function ajaxGetDepositor($customerID)
+    {
+        $customer = $this->loadModel('customer')->getByID($customerID);
+        if(!$customer) die();
+        die($customer->depositor);
+    }
 }
