@@ -34,8 +34,9 @@ class trade extends control
      */
     public function browse($mode = 'all', $date = '', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
+        if($mode == 'out' && !$this->trade->checkExpensePriv()) die(js::error($this->lang->trade->denied) . js::locate('back'));
+
         if($mode == 'all' and $date == '' and $orderBy == 'date_desc') $this->session->set('date', '');
-        if($mode == 'out') $this->trade->checkExpensePriv();
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);

@@ -1146,12 +1146,8 @@ class tradeModel extends model
         if($this->app->user->admin == 'super') return true;
 
         $rights = $this->app->user->rights;
-        if(!isset($rights['tradebrowse']['out']))
-        {
-            $locate = helper::createLink('cash.index');
-            $errorLink = helper::createLink('sys.error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
-        }
+        if(!isset($rights['tradebrowse']['out'])) return false;
+        return true;
     }
 
     /**

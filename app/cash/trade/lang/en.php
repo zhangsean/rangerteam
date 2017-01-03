@@ -187,6 +187,7 @@ $lang->trade->total         = 'Total';
 $lang->trade->noTraderMatch = 'No matched trader，click to create';
 $lang->trade->unique        = 'There has been same record';
 $lang->trade->ignore        = 'Ignore';
+$lang->trade->denied        = 'You have no permission to view expense list!';
 
 $lang->trade->chartList['productLine'] = 'by product line';
 $lang->trade->chartList['category']    = 'by category';
