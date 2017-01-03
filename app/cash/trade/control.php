@@ -34,8 +34,9 @@ class trade extends control
      */
     public function browse($mode = 'all', $date = '', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
+        if($mode == 'out' && !$this->trade->checkExpensePriv()) die(js::error($this->lang->trade->denied) . js::locate('back'));
+
         if($mode == 'all' and $date == '' and $orderBy == 'date_desc') $this->session->set('date', '');
-        if($mode == 'out') $this->trade->checkExpensePriv();
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -228,7 +229,7 @@ class trade extends control
 
         $this->view->title        = $this->lang->trade->batchCreate;
         $this->view->depositors   = array('' => '') + $this->loadModel('depositor', 'cash')->getPairs();
-        $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
+        $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->customerList = $this->loadModel('customer')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer')->getPairs('provider');
         $this->view->expenseTypes = array('' => '') + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
