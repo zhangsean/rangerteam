@@ -3,8 +3,8 @@ if(!isset($lang->sales)) $lang->sales = new stdclass();
 $lang->sales->common = 'Sales';
 $lang->sales->admin  = 'Privileges';
 $lang->sales->browse = 'Manage Groups';
-$lang->sales->list   = 'Sales Groups';
-$lang->sales->create = 'Create a Group';
+$lang->sales->list   = 'Sales Team';
+$lang->sales->create = 'Create';
 $lang->sales->edit   = 'Edit';
 $lang->sales->delete = 'Delete';
 

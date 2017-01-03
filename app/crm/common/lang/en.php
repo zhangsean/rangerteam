@@ -19,7 +19,7 @@ $lang->menu->crm->contract  = 'Contract|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = 'Customer|customer|index|';
 $lang->menu->crm->provider  = 'Supplier|provider|browse|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
-$lang->menu->crm->leads     = 'Leads|leads|browse|';
+$lang->menu->crm->leads     = 'List|leads|browse|';
 $lang->menu->crm->product   = 'Product|product|index|';
 $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
@@ -48,9 +48,9 @@ $lang->contact->menu->thismonth = 'This Month|contact|browse|mode=thismonth';
 
 if(!isset($lang->leads)) $lang->leads = new stdclass();
 $lang->leads->menu = new stdclass();
-$lang->leads->menu->assignedTo  = 'Assigned To Me|leads|browse|mode=assignedTo';
+$lang->leads->menu->assignedTo  = 'Assigned to me|leads|browse|mode=assignedTo';
 $lang->leads->menu->next        = 'Next contact|leads|browse|mode=next';
-$lang->leads->menu->ignoredBy   = 'Ignored By Me|leads|browse|mode=ignoredBy&status=ignore';
+$lang->leads->menu->ignoredBy   = 'Ignored by Me|leads|browse|mode=ignoredBy&status=ignore';
 $lang->leads->menu->public      = 'Public|leads|browse|mode=all&status=ignore';
 $lang->leads->menu->setting     = 'Settings|leads|setting|';
 
@@ -79,7 +79,7 @@ $lang->setting->menu->customerStatus = 'Customer Status|setting|lang|module=cust
 $lang->setting->menu->area           = 'Area|tree|browse|type=area|';
 $lang->setting->menu->industry       = 'Industry|tree|browse|type=industry|';
 $lang->setting->menu->currency       = 'Currency|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->salesGroup     = array('link' => 'Sales Group|sales|browse|', 'alias' => 'create,edit');
+$lang->setting->menu->salesGroup     = array('link' => 'Sales Team|sales|browse|', 'alias' => 'create,edit');
 $lang->setting->menu->customerPool   = 'Customer Pool|setting|customerpool||';
 
 /* Menu of sales module. */

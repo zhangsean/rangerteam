@@ -226,9 +226,9 @@ $lang->action->nextContactList[365000] = 'no contact';
 
 $lang->action->record = new stdclass();
 $lang->action->record->common     = 'Communication';
-$lang->action->record->create     = 'Create Record';
+$lang->action->record->create     = 'Add Record';
 $lang->action->record->edit       = 'Edit Record';
-$lang->action->record->history    = 'Communication Records';
+$lang->action->record->history    = 'Communication History';
 $lang->action->record->customer   = 'Customer';
 $lang->action->record->provider   = 'Supplier';
 $lang->action->record->contract   = 'Contract';
@@ -236,10 +236,10 @@ $lang->action->record->order      = 'Order';
 $lang->action->record->contact    = 'Contact';
 $lang->action->record->actor      = 'Actor';
 $lang->action->record->comment    = 'Content';
-$lang->action->record->date       = 'Contact time';
+$lang->action->record->date       = 'Contact on';
 $lang->action->record->file       = 'Files';
 $lang->action->record->nextDate   = 'Next Contact';
-$lang->action->record->uploadFile = 'Upload Files:';
+$lang->action->record->uploadFile = 'Upload';
 
 $lang->action->objectTypes['order']     = 'Order';
 $lang->action->objectTypes['customer']  = 'Customer';

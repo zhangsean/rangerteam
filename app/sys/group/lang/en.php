@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->group->common             = 'Group';
-$lang->group->browse             = 'Browse';
+$lang->group->browse             = 'Groups';
 $lang->group->create             = 'Create Group';
 $lang->group->edit               = 'Edit';
 $lang->group->copy               = 'Copy';

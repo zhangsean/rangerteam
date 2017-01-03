@@ -50,13 +50,13 @@ $lang->order->createProduct  = 'Create';
 $lang->order->list          = 'Orders';
 $lang->order->browse        = 'Orders';
 $lang->order->create        = 'Create';
-$lang->order->record        = 'History';
+$lang->order->record        = 'Record';
 $lang->order->edit          = 'Edit';
 $lang->order->delete        = 'Delete';
 $lang->order->view          = 'View';
 $lang->order->close         = 'Close';
 $lang->order->sign          = 'Sign';
-$lang->order->assign        = 'Assign Order';
+$lang->order->assign        = 'Assign';
 $lang->order->activate      = 'Activate';
 $lang->order->export        = 'Export';
 
@@ -69,14 +69,14 @@ $lang->order->closedReasonList['payed']     = 'Paid';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
 
-$lang->order->titleLBL  = "%s buy %s (%s)";
+$lang->order->titleLBL  = "%s purchases %s (%s)";
 $lang->order->basicInfo = "Basic";
-$lang->order->lifetime  = "Lifetime";
+$lang->order->lifetime  = "Order Life";
 
-$lang->order->totalAmount   = 'The Budget us %s, the Actual is %s on this page;';
-$lang->order->infoBuy       = "%s buy %s.";
+$lang->order->totalAmount   = 'The Budget is %s, the Actual is %s on this page;';
+$lang->order->infoBuy       = "%s purchases %s.";
 $lang->order->infoContract  = 'Signed Contract: %s.';
 $lang->order->infoAmount    = 'Budget is %s, Actual is %s.';
-$lang->order->infoContacted = 'Contacted Date: %s. ';
-$lang->order->infoNextDate  = 'Next Contact: %s.';
+$lang->order->infoContacted = 'Contacted on %s. ';
+$lang->order->infoNextDate  = 'Next Contact on %s.';
 $lang->order->deny          = 'You has no Privilege to create %s.';
