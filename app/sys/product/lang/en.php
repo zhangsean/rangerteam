@@ -28,13 +28,13 @@ $lang->product->index       = 'Products';
 $lang->product->delete      = 'Delete';
 $lang->product->list        = 'List';
 $lang->product->browse      = 'Browse';
-$lang->product->create      = 'Create';
+$lang->product->create      = 'Add a Product';
 $lang->product->edit        = 'Edit';
 $lang->product->view        = 'View';
 $lang->product->basicInfo   = 'Basic Information';
 $lang->product->setline     = 'Settings';
 
-$lang->product->typeList['real']    = 'Real';
+$lang->product->typeList['real']    = 'Physical';
 $lang->product->typeList['service'] = 'Service';
 $lang->product->typeList['virtual'] = 'Virtual';
 
