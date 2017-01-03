@@ -453,18 +453,25 @@ class tradeModel extends model
         {
             if(empty($type)) break;
             if(!$this->post->money[$key]) continue;
+
+            $depositor = $this->post->depositor[$key] == 'ditto' ? $depositor : $this->post->depositor[$key];
+            $category  = $this->post->category[$key]  == 'ditto' ? $category : $this->post->category[$key];
+            $dept      = $this->post->dept[$key]      == 'ditto' ? $dept : $this->post->dept[$key];
+            $trader    = $this->post->trader[$key]    == 'ditto' ? $trader : ($this->post->trader[$key] ? $this->post->trader[$key] : 0);
+            $product   = $this->post->product[$key]   == 'ditto' ? $product : $this->post->product[$key];
+
             $trade = new stdclass();
             $trade->type           = $type;
-            $trade->depositor      = $this->post->depositor[$key];
+            $trade->depositor      = $depositor;
             $trade->money          = $this->post->money[$key];
-            $trade->category       = $this->post->category[$key];
-            $trade->dept           = $this->post->dept[$key];
-            $trade->trader         = $this->post->trader[$key] ? $this->post->trader[$key] : 0;
+            $trade->category       = $category;
+            $trade->dept           = $dept;
+            $trade->trader         = $trader;
             $trade->createTrader   = isset($this->post->createTrader[$key]) ? $this->post->createTrader[$key] : false;
             $trade->createCustomer = false;
             $trade->traderName     = isset($this->post->traderName[$key]) ? $this->post->traderName[$key] : '';
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
-            $trade->product        = $this->post->product[$key];
+            $trade->product        = $product;
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags);
             $trade->currency       = isset($depositorList[$trade->depositor]) ? $depositorList[$trade->depositor]->currency : '';
