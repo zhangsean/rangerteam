@@ -46,7 +46,7 @@
 </div>
 <?php endforeach;?>
 
-<div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
+<div class='clearfix pager'><?php $pager->show('right');?></div>
 
 <?php if($this->session->user->account != 'guest'):?>
 <div class='panel'>
