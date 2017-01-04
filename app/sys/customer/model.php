@@ -171,6 +171,7 @@ class customerModel extends model
                 ->check('contact', 'length', 30, 0);
         }
 
+        $customer->name = trim($customer->name);
         if(!$this->post->continue)
         {
             $return = $this->checkUnique($customer);
@@ -262,6 +263,7 @@ class customerModel extends model
             ->stripTags('desc', $this->config->allowedTags)
             ->get();
 
+        $customer->name = trim($customer->name);
         /* Add http:// in head when that has not http:// or https://. */
         if(strpos($customer->site, '://') === false )  $customer->site  = 'http://' . $customer->site;
         if(strpos($customer->weibo, 'http://weibo.com/') === false ) $customer->weibo = 'http://weibo.com/' . $customer->weibo;
