@@ -34,7 +34,6 @@ $lang->appModule->cash[] = 'schema';
 
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'announce';
-$lang->appModule->oa[] = 'doc';
 $lang->appModule->oa[] = 'task';
 $lang->appModule->oa[] = 'attend';
 $lang->appModule->oa[] = 'holiday';
@@ -44,6 +43,9 @@ $lang->appModule->oa[] = 'trip';
 $lang->appModule->oa[] = 'egress';
 $lang->appModule->oa[] = 'refund';
 $lang->appModule->oa[] = 'overtime';
+
+$lang->appModule->doc = array();
+$lang->appModule->doc[] = 'doc';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -80,7 +82,6 @@ $lang->moduleOrder[42]  = 'provider';
 $lang->moduleOrder[43]  = 'schema';
 
 $lang->moduleOrder[50]  = 'announce';
-$lang->moduleOrder[55]  = 'doc';
 $lang->moduleOrder[57]  = 'task';
 $lang->moduleOrder[70]  = 'attend';
 $lang->moduleOrder[75]  = 'holiday';
@@ -88,8 +89,10 @@ $lang->moduleOrder[80]  = 'leave';
 $lang->moduleOrder[81]  = 'lieu';
 $lang->moduleOrder[85]  = 'trip';
 $lang->moduleOrder[90]  = 'egress';
-$lang->moduleOrder[95]  = 'refund';
-$lang->moduleOrder[100] = 'overtime';
+$lang->moduleOrder[91]  = 'refund';
+$lang->moduleOrder[92]  = 'overtime';
+
+$lang->moduleOrder[93]  = 'doc';
 
 $lang->moduleOrder[95]  = 'blog';
 $lang->moduleOrder[100] = 'forum';

@@ -37,7 +37,6 @@ $config->action->objectNameFields['schema']    = 'name';
 $config->action->objectNameFields['provider']  = 'name';
 
 $config->action->objectAppNames['task']      = 'oa';
-$config->action->objectAppNames['doc']       = 'oa';
 $config->action->objectAppNames['article']   = 'oa';
 $config->action->objectAppNames['project']   = 'oa';
 $config->action->objectAppNames['announce']  = 'oa';
@@ -46,7 +45,8 @@ $config->action->objectAppNames['attend']    = 'oa';
 $config->action->objectAppNames['leave']     = 'oa';
 $config->action->objectAppNames['overtime']  = 'oa';
 $config->action->objectAppNames['refund']    = 'oa';
-$config->action->objectAppNames['doclib']    = 'oa';
+$config->action->objectAppNames['doc']       = 'doc';
+$config->action->objectAppNames['doclib']    = 'doc';
 $config->action->objectAppNames['user']      = 'sys';
 $config->action->objectAppNames['todo']      = 'sys';
 $config->action->objectAppNames['customer']  = 'crm';

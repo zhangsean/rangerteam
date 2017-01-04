@@ -123,6 +123,9 @@ class upgradeModel extends model
                 $this->setSalesAdminPrivileges();
             case '3_6':
                 $this->execSQL($this->getUpgradeFile('3.6'));
+            case '3_7':
+                $this->execSQL($this->getUpgradeFile('3.7'));
+                $this->setDocEntryPrivileges();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -163,6 +166,7 @@ class upgradeModel extends model
             case '3_4'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.4'));
             case '3_5'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.5'));
             case '3_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.6'));
+            case '3_7'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.7'));
         }
         return $confirmContent;
     }
@@ -1164,5 +1168,26 @@ class upgradeModel extends model
             $grouppriv->group = $group;
             $this->dao->insert(TABLE_GROUPPRIV)->data($grouppriv)->exec();
         }
+    }
+
+    /**
+     * Set doc entry privileges when upgrade from 3.7.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDocEntryPrivileges()
+    {
+        $groups = $this->dao->select('`group`')->from(TABLE_GROUPPRIV)->where('module')->eq('doc')->fetchPairs();
+        $grouppriv = new stdclass();
+        $grouppriv->module = 'apppriv';
+        $grouppriv->method = 'doc';
+        foreach($groups as $group)
+        {
+            $grouppriv->group = $group;
+            $this->dao->insert(TABLE_GROUPPRIV)->data($grouppriv)->exec();
+        }
+
+        return !dao::isError();
     }
 }

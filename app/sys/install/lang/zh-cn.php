@@ -104,3 +104,7 @@ $lang->install->buildinEntry->oa['name']   = '日常办公';
 $lang->install->buildinEntry->oa['abbr']   = '办公';
 $lang->install->buildinEntry->team['name'] = '团队';
 $lang->install->buildinEntry->team['abbr'] = '团队';
+$lang->install->buildinEntry->doc['name']  = '文档';
+$lang->install->buildinEntry->doc['abbr']  = '文档';
+$lang->install->buildinEntry->proj['name'] = '项目';
+$lang->install->buildinEntry->proj['abbr'] = '项目';
