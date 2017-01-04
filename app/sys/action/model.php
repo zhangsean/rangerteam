@@ -888,13 +888,13 @@ class actionModel extends model
 
         if($action->objectType == 'doc')
         {
-            $doc     = $this->loadModel('doc', 'oa')->getById($action->objectID);
+            $doc     = $this->loadModel('doc', 'doc')->getById($action->objectID);
             $canView = $this->doc->hasRight($doc);
         }
 
         if($action->objectType == 'doclib')
         {
-            $lib     = $this->loadModel('doc', 'oa')->getLibById($action->objectID);
+            $lib     = $this->loadModel('doc', 'doc')->getLibById($action->objectID);
             $canView = $this->doc->hasRight($lib);
         }
 

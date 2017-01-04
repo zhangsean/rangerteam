@@ -388,6 +388,28 @@ EOT;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
+        /* Add proj. */
+        $entry->name  = $this->lang->install->buildinEntry->proj['name'];
+        $entry->abbr  = $this->lang->install->buildinEntry->proj['abbr'];
+        $entry->code  = 'proj';
+        $entry->key   = 'a910d9d1dd03c9dd99cecb3ca31ea600'
+        $entry->logo  = 'theme/default/images/ips/app-proj.png';
+        $entry->login = '../proj';
+        $entry->order = 30;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
+
+        /* Add doc. */
+        $entry->name  = $this->lang->install->buildinEntry->doc['name'];
+        $entry->abbr  = $this->lang->install->buildinEntry->doc['abbr'];
+        $entry->code  = 'doc';
+        $entry->key   = '76ff605479df34f1d239730efa68d562'
+        $entry->logo  = 'theme/default/images/ips/app-doc.png';
+        $entry->login = '../doc';
+        $entry->order = 40;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
+
         /* Add cash. */
         $entry->name  = $this->lang->install->buildinEntry->cash['name'];
         $entry->abbr  = $this->lang->install->buildinEntry->cash['abbr'];
@@ -395,7 +417,7 @@ EOT;
         $entry->key   = '438d85f2c2b04372662c63ebfb1c4c2f';
         $entry->logo  = 'theme/default/images/ips/app-cash.png';
         $entry->login = '../cash';
-        $entry->order = 30;
+        $entry->order = 50;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
@@ -406,7 +428,7 @@ EOT;
         $entry->key   = '6c46d9fe76a1afa1cd61f946f1072d1e';
         $entry->logo  = 'theme/default/images/ips/app-team.png';
         $entry->login = '../team';
-        $entry->order = 40;
+        $entry->order = 60;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }

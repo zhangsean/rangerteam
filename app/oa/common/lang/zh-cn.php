@@ -16,7 +16,6 @@ $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '首页|dashboard|index|';
 $lang->menu->oa->project   = '项目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
-$lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '请假|leave|personal|';
 $lang->menu->oa->overtime  = '加班|overtime|personal|';
@@ -39,10 +38,6 @@ if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
 $lang->announce->menu->browse   = array('link' => '公告列表|announce|browse|', 'alias' => 'create,edit,view');
 $lang->announce->menu->category = '类目管理|tree|browse|type=announce|';
-
-if(!isset($lang->doc)) $lang->doc = new stdclass();
-$lang->doc->menu = new stdclass();
-$lang->doc->menu->create = '添加文档库|doc|createlib|';
 
 if(!isset($lang->attend)) $lang->attend = new stdclass();
 $lang->attend->menu = new stdclass();

@@ -16,7 +16,6 @@ $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = 'Home|dashboard|index|';
 $lang->menu->oa->project   = 'Project|project|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';
-$lang->menu->oa->doc       = 'Document|doc|index|';
 $lang->menu->oa->attend    = 'Attendance|attend|personal|';
 $lang->menu->oa->leave     = 'Leave|leave|personal|';
 $lang->menu->oa->overtime  = 'Overtime|overtime|personal|';
@@ -39,10 +38,6 @@ if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
 $lang->announce->menu->browse   = array('link' => 'Announcement|announce|browse|', 'alias' => 'create,edit,view');
 $lang->announce->menu->category = 'Categories|tree|browse|type=announce|';
-
-if(!isset($lang->doc)) $lang->doc = new stdclass();
-$lang->doc->menu = new stdclass();
-$lang->doc->menu->create = 'Create DocLib|doc|createlib|';
 
 if(!isset($lang->attend)) $lang->attend = new stdclass();
 $lang->attend->menu = new stdclass();
