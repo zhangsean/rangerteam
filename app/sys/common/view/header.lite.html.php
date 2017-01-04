@@ -71,4 +71,4 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 </head>
-<body class='m-<?php echo $this->app->getModuleName() . '-' . $this->app->getMethodName() ?>'>
+<body class='m-<?php echo $this->app->getModuleName() . '-' . $this->app->getMethodName() ?><?php if(isset($this->app->entry->code)) echo ' entry-' . $this->app->entry->code; ?>'>
