@@ -30,7 +30,7 @@
             <span class='input-group-addon'><?php echo $lang->overtime->date?></span>
             <?php echo html::input('begin', $date, "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->overtime->time?></span>
-            <?php echo html::input('start', $config->attend->signInLimit, "class='form-control form-time' data-ele-class='my-time-picker'")?>
+            <?php echo html::input('start', $config->attend->signInLimit, "class='form-control form-time'")?>
           </div>
         </td>
         <td></td>
@@ -42,7 +42,7 @@
             <span class='input-group-addon'><?php echo $lang->overtime->date?></span>
             <?php echo html::input('end', $date, "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->overtime->time?></span>
-            <?php echo html::input('finish', $config->attend->signOutLimit, "class='form-control form-time' data-ele-class='my-time-picker'")?>
+            <?php echo html::input('finish', $config->attend->signOutLimit, "class='form-control form-time'")?>
           </div>
         </td>
         <td></td>

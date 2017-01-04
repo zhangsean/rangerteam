@@ -14,7 +14,12 @@ $clientLang = $this->app->getClientLang();
 css::import($jsRoot . 'datetimepicker/css/min.css');
 js::import($jsRoot  . 'datetimepicker/js/min.js'); 
 ?>
-<script language='javascript'>
+<style>
+.only-pick-time table {width: 100%}
+.only-pick-time table td {width: 150px}
+.only-pick-time table > tfoot .today, .only-pick-time table > thead {display: none !important;}
+</style>
+<script>
 /**
  * Format date to a string
  *
@@ -87,7 +92,7 @@ $(function()
 
     $('.form-datetime').fixedDate().datetimepicker(options);
     $('.form-date').fixedDate().datetimepicker($.extend(options, {minView: 2, format: 'yyyy-mm-dd'}));
-    $('.form-time').fixedDate().datetimepicker($.extend(options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'}));
+    $('.form-time').fixedDate().datetimepicker($.extend(options, {eleClass: 'only-pick-time', startView: 1, minView: 0, maxView: 1, format: 'hh:ii'}));
     $('.form-month').fixedDate().datetimepicker($.extend(options, {startView: 3, minView: 3, format: 'yyyy-mm'}));
 });
 </script>
