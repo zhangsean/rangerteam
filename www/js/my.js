@@ -202,6 +202,17 @@ function setMenu()
     }
 }
 
+/* Remove 'ditto' in first row when batch create or edit. */
+function removeDitto()
+{
+    $firstTr = $('.table').find('tbody tr:first');
+    $firstTr.find('td select').each(function()
+    {    
+        $(this).find("option[value='ditto']").remove();
+        $(this).trigger("chosen:updated");
+    });  
+}
+
 /**
  * Start cron.
  * 

@@ -152,7 +152,7 @@ $lang->exportThisPage = 'Export This Page';
 $lang->exportTemplate = 'Export Template';
 $lang->exportExcel    = 'Export Excel';
 $lang->exportWord     = 'Export Word';
-$lang->importFile     = 'Import File';
+$lang->importFile     = 'File';
 $lang->importSuccess  = 'Imported.';
 $lang->importFail     = 'Failed.';
 
