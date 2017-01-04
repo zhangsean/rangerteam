@@ -13,13 +13,8 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include 'header.lite.html.php';?>
 <style>body {padding-top: 58px}</style>
-<nav class='navbar navbar-inverse navbar-fixed-top' role='navigation' id='mainNavbar'>
+<nav class='navbar navbar-main navbar-fixed-top' role='navigation' id='mainNavbar'>
   <div class='navbar-header'>
-    <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-ex1-collapse'>
-      <span class='icon-bar'></span>
-      <span class='icon-bar'></span>
-      <span class='icon-bar'></span>
-    </button>
     <?php
     if(isset($lang->app))
     {
@@ -31,9 +26,7 @@
     }
     ?>
   </div>
-  <div class='collapse navbar-collapse'>
-    <?php echo commonModel::createMainMenu($this->moduleName);?>
-  </div>
+  <?php echo commonModel::createMainMenu($this->moduleName);?>
 </nav>
 <?php 
 if(!isset($moduleMenu)) $moduleMenu = commonModel::createModuleMenu($this->moduleName);

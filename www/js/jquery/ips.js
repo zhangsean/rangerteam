@@ -1100,7 +1100,7 @@
                     if(win.firstLoad)
                     {
                         win.indexUrl = url;
-                        var colorTone = $frame.find('.navbar-inverse');
+                        var colorTone = $frame.find('.navbar-main');
                         if(colorTone.length)
                         {
                             win.tone = colorTone.css('background-color');
@@ -1606,40 +1606,40 @@
         };
 
         /* show a shortcut */
-        this.show = function(entry)
+        this.show = function(et)
         {
             var $shortcut;
             var activedId = (windows && windows.shows.length) ? windows.shows[windows.shows.length - 1] : null;
-            if(entry.hasMenu)
+            if(et.hasMenu)
             {
-                $shortcut = $(entry.toLeftBarShortcutHtml());
-                if(entry.code == '')
+                $shortcut = $(et.toLeftBarShortcutHtml());
+                if(et.code == '')
                 {
-                    $shortcut.find('button').attr('id', 'category' + entry.id).addClass('categoryButton');
+                    $shortcut.find('button').attr('id', 'category' + et.id).addClass('categoryButton');
                     $shortcut.find('button').removeAttr('title');
                 }
-                if(entry.category !== undefined && entry.category != 0) 
+                if(et.category !== undefined && et.category != 0) 
                 {
-                    if($('#categoryMenu' + entry.category).length == 0)
+                    if($('#categoryMenu' + et.category).length == 0)
                     {
-                        $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, entry.category));
+                        $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, et.category));
                     }
                     $shortcut.find('.app-btn').removeAttr('title');
-                    $('#categoryMenu' + entry.category).append($shortcut);
+                    $('#categoryMenu' + et.category).append($shortcut);
                 }
                 else
                 {
-                    if(activedId && entry.id === activedId)
+                    if(activedId && et.id === activedId)
                     {
                         $shortcut.find('.app-btn').addClass('active');
                     }
                     this.$appsMenu.append($shortcut);
                 }
             }
-            if(entry.menu == 'all' || entry.menu == 'list')
+            if(et.menu == 'all' || et.menu == 'list')
             {
-                $shortcut = $(entry.toEntryListShortcutHtml());
-                if(entry.opened)
+                $shortcut = $(et.toEntryListShortcutHtml());
+                if(et.opened)
                 {
                     $shortcut.find('.app-btn').addClass('open');
                 }
@@ -1960,4 +1960,7 @@
 
     /* make jquery object call the ips interface manager */
     $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString, refreshDesktop: refreshDesktop});
+
+    var bgImg = $.zui.store.get('bgImg');
+    if(bgImg) $('body').css('background-image', bgImg);
 }(jQuery, window, document, Math);
