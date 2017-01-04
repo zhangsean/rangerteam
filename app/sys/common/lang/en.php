@@ -81,7 +81,7 @@ $lang->password       = 'Password';
 $lang->all            = 'All';
 $lang->changePassword = 'Change password';
 $lang->currentPos     = 'Current Page';
-$lang->categoryMenu   = 'Categories';
+$lang->categoryMenu   = 'Manage Category';
 $lang->basicInfo      = 'Basic Info';
 
 /* Global action items. */

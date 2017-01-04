@@ -28,7 +28,7 @@ $lang->todo->import       = "Import to";
 $lang->todo->changeStatus = "Change";
 $lang->todo->legendBasic  = "Basic Info";
 $lang->todo->calendar     = "Calendar";
-$lang->todo->assignTo     = "Assignee";
+$lang->todo->assignTo     = "Assign";
 
 $lang->todo->id           = 'ID';
 $lang->todo->account      = 'Owner';

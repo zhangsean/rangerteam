@@ -74,7 +74,7 @@ $lang->in->alias    = 'Alias';
 $lang->in->parent   = 'Parent';
 $lang->in->desc     = 'Description';
 $lang->in->keywords = 'Keywords';
-$lang->in->children = "Children";
+$lang->in->children = "Child";
 $lang->in->merge    = 'Merge Categories';
 
 /* Lang items for expend. */
@@ -85,7 +85,7 @@ $lang->out->alias    = 'Alias';
 $lang->out->parent   = 'Parent';
 $lang->out->desc     = 'Description';
 $lang->out->keywords = 'Keywords';
-$lang->out->children = "Children";
+$lang->out->children = "Child";
 $lang->out->rights   = 'Rights';
 $lang->out->refund   = 'Reimbursement';
 $lang->out->merge    = 'Merge Categories';
@@ -103,7 +103,7 @@ $lang->board->desc       = 'Description';
 $lang->board->keywords   = 'Keyword';
 $lang->board->children   = "Children";
 $lang->board->readonly   = 'Read Only';
-$lang->board->moderators = 'Moderators';
+$lang->board->moderators = 'Adminstrator';
 $lang->board->users      = 'Users';
 $lang->board->groups     = 'Groups';
 

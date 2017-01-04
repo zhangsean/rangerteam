@@ -51,7 +51,7 @@ $lang->attend->menu->department = 'Department|attend|department|';
 $lang->attend->menu->company    = 'Company|attend|company|';
 $lang->attend->menu->detail     = 'Details|attend|detail|';
 $lang->attend->menu->review     = 'Review|attend|browsereview|';
-$lang->attend->menu->stat       = 'Stats|attend|stat|';
+$lang->attend->menu->stat       = 'Report|attend|stat|';
 $lang->attend->menu->holiday    = 'Holidays|holiday|browse|';
 $lang->attend->menu->settings   = array('link' => 'Settings|attend|settings|', 'alias' => 'setmanager');
 

@@ -13,10 +13,10 @@ $lang->article->common      = 'Article';
 $lang->article->createDraft = 'Create draft';
 
 $lang->article->id          = 'Id';
-$lang->article->category    = 'Categories';
+$lang->article->category    = 'Category';
 $lang->article->categories  = 'Categories';
 $lang->article->title       = 'Title';
-$lang->article->alias       = 'English alias';
+$lang->article->alias       = 'Alias';
 $lang->article->content     = 'Content';
 $lang->article->original    = 'Original';
 $lang->article->copySite    = 'Site';

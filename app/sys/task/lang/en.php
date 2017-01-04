@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->task->common = 'Task';
-$lang->task->list   = 'Task list';
+$lang->task->list   = 'Tasks';
 
 $lang->task->browse    = 'Browse';
 $lang->task->view      = 'Info';
@@ -40,7 +40,7 @@ $lang->task->category       = 'Category';
 $lang->task->name           = 'Name';
 $lang->task->type           = 'Type';
 $lang->task->pri            = 'Priority';
-$lang->task->estimate       = 'Man-Hour Estimation';
+$lang->task->estimate       = 'Man-Hour Estimated';
 $lang->task->estimateAB     = 'Est.';
 $lang->task->consumed       = 'Consumed';
 $lang->task->consumedAB     = 'Use';
@@ -81,15 +81,15 @@ $lang->task->date           = 'Date';
 $lang->task->multiple       = 'Multiple Tasks';
 $lang->task->multipleAB     = 'Multiple';
 $lang->task->team           = 'Team';
-$lang->task->transmit       = 'Transmit';
-$lang->task->transmitTo     = 'Transmit To';
-$lang->task->children       = 'Children';
+$lang->task->transmit       = 'Transfer';
+$lang->task->transmitTo     = 'Transfer To';
+$lang->task->children       = 'Child';
 $lang->task->childrenAB     = 'Child';
 $lang->task->parent         = 'Parent Task';
 $lang->task->unfinished     = 'Unfinished';
 $lang->task->end            = 'End';
-$lang->task->myConsumption  = 'My Consumption';
-$lang->task->recordEstimate = 'Record';
+$lang->task->myConsumption  = 'Man-Hour Consumed';
+$lang->task->recordEstimate = 'Man-Hour';
 
 $lang->task->confirmFinish     = '"Remained" is zero, so the status of this task will be "done". Do you want to finish it?';
 $lang->task->consumedBefore    = 'consumed before';
@@ -130,7 +130,7 @@ $lang->task->all          = 'All';
 $lang->task->basicInfo = 'Basic Info';
 $lang->task->life      = 'Task Life';
 
-$lang->task->kanban  = 'Boards';
+$lang->task->kanban  = 'Kanban';
 $lang->task->mind    = 'Mind Map';
 $lang->task->list    = 'List';
 $lang->task->outline = 'Outline';

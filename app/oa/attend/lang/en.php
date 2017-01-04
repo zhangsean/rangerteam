@@ -18,9 +18,9 @@ $lang->attend->overtimed    = 'Already overtime';
 $lang->attend->review       = 'Review attendance';
 $lang->attend->settings     = 'Setting';
 $lang->attend->export       = 'Export';
-$lang->attend->stat         = 'Stats';
+$lang->attend->stat         = 'Report';
 $lang->attend->saveStat     = 'Save';
-$lang->attend->exportStat   = 'Export Stats';
+$lang->attend->exportStat   = 'Export Report';
 $lang->attend->exportDetail = 'Export Details';
 $lang->attend->browseReview = 'Review List';
 
@@ -129,7 +129,7 @@ $lang->attend->notice['absent']   = "N/A";
 $lang->attend->confirmReview['pass']   = 'Do you want to pass it?';
 $lang->attend->confirmReview['reject'] = 'Do you want to reject it?';
 
-$lang->attend->settings   = 'Normal Settings';
+$lang->attend->settings   = 'Settings';
 $lang->attend->setManager = 'Department Manager Settings';
 $lang->attend->setDept    = 'Set Department';
 
