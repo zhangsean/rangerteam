@@ -13,7 +13,7 @@ if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 $lang->depositor->common          = 'Account';
 $lang->depositor->id              = 'ID';
 $lang->depositor->abbr            = 'Abbreviation';
-$lang->depositor->serviceProvider = 'Service Provider';
+$lang->depositor->serviceProvider = 'Provider';
 $lang->depositor->bankProvider    = 'Account Branch';
 $lang->depositor->title           = 'Title';
 $lang->depositor->tags            = 'Tags';
@@ -29,7 +29,7 @@ $lang->depositor->editedBy        = 'Edited By';
 $lang->depositor->editedDate      = 'Edited Date';
 
 $lang->depositor->all         = 'All';
-$lang->depositor->create      = 'Create Account';
+$lang->depositor->create      = 'Create';
 $lang->depositor->browse      = 'Account';
 $lang->depositor->edit        = 'Edit';
 $lang->depositor->delete      = 'Delete';
@@ -38,7 +38,7 @@ $lang->depositor->forbid      = 'Disable';
 $lang->depositor->activate    = 'Activate';
 $lang->depositor->export      = 'Export';
 $lang->depositor->balance     = 'Balance';
-$lang->depositor->saveBalance = 'Save balance';
+$lang->depositor->saveBalance = 'Save';
 $lang->depositor->detail      = 'Detail';
 
 $lang->depositor->check         = 'Check';
@@ -55,8 +55,8 @@ $lang->depositor->less          = "<span class='text-danger'>%s</span>";
 $lang->depositor->createBalance = 'Please add balance first.';
 
 $lang->depositor->typeList['cash']   = 'Cash';
-$lang->depositor->typeList['bank']   = 'Bank';
-$lang->depositor->typeList['online'] = 'Online';
+$lang->depositor->typeList['bank']   = 'Debit';
+$lang->depositor->typeList['online'] = 'Electronic';
 
 $lang->depositor->publicList['1'] = 'Public';
 $lang->depositor->publicList['0'] = 'Personal';

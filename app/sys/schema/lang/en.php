@@ -9,13 +9,13 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->schema->common   = 'Schema';
+$lang->schema->common   = 'Template';
 $lang->schema->browse   = 'Browse';
 $lang->schema->view     = 'View';
-$lang->schema->create   = 'Create';
+$lang->schema->create   = 'Import';
 $lang->schema->edit     = 'Edit';
 $lang->schema->delete   = 'Delete';
-$lang->schema->csvFile  = 'Schema Files';
+$lang->schema->csvFile  = 'Template Files';
 
 $lang->schema->name     = 'Name';
 $lang->schema->feeRow   = 'Fee is a record';
