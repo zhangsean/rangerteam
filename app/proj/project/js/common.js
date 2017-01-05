@@ -6,8 +6,8 @@ $(document).ready(function()
 
     if(typeof(v.projectID) != undefined && v.projectID != 0)
     {
-        $('.menu .nav li').removeClass('active');
-        $('#menu li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
+        $.cookie('projectStatus', v.status, {path: "/"});
+        $('#mainNavbar .nav li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
     }
 
     $("#createButton").modalTrigger({width:800});
