@@ -137,7 +137,7 @@ $lang->dept->parent     = 'Parent';
 $lang->dept->children   = 'Children';
 $lang->dept->desc       = 'Description';
 $lang->dept->keywords   = 'Keywords';
-$lang->dept->moderators = 'Moderator';
+$lang->dept->moderators = 'Dept Manager';
   
 $lang->user->roleList['']           = ''; 
 $lang->user->roleList['dev']        = 'Developer';

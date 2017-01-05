@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->mail->common = 'Email Settings';
-$lang->mail->index  = 'Index';
+$lang->mail->index  = 'Home';
 $lang->mail->detect = 'Detect';
 $lang->mail->edit   = 'Configure';
 $lang->mail->save   = 'Successfully saved.';

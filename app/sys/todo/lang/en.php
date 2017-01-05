@@ -11,7 +11,7 @@
  */
 if(!isset($lang->todo)) $lang->todo = new stdclass();
 $lang->todo->common       = 'To-Do';
-$lang->todo->index        = "Index";
+$lang->todo->index        = "Home";
 $lang->todo->browse       = "To-Dos";
 $lang->todo->create       = "Create";
 $lang->todo->batchCreate  = "Batch create";

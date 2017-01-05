@@ -15,7 +15,7 @@ $lang->upgrade->common  = 'Upgrade';
 $lang->upgrade->result  = 'Result';
 $lang->upgrade->fail    = 'Failed';
 $lang->upgrade->success = 'Success';
-$lang->upgrade->tohome  = 'Go to index';
+$lang->upgrade->tohome  = 'Back to Home';
 
 $lang->upgrade->index         = 'Upgrad Ranzhi.';
 $lang->upgrade->backup        = 'Backup';
