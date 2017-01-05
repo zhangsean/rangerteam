@@ -44,22 +44,22 @@ $lang->block->default['oa']['2']['grid']  = 4;
 
 $lang->block->default['oa']['2']['params']['num'] = 15;
 
-$lang->block->default['oa']['3']['title'] = '指派给我的任务';
-$lang->block->default['oa']['3']['block'] = 'task';
-$lang->block->default['oa']['3']['grid']  = 4;
+$lang->block->default['proj']['3']['title'] = '指派给我的任务';
+$lang->block->default['proj']['3']['block'] = 'task';
+$lang->block->default['proj']['3']['grid']  = 4;
 
-$lang->block->default['oa']['3']['params']['num']     = 15;
-$lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['3']['params']['status']  = array();
-$lang->block->default['oa']['3']['params']['type']    = 'assignedTo';
+$lang->block->default['proj']['3']['params']['num']     = 15;
+$lang->block->default['proj']['3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['proj']['3']['params']['status']  = array();
+$lang->block->default['proj']['3']['params']['type']    = 'assignedTo';
 
-$lang->block->default['oa']['4']['title'] = '项目列表';
-$lang->block->default['oa']['4']['block'] = 'project';
-$lang->block->default['oa']['4']['grid']  = 4;
+$lang->block->default['proj']['4']['title'] = '项目列表';
+$lang->block->default['proj']['4']['block'] = 'project';
+$lang->block->default['proj']['4']['grid']  = 4;
 
-$lang->block->default['oa']['4']['params']['num']     = 15;
-$lang->block->default['oa']['4']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['4']['params']['status']  = 'doing';
+$lang->block->default['proj']['4']['params']['num']     = 15;
+$lang->block->default['proj']['4']['params']['orderBy'] = 'id_desc';
+$lang->block->default['proj']['4']['params']['status']  = 'doing';
 
 $lang->block->default['crm']['1']['title'] = '我的订单';
 $lang->block->default['crm']['1']['block'] = 'order';
@@ -176,9 +176,9 @@ $lang->block->moreLinkList->task['finishedBy'] = '由我完成|sys|my|task|type=
 $lang->block->moreLinkList->task['closedBy']   = '由我关闭|sys|my|task|type=closedBy';
 $lang->block->moreLinkList->task['canceledBy'] = '由我取消|sys|my|task|type=canceledBy';
 
-$lang->block->moreLinkList->project['doing']    = '进行中|oa|project|index|status=doing';
-$lang->block->moreLinkList->project['finished'] = '已完成|oa|project|index|status=finished';
-$lang->block->moreLinkList->project['suspend']  = '已挂起|oa|project|index|status=suspend';
+$lang->block->moreLinkList->project['doing']    = '进行中|proj|project|index|status=doing';
+$lang->block->moreLinkList->project['finished'] = '已完成|proj|project|index|status=finished';
+$lang->block->moreLinkList->project['suspend']  = '已挂起|proj|project|index|status=suspend';
 
 $lang->block->moreLinkList->blog = '最新博客|team|blog|index|';
 $lang->block->moreLinkList->thread['new']   = '最新帖子|team|forum|index|';

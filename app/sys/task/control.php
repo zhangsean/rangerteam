@@ -53,7 +53,7 @@ class task extends control
         /* Check project deleted and privilage. */
         if($projectID)
         {
-            $project = $this->loadModel('project', 'oa')->getByID($projectID);
+            $project = $this->loadModel('project', 'proj')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
             if(!$this->project->checkPriv($projectID)) $this->locate($this->createLink('project'));
         }
@@ -66,9 +66,9 @@ class task extends control
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->task->search['actionURL'] = $this->createLink('task', 'browse', "projectID=$projectID&mode=bysearch");
-        $this->config->task->search['params']['assignedTo']['values'] = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
-        $this->config->task->search['params']['createdBy']['values']  = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
-        $this->config->task->search['params']['finishedBy']['values'] = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
+        $this->config->task->search['params']['assignedTo']['values'] = $this->loadModel('project', 'proj')->getMemberPairs($projectID);
+        $this->config->task->search['params']['createdBy']['values']  = $this->loadModel('project', 'proj')->getMemberPairs($projectID);
+        $this->config->task->search['params']['finishedBy']['values'] = $this->loadModel('project', 'proj')->getMemberPairs($projectID);
         $this->search->setSearchParams($this->config->task->search);
 
         $this->view->title = $this->lang->task->browse;
@@ -83,7 +83,7 @@ class task extends control
         $this->view->orderBy   = $orderBy;
         $this->view->project   = $project;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
+        $this->view->projects  = $this->loadModel('project', 'proj')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->backLink  = html::a($backURL, $this->lang->goback);
         $this->display();
@@ -110,9 +110,9 @@ class task extends control
 
         $this->view->title     = $this->lang->task->create;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
+        $this->view->projects  = $this->loadModel('project', 'proj')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
-        $this->view->members   = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
+        $this->view->members   = $this->loadModel('project', 'proj')->getMemberPairs($projectID);
         $this->display();
     }
 
@@ -138,8 +138,8 @@ class task extends control
 
         $this->view->title     = $parent == '' ? $this->lang->task->batchCreate : $this->lang->task->children;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
-        $this->view->users     = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
+        $this->view->projects  = $this->loadModel('project', 'proj')->getPairs();
+        $this->view->users     = $this->loadModel('project', 'proj')->getMemberPairs($projectID);
         $this->view->parent    = $parent;
         $this->display();
     }
@@ -185,9 +185,9 @@ class task extends control
         $this->view->title          = $this->lang->task->edit;
         $this->view->task           = $task;
         $this->view->projectID      = $this->view->task->project;
-        $this->view->projects       = $this->loadModel('project', 'oa')->getPairs();
+        $this->view->projects       = $this->loadModel('project', 'proj')->getPairs();
         $this->view->members        = !empty($task->team) ? $this->task->getMemberPairs($task) : array();
-        $this->view->projectMembers = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        $this->view->projectMembers = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
         $this->view->users          = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->display();
     }
@@ -242,14 +242,14 @@ class task extends control
             }
         }
 
-        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
         if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;
         $this->view->parent     = $parent;
         $this->view->projectID  = $task->project;
-        $this->view->projects   = $this->loadModel('project', 'oa')->getPairs();
+        $this->view->projects   = $this->loadModel('project', 'proj')->getPairs();
         $this->view->members    = $members;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->preAndNext = $preAndNext;
@@ -326,7 +326,7 @@ class task extends control
         foreach($task->children as $child) if($child->status == 'wait' or $child->status == 'doing') $status = '';
 
         /* Set task team member if exists task team. */
-        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
         if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title  = $status == 'finish' ? $task->name : $task->name . " <span class='label label-warning'>{$this->lang->task->children} {$this->lang->task->unfinished}</span>";
@@ -387,7 +387,7 @@ class task extends control
         $task    = $this->task->getByID($taskID);
         $this->checkPriv($task, 'assignTo');
 
-        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
         /* Compute next assignedTo. */
         if(!empty($task->team))
         {
@@ -444,7 +444,7 @@ class task extends control
         }
 
         /* Set task team member if exists task team. */
-        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
         if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title = $this->lang->task->activate;
@@ -591,7 +591,7 @@ class task extends control
         /* Check project deleted. */
         if($projectID)
         {
-            $project = $this->loadModel('project', 'oa')->getByID($projectID);
+            $project = $this->loadModel('project', 'proj')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
@@ -631,7 +631,7 @@ class task extends control
         /* Check project deleted. */
         if($projectID)
         {
-            $project = $this->loadModel('project', 'oa')->getByID($projectID);
+            $project = $this->loadModel('project', 'proj')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
@@ -723,7 +723,7 @@ class task extends control
 
         /* Set toList and ccList. */
         $task        = $this->task->getById($taskID);
-        $projectName = $this->loadModel('project', 'oa')->getById($task->project)->name;
+        $projectName = $this->loadModel('project', 'proj')->getById($task->project)->name;
         $users       = $this->loadModel('user')->getPairs();
         $toList      = $task->assignedTo;
         $ccList      = trim($task->mailto, ',');
@@ -811,7 +811,7 @@ class task extends control
 
             /* Get users and projects. */
             $users    = $this->loadModel('user')->getPairs();
-            $projects = $this->loadModel('project', 'oa')->getPairs();
+            $projects = $this->loadModel('project', 'proj')->getPairs();
 
             $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('task')->andWhere('objectID')->in(@array_keys($tasks))->fetchGroup('objectID');
 

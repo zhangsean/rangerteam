@@ -1,6 +1,5 @@
 <?php
 $lang->oa->menuOrder[5]  = 'dashboard';
-$lang->oa->menuOrder[10] = 'project';
 $lang->oa->menuOrder[15] = 'announce';
 $lang->oa->menuOrder[25] = 'attend';
 $lang->oa->menuOrder[30] = 'leave';
@@ -10,11 +9,6 @@ $lang->oa->menuOrder[45] = 'trip';
 $lang->oa->menuOrder[50] = 'egress';
 $lang->oa->menuOrder[55] = 'refund';
 $lang->oa->menuOrder[60] = 'setting';
-
-$lang->project->menuOrder[5]  = 'involved';
-$lang->project->menuOrder[10] = 'doing';
-$lang->project->menuOrder[15] = 'finished';
-$lang->project->menuOrder[20] = 'suspend';
 
 $lang->announce->menuOrder[5]  = 'browse';
 $lang->announce->menuOrder[10] = 'category';

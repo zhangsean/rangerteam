@@ -44,22 +44,22 @@ $lang->block->default['oa']['2']['grid']  = 4;
 
 $lang->block->default['oa']['2']['params']['num'] = 15;
 
-$lang->block->default['oa']['3']['title'] = 'Tasks assigned to me';
-$lang->block->default['oa']['3']['block'] = 'task';
-$lang->block->default['oa']['3']['grid']  = 4;
+$lang->block->default['proj']['3']['title'] = 'Tasks assigned to me';
+$lang->block->default['proj']['3']['block'] = 'task';
+$lang->block->default['proj']['3']['grid']  = 4;
 
-$lang->block->default['oa']['3']['params']['num']     = 15;
-$lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['3']['params']['status']  = array();
-$lang->block->default['oa']['3']['params']['type']    = 'assignedTo';
+$lang->block->default['proj']['3']['params']['num']     = 15;
+$lang->block->default['proj']['3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['proj']['3']['params']['status']  = array();
+$lang->block->default['proj']['3']['params']['type']    = 'assignedTo';
 
-$lang->block->default['oa']['4']['title'] = 'ProjectS';
-$lang->block->default['oa']['4']['block'] = 'project';
-$lang->block->default['oa']['4']['grid']  = 4;
+$lang->block->default['proj']['4']['title'] = 'ProjectS';
+$lang->block->default['proj']['4']['block'] = 'project';
+$lang->block->default['proj']['4']['grid']  = 4;
 
-$lang->block->default['oa']['4']['params']['num']     = 15;
-$lang->block->default['oa']['4']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['4']['params']['status']  = 'doing';
+$lang->block->default['proj']['4']['params']['num']     = 15;
+$lang->block->default['proj']['4']['params']['orderBy'] = 'id_desc';
+$lang->block->default['proj']['4']['params']['status']  = 'doing';
 
 $lang->block->default['crm']['1']['title'] = 'My Orders';
 $lang->block->default['crm']['1']['block'] = 'order';
@@ -176,9 +176,9 @@ $lang->block->moreLinkList->task['finishedBy'] = 'Finished By Me|sys|my|task|typ
 $lang->block->moreLinkList->task['closedBy']   = 'Closed By Me|sys|my|task|type=closedBy';
 $lang->block->moreLinkList->task['canceledBy'] = 'Canceled By Me|sys|my|task|type=canceledBy';
 
-$lang->block->moreLinkList->project['doing']    = 'Doing|oa|project|index|status=doing';
-$lang->block->moreLinkList->project['finished'] = 'Finished|oa|project|index|status=finished';
-$lang->block->moreLinkList->project['suspend']  = 'Suspend|oa|project|index|status=suspend';
+$lang->block->moreLinkList->project['doing']    = 'Doing|proj|project|index|status=doing';
+$lang->block->moreLinkList->project['finished'] = 'Finished|proj|project|index|status=finished';
+$lang->block->moreLinkList->project['suspend']  = 'Suspend|proj|project|index|status=suspend';
 
 $lang->block->moreLinkList->blog = 'Latest Blogs|team|blog|index|';
 $lang->block->moreLinkList->thread['new']   = 'Latest Threads|team|forum|index|';

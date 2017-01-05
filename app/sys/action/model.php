@@ -865,7 +865,7 @@ class actionModel extends model
             if(!in_array($action->objectID, $orders)) $canView = false;
         }
 
-        if($action->objectType == 'project' && !($this->loadModel('project', 'oa')->checkPriv($action->objectID))) $canView = false;
+        if($action->objectType == 'project' && !($this->loadModel('project', 'proj')->checkPriv($action->objectID))) $canView = false;
 
         if($action->objectType == 'task')
         {

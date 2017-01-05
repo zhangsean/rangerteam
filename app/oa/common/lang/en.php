@@ -14,7 +14,6 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = 'Home|dashboard|index|';
-$lang->menu->oa->project   = 'Project|project|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->attend    = 'Attendance|attend|personal|';
 $lang->menu->oa->leave     = 'Leave|leave|personal|';
@@ -26,13 +25,6 @@ $lang->menu->oa->refund    = 'Reimburse|refund|personal|';
 $lang->menu->oa->setting   = 'Settings|setting|module|app=oa';
 
 $lang->dashboard = new stdclass();
-
-if(!isset($lang->project)) $lang->project = new stdclass();
-$lang->project->menu = new stdclass();
-$lang->project->menu->involved = 'My Involved|project|index|status=involved';
-$lang->project->menu->doing    = 'Projects|project|index|status=doing';
-$lang->project->menu->finished = 'Finished|project|index|ststus=finished';
-$lang->project->menu->suspend  = 'Suspended|project|index|ststus=suspend';
 
 if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
