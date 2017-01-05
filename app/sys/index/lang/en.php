@@ -9,7 +9,7 @@
  * @version     $Id: en.php 4029 2016-08-26 06:50:41Z liugang $
  * @link        http://www.ranzhico.com
  */
-$lang->index->common       = 'Index';
+$lang->index->common       = 'Home';
 $lang->index->dashboard    = 'Dashboard';
 $lang->index->about        = 'About';
 $lang->index->allEntries   = 'All';

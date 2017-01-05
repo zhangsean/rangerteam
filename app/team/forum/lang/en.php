@@ -11,7 +11,7 @@
  */
 if(!isset($lang->forum)) $lang->forum = new stdclass();
 $lang->forum->common      = 'Forum';
-$lang->forum->index       = 'Index';
+$lang->forum->index       = 'Home';
 $lang->forum->board       = 'Board';
 $lang->forum->owners      = 'Moderator';
 $lang->forum->threadList  = 'Threads';

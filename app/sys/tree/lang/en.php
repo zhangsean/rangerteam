@@ -103,7 +103,7 @@ $lang->board->desc       = 'Description';
 $lang->board->keywords   = 'Keyword';
 $lang->board->children   = "Children";
 $lang->board->readonly   = 'Read Only';
-$lang->board->moderators = 'Adminstrator';
+$lang->board->moderators = 'Board Moderator';
 $lang->board->users      = 'Users';
 $lang->board->groups     = 'Groups';
 
@@ -111,5 +111,5 @@ $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Read Only';
 
 $lang->board->placeholder = new stdclass();
-$lang->board->placeholder->moderators  = "Moderators'account, Separated with" . '","';
+$lang->board->placeholder->moderators  = "BMs'accounts. Separated with" . '","';
 $lang->board->placeholder->setChildren = 'Forum needs two levels of boards to show.';

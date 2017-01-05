@@ -38,7 +38,7 @@ $lang->attend->report        = 'Report';
 $lang->attend->AM            = 'AM';
 $lang->attend->PM            = 'PM';
 $lang->attend->ipList        = 'IP List';
-$lang->attend->noAttendUsers = 'Users With no Attendance';
+$lang->attend->noAttendUsers = 'Clock-in/out not required';
 
 $lang->attend->user          = 'User';
 $lang->attend->begin         = 'Begin';
@@ -96,7 +96,7 @@ $lang->attend->reasonList['egress'] = 'Biz egress';
 $lang->attend->reasonList['leave']  = 'Ask for leave';
 $lang->attend->reasonList['lieu']   = 'Lieu';
 
-$lang->attend->reviewStatusList['wait']   = 'Pending';
+$lang->attend->reviewStatusList['wait']   = 'Wait';
 $lang->attend->reviewStatusList['pass']   = 'Pass';
 $lang->attend->reviewStatusList['reject'] = 'Reject';
 
@@ -105,11 +105,11 @@ $lang->attend->inFail     = 'Signin failed.';
 $lang->attend->outSuccess = 'Signed out.';
 $lang->attend->outFail    = 'Signout failed.';
 
-$lang->attend->signInLimit  = 'Last Clock-in';
-$lang->attend->signOutLimit = 'Earlies Clock-out';
-$lang->attend->workingDays  = 'Working days per week';
-$lang->attend->workingHours = 'Working hours per day';
-$lang->attend->mustSignOut  = 'Clock-out required.';
+$lang->attend->signInLimit  = 'Clock-in';
+$lang->attend->signOutLimit = 'Clock-out';
+$lang->attend->workingDays  = 'Working days';
+$lang->attend->workingHours = 'Working hours';
+$lang->attend->mustSignOut  = 'Required';
 
 $lang->attend->workingDaysList['5']  = "Monday ~ Friday";
 $lang->attend->workingDaysList['6']  = "Monday ~ Saturday";

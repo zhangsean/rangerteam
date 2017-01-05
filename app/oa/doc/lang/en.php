@@ -32,7 +32,7 @@ $lang->doc->editedDate     = 'Edited on';
 $lang->doc->basicInfo      = 'Basic Info';
 $lang->doc->deleted        = 'Deleted';
 
-$lang->doc->index          = 'Index';
+$lang->doc->index          = 'Home';
 $lang->doc->create         = 'Create';
 $lang->doc->edit           = 'Edit';
 $lang->doc->delete         = 'Delete';
