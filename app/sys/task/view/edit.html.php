@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<?php $this->loadModel('project', 'oa')->setMenu($projects, $projectID);?>
+<?php $this->loadModel('project', 'proj')->setMenu($projects, $projectID);?>
 <div class='with-menu page-content'>
   <form method='post' id='ajaxForm' enctype='multipart/form-data'>
     <div class='row'>

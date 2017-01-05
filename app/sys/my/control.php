@@ -354,7 +354,7 @@ class my extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->loadModel('project', 'oa');
+        $this->loadModel('project', 'proj');
         $this->view->title    = $this->lang->my->project->common;
         $this->view->projects = $this->project->getList('involved', $orderBy, $pager);
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed');

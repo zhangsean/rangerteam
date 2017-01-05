@@ -14,7 +14,6 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '首頁|dashboard|index|';
-$lang->menu->oa->project   = '項目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '請假|leave|personal|';
@@ -26,13 +25,6 @@ $lang->menu->oa->refund    = '報銷|refund|personal|';
 $lang->menu->oa->setting   = '設置|setting|modules|app=oa';
 
 $lang->dashboard = new stdclass();
-
-if(!isset($lang->project)) $lang->project = new stdclass();
-$lang->project->menu = new stdclass();
-$lang->project->menu->involved = '我參與的|project|index|status=involved';
-$lang->project->menu->doing    = '進行中|project|index|status=doing';
-$lang->project->menu->finished = '已完成|project|index|ststus=finished';
-$lang->project->menu->suspend  = '已掛起|project|index|ststus=suspend';
 
 if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();

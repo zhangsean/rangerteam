@@ -13,7 +13,7 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php js::set('viewChild', $lang->task->viewChild);?>
-<?php $this->loadModel('project', 'oa')->setMenu($projects, $projectID);?>
+<?php $this->loadModel('project', 'proj')->setMenu($projects, $projectID);?>
 <?php if($task->parent != 0):?>
 <div class='addonMenu'>
   <li><?php echo html::a($this->createLink('task', 'view', "id={$task->parent}"), $lang->task->parent)?></li>

@@ -19,7 +19,7 @@
   </tr>
   <?php foreach($projects as $id => $project):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn text-center' data-id={$this->get->entry}" : "class='text-center'"?>
-  <tr data-url='<?php echo $this->createLink('oa.task', 'browse', "projectID=$id"); ?>' <?php echo $appid?>>
+  <tr data-url='<?php echo $this->createLink('proj.task', 'browse', "projectID=$id"); ?>' <?php echo $appid?>>
     <td class='text-left' title='<?php echo $project->name;?>'><?php echo $project->name;?></td>
     <td><?php echo $project->done;?></td>
     <td><?php echo $project->wait;?></td>

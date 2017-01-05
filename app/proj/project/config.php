@@ -20,7 +20,7 @@ $config->project->editor->edit   = array('id' => 'desc', 'tools' => 'simple');
 $config->project->editor->finish = array('id' => 'comment', 'tools' => 'simple');
 
 global $lang, $app;
-$app->loadLang('project', 'oa');
+$app->loadLang('project', 'proj');
 $config->project->search['module'] = 'project';
 
 $config->project->search['fields']['t1.name']        = $lang->project->name;
