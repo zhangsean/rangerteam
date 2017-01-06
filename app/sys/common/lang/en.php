@@ -237,7 +237,7 @@ $lang->entry->menu->category = 'Category|entry|category|';
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->mail   = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->mail   = array('link' => 'EMail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->system->menu->trash  = array('link' => 'Trash|action|trash|');
 $lang->system->menu->cron   = 'Cron|cron|index|';
 $lang->system->menu->backup = 'Backup|backup|index|';

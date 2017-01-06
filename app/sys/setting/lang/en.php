@@ -50,7 +50,7 @@ $lang->setting->currentLang = 'For current language';
 
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = 'Key';
-$lang->setting->placeholder->value = 'Translation';
+$lang->setting->placeholder->value = 'Define the value';
 $lang->setting->placeholder->info  = 'Description';
 
 $lang->setting->placeholder->typeList = new stdclass();

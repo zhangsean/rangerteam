@@ -19,7 +19,7 @@ $lang->mail->reset  = 'Reset';
 
 $lang->mail->turnon      = 'Turnon';
 $lang->mail->fromAddress = 'From email';
-$lang->mail->fromName    = 'From title';
+$lang->mail->fromName    = 'From';
 $lang->mail->mta         = 'MTA';
 $lang->mail->host        = 'SMTP host';
 $lang->mail->port        = 'SMTP port';
@@ -27,7 +27,7 @@ $lang->mail->auth        = 'Authentication';
 $lang->mail->username    = 'SMTP account';
 $lang->mail->password    = 'SMTP password';
 $lang->mail->secure      = 'Secure';
-$lang->mail->debug       = 'Debug';
+$lang->mail->debug       = 'Debugging';
 
 $lang->mail->turnonList[1] = 'on';
 $lang->mail->turnonList[0] = 'off';
@@ -43,7 +43,7 @@ $lang->mail->secureList['']    = 'plain';
 $lang->mail->secureList['ssl'] = 'ssl';
 $lang->mail->secureList['tls'] = 'tls';
 
-$lang->mail->inputFromEmail = 'Please enter the from email:';
+$lang->mail->inputFromEmail = 'Please enter Email address';
 $lang->mail->nextStep       = 'Next';
 $lang->mail->successSaved   = 'The configuration has been successfully saved.';
 $lang->mail->subject        = "This is a testing Email from Ranger.";

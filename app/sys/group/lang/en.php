@@ -40,8 +40,8 @@ $lang->group->outside  = 'Other Users';
 $lang->group->other    = 'Others';
 $lang->group->all      = 'All';
 $lang->group->extent   = 'extent';
-$lang->group->havePriv = 'With Privileges';
-$lang->group->noPriv   = 'Without Privileges';
+$lang->group->havePriv = 'Authorized';
+$lang->group->noPriv   = 'Not Authorized';
 
 $lang->group->manageAll = 'All customers and orders';
 
@@ -49,7 +49,7 @@ $lang->group->copyOptions['copyPriv'] = 'Copy Privilege';
 $lang->group->copyOptions['copyUser'] = 'Copy user';
 
 $lang->group->placeholder = new stdclass();
-$lang->group->placeholder->tree = 'Including area,industry,income and expense, boards,blog categories, departments.';
+$lang->group->placeholder->tree = 'Including area, industry, income and expense, boards, blog categories, departments.';
 $lang->group->placeholder->lang = 'Including product status, product line, customer type, customer size, customer level, customer status, currency and role';
 
 include (dirname(__FILE__) . '/resource.php');

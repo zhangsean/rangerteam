@@ -11,19 +11,19 @@
  */
 $lang->entry->common      = 'App';
 $lang->entry->admin       = 'Apps';
-$lang->entry->create      = 'Add';
+$lang->entry->create      = 'Create';
 $lang->entry->edit        = 'Edit';
 $lang->entry->delete      = 'Delete';
 $lang->entry->createKey   = 'New';
-$lang->entry->order       = 'Order';
+$lang->entry->order       = 'Sort';
 $lang->entry->style       = 'Style';
-$lang->entry->setCategory = 'Manange Categories';
+$lang->entry->setCategory = 'Manange';
 
-$lang->entry->name        = 'Name';
+$lang->entry->name        = 'App Name';
 $lang->entry->abbr        = 'Abbr';
 $lang->entry->code        = 'Alias';
 $lang->entry->buildin     = 'Build-in';
-$lang->entry->integration = 'Integration';
+$lang->entry->integration = 'Integrate';
 $lang->entry->key         = 'Key';
 $lang->entry->block       = 'Block URL';
 $lang->entry->ip          = 'IPs';
@@ -48,13 +48,13 @@ $lang->entry->integrateZentao  = 'Integrate ZenTao';
 $lang->entry->chanzhiPlaceholder = 'Please enter Admin URL';
 $lang->entry->chanzhiURL         = 'Admin URL';
 $lang->entry->zentaoPlaceholder  = 'E.g. http://www.zentaopms.com/user-login-Lw==.html';
-$lang->entry->zentaoURL          = 'Login ZenTao URL';
+$lang->entry->zentaoURL          = 'ZenTao URL';
 
 $lang->entry->zentaoAdmin   = 'ZenTao Admin';
-$lang->entry->adminAccount  = 'Admin account';
-$lang->entry->adminPassword = 'Admin password';
+$lang->entry->adminAccount  = 'ZenTao Admin';
+$lang->entry->adminPassword = 'Password';
 $lang->entry->bindUser      = 'Bind User';
-$lang->entry->nextStep      = 'Next Step';
+$lang->entry->nextStep      = 'Next';
 $lang->entry->createUser    = 'Create User';
 
 $lang->entry->confirmDelete = 'Do you want to delete this App?';
@@ -62,7 +62,7 @@ $lang->entry->lblBlock      = 'Block';
 $lang->entry->editWarnning  = 'This is a system application. Think before you change it.';
 
 $lang->entry->note = new stdClass();
-$lang->entry->note->name    = 'App Name';
+$lang->entry->note->name    = 'Name';
 $lang->entry->note->abbr    = 'Abbreviation';
 $lang->entry->note->logo    = 'Logo size 64*64. if upload the PNG format, you must keep transparency.';
 $lang->entry->note->code    = 'Entry alias should be letters, digits or underline.';
@@ -79,7 +79,7 @@ $lang->entry->error->name  = 'Please enter name';
 $lang->entry->error->code  = 'Please enter alias';
 $lang->entry->error->key   = 'Please enter key';
 $lang->entry->error->ip    = 'Please enter IP';
-$lang->entry->error->url   = 'Non built-in application login address. /, http:// or https:// must be included.';
+$lang->entry->error->url   = 'No built-in application login address. /, http:// or https:// must be included.';
 
 $lang->entry->error->admin         = 'Wrong admin account or password.';
 $lang->entry->error->zentaoSetting = 'ZenTao PMS config failed. Upgrade Zentao PMS to head.';
