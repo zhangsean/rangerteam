@@ -14,6 +14,7 @@
 /* Judge class config and function getWebRoot exists or not, make sure php shells can work. */
 if(!class_exists('config')){class config{}}
 if(!function_exists('getWebRoot')){function getWebRoot(){}}
+if(!isset($config)) $config = new stdclass();
 
 /* 系统框架配置。Framework settings. */
 $config->framework = new stdclass();
