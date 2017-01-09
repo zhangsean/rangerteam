@@ -15,6 +15,12 @@
 <?php js::set('private', $lib->private);?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('editLib', "libID=$libID")?>'>
   <table class='table table-form'>
+    <?php if(!empty($lib->project)):?>
+    <tr>
+      <th class='w-100px'><?php echo $lang->doc->project?></th>
+      <td><?php echo $project->name;?></td>
+    </tr>
+    <?php endif;?>
     <tr>
       <th class='w-100px'><?php echo $lang->doc->libName;?></th>
       <td><?php echo html::input('name', $lib->name, "class='form-control'");?></td>

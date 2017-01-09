@@ -209,8 +209,20 @@ class projectModel extends model
             $this->dao->insert(TABLE_TEAM)->data($user)->autoCheck()->exec();
             if(dao::isError()) return false;
         }
-        return $projectID;
 
+        /* Create doc lib. */
+        $this->app->loadLang('doc', 'doc');
+        $lib = new stdclass();
+        $lib->project = $projectID;
+        $lib->name    = $this->lang->doc->projectMainLib;
+        $lib->private = 0;
+
+        $teams = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account', 'account');
+        $lib->users  = join(',', $teams);
+        $lib->groups = isset($project->whitelist) ? $project->whitelist : '';
+        $this->dao->insert(TABLE_DOCLIB)->data($lib)->exec();
+
+        return $projectID;
     }
 
     /**
@@ -300,6 +312,8 @@ class projectModel extends model
                 $members[$account] = $member;
             }
         }
+
+        $this->loadModel('doc', 'doc')->setLibUsers($projectID);
 
         $project->members = $members;
         return commonModel::createChanges($oldProject, $project);

@@ -41,20 +41,26 @@ $lang->doc->view           = '文档详情';
 $lang->doc->manageType     = '维护分类';
 
 $lang->doc->libName        = '文档库名称';
+$lang->doc->libType        = '文档库类型';
+$lang->doc->allLib         = '所有文档库';
+$lang->doc->projectLib     = '项目文档库';
+$lang->doc->customLib      = '自定义文档库';
+$lang->doc->projectMainLib = '项目主库';
+$lang->doc->fileLib        = '附件库';
+
 $lang->doc->createLib      = '创建文档库';
 $lang->doc->editLib        = '编辑文档库';
 $lang->doc->deleteLib      = '删除文档库';
 
-$lang->doc->allProduct     = '所有产品';
 $lang->doc->allProject     = '所有项目';
 
 $lang->doc->private        = '设为私密';
 $lang->doc->users          = '授权用户';
 $lang->doc->groups         = '授权分组';
 
-$lang->doc->systemLibs = array();
-//$lang->doc->systemLibs['product'] = '产品文档库';
-//$lang->doc->systemLibs['project'] = '项目文档库';
+$lang->doc->libTypeList = array();
+$lang->doc->libTypeList['custom']  = '自定义文档库';
+$lang->doc->libTypeList['project'] = '项目文档库';
 
 $lang->doc->types['file'] = '文件';
 $lang->doc->types['url']  = '链接';

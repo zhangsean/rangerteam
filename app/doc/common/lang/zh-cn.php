@@ -13,10 +13,14 @@ $lang->app = new stdclass();
 $lang->app->name = 'DOC';
 
 $lang->menu->doc = new stdclass();
-$lang->menu->doc->all       = '所有文档库|doc|index|type=all';
-$lang->menu->doc->project   = '项目文档库|doc|index|type=project';
-$lang->menu->doc->custom    = '自定义文档库|doc|index|type=custom';
+$lang->menu->doc->index = '文档|doc|index|';
 
 $lang->dashboard = new stdclass();
+
+if(!isset($lang->doc)) $lang->doc = new stdclass();
+$lang->doc->menu = new stdclass();
+$lang->doc->menu->all     = '所有文档库|doc|index|';
+$lang->doc->menu->project = '项目文档库|doc|alllibs|type=project';
+$lang->doc->menu->custom  = '自定义文档库|doc|alllibs|type=custom';
 
 include (dirname(__FILE__) . '/menuOrder.php');

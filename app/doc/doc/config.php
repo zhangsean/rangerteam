@@ -24,6 +24,7 @@ global $lang;
 $config->doc->search['module']                   = 'doc';
 $config->doc->search['fields']['title']          = $lang->doc->title;
 $config->doc->search['fields']['id']             = $lang->doc->id;
+$config->doc->search['fields']['project']        = $lang->doc->project;
 $config->doc->search['fields']['keywords']       = $lang->doc->keywords;
 $config->doc->search['fields']['type']           = $lang->doc->type;
 $config->doc->search['fields']['module']         = $lang->doc->category;
@@ -38,6 +39,7 @@ $config->doc->search['fields']['editedDate']     = $lang->doc->editedDate;
 
 $config->doc->search['params']['title']         = array('operator' => 'include', 'control' => 'input',  'values' => '');
 $config->doc->search['params']['id']            = array('operator' => '=',       'control' => 'input',  'values' => '');
+$config->doc->search['params']['project']       = array('operator' => '=',       'control' => 'select', 'values' => 'set in control');
 $config->doc->search['params']['keywords']      = array('operator' => 'include', 'control' => 'input',  'values' => '');
 $config->doc->search['params']['type']          = array('operator' => '=',       'control' => 'select', 'values' => $lang->doc->types);
 $config->doc->search['params']['module']        = array('operator' => 'belong',  'control' => 'select', 'values' => 'set in control');

@@ -15,9 +15,10 @@
 <?php js::set('libID ', $libID);?>
 <?php js::set('browseType ', $browseType);?>
 <?php js::set('mode', $mode)?>
+<?php $this->doc->setMenu($lib->project, $lib->id, $moduleID);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
+  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
 </div>
 <div class='row'>
   <div class='col-sm-3'>
@@ -54,7 +55,7 @@
       <table class='table table-hover table-striped tablesorter table-fixed' id='docList'>
         <thead>
           <tr class='text-center'>
-            <?php $vars = "libID=$libID&module=$moduleID&productID=$productID&projectID=$projectID&browseType=$browseType&param=$param&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+            <?php $vars = "libID=$libID&module=$moduleID&projectID=$projectID&browseType=$browseType&param=$param&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
             <th class='w-100px'>  <?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->doc->id);?></th>
             <th class='text-left'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->doc->title);?></th>
             <th class='w-100px'>  <?php commonModel::printOrderLink('type',      $orderBy, $vars, $lang->doc->type);?></th>
