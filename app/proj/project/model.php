@@ -215,6 +215,7 @@ class projectModel extends model
         $lib = new stdclass();
         $lib->project = $projectID;
         $lib->name    = $this->lang->doc->projectMainLib;
+        $lib->main    = '1';
         $lib->private = 0;
 
         $teams = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account', 'account');

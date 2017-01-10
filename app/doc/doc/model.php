@@ -324,7 +324,7 @@ class docModel extends model
             ->data($lib)
             ->autoCheck()
             ->batchCheck('name', 'notempty')
-            ->check('name', 'unique', "id != $libID")
+            ->check('name', 'unique', "id != $libID && project = $oldLib->project")
             ->where('id')->eq($libID)
             ->exec();
 

@@ -284,6 +284,7 @@ CREATE TABLE `oa_doclib` (
   `private` enum('0', '1') NOT NULL DEFAULT '0',
   `users` text NOT NULL,
   `groups` varchar(255) NOT NULL DEFAULT '',
+  `main` enum('0', '1') NOT NULL DEFAULT '0',
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` varchar(30) NOT NULL,
