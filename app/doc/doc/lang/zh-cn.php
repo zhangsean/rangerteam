@@ -51,6 +51,8 @@ $lang->doc->fileLib        = '附件库';
 $lang->doc->createLib      = '创建文档库';
 $lang->doc->editLib        = '编辑文档库';
 $lang->doc->deleteLib      = '删除文档库';
+$lang->doc->fixedMenu      = '固定到菜单栏';
+$lang->doc->removedMenu    = '从菜单栏移除';
 
 $lang->doc->allProject     = '所有项目';
 

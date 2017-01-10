@@ -602,6 +602,36 @@ class docModel extends model
 
     public function setMenu($projectID = 0, $libID = 0, $category = 0, $extra = '')
     {
+
+        /* Check the privilege. */
+        $lib = $this->getLibById($libID);
+        $projectID = !empty($lib) ? $lib->project : $projectID;
+        $project = $this->loadModel('project', 'proj')->getById($projectID);
+
+        $moduleMenu  = "<nav id='menu'><ul class='nav'>";
+        $moduleMenu .= '<li>';
+
+        if($project)
+        {
+            $moduleMenu .= html::a(helper::createLink('doc', 'allLibs', "type=project"), $this->lang->doc->libTypeList['project']);
+            $moduleMenu .= "<i class='icon-angle-right'></i>";
+            $moduleMenu .= html::a(helper::createLink('doc', 'projectLibs', "projectID=$project->id"), $project->name);
+            if($lib)   $moduleMenu .= "<i class='icon-angle-right'></i> " . $lib->name;
+            if($extra) $moduleMenu .= "<i class='icon-angle-right'></i> " . $extra;
+        }
+        else
+        {
+            
+            if($lib)
+            {
+                $moduleMenu .= html::a(helper::createLink('doc', 'allLibs', "type=custom") , $this->lang->doc->libTypeList['custom']);
+                $moduleMenu .= "<i class='icon-angle-right'></i> " . $lib->name;
+            }
+            if($extra) $moduleMenu .= "<i class='icon-angle-right'></i> " . $extra;
+        }
+
+        $moduleMenu .= '</li>';
+
         if(isset($this->config->customMenu->doc))
         {
             $customMenu = json_decode($this->config->customMenu->doc);
@@ -625,45 +655,19 @@ class docModel extends model
                 }
             }
             $projects = $projectIdList ? $this->dao->select('id,name')->from(TABLE_PROJECT)->where('id')->in($projectIdList)->fetchPairs('id', 'name') : array();
+
             foreach($menuLibIdList as $i => $menuLibID)
             {
-                $lib = $libs[$menuLibID];
                 $libName = '';
+                $lib = $libs[$menuLibID];
                 if($lib->project) $libName = isset($projects[$lib->project]) ? '[' . $projects[$lib->project] . ']' : '';
                 $libName .= $lib->name;
-                $customMenu[$i]->link = "{$libName}|doc|browse|libID={$menuLibID}";
+                $moduleMenu .= "<li class='pull-right'>" . html::a(helper::createLink('doc', 'browse', "libID=$menuLibID"), $libName) . '</li>';
             }
-            $this->config->customMenu->doc = json_encode($customMenu);
         }
 
-        /* Check the privilege. */
-        $lib = $this->getLibById($libID);
-        $projectID = !empty($lib) ? $lib->project : $projectID;
-        $project = $this->loadModel('project', 'proj')->getById($projectID);
-
-        $menu  = "<nav id='menu'><ul class='nav'>";
-        $menu .= '<li>';
-
-        if($project)
-        {
-            $menu .= html::a(helper::createLink('doc', 'allLibs', "type=project"), $this->lang->doc->libTypeList['project']);
-            $menu .= "<i class='icon-angle-right'></i>";
-            $menu .= html::a(helper::createLink('doc', 'projectLibs', "projectID=$project->id"), $project->name);
-            if($lib)   $menu .= "<i class='icon-angle-right'></i> " . $lib->name;
-            if($extra) $menu .= "<i class='icon-angle-right'></i> " . $extra;
-        }
-        else
-        {
-            
-            if($lib)
-            {
-                $menu .= html::a(helper::createLink('doc', 'allLibs', "type=custom") , $this->lang->doc->libTypeList['custom']);
-                $menu .= "<i class='icon-angle-right'></i> " . $lib->name;
-            }
-            if($extra) $menu .= "<i class='icon-angle-right'></i> " . $extra;
-        }
-        $menu .= '</li></ul></nav>';
-        echo  $menu;
+        $moduleMenu .= '</ul></nav>';
+        echo  $moduleMenu;
     }
 
     /**

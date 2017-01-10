@@ -136,6 +136,16 @@ class doc extends control
         $this->config->doc->search['params']['type']['values']   = array('' => '') + $this->config->doc->search['params']['type']['values'];
         $this->config->doc->search['params']['module']['values'] = array('' => '') + $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);
         $this->search->setSearchParams($this->config->doc->search);
+
+        $this->view->fixedMenu = false;
+        if(isset($this->config->customMenu->doc))
+        {
+            $customMenu = json_decode($this->config->customMenu->doc);
+            foreach($customMenu as $menu)
+            {
+                if($menu->name == 'custom' . $libID) $this->view->fixedMenu = true;
+            }
+        }
        
         $this->view->title         = $this->lang->doc->common . $this->lang->colon . $this->libs[$libID];
         $this->view->libID         = $libID;
@@ -430,5 +440,37 @@ class doc extends control
         $this->view->files   = $this->doc->getLibFiles($projectID, $pager);
         $this->view->pager   = $pager;
         $this->display();
+    }
+
+    /**
+     * Ajax fixed menu.
+     * 
+     * @param  int    $libID 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function ajaxFixedMenu($libID, $type = 'fixed')
+    {
+        $customMenus = $this->loadModel('setting')->getItem("owner={$this->app->user->account}&app=sys&module=common&section=customMenu&key=doc");
+        if($customMenus) $customMenus = json_decode($customMenus);
+
+        if(empty($customMenus) and $type == 'remove') $this->send(array('result' => 'success'));
+
+        $lib = $this->doc->getLibByID($libID);
+
+        foreach($customMenus as $i => $customMenu)
+        {   
+            if(isset($customMenu->name) and $customMenu->name == "custom{$libID}") unset($customMenus[$i]);
+        }   
+
+        $customMenu = new stdclass();
+        $customMenu->name  = "custom{$libID}";
+        $customMenu->order = count($customMenus); 
+        if($type == 'fixed') $customMenus[] = $customMenu;
+
+        $this->setting->setItem("{$this->app->user->account}.sys.common.customMenu.doc", json_encode($customMenus));
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
     }
 }

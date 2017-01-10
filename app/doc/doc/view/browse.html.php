@@ -33,6 +33,7 @@
               <?php
               commonModel::printLink('doc', 'editLib',   "libID=$libID", "<i class='icon-edit'> {$lang->edit}</i>", "data-toggle='modal'", '', '', 'li');
               commonModel::printLink('doc', 'deleteLib', "libID=$libID", "<i class='icon-remove'> {$lang->delete}</i>", "class='deleter'", '', '', 'li');
+              commonModel::printLink('doc', 'ajaxFixedMenu', "libID=$libID&type=" . ($fixedMenu ? 'remove' : 'fixed'), ($fixedMenu ? "<i class='icon-remove'></i> {$lang->doc->removedMenu}" : "<i class='icon icon-plus'></i> {$lang->doc->fixedMenu}"), "class='fix-menu'", '', '', 'li');
               ?>
             </ul>
           </div>
