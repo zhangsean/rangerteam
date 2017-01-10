@@ -7,7 +7,7 @@ ALTER TABLE `cash_trade` ADD INDEX `contract` (`contract`);
 ALTER TABLE `cash_trade` ADD INDEX `investID` (`investID`);
 ALTER TABLE `cash_trade` ADD INDEX `loanID` (`loanID`);
 ALTER TABLE `cash_trade` ADD INDEX `dept` (`dept`);
-ALTER TABLE `oa_doc` ADD `main` enum('0', '1') NOT NULL default '0';
+ALTER TABLE `oa_doclib` ADD `main` enum('0', '1') NOT NULL default '0' AFTER `groups`;
 
 UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='product';
 UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='customer';
