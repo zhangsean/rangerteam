@@ -27,7 +27,7 @@
       <div class='lib-name' title='<?php echo $libName?>'><?php echo $libName?></div>
     </a>
     <?php endforeach; ?>
-    <?php if(commonModel::hasPriv('doc', 'createLib')) echo html::a(inlink('createLib', "type=project&projectID={$project->id}"), "<i class='icon icon-plus'></i>", "class='lib addbtn' data-toggle='modal' title='{$lang->doc->createLib}'")?>
+    <?php if(commonModel::hasPriv('doc', 'createLib')) echo html::a(inlink('createLib', "type=project&projectID={$project->id}"), "<i class='icon icon-plus'></i>", "class='lib addbtn' data-toggle='modal' title='{$lang->doc->createLib}'");?>
   </div>
 </div>
 <?php js::set('type', 'doc');?>

@@ -20,3 +20,4 @@ input[type=checkbox]{margin-top: 1px;}
 .w-lib-p33{width:30%;}
 
 #menu .nav > li > a{display:inline-block;}
+#navBarActions {position:absolute; right: 100px; top: 4px; z-index:10000;}

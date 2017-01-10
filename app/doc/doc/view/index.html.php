@@ -16,9 +16,7 @@ $allLibs = array();
 $allLibs['project'] = $projects;
 $allLibs['custom']  = $customLibs;
 ?>
-<div id='menuActions'>
-  <?php commonModel::printLink('doc', 'createlib', '', '<i class="icon-plus"></i> ' . $this->lang->doc->createLib, "id='createButton' class='btn btn-primary' data-toggle='modal'");?>
-</div>
+<div id='navBarActions'><?php commonModel::printLink('doc', 'createlib', '', '<i class="icon-plus"></i> ' . $this->lang->doc->createLib, "id='createButton' class='btn btn-primary' data-toggle='modal'");?></div>
 <div id='libs'>
   <?php foreach($allLibs as $libsName => $libs):?>
     <?php if(empty($libs)) continue;?>
@@ -32,7 +30,7 @@ $allLibs['custom']  = $customLibs;
       <?php if($objectCount > 8 and $objectNum == 8):?>
       <div class='col-md-3'>
         <div class='libs-group clearfix lib-more'>
-          <?php echo html::a(inlink('allLibs', "type=$libsName"), "{$lang->more}{$lang->doc->libTypeList['project']}<i class='icon icon-double-angle-right'></i>", '', "title='$lang->more' class='more'")?>
+          <?php echo html::a(inlink('allLibs', "type=$libsName"), "{$lang->more}{$lang->doc->libTypeList['project']}<i class='icon icon-double-angle-right'></i>", "title='$lang->more' class='more'")?>
         </div>
       </div>
       <?php break;?>
@@ -46,8 +44,8 @@ $allLibs['custom']  = $customLibs;
         <div class='libs-group-heading libs-project-heading'>
           <?php
           $label = $objectNum == 1 ? "<span class='label label-success'>{$lang->doc->libTypeList['project']}</span> " : '';
-          echo html::a(inlink('projectLibs', "projectID=$project->id&from=doc"), $label . $project->name, '', "title='{$project->name}'");
-          if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$project->id&from=doc"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", '', "title='{$lang->more}' class='pull-right'");
+          echo html::a(inlink('projectLibs', "projectID=$project->id&from=doc"), $label . $project->name, "title='{$project->name}'");
+          if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$project->id&from=doc"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", "title='{$lang->more}' class='pull-right'");
           ?>
         </div>
         <div class='libs-group clearfix'>
@@ -85,7 +83,7 @@ $allLibs['custom']  = $customLibs;
         <?php if($objectCount > 8 and $objectNum == 8):?>
         <div class='col-md-3'>
           <div class='libs-group clearfix lib-more'>
-            <?php echo html::a(inlink('allLibs', "type=$libsName"), "{$lang->more}{$lang->doc->libTypeList['custom']}<i class='icon icon-double-angle-right'></i>", '', "title='$lang->more' class='more'")?>
+            <?php echo html::a(inlink('allLibs', "type=$libsName"), "{$lang->more}{$lang->doc->libTypeList['custom']}<i class='icon icon-double-angle-right'></i>", "title='$lang->more' class='more'")?>
           </div>
         </div>
         <?php break;?>
@@ -94,7 +92,7 @@ $allLibs['custom']  = $customLibs;
           <div class='libs-group-heading libs-custom-heading'>
             <?php
             if($objectNum == 1) echo "<span class='label label-info lable-custom'>{$lang->doc->customLib}</span> ";
-            echo html::a(inlink('browse', "libID=$libID"), $libName, '', "title='{$libName}'")
+            echo html::a(inlink('browse', "libID=$libID"), $libName, "title='{$libName}'")
             ?>
           </div>
         </div>

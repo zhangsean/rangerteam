@@ -11,9 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<div id='menuActions'>
-  <?php commonModel::printLink('doc', 'createlib', '', '<i class="icon-plus"></i> ' . $this->lang->doc->createLib, "id='createButton' class='btn btn-primary' data-toggle='modal'");?>
-</div>
+<div id='navBarActions'><?php commonModel::printLink('doc', 'createlib', '', '<i class="icon-plus"></i> ' . $this->lang->doc->createLib, "id='createButton' class='btn btn-primary' data-toggle='modal'");?></div>
 <div id='libs'>
   <?php if(($type == 'project')):?>
   <div class='row'>
@@ -26,8 +24,8 @@
       ?>
       <div class='libs-group-heading libs-<?php echo $type?>-heading'>
         <?php
-        echo html::a(inlink('projectLibs', "projectID=$lib->id&from=doc"), $lib->name, '', "title='{$lib->name}'");
-        if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$lib->id&from=doc"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", '', "title='{$lang->more}' class='pull-right'");
+        echo html::a(inlink('projectLibs', "projectID=$lib->id&from=doc"), $lib->name, "title='{$lib->name}'");
+        if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$lib->id&from=doc"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", "title='{$lang->more}' class='pull-right'");
         ?>
       </div>
       <div class='libs-group clearfix'>

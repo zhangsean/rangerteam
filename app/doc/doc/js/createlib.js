@@ -11,5 +11,7 @@ $(function()
         {
             $('table tr.project').addClass('hidden');
         }
-    })
+    });
+
+    $('#libType').change();
 });

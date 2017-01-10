@@ -16,11 +16,11 @@
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->doc->libType?></th>
-      <td><?php echo html::select('libType', $lang->doc->libTypeList, 'custom', "class='form-control'")?></td>
+      <td><?php echo html::select('libType', $lang->doc->libTypeList, $type, "class='form-control'")?></td>
     </tr>
     <tr class='project hidden'>
       <th><?php echo $lang->doc->project?></th>
-      <td><?php echo html::select('project', $projects, '', "class='form-control chosen'")?></td>
+      <td><?php echo html::select('project', $projects, $projectID, "class='form-control chosen'")?></td>
     </tr>
     <tr>
       <th class='w-100px'><?php echo $lang->doc->libName;?></th>

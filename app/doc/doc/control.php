@@ -86,6 +86,8 @@ class doc extends control
      */
     public function browse($libID = '0', $moduleID = 0, $projectID = 0, $browseType = 'byModule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {  
+        $this->lang->doc->menu = new stdclass();
+
         $libID = $libID ? $libID : key((array)$this->libs);
         if(!$libID) $this->locate(inlink('createLib'));
 
@@ -160,7 +162,7 @@ class doc extends control
      * @access public
      * @return void
      */
-    public function createLib()
+    public function createLib($type = '', $projectID = 0)
     {
         if(!empty($_POST))
         {
@@ -171,10 +173,12 @@ class doc extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "libID=$libID")));
         }
 
-        $this->view->title    = $this->lang->doc->createLib;
-        $this->view->users    = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
-        $this->view->groups   = $this->loadModel('group')->getPairs();
-        $this->view->projects = $this->project->getPairs();
+        $this->view->title     = $this->lang->doc->createLib;
+        $this->view->users     = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
+        $this->view->groups    = $this->loadModel('group')->getPairs();
+        $this->view->projects  = $this->project->getPairs();
+        $this->view->type      = $type;
+        $this->view->projectID = $projectID;
         $this->display();
     }
 
@@ -390,6 +394,7 @@ class doc extends control
      */
     public function projectLibs($projectID, $from = 'doc')
     {
+        $this->lang->doc->menu = new stdclass();
         $project = $this->dao->select('id,name')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
 
         $this->view->title   = $project->name;
@@ -408,6 +413,8 @@ class doc extends control
      */
     public function showFiles($projectID, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->lang->doc->menu = new stdclass();
+
         $uri = $this->app->getURI(true);
         $this->app->session->set('taskList',  $uri);
         $this->app->session->set('docList',   $uri);
