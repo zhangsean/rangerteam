@@ -24,8 +24,8 @@
       ?>
       <div class='libs-group-heading libs-<?php echo $type?>-heading'>
         <?php
-        echo html::a(inlink('projectLibs', "projectID=$lib->id&from=doc"), $lib->name, "title='{$lib->name}'");
-        if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$lib->id&from=doc"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", "title='{$lang->more}' class='pull-right'");
+        echo html::a(inlink('projectLibs', "projectID=$lib->id"), $lib->name, "title='{$lib->name}'");
+        if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$lib->id"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", "title='{$lang->more}' class='pull-right'");
         ?>
       </div>
       <div class='libs-group clearfix'>

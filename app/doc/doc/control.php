@@ -110,8 +110,7 @@ class doc extends control
         $docs    = array();
         if($browseType == 'bymodule')
         {
-            $type = is_numeric($libID) ? 'customerdoc' : $libID . 'doc';
-            if($moduleID) $modules = $this->tree->getFamily($moduleID, $type, (int)$libID);
+            if($moduleID) $modules = $this->tree->getFamily($moduleID, 'doc', (int)$libID);
             $docs = $this->doc->getDocList($libID, $projectID, $modules, $orderBy, $pager);
         }
         elseif($browseType == 'bysearch')
@@ -120,21 +119,14 @@ class doc extends control
         }
 
         /* Get the tree menu. */
-        if($libID == 'project')
-        {
-            $moduleTree = $this->tree->getProjectDocTreeMenu();
-        }
-        else
-        {
-            $moduleTree = $this->tree->getTreeMenu($type = 'customdoc', $startModuleID = 0, array('treeModel', 'createDocLink'), $libID);
-        }
+        $moduleTree = $this->tree->getTreeMenu($type = 'doc', $startModuleID = 0, array('treeModel', 'createDocLink'), $libID);
 
         /* Build the search form. */
         $this->loadModel('search', 'sys');
         $this->config->doc->search['actionURL'] = $this->createLink('doc', 'browse', "libID=$libID&moduleID=$moduleID&projectID=$projectID&browseType=bySearch");
         $this->config->doc->search['params']['lib']['values']    = array('' => '') + $this->libs;
         $this->config->doc->search['params']['type']['values']   = array('' => '') + $this->config->doc->search['params']['type']['values'];
-        $this->config->doc->search['params']['module']['values'] = array('' => '') + $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);
+        $this->config->doc->search['params']['module']['values'] = array('' => '') + $this->tree->getOptionMenu('doc', $startModuleID = 0, false, $libID);
         $this->search->setSearchParams($this->config->doc->search);
 
         $this->view->fixedMenu = false;
@@ -239,7 +231,9 @@ class doc extends control
     {
         if($libID == 'project') die();
         $lib = $this->doc->getLibById($libID);
-        if(!$lib) die(js::error($this->lang->doc->libNotFound));
+
+        if(!$lib) $this->send(array('result' => 'fail', 'message' => $this->lang->doc->libNotFound));
+        if(!empty($lib->main)) $this->send(array('result' => 'fail', 'message' => $this->lang->doc->errorMainLib));
 
         if($this->doc->deleteLib($libID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -251,12 +245,13 @@ class doc extends control
      * @param  int|string   $libID 
      * @param  int          $moduleID 
      * @param  int          $projectID 
-     * @param  string       $from 
      * @access public
      * @return void
      */
-    public function create($libID, $moduleID = 0, $projectID = 0, $from = 'doc')
+    public function create($libID, $moduleID = 0, $projectID = 0)
     {
+        $this->lang->doc->menu = new stdclass();
+
         $projectID = (int)$projectID;
         if(!empty($_POST))
         {
@@ -265,25 +260,14 @@ class doc extends control
 
             $this->action->create('doc', $docID, 'Created');
 
-            if($from == 'project') $link = $this->createLink('project', 'doc', "projectID={$this->post->project}");
-            if($from == 'doc')
-            {
-                $projectID = intval($this->post->project);
-                $vars = "libID=$libID&moduleID={$this->post->module}&projectID=$projectID";
-                $link = $this->createLink('doc', 'browse', $vars);
-            }
+            $projectID = intval($this->post->project);
+            $vars = "libID=$libID&moduleID={$this->post->module}&projectID=$projectID";
+            $link = $this->createLink('doc', 'browse', $vars);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
         /* Get the modules. */
-        if($libID == 'project')
-        {
-            $moduleOptionMenu = $this->tree->getOptionMenu($libID . 'doc', $startModuleID = 0);
-        }
-        else
-        {
-            $moduleOptionMenu = $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);
-        }
+        $moduleOptionMenu = $this->tree->getOptionMenu('doc', $startModuleID = 0, false, $libID);
 
         $this->view->title            = $this->libs[$libID] . $this->lang->colon . $this->lang->doc->create;
         $this->view->libID            = $libID;
@@ -306,6 +290,8 @@ class doc extends control
      */
     public function edit($docID)
     {
+        $this->lang->doc->menu = new stdclass();
+
         if(!empty($_POST))
         {
             $changes  = $this->doc->update($docID);
@@ -328,14 +314,7 @@ class doc extends control
         $libID = $doc->lib;
 
         /* Get modules. */
-        if($libID == 'project')
-        {
-            $moduleOptionMenu = $this->tree->getOptionMenu($libID . 'doc', $startModuleID = 0);
-        }
-        else
-        {
-            $moduleOptionMenu = $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);
-        }
+        $moduleOptionMenu = $this->tree->getOptionMenu('doc', $startModuleID = 0, false, $libID);
 
         $this->view->title            = $this->libs[$libID] . $this->lang->colon . $this->lang->doc->edit;
         $this->view->doc              = $doc;
@@ -355,6 +334,8 @@ class doc extends control
      */
     public function view($docID)
     {
+        $this->lang->doc->menu = new stdclass();
+
         /* Get doc. */
         $doc = $this->doc->getById($docID, true);
         if(!$doc) die(js::error($this->lang->doc->notFound) . js::locate('back'));
@@ -398,18 +379,16 @@ class doc extends control
      * Show libs for project.
      * 
      * @param  int    $projectID 
-     * @param  string $from 
      * @access public
      * @return void
      */
-    public function projectLibs($projectID, $from = 'doc')
+    public function projectLibs($projectID)
     {
         $this->lang->doc->menu = new stdclass();
         $project = $this->dao->select('id,name')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
 
         $this->view->title   = $project->name;
         $this->view->project = $project;
-        $this->view->from    = $from;
         $this->view->libs    = $this->doc->getLibsByProject($projectID);
         $this->display();
     }

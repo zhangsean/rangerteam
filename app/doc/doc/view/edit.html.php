@@ -16,6 +16,7 @@
 <?php js::set('type',  $doc->type);?>
 <?php js::set('libID', $doc->lib);?>
 <?php js::set('private', $doc->private);?>
+<?php $this->doc->setMenu(0, $doc->lib, $doc->module);?>
 <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo inlink('edit', "libID=$doc->id")?>'>
   <div class='col-md-8'>
     <div class='panel'>

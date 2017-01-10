@@ -44,8 +44,8 @@ $allLibs['custom']  = $customLibs;
         <div class='libs-group-heading libs-project-heading'>
           <?php
           $label = $objectNum == 1 ? "<span class='label label-success'>{$lang->doc->libTypeList['project']}</span> " : '';
-          echo html::a(inlink('projectLibs', "projectID=$project->id&from=doc"), $label . $project->name, "title='{$project->name}'");
-          if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$project->id&from=doc"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", "title='{$lang->more}' class='pull-right'");
+          echo html::a(inlink('projectLibs', "projectID=$project->id"), $label . $project->name, "title='{$project->name}'");
+          if($subLibCount > 3) echo html::a(inlink('projectLibs', "projectID=$project->id"), "{$lang->more}<i class='icon icon-double-angle-right'></i>", "title='{$lang->more}' class='pull-right'");
           ?>
         </div>
         <div class='libs-group clearfix'>

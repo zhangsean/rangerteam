@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php echo css::internal($keTableCSS);?>
 <?php js::set('libID ', $doc->lib);?>
+<?php $this->doc->setMenu(0, $doc->lib, $doc->module);?>
 <div class='col-md-8'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->doc->view;?></strong></div>

@@ -11,6 +11,7 @@ ALTER TABLE `oa_doclib` ADD `main` enum('0', '1') NOT NULL default '0' AFTER `gr
 
 UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='product';
 UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='customer';
+UPDATE `sys_category` SET `type`='doc' WHERE `type`='customdoc';
 
 DELETE FROM `sys_grouppriv` WHERE `module`='leave' AND `method`='reviewBack';
 

@@ -16,9 +16,7 @@
   <div class='libs-group clearfix'>
     <?php foreach($libs as $libID => $libName):?>
     <?php
-    if($libID == 'project' and $from != 'doc') continue;
-
-    $libLink = inlink('browse', "libID=$libID&browseType=all&param=0&orderBy=id_desc&from=$from");
+    $libLink = inlink('browse', "libID=$libID&browseType=all&param=0&orderBy=id_desc");
     if($libID == 'project') $libLink = inlink('allLibs', "type=project");
     if($libID == 'files')   $libLink = inlink('showFiles', "projectID=$project->id");
     ?>

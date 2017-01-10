@@ -15,6 +15,7 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('holders', $lang->doc->placeholder);?>
 <?php js::set('libID', $libID);?>
+<?php $this->doc->setMenu(0, $libID, $moduleID);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><small class='text-muted'><i class='icon icon-plus'></i></small> <?php echo $lang->doc->create;?></strong>
@@ -22,19 +23,10 @@
   <div class='panel-body'>
     <form class='form-condensed' method='post' enctype='multipart/form-data' id='ajaxForm'>
       <table class='table table-form'> 
-        <?php if($libID == 'product'):?>
-        <tr>
-          <th><?php echo $lang->doc->product;?></th>
-          <td><?php echo html::select('product', $products, $productID, "class='form-control'");?></td>
-        </tr>  
-        <?php elseif($libID == 'project'):?>
+        <?php if($libID == 'project'):?>
         <tr>
           <th><?php echo $lang->doc->project;?></th>
           <td><?php echo html::select('project', $projects, $projectID, "class='form-control' onchange=loadProducts(this.value);");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->doc->product;?></th>
-          <td><span id='productBox'><?php echo html::select('product', $products, '', "class='form-control'");?></span></td>
         </tr>  
         <?php endif;?>
         <tr>
