@@ -280,6 +280,7 @@ CREATE TABLE `oa_doc` (
 -- DROP TABLE IF EXISTS `oa_doclib`;
 CREATE TABLE `oa_doclib` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `project` mediumint(8) unsigned NOT NULL,
   `name` varchar(60) NOT NULL,
   `private` enum('0', '1') NOT NULL DEFAULT '0',
   `users` text NOT NULL,
