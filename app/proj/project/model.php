@@ -520,6 +520,7 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=finishedBy", $this->lang->task->finishedByMe, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
+            $menu .= commonModel::printLink('doc.doc', 'projectLibs', "projectID=$projectID", $this->lang->project->doc, "class='doc'", false, '', 'li');
 
             if($this->app->user->admin == 'super' || $this->app->user->account == $project->createdBy || $this->app->user->account == $project->PM)
             {
