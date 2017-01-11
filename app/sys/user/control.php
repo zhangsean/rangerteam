@@ -81,7 +81,33 @@ class user extends control
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink, $this->post->referer) === false)
             {
-                $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
+                if($this->config->requestType == 'PATH_INFO')
+                {
+                    $path = substr($this->post->referer, strrpos($this->post->referer, '/') + 1);
+                    $path = rtrim($path, '.html');
+                    if(empty($path)) $path = $this->config->requestFix;
+                    list($module, $method) = explode($this->config->requestFix, $path);
+                }
+                else
+                {
+                    $url   = html_entity_decode($this->post->referer);
+                    $param = substr($url, strrpos($url, '?') + 1);
+
+                    $module = $this->config->default->module;
+                    $method = $this->config->default->method;
+                    if(strpos($param, '&') !== false) list($module, $method) = explode('&', $param);
+                    $module = str_replace('m=', '', $module);
+                    $method = str_replace('f=', '', $method);
+                }
+
+                if(commonModel::hasPriv($module, $method))
+                {
+                    $this->send(array('result'=>'success', 'locate' => urldecode($this->post->referer)));
+                }
+                else
+                {
+                    $this->send(array('result'=>'success', 'locate' => $this->createLink('index', 'index')));
+                }
             }
             else
             {
