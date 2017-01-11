@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php $this->doc->setMenu($project->id);?>
-<div id='libs'>
+<div id='libs' class='with-menu page-content'>
   <div class='libs-group clearfix'>
     <?php foreach($libs as $libID => $libName):?>
     <?php
@@ -29,4 +29,5 @@
   </div>
 </div>
 <?php js::set('type', 'doc');?>
+<?php js::set('libType', 'project');?>
 <?php include '../../common/view/footer.html.php';?>

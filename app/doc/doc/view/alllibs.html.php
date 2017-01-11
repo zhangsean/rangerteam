@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('libType', $type);?>
 <div id='navBarActions'><?php commonModel::printLink('doc', 'createlib', '', '<i class="icon-plus"></i> ' . $this->lang->doc->createLib, "id='createButton' class='btn btn-primary' data-toggle='modal'");?></div>
 <div id='libs'>
   <?php if(($type == 'project')):?>

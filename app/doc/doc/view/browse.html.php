@@ -15,12 +15,14 @@
 <?php js::set('libID ', $libID);?>
 <?php js::set('browseType ', $browseType);?>
 <?php js::set('mode', $mode)?>
+<?php js::set('libType', $lib->project ? 'project' : 'custom');?>
+
 <?php $this->doc->setMenu($lib->project, $lib->id, $moduleID);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
   <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
 </div>
-<div class='row'>
+<div class='row with-menu page-content'>
   <div class='col-sm-3'>
     <div class='panel' id='treebox'>
       <div class='panel-heading'>

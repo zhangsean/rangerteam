@@ -600,6 +600,16 @@ class docModel extends model
         return $docs;
     }
 
+    /**
+     * Set module menu.
+     * 
+     * @param  int    $projectID 
+     * @param  int    $libID 
+     * @param  int    $category 
+     * @param  string $extra 
+     * @access public
+     * @return void
+     */
     public function setMenu($projectID = 0, $libID = 0, $category = 0, $extra = '')
     {
 
@@ -608,29 +618,23 @@ class docModel extends model
         $projectID = !empty($lib) ? $lib->project : $projectID;
         $project = $this->loadModel('project', 'proj')->getById($projectID);
 
-        $moduleMenu  = "<nav id='menu'><ul class='nav'>";
-        $moduleMenu .= '<li>';
-
+        $moduleMenu = "<nav id='menu'><ul class='nav'>";
         if($project)
         {
-            $moduleMenu .= html::a(helper::createLink('doc', 'allLibs', "type=project"), $this->lang->doc->libTypeList['project']);
-            $moduleMenu .= "<i class='icon-angle-right'></i>";
-            $moduleMenu .= html::a(helper::createLink('doc', 'projectLibs', "projectID=$project->id"), $project->name);
-            if($lib)   $moduleMenu .= "<i class='icon-angle-right'></i> " . $lib->name;
-            if($extra) $moduleMenu .= "<i class='icon-angle-right'></i> " . $extra;
+            $moduleMenu .= commonModel::printLink('doc', 'allLibs', "type=project", $this->lang->doc->libTypeList['project'], '', false, '', 'li');
+            $moduleMenu .= "<li class='divider angle'></li>";
+            $moduleMenu .= commonModel::printLink('doc', 'projectLibs', "projectID=$project->id", $project->name, '', false, '', 'li');
+            if($lib) $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id", $lib->name, '', false, '', 'li');
         }
         else
         {
-            
             if($lib)
             {
-                $moduleMenu .= html::a(helper::createLink('doc', 'allLibs', "type=custom") , $this->lang->doc->libTypeList['custom']);
-                $moduleMenu .= "<i class='icon-angle-right'></i> " . $lib->name;
+                $moduleMenu .= commonModel::printLink('doc', 'allLibs', "type=custom" , $this->lang->doc->libTypeList['custom'], '', false, '', 'li');
+                $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id", $lib->name, '', false, '', 'li');
             }
-            if($extra) $moduleMenu .= "<i class='icon-angle-right'></i> " . $extra;
         }
-
-        $moduleMenu .= '</li>';
+        if($extra) $moduleMenu .= "<li class='divider angle'></li><li>" . $extra . '</li>';
 
         if(isset($this->config->customMenu->doc))
         {

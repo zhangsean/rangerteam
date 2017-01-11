@@ -15,8 +15,9 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('holders', $lang->doc->placeholder);?>
 <?php js::set('libID', $libID);?>
+<?php js::set('libType', $projectID ? 'project' : 'custom');?>
 <?php $this->doc->setMenu(0, $libID, $moduleID);?>
-<div class='panel'>
+<div class='panel with-menu page-content'>
   <div class='panel-heading'>
     <strong><small class='text-muted'><i class='icon icon-plus'></i></small> <?php echo $lang->doc->create;?></strong>
   </div>
