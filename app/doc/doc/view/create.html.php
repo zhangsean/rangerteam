@@ -23,12 +23,6 @@
   <div class='panel-body'>
     <form class='form-condensed' method='post' enctype='multipart/form-data' id='ajaxForm'>
       <table class='table table-form'> 
-        <?php if($libID == 'project'):?>
-        <tr>
-          <th><?php echo $lang->doc->project;?></th>
-          <td><?php echo html::select('project', $projects, $projectID, "class='form-control' onchange=loadProducts(this.value);");?></td>
-        </tr>  
-        <?php endif;?>
         <tr>
           <th class='w-80px'><?php echo $lang->doc->category;?></th>
           <td><?php echo html::select('module', $moduleOptionMenu, $moduleID, "class='form-control'");?></td>
@@ -74,7 +68,7 @@
         </tr>  
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton() . html::backButton() . html::hidden('lib', $libID);?></td>
+          <td colspan='2'><?php echo html::submitButton() . html::backButton() . html::hidden('lib', $libID) . html::hidden('project', $projectID);?></td>
         </tr>
       </table>
     </form>

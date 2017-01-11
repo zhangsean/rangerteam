@@ -38,7 +38,7 @@
         <?php
         if($subLibID == 'project')   $libLink = inlink('allLibs', "type=project");
         elseif($subLibID == 'files') $libLink = inlink('showFiles', "projectID=$lib->id");
-        else                         $libLink = inlink('browse', "libID=$subLibID");
+        else                         $libLink = inlink('browse', "libID=$subLibID&moduleID=&projectID=$lib->id");
         ?>
         <a class='lib <?php echo $widthClass?>' title='<?php echo $subLibName?>' href='<?php echo $libLink ?>'>
           <i class='icon icon-2x icon-folder-open-alt'></i>

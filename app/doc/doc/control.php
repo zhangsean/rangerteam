@@ -51,6 +51,16 @@ class doc extends control
         $this->display();
     }
 
+    /**
+     * Show all libs.
+     * 
+     * @param  int    $type 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
     public function allLibs($type, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         /* Load pager. */
@@ -84,7 +94,7 @@ class doc extends control
      * @access public
      * @return void
      */
-    public function browse($libID = '0', $moduleID = 0, $projectID = 0, $browseType = 'byModule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($libID = '0', $moduleID = 0, $projectID = 0, $browseType = 'bymodule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {  
         $this->lang->doc->menu = new stdclass();
 
@@ -116,6 +126,10 @@ class doc extends control
         elseif($browseType == 'bysearch')
         {
             $docs = $this->doc->getDocListBySearch($orderBy, $pager);
+        }
+        else
+        {
+            $docs = $this->doc->getDocList($libID, $projectID, '', $orderBy, $pager);
         }
 
         /* Get the tree menu. */
@@ -274,7 +288,6 @@ class doc extends control
         $this->view->moduleOptionMenu = $moduleOptionMenu;
         $this->view->moduleID         = $moduleID;
         $this->view->projectID        = $projectID;
-        $this->view->projects         = array();
         $this->view->users            = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups           = $this->loadModel('group')->getPairs();
 

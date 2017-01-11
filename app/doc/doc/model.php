@@ -662,7 +662,7 @@ class docModel extends model
                 $lib = $libs[$menuLibID];
                 if($lib->project) $libName = isset($projects[$lib->project]) ? '[' . $projects[$lib->project] . ']' : '';
                 $libName .= $lib->name;
-                $moduleMenu .= "<li class='pull-right'>" . html::a(helper::createLink('doc', 'browse', "libID=$menuLibID"), $libName) . '</li>';
+                $moduleMenu .= "<li class='pull-right'>" . html::a(helper::createLink('doc', 'browse', "libID=$menuLibID&moduleID=$category&projectID={$lib->project}"), $libName) . '</li>';
             }
         }
 

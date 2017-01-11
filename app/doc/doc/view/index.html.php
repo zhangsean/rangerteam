@@ -57,7 +57,7 @@ $allLibs['custom']  = $customLibs;
           <?php foreach($subLibs[$project->id] as $libID => $libName):?>
           <?php
           if($libID == 'files') $libLink = inlink('showFiles', "projectID=$project->id");
-          else                  $libLink = inlink('browse', "libID=$libID");
+          else                  $libLink = inlink('browse', "libID=$libID&moduleID=&projectID=$project->id");
           ?>
           <a class='lib <?php echo $widthClass?>' title='<?php echo $libName?>' href='<?php echo $libLink ?>'>
             <i class='icon icon-2x icon-folder-open-alt'></i>
