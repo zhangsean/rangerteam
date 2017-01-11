@@ -392,7 +392,7 @@ EOT;
         $entry->name  = $this->lang->install->buildinEntry->proj['name'];
         $entry->abbr  = $this->lang->install->buildinEntry->proj['abbr'];
         $entry->code  = 'proj';
-        $entry->key   = 'a910d9d1dd03c9dd99cecb3ca31ea600'
+        $entry->key   = 'a910d9d1dd03c9dd99cecb3ca31ea600';
         $entry->logo  = 'theme/default/images/ips/app-proj.png';
         $entry->login = '../proj';
         $entry->order = 30;
@@ -403,7 +403,7 @@ EOT;
         $entry->name  = $this->lang->install->buildinEntry->doc['name'];
         $entry->abbr  = $this->lang->install->buildinEntry->doc['abbr'];
         $entry->code  = 'doc';
-        $entry->key   = '76ff605479df34f1d239730efa68d562'
+        $entry->key   = '76ff605479df34f1d239730efa68d562';
         $entry->logo  = 'theme/default/images/ips/app-doc.png';
         $entry->login = '../doc';
         $entry->order = 40;
