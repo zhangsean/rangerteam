@@ -344,10 +344,10 @@ class doc extends control
      * @access public
      * @return void
      */
-    public function view($docID)
+    public function view($docID, $version = 0)
     {
         /* Get doc. */
-        $doc = $this->doc->getById($docID, 0, true);
+        $doc = $this->doc->getById($docID, $version, true);
         if(!$doc) die(js::error($this->lang->doc->notFound) . js::locate('back'));
         if($doc->project != 0 and !$this->project->checkPriv($this->project->getById($doc->project)))
         {
@@ -369,6 +369,7 @@ class doc extends control
         $this->view->title      = "DOC #$doc->id $doc->title - " . $this->libs[$doc->lib];
         $this->view->doc        = $doc;
         $this->view->lib        = $lib;
+        $this->view->version    = $version ? $version : $doc->version;
         $this->view->projects   = $this->project->getPairs();
         $this->view->users      = $this->user->getPairs();
         $this->view->keTableCSS = $this->doc->extractKETableCSS($doc->content);

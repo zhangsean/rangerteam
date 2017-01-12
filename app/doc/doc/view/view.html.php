@@ -18,7 +18,25 @@
 <div class='row with-menu page-content'>
   <div class='col-md-8'>
     <div class='panel'>
-      <div class='panel-heading'><strong><?php echo $lang->doc->view;?></strong></div>
+      <div class='panel-heading'>
+        <strong><?php echo $lang->doc->view;?></strong>
+        <div class='panel-actions pull-right' style='margin:0'>
+          <?php if($doc->version > 1):?>
+          <span class='dropdown'>
+            <a href='#' data-toggle='dropdown' class='text-muted'><?php echo '#' . $version;?> <span class='caret'></span></a>
+              <ul class='dropdown-menu'>
+              <?php
+              for($i = $doc->version; $i >= 1; $i --)
+              {
+                  $class = $i == $version ? " class='active'" : '';
+                  echo '<li' . $class .'>' . html::a(inlink('view', "docID=$doc->id&version=$i"), '#' . $i) . '</li>';
+              }
+              ?>
+            </ul>
+          </span>
+          <?php endif; ?>
+        </div>
+      </div>
       <div class='panel-body doc-content'>
         <table class='table table-form table-data'>
           <tr>
