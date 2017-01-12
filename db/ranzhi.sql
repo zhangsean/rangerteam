@@ -261,21 +261,32 @@ CREATE TABLE `oa_doc` (
   `lib` mediumint(8) unsigned NOT NULL,
   `module` mediumint(8) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
-  `digest` varchar(255) NOT NULL,
   `keywords` varchar(255) NOT NULL,
   `type` varchar(30) NOT NULL,
-  `content` text NOT NULL,
-  `url` varchar(255) NOT NULL,
   `views` mediumint(8) unsigned NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` varchar(30) NOT NULL,
   `editedDate` datetime NOT NULL,
+  `version` smallint(5) unsigned NOT NULL DEFAULT '1',
   `private` enum('0', '1') NOT NULL DEFAULT '0',
   `users` text NOT NULL,
   `groups` varchar(255) NOT NULL DEFAULT '',
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `oa_doccontent`;
+CREATE TABLE IF NOT EXISTS `oa_doccontent` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `doc` mediumint(8) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `digest` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `files` text NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `version` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `doc_version` (`doc`,`version`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_doclib`;
 CREATE TABLE `oa_doclib` (

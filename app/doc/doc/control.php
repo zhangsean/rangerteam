@@ -301,9 +301,12 @@ class doc extends control
     {
         if(!empty($_POST))
         {
-            $changes  = $this->doc->update($docID);
+            $return = $this->doc->update($docID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $files = $this->loadModel('file')->saveUpload('doc', $docID);
+
+            $changes = isset($return['changes']) ? $return['changes'] : '';
+            $files   = isset($return['files']) ? $return['files'] : '';
+
             if($this->post->comment != '' or !empty($changes) or !empty($files))
             {
                 $action = !empty($changes) ? 'Edited' : 'Commented';
@@ -322,6 +325,8 @@ class doc extends control
 
         /* Get modules. */
         $moduleOptionMenu = $this->tree->getOptionMenu('doc', $startModuleID = 0, false, $libID);
+
+        if($doc->contentType == 'markdown') $this->config->doc->markdown->edit = array('id' => 'content', 'tools' => 'toolbar');
 
         $this->view->title            = $this->libs[$libID] . $this->lang->colon . $this->lang->doc->edit;
         $this->view->doc              = $doc;
@@ -342,12 +347,19 @@ class doc extends control
     public function view($docID)
     {
         /* Get doc. */
-        $doc = $this->doc->getById($docID, true);
+        $doc = $this->doc->getById($docID, 0, true);
         if(!$doc) die(js::error($this->lang->doc->notFound) . js::locate('back'));
         if($doc->project != 0 and !$this->project->checkPriv($this->project->getById($doc->project)))
         {
             echo(js::alert($this->lang->error->accessDenied));
             die(js::locate('back'));
+        }
+
+        if($doc->contentType == 'markdown')
+        {
+            $hyperdown    = $this->app->loadClass('hyperdown');
+            $doc->content = $hyperdown->makeHtml($doc->content);
+            $doc->digest  = $hyperdown->makeHtml($doc->digest);
         }
 
         /* Get library. */

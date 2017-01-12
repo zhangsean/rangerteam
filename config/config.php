@@ -160,6 +160,7 @@ define('TABLE_SALESPRIV',     '`crm_salespriv`');
 define('TABLE_TODO',       '`oa_todo`');
 define('TABLE_PROJECT',    '`oa_project`');
 define('TABLE_DOC',        '`oa_doc`');
+define('TABLE_DOCCONTENT', '`oa_doccontent`');
 define('TABLE_DOCLIB',     '`oa_doclib`');
 define('TABLE_ATTEND',     '`oa_attend`');
 define('TABLE_ATTENDSTAT', '`oa_attendstat`');

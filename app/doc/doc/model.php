@@ -409,19 +409,44 @@ class docModel extends model
      * Get doc info by id.
      * 
      * @param  int    $docID 
+     * @param  int    $version 
      * @param  bool   $setImgSize 
      * @access public
      * @return void
      */
-    public function getById($docID, $setImgSize = false)
+    public function getById($docID, $version = 0, $setImgSize = false)
     {
-        $doc = $this->dao->select('*')
-            ->from(TABLE_DOC)
-            ->where('id')->eq((int)$docID)
-            ->fetch();
+        $doc = $this->dao->select('*')->from(TABLE_DOC)->where('id')->eq((int)$docID)->fetch();
         if(!$doc) return false;
         if(!$this->hasRight($doc)) return false;
-        $doc->files = $this->loadModel('file')->getByObject('doc', $docID);
+        $version = $version ? $version : $doc->version;
+        $docContent = $this->dao->select('*')->from(TABLE_DOCCONTENT)->where('doc')->eq($doc->id)->andWhere('version')->eq($version)->fetch();
+
+        $files = $this->loadModel('file')->getByObject('doc', $docID);
+        $docFiles = array();
+        foreach($files as $file)
+        {
+            $file->webPath  = $this->file->webPath . $file->pathname;
+            $file->realPath = $this->file->savePath . $file->pathname;
+            if(strpos(",{$docContent->files},", ",{$file->id},") !== false) $docFiles[$file->id] = $file;
+        }
+
+        /* Check file change. */
+        if($version == $doc->version and ((empty($docContent->files) and $docFiles) OR ($docContent->files and count(explode(',', trim($docContent->files, ','))) != count($docFiles))))
+        {
+            unset($docContent->id);
+            $doc->version        += 1;
+            $docContent->version  = $doc->version;
+            $docContent->files    = join(',', array_keys($docFiles));
+            $this->dao->insert(TABLE_DOCCONTENT)->data($docContent)->exec();
+            $this->dao->update(TABLE_DOC)->set('version')->eq($doc->version)->where('id')->eq($doc->id)->exec();
+        }
+
+        $doc->title       = isset($docContent->title)   ? $docContent->title  : '';
+        $doc->digest      = isset($docContent->digest)  ? $docContent->digest  : '';
+        $doc->content     = isset($docContent->content) ? $docContent->content : '';
+        $doc->contentType = isset($docContent->type)    ? $docContent->type : '';
+        $doc->files = $docFiles;
 
         $doc->libName     = '';
         $doc->projectName = '';
@@ -444,10 +469,12 @@ class docModel extends model
         $doc = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
+            ->add('version', 1)
             ->setDefault('project, module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')
             ->stripTags('content', $this->config->allowedTags)
+            ->stripTags($this->config->doc->markdown->create['id'], $this->config->allowedTags)
             ->cleanInt('project, module')
             ->remove('files,labels')
             ->join('users', ',')
@@ -458,7 +485,29 @@ class docModel extends model
         $doc->groups = !empty($doc->groups) ? ',' . trim($doc->groups, ',') . ',' : '';
 
         $condition = "lib = '$doc->lib' AND module = $doc->module";
-        $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->create['id']);
+        $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->create['id'], $this->post->uid);
+
+        $lib = $this->getLibByID($doc->lib);
+        $doc->project = $lib->project;
+        if($doc->type == 'url')
+        {
+            $doc->content     = $doc->url;
+            $doc->contentType = 'html';
+        }
+
+        $docContent = new stdclass();
+        $docContent->title   = $doc->title;
+        $docContent->digest  = $doc->digest;
+        $docContent->content = $doc->contentType == 'html' ? $doc->content : $doc->contentMarkdown;
+        $docContent->type    = $doc->contentType;
+        $docContent->version = 1;
+        if($doc->contentType == 'markdown') $docContent->content = str_replace('&gt;', '>', $docContent->content);
+        unset($doc->digest);
+        unset($doc->content);
+        unset($doc->contentMarkdown);
+        unset($doc->contentType);
+        unset($doc->url);
+
         $this->dao->insert(TABLE_DOC)
             ->data($doc, 'uid')
             ->autoCheck()
@@ -469,7 +518,12 @@ class docModel extends model
         if(!dao::isError())
         {
             $docID = $this->dao->lastInsertID();
-            $this->file->saveUpload('doc', $docID);
+            $this->file->updateObjectID($this->post->uid, $docID, 'doc');
+            $files = $this->file->saveUpload('doc', $docID);
+
+            $docContent->doc   = $docID;
+            $docContent->files = join(',', array_keys($files));
+            $this->dao->insert(TABLE_DOCCONTENT)->data($docContent)->exec();
             return $docID;
         }
         return false;
@@ -493,17 +547,54 @@ class docModel extends model
             ->stripTags('content', $this->config->allowedTags)
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', helper::now())
-            ->remove('comment,files,labels')
             ->join('users', ',')
             ->join('groups', ',')
+            ->remove('comment,files,labels')
             ->get();
 
         $doc->private = $this->post->private ? 1 : 0;
         $doc->users   = !empty($doc->users) ? ',' . trim($doc->users, ',') . ',' : '';
         $doc->groups  = !empty($doc->groups) ? ',' . trim($doc->groups, ',') . ',' : '';
 
+        if($oldDoc->contentType == 'markdown') $doc->content = str_replace('&gt;', '>', $doc->content);
+
         $uniqueCondition = "lib = '{$oldDoc->lib}' AND module = {$doc->module} AND id != $docID";
-        $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id']);
+        $lib = $this->getLibByID($doc->lib);
+        $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id'], $this->post->uid);
+        $doc->project = $lib->project;
+        if($oldDoc->type == 'url') $doc->content = $doc->url;
+        unset($doc->url);
+
+        $files   = $this->file->saveUpload('doc', $docID);
+        $changes = commonModel::createChanges($oldDoc, $doc);
+        $changed = false;
+        if($files) $changed = true;
+        foreach($changes as $change)
+        {
+            if($change['field'] == 'content' or $change['field'] == 'title' or $change['field'] == 'digest') $changed = true;
+        }
+
+        if($changed)
+        {
+            $oldDocContent = $this->dao->select('files,type')->from(TABLE_DOCCONTENT)->where('doc')->eq($docID)->andWhere('version')->eq($oldDoc->version)->fetch();
+            $doc->version  = $oldDoc->version + 1;
+
+            $docContent = new stdclass();
+            $docContent->doc     = $docID;
+            $docContent->title   = $doc->title;
+            $docContent->digest  = $doc->digest;
+            $docContent->content = $doc->content;
+            $docContent->version = $doc->version;
+            $docContent->type    = $oldDocContent->type;
+            $docContent->files   = $oldDocContent->files;
+            if($files) $docContent->files .= ',' . join(',', array_keys($files));
+            $docContent->files   = trim($docContent->files, ',');
+            $this->dao->insert(TABLE_DOCCONTENT)->data($docContent)->exec();
+        }
+        unset($doc->digest);
+        unset($doc->content);
+        unset($doc->contentType);
+
         $this->dao->update(TABLE_DOC)->data($doc, 'uid')
             ->autoCheck()
             ->batchCheck($this->config->doc->require->edit, 'notempty')
@@ -511,19 +602,11 @@ class docModel extends model
             ->where('id')->eq((int)$docID)
             ->exec();
 
-        if(!dao::isError()) return commonModel::createChanges($oldDoc, $doc);
-    }
- 
-    /**
-     * Get docs of a project.
-     * 
-     * @param  int    $projectID 
-     * @access public
-     * @return array
-     */
-    public function getProjectDocList($projectID)
-    {
-        return $this->dao->findByProject($projectID)->from(TABLE_DOC)->andWhere('deleted')->eq(0)->orderBy('id_desc')->fetchAll();
+        if(!dao::isError())
+        {
+            $this->file->updateObjectID($this->post->uid, $docID, 'doc');
+            return array('changes' => $changes, 'files' => $files);
+        }
     }
 
     /**
@@ -534,7 +617,11 @@ class docModel extends model
      */
     public function getProjectModulePairs()
     {
-        return $this->dao->findByType('projectdoc')->from(TABLE_CATEGORY)->andWhere('type')->eq('projectdoc')->fetchPairs('id', 'name');
+        return $this->dao->select('t1.id,t1.name')->from(TABLE_CATEGORY)->alias('t1')
+            ->leftJoin(TABLE_DOCLIB)->alias('t2')->on('t1.root = t2.id')
+            ->andWhere('t1.type')->eq('doc')
+            ->andWhere('t2.project')->ne('0')
+            ->fetchPairs('id', 'name');
     }
 
     /**

@@ -11,7 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/ueditor.html.php';?>
+<?php include '../../../sys/common/view/markdown.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('holders', $lang->doc->placeholder);?>
 <?php js::set('libID', $libID);?>
@@ -53,7 +54,11 @@
         </tr>  
         <tr id='contentBox' class='hidden'>
           <th><?php echo $lang->doc->content;?></th>
-          <td colspan='2'><?php echo html::textarea('content', '', "class='form-control' rows=8");?></td>
+          <td colspan='2'>
+            <div class='contenthtml'><?php echo html::textarea('content', '', "style='width:100%;height:200px'");?></div>
+            <div class='contentmarkdown hidden'><?php echo html::textarea('contentMarkdown', '', "style='width:100%;height:200px'");?></div>
+            <?php echo html::hidden('contentType', 'html');?>
+          </td>
         </tr>  
         <tr>
           <th><?php echo $lang->doc->keywords;?></th>

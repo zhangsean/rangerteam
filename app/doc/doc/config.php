@@ -20,6 +20,9 @@ $config->doc->editor = new stdclass();
 $config->doc->editor->create = array('id' => 'content', 'tools' => 'full');
 $config->doc->editor->edit   = array('id' => 'content,comment', 'tools' => 'full');
 
+$config->doc->markdown = new stdclass();
+$config->doc->markdown->create = array('id' => 'contentMarkdown', 'tools' => 'withchange');
+
 global $lang;
 $config->doc->search['module']                   = 'doc';
 $config->doc->search['fields']['title']          = $lang->doc->title;

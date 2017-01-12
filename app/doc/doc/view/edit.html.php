@@ -11,8 +11,9 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/ueditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<?php if($doc->contentType == 'markdown') include '../../../sys/common/view/markdown.html.php';?>
 <?php js::set('type',  $doc->type);?>
 <?php js::set('libID', $doc->lib);?>
 <?php js::set('private', $doc->private);?>
@@ -26,7 +27,7 @@
         <div class='panel-body'>
           <table class='table table-form table-data'> 
             <tr>
-              <th><?php echo $lang->doc->title;?></th>
+              <th class='w-80px'><?php echo $lang->doc->title;?></th>
               <td><?php echo html::input('title', $doc->title, "class='form-control'");?></td>
               <td class='w-100px'>
                 <label class='checkbox'><input type='checkbox' name='private' id='private' value='1' /><?php echo $lang->doc->private;?></label>
@@ -46,15 +47,15 @@
             </tr>  
             <tr id='urlBox' class='hidden'>
               <th><?php echo $lang->doc->url;?></th>
-              <td colspan='2'><?php echo html::input('url', urldecode($doc->url), "class='form-control'");?></td>
+              <td colspan='2'><?php echo html::input('url', urldecode($doc->content), "class='form-control'");?></td>
             </tr>  
             <tr id='contentBox' class='hidden'>
               <th><?php echo $lang->doc->content;?></th>
-              <td colspan='2'><?php echo html::textarea('content', $doc->content, "class='form-control'");?></td>
+              <td colspan='2'><?php echo html::textarea('content', $doc->content, "style='width:100%;height:200px'");?></td>
             </tr>  
             <tr>
               <th><?php echo $lang->doc->comment;?></th>
-              <td colspan='2'><?php echo html::textarea('comment','', "class='form-control'");?></td>
+              <td colspan='2'><?php echo html::textarea('comment','', "style='width:100%;height:200px;'");?></td>
             </tr> 
             <tr id='fileBox' class='hidden'>
               <th><?php echo $lang->doc->files;?></th>
@@ -64,7 +65,7 @@
         </div>
       </div>
       <?php echo $this->fetch('action', 'history', "objectType=doc&objectID={$doc->id}");?>
-      <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
+      <div class='page-actions'><?php echo html::submitButton() . html::backButton() .html::hidden('lib', $doc->lib);?></div>
     </div>
     <div class='col-md-4'>
       <div class='panel'>
