@@ -24,3 +24,17 @@ DELETE FROM `sys_grouppriv` WHERE `module`='leave' AND `method`='reviewBack';
 INSERT INTO `sys_entry` (`name`, `abbr`, `code`, `buildin`, `integration`, `open`, `key`, `ip`, `logo`, `login`, `control`, `size`, `position`, `visible`, `order`) VALUES
 ('项目', '项目', 'proj', 1, 1, 'iframe', 'b1fbfec042ee3daaee1edfb0bb59d036', '*', 'theme/default/images/ips/app-proj.png', '../proj', 'simple', 'max', 'default', 1, 26),
 ('文档', '文档', 'doc', 1, 1, 'iframe', '76ff605479df34f1d239730efa68d562', '*', 'theme/default/images/ips/app-doc.png', '../doc', 'simple', 'max', 'default', 1, 27);
+
+-- DROP TABLE IF EXISTS `oa_doccontent`;
+CREATE TABLE IF NOT EXISTS `oa_doccontent` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `doc` mediumint(8) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `digest` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `files` text NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `version` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `doc_version` (`doc`,`version`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
