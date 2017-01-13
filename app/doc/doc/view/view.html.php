@@ -55,7 +55,7 @@
           <?php if($doc->type == 'url'):?>
           <tr>
             <th><?php echo $lang->doc->url;?></th>
-            <td><?php echo html::a(urldecode($doc->url), '', "target='_blank'");?></td>
+            <td><?php echo html::a(urldecode($doc->content), '', "target='_blank'");?></td>
           </tr>
           <?php endif;?>
           <?php if($doc->type == 'text'):?>
