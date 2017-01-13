@@ -126,6 +126,8 @@ class upgradeModel extends model
             case '3_7':
                 $this->execSQL($this->getUpgradeFile('3.7'));
                 $this->setDocEntryPrivileges();
+                $this->moveDocContent();
+                $this->addProjectDoc();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1186,6 +1188,76 @@ class upgradeModel extends model
         {
             $grouppriv->group = $group;
             $this->dao->insert(TABLE_GROUPPRIV)->data($grouppriv)->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Move doc content to table oa_doccontent.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function moveDocContent()
+    {
+        $descDoc = $this->dao->query('DESC ' .  TABLE_DOC)->fetchAll();
+        $processFields = 0;
+        foreach($descDoc as $field)
+        {
+            if($field->Field == 'content' or $field->Field == 'digest' or $field->Field == 'url') $processFields ++; 
+        }
+        if($processFields < 3) return true;
+
+        $this->dao->exec('TRUNCATE TABLE ' . TABLE_DOCCONTENT);
+        $stmt = $this->dao->select('id,title,digest,content,url')->from(TABLE_DOC)->query();
+        $fileGroups = $this->dao->select('id,objectID')->from(TABLE_FILE)->where('objectType')->eq('doc')->fetchGroup('objectID', 'id');
+        while($doc = $stmt->fetch())
+        {
+            $url = empty($doc->url) ? '' : urldecode($doc->url);
+            $docContent = new stdclass();
+            $docContent->doc      = $doc->id;
+            $docContent->title    = $doc->title;
+            $docContent->digest   = $doc->digest;
+            $docContent->content  = $doc->content;
+            $docContent->content .= empty($url) ? '' : $url;
+            $docContent->version  = 1;
+            $docContent->type     = 'html';
+            if(isset($fileGroups[$doc->id])) $docContent->files = join(',', array_keys($fileGroups[$doc->id]));
+            $this->dao->insert(TABLE_DOCCONTENT)->data($docContent)->exec();
+        }
+        $this->dao->exec('ALTER TABLE ' . TABLE_DOC . ' DROP `digest`');
+        $this->dao->exec('ALTER TABLE ' . TABLE_DOC . ' DROP `content`');
+        $this->dao->exec('ALTER TABLE ' . TABLE_DOC . ' DROP `url`');
+        return true;
+    }
+
+    /**
+     * Add project default doc.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function addProjectDoc()
+    {
+        set_time_limit(0);
+        $this->app->loadLang('doc', 'doc');
+
+        $allProjectIdList  = $this->dao->select('id,name,whitelist')->from(TABLE_PROJECT)->where('deleted')->eq('0')->fetchAll('id');
+        foreach($allProjectIdList as $projectID => $project)
+        {
+            $this->dao->delete()->from(TABLE_DOCLIB)->where('project')->eq($projectID)->exec();
+
+            $lib = new stdclass();
+            $lib->project = $projectID;
+            $lib->name    = $this->lang->doc->projectMainLib;
+            $lib->main    = 1;
+            $lib->private = 0;
+
+            $teams = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account', 'account');
+            $lib->users = join(',', $teams);
+            $lib->groups = isset($project->whitelist) ? $project->whitelist : '';
+            $this->dao->insert(TABLE_DOCLIB)->data($lib)->exec();
         }
 
         return !dao::isError();
