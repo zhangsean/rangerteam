@@ -36,6 +36,8 @@ ranzhi:
 	rm ranzhi/www/cash/index.html
 	rm ranzhi/www/oa/index.html
 	rm ranzhi/www/team/index.html
+	rm ranzhi/www/doc/index.html
+	rm ranzhi/www/proj/index.html
 	# change mode.
 	chmod -R 777 ranzhi/tmp/
 	chmod -R 777 ranzhi/www/data
@@ -58,6 +60,8 @@ deb:
 	sed -i 's/index.php/\/ranzhi\/cash\/index.php/' buildroot/opt/ranzhi/www/cash/.htaccess
 	sed -i 's/index.php/\/ranzhi\/oa\/index.php/' buildroot/opt/ranzhi/www/oa/.htaccess
 	sed -i 's/index.php/\/ranzhi\/team\/index.php/' buildroot/opt/ranzhi/www/team/.htaccess
+	sed -i 's/index.php/\/ranzhi\/doc\/index.php/' buildroot/opt/ranzhi/www/doc/.htaccess
+	sed -i 's/index.php/\/ranzhi\/proj\/index.php/' buildroot/opt/ranzhi/www/proj/.htaccess
 	sudo dpkg -b buildroot/ ranzhi_${VERSION}_1_all.deb
 	rm -rf buildroot
 rpm:
@@ -75,6 +79,8 @@ rpm:
 	sed -i 's/index.php/\/ranzhi\/cash\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/cash/.htaccess
 	sed -i 's/index.php/\/ranzhi\/oa\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/oa/.htaccess
 	sed -i 's/index.php/\/ranzhi\/team\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/team/.htaccess
+	sed -i 's/index.php/\/ranzhi\/doc\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/doc/.htaccess
+	sed -i 's/index.php/\/ranzhi\/proj\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/proj/.htaccess
 	cd ~/rpmbuild/SOURCES; tar -czvf ranzhi-${VERSION}.tar.gz etc opt; rm -rf ranzhi.${VERSION}.zip etc opt;
 	rpmbuild -ba ~/rpmbuild/SPECS/ranzhi.spec
 	cp ~/rpmbuild/RPMS/noarch/ranzhi-${VERSION}-1.noarch.rpm ./
