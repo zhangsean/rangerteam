@@ -13,16 +13,16 @@
 <?php include '../../common/view/header.html.php';?>
 <?php $this->doc->setMenu($project->id);?>
 <div id='libs' class='with-menu page-content'>
-  <div class='libs-group clearfix'>
+  <div class='libs-group clearfix' id='libList'>
     <?php foreach($libs as $libID => $libName):?>
     <?php
     $libLink = inlink('browse', "libID=$libID&moduleID=&projectID={$project->id}&browseType=all&param=0&orderBy=id_desc");
     if($libID == 'project') $libLink = inlink('allLibs', "type=project");
     if($libID == 'files')   $libLink = inlink('showFiles', "projectID=$project->id");
     ?>
-    <a class='lib' title='<?php echo $libName?>' href='<?php echo $libLink?>'>
+    <a class="lib <?php echo $libID == 'files' ? 'files' : '';?>" title='<?php echo $libName?>' href='<?php echo $libLink?>' data-id='<?php echo $libID;?>'>
       <i class='icon icon-2x icon-folder-open-alt'></i>
-      <div class='lib-name' title='<?php echo $libName?>'><?php echo $libName?></div>
+      <div class='lib-name' title='<?php echo $libName?>'><?php if($libID != 'files'):?><i class='icon icon-move'> </i><?php endif;?><?php echo $libName?></div>
     </a>
     <?php endforeach; ?>
     <?php if(commonModel::hasPriv('doc', 'createLib')) echo html::a(inlink('createLib', "type=project&projectID={$project->id}"), "<i class='icon icon-plus'></i>", "class='lib addbtn' data-toggle='modal' title='{$lang->doc->createLib}'");?>

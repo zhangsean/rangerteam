@@ -55,4 +55,32 @@ $(document).ready(function()
     });
 
     if(v.private) $('#private').click();
+
+    $('#libList').sortable(
+    {
+        trigger: '.icon-move',
+        selector: '#libList .lib',
+        finish: function()
+        {
+            var orders = {};     
+            var orderNext = 1;
+            $('#libList .lib').not('.addbtn').not('.files').each(function()
+            {
+                orders[$(this).data('id')] = orderNext ++;
+            });
+
+             $.post(createLink('doc', 'sort'), orders, function(data)
+             {
+                 if(data.result == 'success')
+                 {
+                     return location.reload(); 
+                 }
+                 else
+                 {
+                     alert(data.message);
+                     return location.reload(); 
+                 }
+             }, 'json');
+        }
+    })
 });

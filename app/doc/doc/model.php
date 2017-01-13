@@ -88,7 +88,7 @@ class docModel extends model
         }
         else
         {
-            $libs = $this->dao->select('id,name')->from(TABLE_DOCLIB)->where('id')->in($idList)->orderBy('id desc')->fetchAll('id');
+            $libs = $this->dao->select('id,name')->from(TABLE_DOCLIB)->where('id')->in($idList)->orderBy('order, id desc')->fetchAll('id');
         }
 
         return $libs;
@@ -109,12 +109,12 @@ class docModel extends model
             $stmt  = $this->dao->select('t1.*')->from(TABLE_DOCLIB)->alias('t1')
                 ->leftJoin(TABLE_PROJECT)->alias('t2')->on('t1.project=t2.id')
                 ->where('t1.deleted')->eq(0)->andWhere('t1.project')->ne(0)
-                ->orderBy('id desc')
+                ->orderBy('order, id desc')
                 ->query();
         }
         else
         {
-            $stmt = $this->dao->select('*')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->andWhere('project')->eq(0)->orderBy('id desc')->query();
+            $stmt = $this->dao->select('*')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->andWhere('project')->eq(0)->orderBy('order, id desc')->query();
         }
 
         $i    = 1;
@@ -145,7 +145,7 @@ class docModel extends model
      */
     public function getLibsByProject($projectID, $mode = '')
     {
-        $projectLibs = $this->dao->select('*')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->andWhere('project')->eq($projectID)->orderBy('id')->fetchAll('id');
+        $projectLibs = $this->dao->select('*')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->andWhere('project')->eq($projectID)->orderBy('order, id')->fetchAll('id');
 
         $libs = array();
         foreach($projectLibs as $lib)

@@ -37,9 +37,6 @@ class doc extends control
      */
     public function index()
     {
-        /* Build search form. */
-        $this->loadModel('search', 'sys');
-
         $projects   = $this->doc->getLimitLibs('project', '9');
         $subLibs    = $this->doc->getSubLibGroups(array_keys($projects));
         $customLibs = $this->doc->getLimitLibs('custom', '9');
@@ -467,5 +464,26 @@ class doc extends control
         $this->setting->setItem("{$this->app->user->account}.sys.common.customMenu.doc", json_encode($customMenus));
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Sort.
+     * 
+     * @access public
+     * @return void
+     */
+    public function sort()
+    {
+        if($_POST)
+        {
+            $orders = $_POST;
+            foreach($orders as $id => $order)
+            {    
+                $this->dao->update(TABLE_DOCLIB)->set('order')->eq($order)->where('id')->eq($id)->exec();
+            }    
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
     }
 }
