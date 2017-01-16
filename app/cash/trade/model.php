@@ -231,7 +231,7 @@ class tradeModel extends model
                 ->where('type')->eq($type)
                 ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                 ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
-                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
+                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))->fi()
                 ->groupBy($groupBy)
                 ->orderBy('value_desc')
                 ->fetchAll('name');
