@@ -38,8 +38,11 @@ $(document).ready(function()
         $(".nav li a[href*='createlib']").attr('data-toggle', 'modal');
     }
 
-    $('#mainNavbar .nav li').removeClass('active');
-    $("#mainNavbar .nav li a[href*='" + v.libType + "']").parent().addClass('active');
+    if(v.libType != undefined)
+    {
+        $('#mainNavbar .nav li').removeClass('active');
+        $("#mainNavbar .nav li a[href*='" + v.libType + "']").parent().addClass('active');
+    }
 
     $('#private').click(function()
     {

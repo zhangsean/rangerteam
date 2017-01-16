@@ -13,14 +13,12 @@ $lang->app = new stdclass();
 $lang->app->name = 'DOC';
 
 $lang->menu->doc = new stdclass();
-$lang->menu->doc->index = 'Document|doc|index|';
+$lang->menu->doc->doc     = 'Document|doc|index|';
+$lang->menu->doc->project = 'Project|doc|alllibs|type=project';
+$lang->menu->doc->custom  = 'Custom|doc|alllibs|type=custom';
 
 $lang->dashboard = new stdclass();
 
 if(!isset($lang->doc)) $lang->doc = new stdclass();
-$lang->doc->menu = new stdclass();
-$lang->doc->menu->all     = 'All|doc|index|';
-$lang->doc->menu->project = 'Project|doc|alllibs|type=project';
-$lang->doc->menu->custom  = 'Custom|doc|alllibs|type=custom';
 
 include (dirname(__FILE__) . '/menuOrder.php');
