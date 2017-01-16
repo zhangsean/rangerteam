@@ -479,6 +479,34 @@ class customer extends control
     }
 
     /**
+     * Merge two customers.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function merge($customerID)
+    {
+        if($_POST)
+        {
+            $customer = $this->customer->getByID($customerID);
+
+            $this->customer->merge($customerID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $actionID = $this->loadModel('action')->create('customer', $this->post->customer, 'Merged', '', $customer->name);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $customers = $this->customer->getPairs('client');
+        unset($customers[$customerID]);
+
+        $this->view->title      = $this->lang->customer->merge;
+        $this->view->customerID = $customerID;
+        $this->view->customers  = $customers;
+        $this->display();
+    }
+
+    /**
      * ajax get customers for todo.
      * 
      * @param  string $account    not used.

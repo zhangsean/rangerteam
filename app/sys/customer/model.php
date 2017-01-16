@@ -460,4 +460,65 @@ class customerModel extends model
             $this->action->logHistory($actionID, $changes);
         }
     }
+
+    /**
+     * Merge two customers.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function merge($customerID)
+    {
+        $this->dao->update(TABLE_CONTRACT)->set('customer')->eq($this->post->customer)->where('customer')->eq($customerID)->exec();
+        $this->dao->update(TABLE_ORDER)->set('customer')->eq($this->post->customer)->where('customer')->eq($customerID)->exec();
+        $this->dao->update(TABLE_RESUME)->set('customer')->eq($this->post->customer)->where('customer')->eq($customerID)->exec();
+        $this->dao->update(TABLE_ADDRESS)->set('objectID')->eq($this->post->customer)->where('objectType')->eq('customer')->andWhere('objectID')->eq($customerID)->exec();
+        $this->dao->update(TABLE_ACTION)->set('customer')->eq($this->post->customer)->where('customer')->eq($customerID)->exec();
+        $this->dao->update(TABLE_ACTION)->set('objectID')->eq($this->post->customer)->where('objectType')->eq('customer')->andWhere('objectID')->eq($customerID)->andWhere('action')->notin('created,edited')->exec();
+        $this->dao->update(TABLE_TASK)->set('customer')->eq($this->post->customer)->where('customer')->eq($customerID)->exec();
+        $this->dao->update(TABLE_TRADE)->set('trader')->eq($this->post->customer)->where('trader')->eq($customerID)->exec();
+
+        $tripList = $this->loadModel('trip', 'oa')->getList();
+        foreach($tripList as $trip)
+        {
+            $tripCustomers = explode(',', $trip->customers);
+            $tripCustomers = array_flip($tripCustomers);
+            if(!isset($tripCustomers[$customerID])) continue;
+
+            unset($tripCustomers[$customerID]);
+            $tripCustomers   = array_flip($tripCustomers);
+            $tripCustomers[] = $this->post->customer;
+            $tripCustomers   = array_unique($tripCustomers);
+            $this->dao->update(TABLE_TRIP)->set('customers')->eq(implode(',', $tripCustomers))->where('id')->eq($trip->id)->exec();
+        }
+
+        if(!dao::isError())
+        {
+            $originCustomer = $this->getByID($customerID);
+            $targetCustomer = $this->getByID($this->post->customer);
+
+            $newCustomer = new stdclass();
+            $newCustomer->type      = $targetCustomer->type ? $targetCustomer->type : $originCustomer->type;
+            $newCustomer->size      = $targetCustomer->size ? $targetCustomer->size : $originCustomer->size;
+            $newCustomer->industry  = $targetCustomer->industry ? $targetCustomer->industry : $originCustomer->industry;
+            $newCustomer->area      = $targetCustomer->area ? $targetCustomer->area : $originCustomer->area;
+            $newCustomer->intension = $targetCustomer->intension ? $targetCustomer->intension : $originCustomer->intension;
+            $newCustomer->site      = $targetCustomer->site ? $targetCustomer->site : $originCustomer->site;
+            $newCustomer->weibo     = $targetCustomer->weibo ? $targetCustomer->weibo : $originCustomer->weibo;
+            $newCustomer->weixin    = $targetCustomer->weixin ? $targetCustomer->weixin : $originCustomer->weixin;
+            $newCustomer->depositor = $targetCustomer->depositor ? $targetCustomer->depositor : $originCustomer->depositor;
+            $newCustomer->desc      = $targetCustomer->desc ? $targetCustomer->desc : $originCustomer->desc;
+
+            $levelList  = array_flip(array_keys($this->lang->customer->levelNameList));
+            $statusList = array_flip(array_keys($this->lang->customer->statusList));
+
+            $newCustomer->level  = zget($levelList, $targetCustomer->level) > zget($levelList, $originCustomer->level) ? $targetCustomer->level : $originCustomer->level;
+            $newCustomer->status = zget($statusList, $targetCustomer->status) > zget($statusList, $originCustomer->status) ? $targetCustomer->status : $originCustomer->status;
+
+            $this->dao->update(TABLE_CUSTOMER)->data($newCustomer)->where('id')->eq($this->post->customer)->exec();
+            $this->dao->update(TABLE_CUSTOMER)->set('deleted')->eq(1)->where('id')->eq($customerID)->exec();
+        }
+        return !dao::isError();
+    }
 }

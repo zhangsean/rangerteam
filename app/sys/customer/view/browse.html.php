@@ -67,6 +67,7 @@
             commonModel::printLink('customer', 'order', "customerID=$customer->id", $lang->customer->order, "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('customer', 'contract', "customerID=$customer->id", $lang->customer->contract, "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('address',  'browse', "objectType=customer&objectID=$customer->id", $lang->customer->address, "data-toggle='modal'", '', '', 'li');
+            commonModel::printLink('customer',  'merge', "customerID=$customer->id", $lang->customer->merge, "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('customer', 'delete', "customerID=$customer->id", $lang->delete, "class='deleter'", '', '', 'li');
             echo "</ul></div>";
             ?>

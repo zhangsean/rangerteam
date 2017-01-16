@@ -59,6 +59,7 @@ $lang->customer->linkContact = 'Add a Contact';
 $lang->customer->list        = 'Customers';
 $lang->customer->edit        = 'Edit';
 $lang->customer->export      = 'Export';
+$lang->customer->merge       = 'Merge';
 $lang->customer->basicInfo   = 'Basic Info';
 $lang->customer->moreInfo    = 'More Info';
 
@@ -106,3 +107,5 @@ $lang->customer->levelNoteList['E'] = ' Make no deal.';
 $lang->customer->relationList['client']   = 'Client';
 $lang->customer->relationList['provider'] = 'Provider';
 $lang->customer->relationList['partner']  = 'Partner';
+
+$lang->customer->mergeTip = 'Merge this customer to selected customer.';

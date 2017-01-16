@@ -46,6 +46,7 @@ $lang->action->desc->opened                = '$date, opened by <strong>$actor</s
 $lang->action->desc->created               = '$date, created by <strong>$actor</strong>.';
 $lang->action->desc->edited                = '$date, edited by <strong>$actor</strong>.';
 $lang->action->desc->assigned              = '$date, <strong>$actor</strong> assigned task to <strong>$extra</strong>.' . "\n";
+$lang->action->desc->merged                = '$date, <strong>$actor</strong> merged customer <strong>$extra</strong>。' . "\n";
 $lang->action->desc->transmit              = '$date, <strong>$actor</strong> transfer task to <strong>$extra</strong>.' . "\n";
 $lang->action->desc->closed                = '$date, closed by <strong>$actor</strong>, close resion:<strong>$extra</strong>.';
 $lang->action->desc->deleted               = '$date, deleted by <strong>$actor</strong>.';

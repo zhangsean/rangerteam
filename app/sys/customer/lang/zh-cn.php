@@ -59,6 +59,7 @@ $lang->customer->linkContact = '添加联系人';
 $lang->customer->list        = '客户列表';
 $lang->customer->edit        = '编辑客户';
 $lang->customer->export      = '导出';
+$lang->customer->merge       = '合并';
 $lang->customer->basicInfo   = '基本信息';
 $lang->customer->moreInfo    = '更多信息';
 
@@ -106,3 +107,5 @@ $lang->customer->levelNoteList['E'] = '没有需求或者没有任何成交机�
 $lang->customer->relationList['client']   = '客户';
 $lang->customer->relationList['provider'] = '供应商';
 $lang->customer->relationList['partner']  = '合作伙伴';
+
+$lang->customer->mergeTip = '将该客户合并到选择的客户。';
