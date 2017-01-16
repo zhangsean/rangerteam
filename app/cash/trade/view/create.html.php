@@ -91,6 +91,10 @@
           <th><?php echo $lang->trade->customer;?></th>
           <td><?php echo html::select('trader', $customerList, '', "class='form-control chosen' onchange='getContract(this.value)'");?></td>
         </tr>
+        <tr class='customer-depositor hide'>
+          <th><?php echo $lang->customer->depositor;?></th>
+          <td><?php echo html::input('customerDepositor', '', "class='form-control' disabled='disabled'");?></td>
+        </tr>
         <tr>
           <th><?php echo $lang->trade->contract;?></th>
           <td class='contractTD'><select name='contract' id='contract' class='form-control'></select></td>
