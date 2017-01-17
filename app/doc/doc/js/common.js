@@ -86,4 +86,20 @@ $(document).ready(function()
              }, 'json');
         }
     })
+
+    $(document).on('click', '.edui-for-fullscreen', function()
+    {
+        $('#content .edui-editor').toggleClass('full-screen');
+
+        if($('#content .edui-editor.full-screen').length > 0)
+        {
+            $(this).css('right', '100px');
+            $('#content .edui-editor').css('z-index', 99999);
+        }
+        else
+        {
+            $(this).css('right', '');
+            $('#content .edui-editor').css('z-index', '');
+        }
+    })
 });
