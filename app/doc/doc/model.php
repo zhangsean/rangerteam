@@ -625,6 +625,95 @@ class docModel extends model
     }
 
     /**
+     * Get doc menu.
+     * 
+     * @param  int    $libID 
+     * @param  int    $parent 
+     * @access public
+     * @return array
+     */
+    public function getDocMenu($libID, $parent, $orderBy = 'name_asc')
+    {
+        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('root')->eq($libID)
+            ->andWhere('type')->eq('doc')
+            ->andWhere('parent')->eq($parent)
+            ->orderBy($orderBy)
+            ->fetchAll('id');
+    }
+
+    /**
+     * Get doc tree.
+     * 
+     * @param  int    $libID 
+     * @access public
+     * @return array
+     */
+    public function getDocTree($libID)
+    {
+        $fullTrees = $this->loadModel('tree')->getTreeStructure($libID, 'doc');
+        array_unshift($fullTrees, array('id' => 0, 'name' => '/', 'type' => 'doc', 'actions' => false, 'root' => $libID));
+        $docTree = "<ul class='tree'>";
+        foreach($fullTrees as $i => $tree)
+        {
+            $tree = (object)$tree;
+            $docTree .= "<li><i class='icon category icon-folder-open-alt'> </i>" . $tree->name;
+            $docTree .= $this->fillDocsInTree($tree, $libID);
+            $docTree .= '</li>';
+        }
+        $docTree .= '</ul>';
+        return $docTree;
+    }
+
+    /**
+     * Fill docs in tree.
+     * 
+     * @param  object $node 
+     * @param  int    $libID 
+     * @access public
+     * @return array
+     */
+    public function fillDocsInTree($node, $libID)
+    {
+        $tree = '<ul>';
+        $node = (object)$node;
+        static $docGroups;
+        if(empty($docGroups))
+        {
+            $docs = $this->dao->select('*')->from(TABLE_DOC)->where('lib')->eq((int)$libID)->andWhere('deleted')->eq(0)->fetchAll();
+            $docGroups = array();
+            foreach($docs as $doc) $docGroups[$doc->module][$doc->id] = $doc;
+        }
+
+        if(!empty($node->children))
+        {
+            foreach($node->children as $i => $child)
+            {
+                $tree .= "<li><i class='icon category icon-folder-open-alt'> </i>" . $child->name;
+                $tree .= $this->fillDocsInTree($child, $libID);
+                $tree .= '</li>';
+            }
+        }
+
+        if(!isset($node->id)) $node->id = 0;
+
+        $docs = isset($docGroups[$node->id]) ? $docGroups[$node->id] : array();
+        if(!empty($docs))
+        {
+            foreach($docs as $doc)
+            {
+                $tree .= '<li>';
+                $tree .= html::a(helper::createLink('doc', 'view', "doc=$doc->id"), "<i class='icon icon-file-text-o'></i> " . $doc->title);
+                $tree .= "<span class='doc-actions'>" . html::a(helper::createLink('doc', 'edit', "doc=$doc->id"), "<i class='icon icon-pencil'> </i>");
+                $tree .= html::a(helper::createLink('doc', 'delete', "doc=$doc->id"), "<i class='icon icon-remove'></i>", "class='deleter'") . '</span>';
+                $tree .='</li>';
+
+            }
+        }
+        $tree .= '</ul>';
+        return $tree;
+    }
+
+    /**
      * Extract css styles for tables created in kindeditor.
      *
      * Like this: <table class="ke-table1" style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#000000">

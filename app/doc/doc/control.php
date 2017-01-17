@@ -147,13 +147,27 @@ class doc extends control
                 if($menu->name == 'custom' . $libID) $this->view->fixedMenu = true;
             }
         }
+
+        if($this->cookie->browseType == 'bymenu')
+        {
+            $this->view->modules = $this->doc->getDocMenu($libID, $moduleID, $orderBy == 'title_asc' ? 'name_asc' : 'id_desc');
+            $this->view->parents = $this->loadModel('tree')->getFamily($moduleID);
+        }
+        elseif($this->cookie->browseType == 'bytree')
+        {
+            $this->view->tree = $this->doc->getDocTree($libID);
+        }
+        else
+        {
+            $this->view->moduleTree = $moduleTree;
+        }
+
        
         $this->view->title         = $this->lang->doc->common . $this->lang->colon . $this->libs[$libID];
         $this->view->libID         = $libID;
         $this->view->lib           = $lib;
         $this->view->libName       = $this->libs[$libID];
         $this->view->moduleID      = $moduleID;
-        $this->view->moduleTree    = $moduleTree;
         $this->view->parentModules = $this->tree->getFamily($moduleID);
         $this->view->docs          = $docs;
         $this->view->pager         = $pager;

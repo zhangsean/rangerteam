@@ -49,6 +49,25 @@ class helper extends baseHelper
     }
 
     /**
+     * Encode json for $.parseJSON
+     * 
+     * @param  array  $data 
+     * @param  int    $options 
+     * @static
+     * @access public
+     * @return string
+     */
+    static public function jsonEncode4Parse($data, $options = 0)
+    {
+        $json = json_encode($data);
+        if($options) $json = str_replace(array("'", '"'), array('\u0027', '\u0022'), $json);
+
+        $escapers     = array("\\",  "/",   "\"", "'", "\n",  "\r",  "\t", "\x08", "\x0c", "\\\\u");
+        $replacements = array("\\\\", "\\/", "\\\"", "\'", "\\n", "\\r", "\\t",  "\\f",  "\\b", "\\u");
+        return str_replace($escapers, $replacements, $json);
+    }
+
+    /**
      * Unify string to standard chars.
      * 
      * @param  string    $string 

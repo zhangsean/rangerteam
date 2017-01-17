@@ -6,7 +6,7 @@ label.checkbox{float: left; margin-right: 10px; width: 100px;}
 input[type=checkbox]{margin-top: 1px;}
 .table-form td + td, .table-form th + th {padding-left: 20px;}
 
-.icon-2x{font-size: 28px;}
+.icon-2x{font-size: 40px;}
 
 .libs-group-heading {color: #808080; border-bottom:1px solid #ddd; padding:8px;}
 .libs-group-heading a{overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
