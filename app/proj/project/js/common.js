@@ -7,7 +7,7 @@ $(document).ready(function()
     if(typeof(v.projectID) != undefined && v.projectID != 0)
     {
         $.cookie('projectStatus', v.status, {path: "/"});
-        $('#mainNavbar .nav li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
+        $('#menu li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
     }
 
     $("#createButton").modalTrigger({width:800});

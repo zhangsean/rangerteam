@@ -7,7 +7,7 @@ $(function()
     })
 
     if(v.backLink !== undefined) $('#menu .nav:first').append('<li>' + v.backLink + '</li>');
-    if($.cookie('projectStatus'))
+    if($.cookie('projectStatus') && v.projectID)
     {
         $('#mainNavbar .nav li').removeClass('active').find('[href*=' + $.cookie('projectStatus') + ']').parent().addClass('active');
     }

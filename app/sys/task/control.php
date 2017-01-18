@@ -57,8 +57,12 @@ class task extends control
             if($project->deleted) $this->locate($this->createLink('project'));
             if(!$this->project->checkPriv($projectID)) $this->locate($this->createLink('project'));
         }
+        else
+        {
+            $this->lang->menuGroups->task = 'task';
+        }
 
-        if(!isset($project->members[$this->app->user->account]) and $mode == 'assignedTo') $mode = 'all';
+        if($projectID and !isset($project->members[$this->app->user->account]) and $mode == 'assignedTo') $mode = 'all';
 
         $this->session->set('taskList', $this->app->getURI(true));
         setCookie('taskListType', 'browse', time() + 60 * 60 * 24 * 10);
@@ -81,7 +85,7 @@ class task extends control
         $this->view->pager     = $pager;
         $this->view->mode      = $mode;
         $this->view->orderBy   = $orderBy;
-        $this->view->project   = $project;
+        $this->view->project   = isset($project) ? $project : '';
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project', 'proj')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
