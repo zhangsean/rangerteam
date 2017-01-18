@@ -39,12 +39,14 @@ $lang->doc->delete         = '删除文档';
 $lang->doc->browse         = '文档列表';
 $lang->doc->view           = '文档详情';
 $lang->doc->manageType     = '维护分类';
+$lang->doc->showFiles      = '附件库';
+$lang->doc->sort           = '文档库排序';
 
 $lang->doc->libName        = '文档库名称';
 $lang->doc->libType        = '文档库类型';
-$lang->doc->allLib         = '所有文档库';
-$lang->doc->projectLib     = '项目文档库';
-$lang->doc->customLib      = '自定义文档库';
+$lang->doc->allLibs        = '所有文档库';
+$lang->doc->projectLibs    = '项目文档库';
+$lang->doc->customLibs     = '自定义文档库';
 $lang->doc->projectMainLib = '项目主库';
 $lang->doc->fileLib        = '附件库';
 

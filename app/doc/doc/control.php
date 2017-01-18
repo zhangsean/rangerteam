@@ -38,8 +38,8 @@ class doc extends control
     public function index()
     {
         $projects   = $this->doc->getLimitLibs('project', '9');
-        $subLibs    = $this->doc->getSubLibGroups(array_keys($projects));
         $customLibs = $this->doc->getLimitLibs('custom', '9');
+        $subLibs    = $this->doc->getSubLibGroups(array_keys($projects));
 
         $this->view->title      = $this->lang->doc->common . $this->lang->colon . $this->lang->doc->index;
         $this->view->projects   = $projects;
@@ -68,7 +68,7 @@ class doc extends control
         $subLibs = array();
         if($type == 'project') $subLibs = $this->doc->getSubLibGroups(array_keys($libs));
 
-        $this->view->title   = $this->lang->doc->allLib;
+        $this->view->title   = $this->lang->doc->allLibs;
         $this->view->type    = $type;
         $this->view->libs    = $libs;
         $this->view->subLibs = $subLibs;

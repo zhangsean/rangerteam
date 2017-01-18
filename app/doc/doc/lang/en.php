@@ -39,26 +39,41 @@ $lang->doc->delete         = 'Delete';
 $lang->doc->browse         = 'Documents';
 $lang->doc->view           = 'Documents';
 $lang->doc->manageType     = 'Manage Categories';
+$lang->doc->showFiles      = 'Files Library';
+$lang->doc->sort           = 'Sort';
 
 $lang->doc->libName        = 'Name';
+$lang->doc->libType        = 'Type';
+$lang->doc->allLibs        = 'All Library';
+$lang->doc->projectLibs    = 'Project Library';
+$lang->doc->customLibs     = 'Custom Library';
+$lang->doc->projectMainLib = 'Main Library';
+$lang->doc->fileLib        = 'File Library';
+
 $lang->doc->createLib      = 'Create a Library';
 $lang->doc->editLib        = 'Edit';
 $lang->doc->deleteLib      = 'Delete';
+$lang->doc->fixedMenu      = 'Fixed Menu';
+$lang->doc->removedMenu    = 'Remove Menu';
 
-$lang->doc->allProduct     = 'All products';
 $lang->doc->allProject     = 'All projects';
 
 $lang->doc->private        = 'Private';
 $lang->doc->users          = 'Users';
 $lang->doc->groups         = 'Groups';
 
-$lang->doc->systemLibs = array();
-//$lang->doc->systemLibs['product'] = 'Product doc';
-//$lang->doc->systemLibs['project'] = 'Project doc';
+$lang->doc->libTypeList = array();
+$lang->doc->libTypeList['custom']  = 'Custom';
+$lang->doc->libTypeList['project'] = 'Project';
 
 $lang->doc->types['file'] = 'File';
 $lang->doc->types['url']  = 'Link';
 $lang->doc->types['text'] = 'Html';
+
+$lang->doc->browseType = '浏览方式';
+$lang->doc->browseTypeList['list'] = 'List';
+$lang->doc->browseTypeList['menu'] = 'Menu';
+$lang->doc->browseTypeList['tree'] = 'Tree';
 
 $lang->doc->confirmDelete      = "Do you want to delete this doc?";
 $lang->doc->confirmDeleteLib   = "Do you want to delete this doc library?";

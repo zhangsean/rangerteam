@@ -425,23 +425,33 @@ $lang->announce->methodOrder[25] = 'delete';
 
 /* Doc. */
 $lang->resource->doc = new stdclass();
-$lang->resource->doc->createLib = 'createLib';
-$lang->resource->doc->editLib   = 'editLib';
-$lang->resource->doc->deleteLib = 'deleteLib';
-$lang->resource->doc->browse    = 'browse';
-$lang->resource->doc->create    = 'create';
-$lang->resource->doc->edit      = 'edit';
-$lang->resource->doc->view      = 'view';
-$lang->resource->doc->delete    = 'delete';
+$lang->resource->doc->createLib   = 'createLib';
+$lang->resource->doc->editLib     = 'editLib';
+$lang->resource->doc->deleteLib   = 'deleteLib';
+$lang->resource->doc->index       = 'index';
+$lang->resource->doc->browse      = 'browse';
+$lang->resource->doc->allLibs     = 'allLibs';
+$lang->resource->doc->projectLibs = 'projectLibs';
+$lang->resource->doc->showFiles   = 'showFiles';
+$lang->resource->doc->create      = 'create';
+$lang->resource->doc->edit        = 'edit';
+$lang->resource->doc->view        = 'view';
+$lang->resource->doc->delete      = 'delete';
+$lang->resource->doc->sort        = 'sort';
 
 $lang->doc->methodOrder[0]  = 'createLib';
 $lang->doc->methodOrder[5]  = 'editLib';
 $lang->doc->methodOrder[10] = 'deleteLib';
-$lang->doc->methodOrder[15] = 'browse';
-$lang->doc->methodOrder[20] = 'create';
-$lang->doc->methodOrder[25] = 'edit';
-$lang->doc->methodOrder[30] = 'view';
-$lang->doc->methodOrder[35] = 'delete';
+$lang->doc->methodOrder[15] = 'index';
+$lang->doc->methodOrder[20] = 'browse';
+$lang->doc->methodOrder[25] = 'allLibs';
+$lang->doc->methodOrder[30] = 'projectLibs';
+$lang->doc->methodOrder[35] = 'showFiles';
+$lang->doc->methodOrder[40] = 'create';
+$lang->doc->methodOrder[45] = 'edit';
+$lang->doc->methodOrder[50] = 'view';
+$lang->doc->methodOrder[55] = 'delete';
+$lang->doc->methodOrder[60] = 'sort';
 
 /* Attend */
 $lang->resource->attend = new stdclass();
