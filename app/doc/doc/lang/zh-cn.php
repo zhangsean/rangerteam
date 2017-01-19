@@ -69,9 +69,8 @@ $lang->doc->libTypeList = array();
 $lang->doc->libTypeList['custom']  = '自定义文档库';
 $lang->doc->libTypeList['project'] = '项目文档库';
 
-$lang->doc->types['file'] = '文件';
+$lang->doc->types['text'] = '文档';
 $lang->doc->types['url']  = '链接';
-$lang->doc->types['text'] = '网页';
 
 $lang->doc->browseType = '浏览方式';
 $lang->doc->browseTypeList['list'] = '列表';

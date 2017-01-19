@@ -16,6 +16,7 @@ ALTER TABLE `oa_doc` ADD `version` smallint unsigned NOT NULL DEFAULT '1' AFTER 
 UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='product';
 UPDATE `sys_lang` SET `app`='sys' WHERE `app`='crm' AND `module`='customer';
 
+UPDATE `oa_doc` SET `type` = 'text' WHERE `type` = 'file';
 UPDATE `sys_category` SET `type`='doc' WHERE `type`='customdoc';
 UPDATE `sys_block` SET `app`='proj',`source`='proj' WHERE `app`='oa' AND `source`='oa' AND `block` in ('project','task');
 

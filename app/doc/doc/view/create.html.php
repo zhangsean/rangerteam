@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->doc->type;?></th>
-          <td colspan='2'><?php echo html::radio('type', $lang->doc->types, 'file', "onclick=setType(this.value)");?></td>
+          <td colspan='2'><?php echo html::radio('type', $lang->doc->types, 'text', "onclick=setType(this.value)");?></td>
         </tr>  
         <tr>
           <th><?php echo $lang->doc->title;?></th>
@@ -52,7 +52,7 @@
           <th><?php echo $lang->doc->url;?></th>
           <td colspan='2'><?php echo html::input('url', '', "class='form-control'");?></td>
         </tr>  
-        <tr id='contentBox' class='hidden'>
+        <tr id='contentBox'>
           <th><?php echo $lang->doc->content;?></th>
           <td colspan='2'>
             <div class='contenthtml'><?php echo html::textarea('content', '', "style='width:100%;height:200px'");?></div>
@@ -68,7 +68,7 @@
           <th><?php echo $lang->doc->digest;?></th>
           <td colspan='2'><?php echo html::textarea('digest', '', "class='form-control' rows=3");?></td>
         </tr>  
-        <tr id='fileBox'>
+        <tr>
           <th><?php echo $lang->doc->files;?></th>
           <td colspan='2'><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
         </tr>  

@@ -128,6 +128,7 @@ class upgradeModel extends model
                 $this->setDocEntryPrivileges();
                 $this->moveDocContent();
                 $this->addProjectDoc();
+                $this->updateDocPriv();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1181,13 +1182,30 @@ class upgradeModel extends model
     public function setDocEntryPrivileges()
     {
         $groups = $this->dao->select('`group`')->from(TABLE_GROUPPRIV)->where('module')->eq('doc')->fetchPairs();
-        $grouppriv = new stdclass();
-        $grouppriv->module = 'apppriv';
-        $grouppriv->method = 'doc';
         foreach($groups as $group)
         {
-            $grouppriv->group = $group;
-            $this->dao->insert(TABLE_GROUPPRIV)->data($grouppriv)->exec();
+            $data = new stdclass();
+            $data->group = $group;
+            $data->module = 'apppriv';
+            $data->method = 'doc';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
+
+            $data = new stdclass();
+            $data->module = 'doc';
+            $data->method = 'index';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
+
+            $data->method = 'allLibs';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
+
+            $data->method = 'showFiles';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
+
+            $data->method = 'projectLibs';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
+
+            $data->method = 'sort';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
         }
 
         return !dao::isError();

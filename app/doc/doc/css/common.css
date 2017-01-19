@@ -22,4 +22,4 @@ input[type=checkbox]{margin-top: 1px;}
 #menu .nav > li > a{display:inline-block;}
 #navBarActions {position:absolute; right: 100px; top: 4px; z-index:10000;}
 
-#menu > .nav{float: none;}
+.panel-body > form {max-width: 1200px;}
