@@ -13,9 +13,23 @@ $(document).ready(function()
         $(menu + " a[href*='tree'][href*='" + v.type + "']").parent().addClass('active');
     }
 
-    if(v.type == 'customdoc')
+    if(v.type == 'doc')
     {
-         $(menu + " a[href*='" + v.root +"']").parent().addClass('active');
+         if(v.project)
+         {
+             if($('#mainNavbar .nav li').find("a[href*='" + v.root + "'][href*='" + v.project + "']").length > 0)
+             {
+                 $('#mainNavbar .nav li').find("a[href*='" + v.root + "'][href*='" + v.project + "']").parent().addClass('active');
+             }
+             else
+             {
+                 $("#mainNavbar .nav a[href*='alllibs'][href*='project']").parent().addClass('active');
+             }
+         }
+         else
+         {
+             $("#mainNavbar .nav a[href*='alllibs'][href*='custom']").parent().addClass('active');
+         }
     }
     if(v.type == 'provider') $(menu + " a[href*=" + v.type + "]").parent().addClass('active');
 

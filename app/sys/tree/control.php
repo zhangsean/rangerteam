@@ -45,8 +45,9 @@ class tree extends control
         }
         elseif(strpos($type, 'doc') !== false)
         {
-            $this->lang->tree->menu = $this->loadModel('doc')->getSubMenus();
+            $this->loadModel('doc', 'doc')->setMainMenu();
             $this->lang->menuGroups->tree = 'doc';
+            $this->view->lib = $this->doc->getLibById($root);
         }
 
         $this->view->title    = $this->lang->category->common;

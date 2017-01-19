@@ -25,7 +25,13 @@ js::set('root', $root);
 js::set('type', $type);
 js::set('moduleID', $moduleID);
 ?>
+<?php if($type == 'doc'):?>
+<?php js::set('project', isset($lib->project) ? $lib->project : 0);?>
+<?php $this->loadModel('doc', 'doc')->setMenu(0, $root, $moduleID);?>
+<div class='col-md-12 doc-category'>
+<?php else:?>
 <div class='col-md-12'>
+<?php endif;?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
   <?php if($moduleMenu):?>
