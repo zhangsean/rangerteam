@@ -23,3 +23,6 @@ input[type=checkbox]{margin-top: 1px;}
 #navBarActions {position:absolute; right: 100px; top: 4px; z-index:10000;}
 
 .panel-body > form {max-width: 1200px;}
+
+#libList .lib .icon-move {display: none; position: relative; top: -20px; right: -25px;}
+#libList .lib:hover .icon-move {display: inline-block;}

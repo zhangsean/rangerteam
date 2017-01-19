@@ -22,7 +22,8 @@
     ?>
     <a class="lib <?php echo $libID == 'files' ? 'files' : '';?>" title='<?php echo $libName?>' href='<?php echo $libLink?>' data-id='<?php echo $libID;?>'>
       <i class='icon icon-2x icon-folder-open-alt'></i>
-      <div class='lib-name' title='<?php echo $libName?>'><?php if($libID != 'files'):?><i class='icon icon-move'> </i><?php endif;?><?php echo $libName?></div>
+      <?php if($libID != 'files'):?><i class='icon icon-move'> </i><?php endif;?>
+      <div class='lib-name' title='<?php echo $libName?>'><?php echo $libName?></div>
     </a>
     <?php endforeach; ?>
     <?php if(commonModel::hasPriv('doc', 'createLib')) echo html::a(inlink('createLib', "type=project&projectID={$project->id}"), "<i class='icon icon-plus'></i>", "class='lib addbtn' data-toggle='modal' title='{$lang->doc->createLib}'");?>
