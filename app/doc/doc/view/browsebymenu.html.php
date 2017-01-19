@@ -18,12 +18,31 @@
 <?php $this->doc->setMenu($lib->project, $lib->id, $moduleID);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
+  <?php echo html::backButton("<i class='icon-level-up icon-rotate-270'></i> {$lang->goback}");?>
   <div class='btn-group'>
     <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'><i class='icon icon-th'></i> <?php echo $lang->doc->browseTypeList['menu']?> <span class='caret'></span></button>
     <ul class='dropdown-menu' role='menu'>
       <li><?php echo html::a('javascript:setBrowseType("bylist")', "<i class='icon icon-list'></i> {$lang->doc->browseTypeList['list']}");?></li>
       <li><?php echo html::a('javascript:setBrowseType("bymenu")', "<i class='icon icon-th'></i> {$lang->doc->browseTypeList['menu']}");?></li>
       <li><?php echo html::a('javascript:setBrowseType("bytree")', "<i class='icon icon-branch'></i> {$lang->doc->browseTypeList['tree']}");?></li>
+    </ul>
+  </div>
+  <div class='btn-group'>
+    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'><i class='icon icon-cog'></i> <?php echo $lang->actions?> <span class='caret'></span></button>
+    <ul class='dropdown-menu' role='menu'>
+      <?php if(empty($moduleID)):?>
+      <?php
+      commonModel::printLink('doc', 'editLib',   "libID=$libID", "{$lang->doc->editLib}", "data-toggle='modal'", '', '', 'li');
+      commonModel::printLink('doc', 'deleteLib', "libID=$libID", "{$lang->doc->deleteLib}", "class='deleter'", '', '', 'li');
+      ?>
+      <?php else:?>
+      <?php
+      commonModel::printLink('tree', 'edit', "moduleID=$moduleID", "{$lang->doc->editCategory}", "data-toggle='modal'", '', '', 'li');
+      commonModel::printLink('tree', 'delete', "moduleID=$moduleID", "{$lang->doc->deleteCategory}", "class='deleter'", '', '', 'li');
+      ?>
+      <?php endif;?>
+      <?php commonModel::printLink('tree', 'browse', "type=doc&startModule=$moduleID&rootID=$libID", "{$lang->doc->manageType}", '', '', '', 'li');?>
+      <?php commonModel::printLink('doc', 'ajaxFixedMenu', "libID=$libID&type=" . ($fixedMenu ? 'remove' : 'fixed'), ($fixedMenu ? $lang->doc->removedMenu : $lang->doc->fixedMenu), "class='fix-menu'", '', '', 'li');?>
     </ul>
   </div>
   <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>

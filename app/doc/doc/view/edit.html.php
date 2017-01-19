@@ -16,8 +16,8 @@
 <?php if($doc->contentType == 'markdown') include '../../../sys/common/view/markdown.html.php';?>
 <?php js::set('type',  $doc->type);?>
 <?php js::set('libID', $doc->lib);?>
-<?php js::set('private', $doc->private);?>
 <?php js::set('libType', $doc->project ? 'project' : 'custom');?>
+<?php js::set('private', $doc->private);?>
 <?php $this->doc->setMenu(0, $doc->lib, $doc->module);?>
 <div class='with-menu page-content'>
   <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo inlink('edit', "libID=$doc->id")?>'>

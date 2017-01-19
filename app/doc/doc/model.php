@@ -777,7 +777,7 @@ class docModel extends model
     }
 
     /**
-     * Set module menu.
+     * Set main menu.
      * 
      * @param  int    $projectID 
      * @param  int    $libID 
@@ -786,32 +786,8 @@ class docModel extends model
      * @access public
      * @return void
      */
-    public function setMenu($projectID = 0, $libID = 0, $category = 0, $extra = '')
+    public function setMainMenu()
     {
-
-        /* Check the privilege. */
-        $lib = $this->getLibById($libID);
-        $projectID = !empty($lib) ? $lib->project : $projectID;
-        $project = $this->loadModel('project', 'proj')->getById($projectID);
-
-        $moduleMenu = "<nav id='menu'><ul class='nav'>";
-        if($project)
-        {
-            $moduleMenu .= commonModel::printLink('doc', 'allLibs', "type=project", $this->lang->doc->libTypeList['project'], '', false, '', 'li');
-            $moduleMenu .= "<li class='divider angle'></li>";
-            $moduleMenu .= commonModel::printLink('doc', 'projectLibs', "projectID=$project->id", $project->name, '', false, '', 'li');
-            if($lib) $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id", $lib->name, '', false, '', 'li');
-        }
-        else
-        {
-            if($lib)
-            {
-                $moduleMenu .= commonModel::printLink('doc', 'allLibs', "type=custom" , $this->lang->doc->libTypeList['custom'], '', false, '', 'li');
-                $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id", $lib->name, '', false, '', 'li');
-            }
-        }
-        if($extra) $moduleMenu .= "<li class='divider angle'></li><li>" . $extra . '</li>';
-
         if(isset($this->config->customMenu->doc))
         {
             $customMenu = json_decode($this->config->customMenu->doc);
@@ -838,14 +814,56 @@ class docModel extends model
 
             foreach($menuLibIdList as $i => $menuLibID)
             {
-                $libName = '';
                 $lib = $libs[$menuLibID];
-                if($lib->project) $libName = isset($projects[$lib->project]) ? '[' . $projects[$lib->project] . ']' : '';
-                $libName .= $lib->name;
-                $moduleMenu .= "<li class='pull-right'>" . html::a(helper::createLink('doc', 'browse', "libID=$menuLibID&moduleID=$category&projectID={$lib->project}"), $libName) . '</li>';
+                $libName = ($lib->project and isset($projects[$lib->project])) ? '[' . $projects[$lib->project] . ']' . $lib->name : $lib->name;
+                $this->lang->menu->doc->$menuLibID = "$libName|doc|browse|libID=$menuLibID&moduleID=&projectID=$lib->project";
             }
         }
+    }
 
+    /**
+     * Set module menu.
+     * 
+     * @param  int    $projectID 
+     * @param  int    $libID 
+     * @param  int    $category 
+     * @param  string $extra 
+     * @access public
+     * @return void
+     */
+    public function setMenu($projectID = 0, $libID = 0, $category = 0, $extra = '')
+    {
+        /* Check the privilege. */
+        $lib = $this->getLibById($libID);
+        $projectID = !empty($lib) ? $lib->project : $projectID;
+        $project   = $this->loadModel('project', 'proj')->getById($projectID);
+        $category  = $this->loadModel('tree')->getByID($category);
+
+        $moduleMenu = "<nav id='menu'><ul class='nav'>";
+        if($project)
+        {
+            $moduleMenu .= commonModel::printLink('doc', 'projectLibs', "projectID=$project->id", $project->name, '', false, '', 'li');
+            if($lib) $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id", $lib->name, '', false, '', 'li');
+            if($category)
+            {
+                foreach($category->pathNames as $categoryID => $categoryName)
+                {
+                    $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id&moduleID=$categoryID", $categoryName, '', false, '', 'li');
+                }
+            }
+        }
+        else
+        {
+            if($lib) $moduleMenu .= commonModel::printLink('doc', 'browse', "libID=$lib->id", $lib->name, '', false, '', 'li');
+            if($category)
+            {
+                foreach($category->pathNames as $categoryID => $categoryName)
+                {
+                    $moduleMenu .= "<li class='divider angle'></li>" . commonModel::printLink('doc', 'browse', "libID=$lib->id&moduleID=$categoryID", $categoryName, '', false, '', 'li');
+                }
+            }
+        }
+        if($extra) $moduleMenu .= "<li class='divider angle'></li><li>" . $extra . '</li>';
         $moduleMenu .= '</ul></nav>';
         echo  $moduleMenu;
     }

@@ -30,18 +30,16 @@ function setType(type)
 
 $(document).ready(function()
 {
-    if(typeof(v.libID) != undefined && v.libID != 'createLib')
-    {
-        $('#menu .nav li').removeClass('active');
-        if(typeof(v.libID) != undefined) $(".nav li a[href*='" + v.libID + "']").parent().addClass('active');
-        $('#menu .nav li').first().removeClass('active');
-        $(".nav li a[href*='createlib']").attr('data-toggle', 'modal');
-    }
-
     if(v.libType != undefined)
     {
         $('#mainNavbar .nav li').removeClass('active');
         $("#mainNavbar .nav li a[href*='" + v.libType + "']").parent().addClass('active');
+    }
+
+    if(typeof(v.libID) != undefined && $('#mainNavbar .nav li').find("a[href*='" + v.libID + "']").length > 0)
+    {
+        $('#mainNavbar .nav li').removeClass('active');
+        $("#mainNavbar .nav li a[href*='" + v.libID + "']").parent().addClass('active');
     }
 
     $('#private').click(function()

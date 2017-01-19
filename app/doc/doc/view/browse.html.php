@@ -13,8 +13,6 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('libID ', $libID);?>
-<?php js::set('browseType ', $browseType);?>
-<?php js::set('mode', $mode)?>
 <?php js::set('libType', $lib->project ? 'project' : 'custom');?>
 
 <?php if($this->cookie->browseType == 'bymenu'):?>
@@ -33,6 +31,16 @@
       <li><?php echo html::a('javascript:setBrowseType("bytree")', "<i class='icon icon-branch'></i> {$lang->doc->browseTypeList['tree']}");?></li>
     </ul>
   </div>
+  <div class='btn-group'>
+    <button class='btn dropdown-toggle' data-toggle='dropdown'><i class='icon icon-cog'> </i><?php echo $lang->actions;?> <span class='caret'></span></button>
+    <ul class='dropdown-menu pull-right'>
+      <?php
+      commonModel::printLink('doc', 'editLib',   "libID=$libID", "{$lang->doc->editLib}", "data-toggle='modal'", '', '', 'li');
+      commonModel::printLink('doc', 'deleteLib', "libID=$libID", "{$lang->doc->deleteLib}", "class='deleter'", '', '', 'li');
+      commonModel::printLink('doc', 'ajaxFixedMenu', "libID=$libID&type=" . ($fixedMenu ? 'remove' : 'fixed'), ($fixedMenu ? "{$lang->doc->removedMenu}" : "{$lang->doc->fixedMenu}"), "class='fix-menu'", '', '', 'li');
+      ?>
+    </ul>
+  </div>
   <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
 </div>
 <div class='row with-menu page-content'>
@@ -42,16 +50,6 @@
         <strong><?php echo $libName;?></strong>
         <?php if(!isset($lang->doc->systemLibs[$libID])):?>
         <div class='panel-actions pull-right'>
-          <div class='dropdown'>
-            <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
-            <ul class='dropdown-menu pull-right'>
-              <?php
-              commonModel::printLink('doc', 'editLib',   "libID=$libID", "<i class='icon-edit'> {$lang->edit}</i>", "data-toggle='modal'", '', '', 'li');
-              commonModel::printLink('doc', 'deleteLib', "libID=$libID", "<i class='icon-remove'> {$lang->delete}</i>", "class='deleter'", '', '', 'li');
-              commonModel::printLink('doc', 'ajaxFixedMenu', "libID=$libID&type=" . ($fixedMenu ? 'remove' : 'fixed'), ($fixedMenu ? "<i class='icon-remove'></i> {$lang->doc->removedMenu}" : "<i class='icon icon-plus'></i> {$lang->doc->fixedMenu}"), "class='fix-menu'", '', '', 'li');
-              ?>
-            </ul>
-          </div>
         </div>
         <?php endif;?>
       </div>

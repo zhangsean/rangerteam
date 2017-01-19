@@ -13,6 +13,16 @@
       <li><?php echo html::a('javascript:setBrowseType("bytree")', "<i class='icon icon-branch'></i> {$lang->doc->browseTypeList['tree']}");?></li>
     </ul>
   </div>
+  <div class='btn-group'>
+    <button class='btn dropdown-toggle' data-toggle='dropdown'><i class='icon icon-cog'> </i><?php echo $lang->actions;?> <span class='caret'></span></button>
+    <ul class='dropdown-menu pull-right'>
+      <?php
+      commonModel::printLink('doc', 'editLib',   "libID=$libID", "{$lang->doc->editLib}", "data-toggle='modal'", '', '', 'li');
+      commonModel::printLink('doc', 'deleteLib', "libID=$libID", "{$lang->doc->deleteLib}", "class='deleter'", '', '', 'li');
+      commonModel::printLink('doc', 'ajaxFixedMenu', "libID=$libID&type=" . ($fixedMenu ? 'remove' : 'fixed'), ($fixedMenu ? "{$lang->doc->removedMenu}" : "{$lang->doc->fixedMenu}"), "class='fix-menu'", '', '', 'li');
+      ?>
+    </ul>
+  </div>
   <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
 </div>
 <div class='row with-menu page-content'>

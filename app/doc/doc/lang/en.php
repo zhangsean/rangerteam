@@ -56,6 +56,9 @@ $lang->doc->deleteLib      = 'Delete';
 $lang->doc->fixedMenu      = 'Fixed Menu';
 $lang->doc->removedMenu    = 'Remove Menu';
 
+$lang->doc->editCategory   = 'Edit Category';
+$lang->doc->deleteCategory = 'Delete Category';
+
 $lang->doc->allProject     = 'All projects';
 
 $lang->doc->private        = 'Private';

@@ -91,7 +91,7 @@ $allLibs['custom']  = $customLibs;
         <div class='col-md-3'>
           <div class='libs-group-heading libs-custom-heading'>
             <?php
-            if($objectNum == 1) echo "<span class='label label-info lable-custom'>{$lang->doc->customLib}</span> ";
+            if($objectNum == 1) echo "<span class='label label-info lable-custom'>{$lang->doc->customLibs}</span> ";
             echo html::a(inlink('browse', "libID=$libID"), $libName, "title='{$libName}'")
             ?>
           </div>

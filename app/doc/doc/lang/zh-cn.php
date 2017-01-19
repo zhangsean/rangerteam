@@ -56,6 +56,9 @@ $lang->doc->deleteLib      = '删除文档库';
 $lang->doc->fixedMenu      = '固定到菜单栏';
 $lang->doc->removedMenu    = '从菜单栏移除';
 
+$lang->doc->editCategory   = '编辑分类';
+$lang->doc->deleteCategory = '删除分类';
+
 $lang->doc->allProject     = '所有项目';
 
 $lang->doc->private        = '设为私密';

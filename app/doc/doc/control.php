@@ -22,7 +22,6 @@ class doc extends control
         parent::__construct();
 
         $this->libs = $this->doc->getLibPairs();
-
         $this->loadModel('user');
         $this->loadModel('tree');
         $this->loadModel('action');
@@ -37,6 +36,8 @@ class doc extends control
      */
     public function index()
     {
+        $this->doc->setMainMenu();
+
         $projects   = $this->doc->getLimitLibs('project', '9');
         $customLibs = $this->doc->getLimitLibs('custom', '9');
         $subLibs    = $this->doc->getSubLibGroups(array_keys($projects));
@@ -60,6 +61,8 @@ class doc extends control
      */
     public function allLibs($type, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->doc->setMainMenu();
+
         /* Load pager. */
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -93,6 +96,8 @@ class doc extends control
      */
     public function browse($libID = '0', $moduleID = 0, $projectID = 0, $browseType = 'bymodule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {  
+        $this->doc->setMainMenu();
+
         $libID = $libID ? $libID : key((array)$this->libs);
         if(!$libID) $this->locate(inlink('createLib'));
 
@@ -176,7 +181,6 @@ class doc extends control
         $this->view->projectID     = $projectID;
         $this->view->browseType    = $browseType;
         $this->view->param         = $param;
-        $this->view->mode          = $browseType;
 
         $this->display();
     }
@@ -273,6 +277,8 @@ class doc extends control
      */
     public function create($libID, $moduleID = 0, $projectID = 0)
     {
+        $this->doc->setMainMenu();
+
         $projectID = (int)$projectID;
         if(!empty($_POST))
         {
@@ -310,6 +316,8 @@ class doc extends control
      */
     public function edit($docID)
     {
+        $this->doc->setMainMenu();
+
         if(!empty($_POST))
         {
             $return = $this->doc->update($docID);
@@ -357,6 +365,8 @@ class doc extends control
      */
     public function view($docID, $version = 0)
     {
+        $this->doc->setMainMenu();
+
         /* Get doc. */
         $doc = $this->doc->getById($docID, $version, true);
         if(!$doc) die(js::error($this->lang->doc->notFound) . js::locate('back'));
@@ -414,6 +424,8 @@ class doc extends control
      */
     public function projectLibs($projectID)
     {
+        $this->doc->setMainMenu();
+
         $project = $this->dao->select('id,name')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
 
         $this->view->title   = $project->name;
@@ -431,6 +443,8 @@ class doc extends control
      */
     public function showFiles($projectID, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->doc->setMainMenu();
+
         $uri = $this->app->getURI(true);
         $this->app->session->set('taskList',  $uri);
         $this->app->session->set('docList',   $uri);
@@ -463,12 +477,13 @@ class doc extends control
 
         if(empty($customMenus) and $type == 'remove') $this->send(array('result' => 'success'));
 
-        $lib = $this->doc->getLibByID($libID);
-
-        foreach($customMenus as $i => $customMenu)
-        {   
-            if(isset($customMenu->name) and $customMenu->name == "custom{$libID}") unset($customMenus[$i]);
-        }   
+        if(!empty($customMenus))
+        {
+            foreach($customMenus as $i => $customMenu)
+            {   
+                if(isset($customMenu->name) and $customMenu->name == "custom{$libID}") unset($customMenus[$i]);
+            }   
+        }
 
         $customMenu = new stdclass();
         $customMenu->name  = "custom{$libID}";
