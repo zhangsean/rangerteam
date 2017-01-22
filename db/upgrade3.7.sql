@@ -9,7 +9,8 @@ ALTER TABLE `cash_trade` ADD INDEX `loanID` (`loanID`);
 ALTER TABLE `cash_trade` ADD INDEX `dept` (`dept`);
 
 ALTER TABLE `oa_doclib` ADD `project` mediumint(8) unsigned NOT NULL AFTER `id`,
-ADD `main` enum('0', '1') NOT NULL default '0' AFTER `groups`;
+ADD `main` enum('0', '1') NOT NULL default '0' AFTER `groups`,
+ADD `order` tinyint(5) unsigned NOT NULL AFTER `main`;
 
 ALTER TABLE `oa_doc` ADD `version` smallint unsigned NOT NULL DEFAULT '1' AFTER `editedDate`;
 
@@ -37,5 +38,5 @@ CREATE TABLE IF NOT EXISTS `oa_doccontent` (
   `type` varchar(10) NOT NULL,
   `version` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `doc_version` (`doc`,`version`)
+  UNIQUE KEY `docVersion` (`doc`,`version`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
