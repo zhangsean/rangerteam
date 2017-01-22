@@ -392,7 +392,7 @@ class userModel extends model
         if(!$this->compareHashPassword($password, $user))
         {
             $user->fails ++;
-            if($user->fails > 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
+            if($user->fails > 4) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
             $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }
