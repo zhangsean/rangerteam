@@ -56,7 +56,7 @@
     <div class='panel-body clearfix'>
       <?php foreach($modules as $module):?>
       <div class='file file-dir'>
-        <a href='<?php echo inlink('browse', "libID=$libID&moduleID=$module->id&orderBy=$orderBy")?>'>
+        <a href='<?php echo inlink('browse', "libID=$libID&moduleID=$module->id&projectID=$projectID&browseType=$browseType&param=$param&orderBy=$orderBy")?>'>
           <i class='icon icon-2x icon-folder-open-alt file-icon'></i>
           <div class='file-name' title='<?php echo $module->name?>'><?php echo $module->name?></div>
         </a>
