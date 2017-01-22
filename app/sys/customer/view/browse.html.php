@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <?php js::set('mode', $mode);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
