@@ -21,64 +21,20 @@ class doc extends control
     {
         parent::__construct();
 
-        $this->session->set('docFrom', 'doc');
+        $this->session->set('docFrom', 'project');
 
-        $this->libs = $this->doc->getLibPairs();
         $this->loadModel('user');
         $this->loadModel('tree');
         $this->loadModel('action');
         $this->loadModel('project', 'proj');
-    }
+        $this->loadModel('doc', 'doc');
 
-    /**
-     * Go to browse page.
-     * 
-     * @access public
-     * @return void
-     */
-    public function index()
-    {
-        $this->doc->setMainMenu();
+        $this->app->loadLang('common', 'proj');
+        $this->lang->menu->doc = $this->lang->menu->proj;
+        $this->lang->doc->menuOrder = $this->lang->proj->menuOrder;
 
-        $projects   = $this->doc->getLimitLibs('project', '9');
-        $customLibs = $this->doc->getLimitLibs('custom', '9');
-        $subLibs    = $this->doc->getSubLibGroups(array_keys($projects));
+        $this->libs = $this->doc->getLibPairs();
 
-        $this->view->title      = $this->lang->doc->common . $this->lang->colon . $this->lang->doc->index;
-        $this->view->projects   = $projects;
-        $this->view->customLibs = $customLibs;
-        $this->view->subLibs    = $subLibs;
-        $this->display();
-    }
-
-    /**
-     * Show all libs.
-     * 
-     * @param  int    $type 
-     * @param  int    $recTotal 
-     * @param  int    $recPerPage 
-     * @param  int    $pageID 
-     * @access public
-     * @return void
-     */
-    public function allLibs($type, $recTotal = 0, $recPerPage = 20, $pageID = 1)
-    {
-        $this->doc->setMainMenu();
-
-        /* Load pager. */
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        $libs    = $this->doc->getAllLibsByType($type, $pager);
-        $subLibs = array();
-        if($type == 'project') $subLibs = $this->doc->getSubLibGroups(array_keys($libs));
-
-        $this->view->title   = $this->lang->doc->allLibs;
-        $this->view->type    = $type;
-        $this->view->libs    = $libs;
-        $this->view->subLibs = $subLibs;
-        $this->view->pager   = $pager;
-        $this->display();
     }
 
     /**
@@ -98,8 +54,6 @@ class doc extends control
      */
     public function browse($libID = '0', $moduleID = 0, $projectID = 0, $browseType = 'bymodule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {  
-        $this->doc->setMainMenu();
-
         $libID = $libID ? $libID : key((array)$this->libs);
         if(!$libID) $this->locate(inlink('createLib'));
 
@@ -183,6 +137,7 @@ class doc extends control
         $this->view->projectID     = $projectID;
         $this->view->browseType    = $browseType;
         $this->view->param         = $param;
+        $this->view->projects      = $this->project->getPairs();
 
         $this->display();
     }
@@ -279,8 +234,6 @@ class doc extends control
      */
     public function create($libID, $moduleID = 0, $projectID = 0)
     {
-        $this->doc->setMainMenu();
-
         $projectID = (int)$projectID;
         if(!empty($_POST))
         {
@@ -303,6 +256,7 @@ class doc extends control
         $this->view->moduleOptionMenu = $moduleOptionMenu;
         $this->view->moduleID         = $moduleID;
         $this->view->projectID        = $projectID;
+        $this->view->projects         = $this->project->getPairs();
         $this->view->users            = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups           = $this->loadModel('group')->getPairs();
 
@@ -318,8 +272,6 @@ class doc extends control
      */
     public function edit($docID)
     {
-        $this->doc->setMainMenu();
-
         if(!empty($_POST))
         {
             $return = $this->doc->update($docID);
@@ -355,6 +307,7 @@ class doc extends control
         $this->view->moduleOptionMenu = $moduleOptionMenu;
         $this->view->users            = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups           = $this->loadModel('group')->getPairs();
+        $this->view->projects         = $this->project->getPairs();
         $this->display();
     }
 
@@ -367,8 +320,6 @@ class doc extends control
      */
     public function view($docID, $version = 0)
     {
-        $this->doc->setMainMenu();
-
         /* Get doc. */
         $doc = $this->doc->getById($docID, $version, true);
         if(!$doc) die(js::error($this->lang->doc->notFound) . js::locate('back'));
@@ -426,13 +377,12 @@ class doc extends control
      */
     public function projectLibs($projectID)
     {
-        $this->doc->setMainMenu();
-
         $project = $this->dao->select('id,name')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
 
-        $this->view->title   = $project->name;
-        $this->view->project = $project;
-        $this->view->libs    = $this->doc->getLibsByProject($projectID);
+        $this->view->title    = $project->name;
+        $this->view->project  = $project;
+        $this->view->projects = $this->project->getPairs();
+        $this->view->libs     = $this->doc->getLibsByProject($projectID);
         $this->display();
     }
 
@@ -445,8 +395,6 @@ class doc extends control
      */
     public function showFiles($projectID, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->doc->setMainMenu();
-
         $uri = $this->app->getURI(true);
         $this->app->session->set('taskList',  $uri);
         $this->app->session->set('docList',   $uri);
@@ -457,44 +405,12 @@ class doc extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title   = $project->name;
-        $this->view->project = $project;
-        $this->view->files   = $this->doc->getLibFiles($projectID, $pager);
-        $this->view->pager   = $pager;
+        $this->view->title    = $project->name;
+        $this->view->project  = $project;
+        $this->view->files    = $this->doc->getLibFiles($projectID, $pager);
+        $this->view->projects = $this->project->getPairs();
+        $this->view->pager    = $pager;
         $this->display();
-    }
-
-    /**
-     * Ajax fixed menu.
-     * 
-     * @param  int    $libID 
-     * @param  string $type 
-     * @access public
-     * @return void
-     */
-    public function ajaxFixedMenu($libID, $type = 'fixed')
-    {
-        $customMenus = $this->loadModel('setting')->getItem("owner={$this->app->user->account}&app=sys&module=common&section=customMenu&key=doc");
-        if($customMenus) $customMenus = json_decode($customMenus);
-
-        if(empty($customMenus) and $type == 'remove') $this->send(array('result' => 'success'));
-
-        if(!empty($customMenus))
-        {
-            foreach($customMenus as $i => $customMenu)
-            {   
-                if(isset($customMenu->name) and $customMenu->name == "custom{$libID}") unset($customMenus[$i]);
-            }   
-        }
-
-        $customMenu = new stdclass();
-        $customMenu->name  = "custom{$libID}";
-        $customMenu->order = count($customMenus); 
-        if($type == 'fixed') $customMenus[] = $customMenu;
-
-        $this->setting->setItem("{$this->app->user->account}.sys.common.customMenu.doc", json_encode($customMenus));
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
     }
 
     /**

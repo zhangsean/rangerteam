@@ -27,7 +27,11 @@ js::set('moduleID', $moduleID);
 ?>
 <?php if($type == 'doc'):?>
 <?php js::set('project', isset($lib->project) ? $lib->project : 0);?>
+<?php if($this->session->docFrom == 'project'):?>
+<?php $this->loadModel('project', 'proj')->setMenu($projects, $lib->project);?>
+<?php else:?>
 <?php $this->loadModel('doc', 'doc')->setMenu(0, $root, $moduleID);?>
+<?php endif;?>
 <div class='col-md-12 doc-category'>
 <?php else:?>
 <div class='col-md-12'>

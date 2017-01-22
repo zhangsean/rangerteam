@@ -505,13 +505,15 @@ class projectModel extends model
         $methodName = $this->app->getMethodName();
         $moduleName = $this->app->getModuleName();
             
+        $this->app->loadLang('task', 'sys');
+
         $menu  = "<nav id='menu'><ul class='nav'>";
         $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\"><i class='icon-folder-open-alt'></i> <strong>{$currentProject->name}</strong> <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
 
         $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
         $this->lang->task->browse = $this->lang->task->list;
 
-        if($methodName ==  'browse' or $methodName == 'importtask')
+        if($methodName ==  'browse' or $methodName == 'importtask' or $moduleName == 'doc')
         {
             $menu .= '<li class="divider angle"></li>';
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=all", $this->lang->task->all, '', false, '', 'li');
@@ -520,7 +522,7 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=finishedBy", $this->lang->task->finishedByMe, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
-            $menu .= commonModel::printLink('doc.doc', 'projectLibs', "projectID=$projectID", $this->lang->project->doc, "class='doc'", false, '', 'li');
+            $menu .= commonModel::printLink('proj.doc', 'projectLibs', "projectID=$projectID", $this->lang->project->doc, '', false, '', 'li');
 
             if($this->app->user->admin == 'super' || $this->app->user->account == $project->createdBy || $this->app->user->account == $project->PM)
             {
