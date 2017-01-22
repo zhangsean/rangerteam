@@ -213,13 +213,15 @@ class projectModel extends model
         /* Create doc lib. */
         $this->app->loadLang('doc', 'doc');
         $lib = new stdclass();
-        $lib->project = $projectID;
-        $lib->name    = $this->lang->doc->projectMainLib;
-        $lib->main    = '1';
-        $lib->private = 0;
+        $lib->project     = $projectID;
+        $lib->name        = $this->lang->doc->projectMainLib;
+        $lib->main        = '1';
+        $lib->private     = 0;
+        $lib->createdBy   = $this->app->user->account;
+        $lib->createdDate = helper::now(); 
 
         $teams = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account', 'account');
-        $lib->users  = join(',', $teams);
+        $lib->users  = ',' . join(',', $teams) . ',';
         $lib->groups = isset($project->whitelist) ? $project->whitelist : '';
         $this->dao->insert(TABLE_DOCLIB)->data($lib)->exec();
 
