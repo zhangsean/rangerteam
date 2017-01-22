@@ -23,8 +23,8 @@ UPDATE `sys_block` SET `app`='proj',`source`='proj' WHERE `app`='oa' AND `source
 DELETE FROM `sys_grouppriv` WHERE `module`='leave' AND `method`='reviewBack';
 
 INSERT INTO `sys_entry` (`name`, `abbr`, `code`, `buildin`, `integration`, `open`, `key`, `ip`, `logo`, `login`, `control`, `size`, `position`, `visible`, `order`) VALUES
-('项目', '项目', 'proj', 1, 1, 'iframe', 'b1fbfec042ee3daaee1edfb0bb59d036', '*', 'theme/default/images/ips/app-proj.png', '../proj', 'simple', 'max', 'default', 1, 26),
-('文档', '文档', 'doc', 1, 1, 'iframe', '76ff605479df34f1d239730efa68d562', '*', 'theme/default/images/ips/app-doc.png', '../doc', 'simple', 'max', 'default', 1, 27);
+('项目', '项目', 'proj', 1, 1, 'iframe', 'b1fbfec042ee3daaee1edfb0bb59d036', '*', 'theme/default/images/ips/app-proj.png', '../proj', 'simple', 'max', 'default', 1, 16),
+('文档', '文档', 'doc', 1, 1, 'iframe', '76ff605479df34f1d239730efa68d562', '*', 'theme/default/images/ips/app-doc.png', '../doc', 'simple', 'max', 'default', 1, 17);
 
 -- DROP TABLE IF EXISTS `oa_doccontent`;
 CREATE TABLE IF NOT EXISTS `oa_doccontent` (
