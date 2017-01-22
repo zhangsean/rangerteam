@@ -18,7 +18,8 @@
 <?php js::set('libID', $doc->lib);?>
 <?php js::set('libType', $doc->project ? 'project' : 'custom');?>
 <?php js::set('private', $doc->private);?>
-<?php $this->doc->setMenu(0, $doc->lib, $doc->module);?>
+<?php if($this->session->docFrom == 'doc') $this->doc->setMenu(0, $doc->lib, $doc->module);?>
+<?php if($this->session->docFrom == 'project') $this->loadModel('project', 'proj')->setMenu($projects, $doc->project);?>
 <div class='with-menu page-content'>
   <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo inlink('edit', "libID=$doc->id")?>'>
     <div class='col-md-8'>

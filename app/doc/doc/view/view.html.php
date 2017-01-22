@@ -14,11 +14,14 @@
 <?php echo css::internal($keTableCSS);?>
 <?php js::set('libType', $doc->project ? 'project' : 'custom');?>
 <?php js::set('libID ', $doc->lib);?>
+<?php if($this->session->docFrom == 'project') $this->loadModel('project', 'proj')->setMenu($projects, $doc->project);?>
+<?php if($this->session->docFrom == 'doc'):?>
 <?php $this->doc->setMenu(0, $doc->lib, $doc->module);?>
 <div id='menuActions'>
   <?php $browseLink = $this->session->docList ? $this->session->docList : inlink('browse');?>
   <?php echo html::a($browseLink, $lang->goback, "class='btn btn-default'");?>
 </div>
+<?php endif;?>
 <div class='row with-menu page-content'>
   <div class='col-md-8'>
     <div class='panel'>
@@ -92,6 +95,7 @@
           echo "</div>";
       }
   
+      $browseLink = $this->session->docList ? $this->session->docList : inlink('browse');
       echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
       ?>
     </div>

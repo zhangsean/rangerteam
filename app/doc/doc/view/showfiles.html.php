@@ -12,7 +12,8 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('libType', 'project');?>
-<?php $this->doc->setMenu($project->id, 0, 0, html::a(inlink('showfiles', "projectID=$project->id"), $lang->doc->fileLib));?>
+<?php if($this->session->docFrom == 'doc') $this->doc->setMenu($project->id, 0, 0, html::a(inlink('showfiles', "projectID=$project->id"), $lang->doc->fileLib));?>
+<?php if($this->session->docFrom == 'project') $this->loadModel('project', 'proj')->setMenu($projects, $project->id);?>
 <div class='with-menu page-content'>
   <div class='lib-files cards'>
     <?php foreach($files as $file):?>

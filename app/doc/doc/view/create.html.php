@@ -17,7 +17,8 @@
 <?php js::set('holders', $lang->doc->placeholder);?>
 <?php js::set('libID', $libID);?>
 <?php js::set('libType', $projectID ? 'project' : 'custom');?>
-<?php $this->doc->setMenu(0, $libID, $moduleID);?>
+<?php if($this->session->docFrom == 'doc') $this->doc->setMenu(0, $libID, $moduleID);?>
+<?php if($this->session->docFrom == 'project') $this->loadModel('project', 'proj')->setMenu($projects, $projectID);?>
 <div class='panel with-menu page-content'>
   <div class='panel-heading'>
     <strong><small class='text-muted'><i class='icon icon-plus'></i></small> <?php echo $lang->doc->create;?></strong>

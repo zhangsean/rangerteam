@@ -11,7 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php $this->doc->setMenu($project->id);?>
+<?php if($this->session->docFrom == 'doc') $this->doc->setMenu($project->id);?>
+<?php if($this->session->docFrom == 'project') $this->loadModel('project', 'proj')->setMenu($projects, $project->id);?>
 <div id='libs' class='with-menu page-content'>
   <div class='libs-group clearfix' id='libList'>
     <?php foreach($libs as $libID => $libName):?>
