@@ -116,8 +116,7 @@ class refundModel extends model
             $refund->firstReviewer   = $this->app->user->account;
             $refund->firstReviewDate = $now;
 
-            if(empty($this->config->refund->secondReviewer)) $refund->status = 'pass';
-            
+            if(empty($this->config->refund->secondReviewer) or (isset($this->config->refund->money) and $refund->money < $this->config->refund->money)) $refund->status = 'pass';
             if(!empty($this->config->refund->secondReviewer) && $this->config->refund->secondReviewer == $this->app->user->account)
             {
                 $refund->status = 'pass';
