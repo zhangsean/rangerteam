@@ -46,6 +46,7 @@ $lang->project->createdBy   = '由誰創建';
 $lang->project->createdDate = '創建時間';
 $lang->project->fromproject = '所屬項目';
 $lang->project->whitelist   = '參觀者';
+$lang->project->doc         = '文檔';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '確認激活此項目？';

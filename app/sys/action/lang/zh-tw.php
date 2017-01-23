@@ -46,6 +46,7 @@ $lang->action->desc->opened                = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->created               = '$date, 由 <strong>$actor</strong> 創建。' . "\n";
 $lang->action->desc->edited                = '$date, 由 <strong>$actor</strong> 編輯。' . "\n";
 $lang->action->desc->assigned              = '$date, 由 <strong>$actor</strong> 指派給 <strong>$extra</strong>。' . "\n";
+$lang->action->desc->merged                = '$date, 由 <strong>$actor</strong> 合併客戶 <strong>$extra</strong>。' . "\n";
 $lang->action->desc->transmit              = '$date, 由 <strong>$actor</strong> 轉交給 <strong>$extra</strong>。' . "\n";
 $lang->action->desc->closed                = '$date, 由 <strong>$actor</strong> 關閉，關閉原因:<strong>$extra</strong>。' . "\n";
 $lang->action->desc->deleted               = '$date, 由 <strong>$actor</strong> 刪除。' . "\n";

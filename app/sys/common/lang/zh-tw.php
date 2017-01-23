@@ -32,6 +32,7 @@ $lang->apps = new stdclass();
 $lang->apps->crm        = '客戶';
 $lang->apps->cash       = '財務';
 $lang->apps->oa         = '辦公';
+$lang->apps->doc        = '文檔';
 $lang->apps->sys        = '通用';
 $lang->apps->team       = '團隊';
 $lang->apps->superadmin = '後台';
@@ -340,6 +341,8 @@ $lang->my->dynamic->menu->lastweek   = '上周|my|dynamic|period=lastweek';
 $lang->my->dynamic->menu->thismonth  = '本月|my|dynamic|period=thismonth';
 $lang->my->dynamic->menu->lastmonth  = '上月|my|dynamic|period=lastmonth';
 $lang->my->dynamic->menu->all        = '所有|my|dynamic|period=all';
+
+$lang->my->company = new stdclass();
 
 /* Menu of mail module. */
 $lang->mail = new stdclass();

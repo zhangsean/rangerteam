@@ -46,6 +46,7 @@ $lang->project->createdBy   = 'Created by';
 $lang->project->createdDate = 'Created on';
 $lang->project->fromproject = 'From Project';
 $lang->project->whitelist   = 'Whitelist';
+$lang->project->doc         = 'Document';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = 'Do you want to activate this projcet?';
