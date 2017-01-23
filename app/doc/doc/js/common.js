@@ -24,7 +24,14 @@ $(document).ready(function()
     if(typeof(v.libID) != undefined && $('#mainNavbar .nav li').find("a[href*='" + v.libID + "']").length > 0)
     {
         $('#mainNavbar .nav li').removeClass('active');
-        $("#mainNavbar .nav li a[href*='" + v.libID + "']").parent().addClass('active');
+        if(config.requestType == 'GET')
+        {   
+            $("#mainNavbar .nav li a[href*='libID=" + v.libID + "']").parent().addClass('active');
+        }   
+        else
+        {   
+            $("#mainNavbar .nav li a[href*='browse-" + v.libID + "-']").parent().addClass('active');
+        }   
     }
 
     $('#private').click(function()
