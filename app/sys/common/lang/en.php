@@ -342,6 +342,8 @@ $lang->my->dynamic->menu->thismonth  = 'This Month|my|dynamic|period=thismonth';
 $lang->my->dynamic->menu->lastmonth  = 'Last Month|my|dynamic|period=lastmonth';
 $lang->my->dynamic->menu->all        = 'All|my|dynamic|period=all';
 
+$lang->my->company = new stdclass();
+
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;

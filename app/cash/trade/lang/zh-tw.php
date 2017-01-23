@@ -187,6 +187,7 @@ $lang->trade->total         = '總計';
 $lang->trade->noTraderMatch = '沒有匹配到相應的商戶，點擊新建';
 $lang->trade->unique        = '今天已經有相同金額的賬目';
 $lang->trade->ignore        = '忽略';
+$lang->trade->denied        = '您沒有權限瀏覽此類賬目，請聯繫管理員設置權限。';
 
 $lang->trade->chartList['productLine'] = '按產品綫統計';
 $lang->trade->chartList['category']    = '按科目統計';

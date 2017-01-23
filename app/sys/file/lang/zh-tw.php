@@ -36,6 +36,7 @@ $lang->file->edit          = '編輯';
 $lang->file->editFile      = '更改附件';
 $lang->file->sizeLimit     = "<p class='text-danger'>附件大小不能大於%sM</p>";
 $lang->file->maxUploadSize = "<span class='red'>%s</span>";
+$lang->file->delete        = '刪除';
 
 $lang->file->errorUnwritable = '上傳目錄不可寫，無法上傳附件。';
 $lang->file->errorNoFile     = '未選擇任何檔案。';

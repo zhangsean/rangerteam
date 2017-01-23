@@ -69,10 +69,10 @@ $lang->doc->libTypeList = array();
 $lang->doc->libTypeList['custom']  = 'Custom';
 $lang->doc->libTypeList['project'] = 'Project';
 
-$lang->doc->types['url']  = 'Link';
 $lang->doc->types['text'] = 'Document';
+$lang->doc->types['url']  = 'Link';
 
-$lang->doc->browseType = '浏览方式';
+$lang->doc->browseType = 'Browse Type';
 $lang->doc->browseTypeList['list'] = 'List';
 $lang->doc->browseTypeList['menu'] = 'Menu';
 $lang->doc->browseTypeList['tree'] = 'Tree';
@@ -84,6 +84,6 @@ $lang->doc->errorEditSystemDoc = "System doc library cannot be edited.";
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = 'url';
 
-$lang->doc->notFound    = 'The document does not exist';
-$lang->doc->libNotFound = 'The document library does not exist';
-$lang->doc->libNotFound = 'Doc Lib is not found.';
+$lang->doc->notFound     = 'The document does not exist';
+$lang->doc->libNotFound  = 'The document library does not exist';
+$lang->doc->errorMainLib = 'The main library can not be deleted.';

@@ -17,6 +17,12 @@ $(document).ready(function()
     {
          if(v.project)
          {
+             if(v.docFrom == 'project')
+             {   
+                 $('#mainNavbar .nav li').find("a[href*='project']").parent().addClass('active');
+                 $('#menu .nav li').find("a[href*='doc']").parent().addClass('active');
+             }   
+             
              if($('#mainNavbar .nav li').find("a[href*='" + v.root + "'][href*='" + v.project + "']").length > 0)
              {
                  $('#mainNavbar .nav li').find("a[href*='" + v.root + "'][href*='" + v.project + "']").parent().addClass('active');

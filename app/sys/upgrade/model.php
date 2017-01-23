@@ -1189,7 +1189,6 @@ class upgradeModel extends model
             $data->method = 'doc';
             $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
 
-            $data = new stdclass();
             $data->module = 'doc';
             $data->method = 'index';
             $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
