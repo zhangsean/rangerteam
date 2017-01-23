@@ -37,7 +37,7 @@
           <ul class='dropdown-menu' role='menu'>
             <?php if(empty($moduleID)):?>
             <?php
-            commonModel::printLink('doc', 'createLib', "type=project&projectID=$projectID", "{$lang->doc->createLib}", "data-toggle='modal'", '', '', 'li');
+            commonModel::printLink('doc', 'createLib', "type=project&projectID=$lib->project", "{$lang->doc->createLib}", "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('doc', 'editLib',   "libID=$libID", "{$lang->doc->editLib}", "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('doc', 'deleteLib', "libID=$libID", "{$lang->doc->deleteLib}", "class='deleter'", '', '', 'li');
             ?>
@@ -50,13 +50,13 @@
             <?php commonModel::printLink('tree', 'browse', "type=doc&startModule=$moduleID&rootID=$libID", "{$lang->doc->manageType}", '', '', '', 'li');?>
           </ul>
         </div>
-        <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
+        <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
       </div>
     </div>
     <div class='panel-body clearfix'>
       <?php foreach($modules as $module):?>
       <div class='file file-dir'>
-        <a href='<?php echo inlink('browse', "libID=$libID&moduleID=$module->id&projectID=$projectID&browseType=$browseType&param=$param&orderBy=$orderBy")?>'>
+        <a href='<?php echo inlink('browse', "libID=$libID&moduleID=$module->id&projectID=$lib->project&browseType=$browseType&param=$param&orderBy=$orderBy")?>'>
           <i class='icon icon-2x icon-folder-open-alt file-icon'></i>
           <div class='file-name' title='<?php echo $module->name?>'><?php echo $module->name?></div>
         </a>
@@ -75,7 +75,7 @@
             <a href='###' class='addbtn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-plus'></i></a>
             <ul class='dropdown-menu' role='menu'>
               <?php commonModel::printLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID", $lang->doc->manageType, '', true, '', 'li');?>
-              <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", $lang->doc->create, '', true, '', 'li');?>
+              <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", $lang->doc->create, '', true, '', 'li');?>
             </ul>
           </div>
       </div>

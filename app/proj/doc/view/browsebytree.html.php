@@ -21,13 +21,13 @@
           <?php echo html::a('javascript:;', "<i class='icon icon-cog'> </i>" . $lang->actions . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
           <ul class='dropdown-menu pull-right'>
             <?php
-            commonModel::printLink('doc', 'createLib', "type=project&projectID=$projectID", "{$lang->doc->createLib}", "data-toggle='modal'", '', '', 'li');
+            commonModel::printLink('doc', 'createLib', "type=project&projectID=$lib->project", "{$lang->doc->createLib}", "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('doc', 'editLib',   "libID=$libID", "{$lang->doc->editLib}", "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('doc', 'deleteLib', "libID=$libID", "{$lang->doc->deleteLib}", "class='deleter'", '', '', 'li');
             ?>
           </ul>
         </div>
-        <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
+        <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
       </div>
     </div>
     <div class='panel-body'>
@@ -35,7 +35,7 @@
       <?php echo $tree;?>
       <?php else:?>
       <?php echo $lang->pager->noRecord;?>
-      <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", $lang->doc->create);?>
+      <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", $lang->doc->create);?>
       <?php endif;?>
     </div>
   </div>

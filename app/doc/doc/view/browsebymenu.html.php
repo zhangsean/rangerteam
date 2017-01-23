@@ -45,14 +45,14 @@
       <?php commonModel::printLink('doc', 'ajaxFixedMenu', "libID=$libID&type=" . ($fixedMenu ? 'remove' : 'fixed'), ($fixedMenu ? $lang->doc->removedMenu : $lang->doc->fixedMenu), "class='fix-menu'", '', '', 'li');?>
     </ul>
   </div>
-  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
+  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
 </div>
 <div class='row with-menu page-content'>
   <div class='panel' id='filesPanel'>
     <div class='panel-body clearfix'>
       <?php foreach($modules as $module):?>
       <div class='file file-dir'>
-        <a href='<?php echo inlink('browse', "libID=$libID&moduleID=$module->id&projectID=$projectID&browseType=$browseType&param=$param&orderBy=$orderBy")?>'>
+        <a href='<?php echo inlink('browse', "libID=$libID&moduleID=$module->id&projectID=$lib->project&browseType=$browseType&param=$param&orderBy=$orderBy")?>'>
           <i class='icon icon-2x icon-folder-open-alt file-icon'></i>
           <div class='file-name' title='<?php echo $module->name?>'><?php echo $module->name?></div>
         </a>
@@ -71,7 +71,7 @@
             <a href='###' class='addbtn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-plus'></i></a>
             <ul class='dropdown-menu' role='menu'>
               <?php commonModel::printLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID", $lang->doc->manageType, '', true, '', 'li');?>
-              <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", $lang->doc->create, '', true, '', 'li');?>
+              <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", $lang->doc->create, '', true, '', 'li');?>
             </ul>
           </div>
       </div>
