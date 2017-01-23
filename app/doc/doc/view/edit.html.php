@@ -58,7 +58,7 @@
               <th><?php echo $lang->doc->comment;?></th>
               <td colspan='2'><?php echo html::textarea('comment','', "style='width:100%;height:200px;'");?></td>
             </tr> 
-            <tr id='fileBox' class='hidden'>
+            <tr>
               <th><?php echo $lang->doc->files;?></th>
               <td colspan='2'><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
             </tr>

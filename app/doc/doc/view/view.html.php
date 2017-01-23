@@ -74,7 +74,7 @@
             <td colspan='2' class='content'><?php echo $doc->content;?></td>
           </tr>
           <?php endif;?>
-          <?php if($doc->type == 'file'):?>
+          <?php if($doc->files):?>
           <tr>
             <th><?php echo $lang->files;?></th>
             <td><?php echo $this->fetch('file', 'printFiles', array('files' => $doc->files, 'fieldset' => 'false'));?></td>
