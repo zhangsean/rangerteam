@@ -24,7 +24,7 @@
     <div class='panel-heading'>
       <strong><i class='icon-list-ul'></i> <?php echo $lang->doc->browse;?></strong>
       <div class='panel-actions pull-right'>
-        <a href="javascript:history.go(-1);"><i class='icon-level-up icon-rotate-270'> </i><?php echo $lang->goback;?></a>
+        <a href="javascript:history.go(-1);" class='goback'><i class='icon-level-up icon-rotate-270'> </i><?php echo $lang->goback;?></a>
         <div class='btn-group'>
           <?php echo html::a('javascript:;', "<i class='icon icon-th'> </i>" . $lang->doc->browseTypeList['menu'] . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
           <ul class='dropdown-menu' role='menu'>
