@@ -14,9 +14,7 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '首页|dashboard|index|';
-$lang->menu->oa->project   = '项目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
-$lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '请假|leave|personal|';
 $lang->menu->oa->overtime  = '加班|overtime|personal|';
@@ -28,21 +26,10 @@ $lang->menu->oa->setting   = '设置|setting|modules|app=oa';
 
 $lang->dashboard = new stdclass();
 
-if(!isset($lang->project)) $lang->project = new stdclass();
-$lang->project->menu = new stdclass();
-$lang->project->menu->involved = '我参与的|project|index|status=involved';
-$lang->project->menu->doing    = '进行中|project|index|status=doing';
-$lang->project->menu->finished = '已完成|project|index|ststus=finished';
-$lang->project->menu->suspend  = '已挂起|project|index|ststus=suspend';
-
 if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
 $lang->announce->menu->browse   = array('link' => '公告列表|announce|browse|', 'alias' => 'create,edit,view');
 $lang->announce->menu->category = '类目管理|tree|browse|type=announce|';
-
-if(!isset($lang->doc)) $lang->doc = new stdclass();
-$lang->doc->menu = new stdclass();
-$lang->doc->menu->create = '添加文档库|doc|createlib|';
 
 if(!isset($lang->attend)) $lang->attend = new stdclass();
 $lang->attend->menu = new stdclass();
@@ -100,3 +87,4 @@ $lang->refund->menu->settings   = array('link' => '设置|refund|setreviewer|', 
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = '功能模块|setting|modules|app=oa';
+include (dirname(__FILE__) . '/menuOrder.php');

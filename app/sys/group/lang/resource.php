@@ -17,6 +17,7 @@ $lang->appModule->crm = array();
 $lang->appModule->crm[] = 'order';
 $lang->appModule->crm[] = 'contract';
 $lang->appModule->crm[] = 'customer';
+$lang->appModule->crm[] = 'provider';
 $lang->appModule->crm[] = 'contact';
 $lang->appModule->crm[] = 'leads';
 $lang->appModule->crm[] = 'product';
@@ -33,7 +34,6 @@ $lang->appModule->cash[] = 'schema';
 
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'announce';
-$lang->appModule->oa[] = 'doc';
 $lang->appModule->oa[] = 'task';
 $lang->appModule->oa[] = 'attend';
 $lang->appModule->oa[] = 'holiday';
@@ -43,6 +43,9 @@ $lang->appModule->oa[] = 'trip';
 $lang->appModule->oa[] = 'egress';
 $lang->appModule->oa[] = 'refund';
 $lang->appModule->oa[] = 'overtime';
+
+$lang->appModule->doc = array();
+$lang->appModule->doc[] = 'doc';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -59,11 +62,13 @@ $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'setting';
 $lang->appModule->sys[] = 'report';
 $lang->appModule->sys[] = 'my';
+$lang->appModule->sys[] = 'file';
 
 /* Module order. */
 $lang->moduleOrder[0]   = 'order';
 $lang->moduleOrder[5]   = 'contract';
 $lang->moduleOrder[10]  = 'customer';
+$lang->moduleOrder[13]  = 'provider';
 $lang->moduleOrder[15]  = 'contact';
 $lang->moduleOrder[16]  = 'leads';
 $lang->moduleOrder[20]  = 'product';
@@ -77,7 +82,6 @@ $lang->moduleOrder[42]  = 'provider';
 $lang->moduleOrder[43]  = 'schema';
 
 $lang->moduleOrder[50]  = 'announce';
-$lang->moduleOrder[55]  = 'doc';
 $lang->moduleOrder[57]  = 'task';
 $lang->moduleOrder[70]  = 'attend';
 $lang->moduleOrder[75]  = 'holiday';
@@ -85,8 +89,10 @@ $lang->moduleOrder[80]  = 'leave';
 $lang->moduleOrder[81]  = 'lieu';
 $lang->moduleOrder[85]  = 'trip';
 $lang->moduleOrder[90]  = 'egress';
-$lang->moduleOrder[95]  = 'refund';
-$lang->moduleOrder[100] = 'overtime';
+$lang->moduleOrder[91]  = 'refund';
+$lang->moduleOrder[92]  = 'overtime';
+
+$lang->moduleOrder[93]  = 'doc';
 
 $lang->moduleOrder[95]  = 'blog';
 $lang->moduleOrder[100] = 'forum';
@@ -98,6 +104,9 @@ $lang->moduleOrder[120] = 'adminUser';
 
 $lang->moduleOrder[125] = 'tree';
 $lang->moduleOrder[130] = 'setting';
+$lang->moduleOrder[135] = 'report';
+$lang->moduleOrder[140] = 'my';
+$lang->moduleOrder[145] = 'file';
 
 $lang->resource = new stdclass();
 
@@ -131,27 +140,31 @@ $lang->resource->contract->browse         = 'browse';
 $lang->resource->contract->create         = 'create';
 $lang->resource->contract->edit           = 'edit';
 $lang->resource->contract->view           = 'view';
+$lang->resource->contract->cancel         = 'cancel';
+$lang->resource->contract->finish         = 'finish';
+$lang->resource->contract->delete         = 'delete';
 $lang->resource->contract->delivery       = 'delivery';
 $lang->resource->contract->editDelivery   = 'editDelivery';
 $lang->resource->contract->deleteDelivery = 'deleteDelivery';
 $lang->resource->contract->receive        = 'receive';
 $lang->resource->contract->editReturn     = 'editReturn';
 $lang->resource->contract->deleteReturn   = 'deleteReturn';
-$lang->resource->contract->cancel         = 'cancel';
-$lang->resource->contract->finish         = 'finish';
 $lang->resource->contract->export         = 'export';
-$lang->resource->contract->delete         = 'delete';
 
 $lang->contract->methodOrder[5]  = 'browse';
 $lang->contract->methodOrder[10] = 'create';
 $lang->contract->methodOrder[15] = 'edit';
 $lang->contract->methodOrder[20] = 'view';
-$lang->contract->methodOrder[25] = 'delivery';
-$lang->contract->methodOrder[30] = 'receive';
-$lang->contract->methodOrder[40] = 'cancel';
-$lang->contract->methodOrder[45] = 'finish';
-$lang->contract->methodOrder[50] = 'export';
-$lang->contract->methodOrder[55] = 'delete';
+$lang->contract->methodOrder[25] = 'cancel';
+$lang->contract->methodOrder[30] = 'finish';
+$lang->contract->methodOrder[35] = 'delete';
+$lang->contract->methodOrder[40] = 'delivery';
+$lang->contract->methodOrder[45] = 'editDelivery';
+$lang->contract->methodOrder[50] = 'deleteDelivery';
+$lang->contract->methodOrder[55] = 'receive';
+$lang->contract->methodOrder[60] = 'editReturn';
+$lang->contract->methodOrder[65] = 'deleteReturn';
+$lang->contract->methodOrder[70] = 'export';
 
 /* Customer. */
 $lang->resource->customer = new stdclass();
@@ -167,6 +180,7 @@ $lang->resource->customer->contract    = 'contract';
 $lang->resource->customer->export      = 'export';
 $lang->resource->customer->delete      = 'delete';
 $lang->resource->customer->batchAssign = 'batchAssign';
+$lang->resource->customer->merge       = 'merge';
 
 $lang->customer->methodOrder[5]  = 'browse';
 $lang->customer->methodOrder[15] = 'create';
@@ -180,6 +194,7 @@ $lang->customer->methodOrder[50] = 'export';
 $lang->customer->methodOrder[55] = 'delete';
 $lang->customer->methodOrder[60] = 'assign';
 $lang->customer->methodOrder[65] = 'batchAssign';
+$lang->customer->methodOrder[70] = 'merge';
 
 /* Contact. */
 $lang->resource->contact = new stdclass();
@@ -412,23 +427,33 @@ $lang->announce->methodOrder[25] = 'delete';
 
 /* Doc. */
 $lang->resource->doc = new stdclass();
-$lang->resource->doc->createLib = 'createLib';
-$lang->resource->doc->editLib   = 'editLib';
-$lang->resource->doc->deleteLib = 'deleteLib';
-$lang->resource->doc->browse    = 'browse';
-$lang->resource->doc->create    = 'create';
-$lang->resource->doc->edit      = 'edit';
-$lang->resource->doc->view      = 'view';
-$lang->resource->doc->delete    = 'delete';
+$lang->resource->doc->createLib   = 'createLib';
+$lang->resource->doc->editLib     = 'editLib';
+$lang->resource->doc->deleteLib   = 'deleteLib';
+$lang->resource->doc->index       = 'index';
+$lang->resource->doc->browse      = 'browse';
+$lang->resource->doc->allLibs     = 'allLibs';
+$lang->resource->doc->projectLibs = 'projectLibs';
+$lang->resource->doc->showFiles   = 'showFiles';
+$lang->resource->doc->create      = 'create';
+$lang->resource->doc->edit        = 'edit';
+$lang->resource->doc->view        = 'view';
+$lang->resource->doc->delete      = 'delete';
+$lang->resource->doc->sort        = 'sort';
 
 $lang->doc->methodOrder[0]  = 'createLib';
 $lang->doc->methodOrder[5]  = 'editLib';
 $lang->doc->methodOrder[10] = 'deleteLib';
-$lang->doc->methodOrder[15] = 'browse';
-$lang->doc->methodOrder[20] = 'create';
-$lang->doc->methodOrder[25] = 'edit';
-$lang->doc->methodOrder[30] = 'view';
-$lang->doc->methodOrder[35] = 'delete';
+$lang->doc->methodOrder[15] = 'index';
+$lang->doc->methodOrder[20] = 'browse';
+$lang->doc->methodOrder[25] = 'allLibs';
+$lang->doc->methodOrder[30] = 'projectLibs';
+$lang->doc->methodOrder[35] = 'showFiles';
+$lang->doc->methodOrder[40] = 'create';
+$lang->doc->methodOrder[45] = 'edit';
+$lang->doc->methodOrder[50] = 'view';
+$lang->doc->methodOrder[55] = 'delete';
+$lang->doc->methodOrder[60] = 'sort';
 
 /* Attend */
 $lang->resource->attend = new stdclass();
@@ -605,6 +630,18 @@ $lang->resource->tree->edit     = 'edit';
 $lang->resource->tree->children = 'children';
 $lang->resource->tree->delete   = 'delete';
 $lang->resource->tree->merge    = 'merge';
+
+$lang->tree->methodOrder[0]  = 'browse';
+$lang->tree->methodOrder[5]  = 'edit';
+$lang->tree->methodOrder[10] = 'children';
+$lang->tree->methodOrder[15] = 'delete';
+$lang->tree->methodOrder[20] = 'merge';
+
+/* File. */
+$lang->resource->file = new stdclass();
+$lang->resource->file->download = 'download';
+$lang->resource->file->edit     = 'edit';
+$lang->resource->file->delete   = 'delete';
 
 $lang->tree->methodOrder[0]  = 'browse';
 $lang->tree->methodOrder[5]  = 'edit';

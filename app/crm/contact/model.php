@@ -32,7 +32,7 @@ class contactModel extends model
 
         if($contact->status == 'normal')
         {
-            $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
             if(empty($customerIdList)) return null;
 
             $resume = $this->dao->select('`customer`, `maker`, `title`, `dept`, `join`, `left`')->from(TABLE_RESUME)->where('id')->eq($contact->resume)->andWhere('customer')->in($customerIdList)->fetch();
@@ -75,7 +75,7 @@ class contactModel extends model
      */
     public function getContactsSawByMe($type = 'view', $contactIdList = array())
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $contactList = $this->dao->select('t1.id')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
@@ -102,12 +102,12 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $relation = 'client', $mode = '', $status = 'normal', $origin = '', $orderBy = 'maker_desc', $pager = null)
+    public function getList($customer = 0, $relation = 'client', $mode = '', $status = 'normal', $origin = '', $orderBy = 't2.maker_desc', $pager = null)
     {
         $customerIdList = array();
         if($relation != 'provider' and $status == 'normal')
         {
-            $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
             if(empty($customerIdList)) return array();
         }
 
@@ -219,7 +219,7 @@ class contactModel extends model
      */
     public function getPairs($customer = 0, $emptyOption = true, $status = 'normal')
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $contacts = $this->dao->select('t1.id, t1.realname')->from(TABLE_CONTACT)->alias('t1')
@@ -244,7 +244,7 @@ class contactModel extends model
      */
     public function getCustomerPairs($contactID = 0)
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         return $this->dao->select('customer,name')
@@ -303,7 +303,7 @@ class contactModel extends model
                     if($return['result'] == 'fail') return $return;
                 }
 
-                $return = $this->loadModel('customer', 'crm')->create($customer);
+                $return = $this->loadModel('customer')->create($customer);
                 if($return['result'] == 'fail') return $return;
                 $contact->customer = $return['customerID'];
             }
@@ -540,7 +540,7 @@ class contactModel extends model
 
             if(!$this->post->continue)
             {
-                $return = $this->loadModel('customer', 'crm')->checkUnique($customer);
+                $return = $this->loadModel('customer')->checkUnique($customer);
                 if($return['result'] == 'fail') return $return;
             }
             

@@ -53,6 +53,9 @@ class leads extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status, $origin, $orderBy, $pager);
+        $this->session->set('leadsQueryCondition', $this->dao->get());
+        $this->session->set('leadsList', $this->app->getURI(true));
+        $this->app->user->canEditContactIdList = ',' . implode(',', array_keys($contacts)) . ',';
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -120,7 +123,7 @@ class leads extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->loadModel('customer', 'crm')->updateEditedDate($this->post->customer);
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
             $return = $this->contact->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
@@ -258,7 +261,7 @@ class leads extends control
 
         $this->view->title     = $this->lang->confirm . $this->lang->contact->common;
         $this->view->contact   = $this->contact->getByID($contactID, 'wait');
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->display();
     }
 

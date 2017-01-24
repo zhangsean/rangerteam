@@ -50,7 +50,9 @@ class tripModel extends model
      */
     public function getList($type = 'trip', $year = '', $month = '', $account = '', $dept = '', $orderBy = 'id_desc')
     {
-        return $this->dao->select('t1.*, t2.realname, t2.dept')->from(TABLE_TRIP)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
+        return $this->dao->select('t1.*, t2.realname, t2.dept')
+            ->from(TABLE_TRIP)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
             ->where('1=1')
             ->beginIF($type != '')->andWhere('t1.type')->eq($type)->fi()
             ->beginIF($year != '')->andWhere('t1.year')->eq($year)->fi()
@@ -65,18 +67,34 @@ class tripModel extends model
      * Get all month of trip's begin.
      * 
      * @param  string $type
+     * @param  string $mode
      * @access public
      * @return array
      */
-    public function getAllMonth($type = 'trip')
+    public function getAllMonth($type = 'trip', $mode)
     {
+        if($mode == 'department')
+        {
+            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+            $dateList = $this->dao->select('t1.begin')->from(TABLE_TRIP)->alias('t1')
+                ->leftJoin(TABLE_USER)->alias('t2')->on('t1.createdBy=t2.account')
+                ->where('t2.dept')->in(array_keys($deptList))
+                ->beginIF($type)->andWhere('type')->eq($type)->fi()
+                ->groupBy('begin')
+                ->orderBy('begin_desc')
+                ->fetchAll('begin');
+        }
+        else
+        {
+            $dateList = $this->dao->select('begin')->from(TABLE_TRIP)
+                ->where(1)
+                ->beginIF($type)->andWhere('type')->eq($type)->fi()
+                ->beginIF($mode == 'personal')->andWhere('createdBy')->eq($this->app->user->account)->fi()
+                ->groupBy('begin')
+                ->orderBy('begin_desc')
+                ->fetchAll('begin');
+        }
         $monthList = array();
-        $dateList  = $this->dao->select('begin')->from(TABLE_TRIP)
-            ->where(1)
-            ->beginIF($type)->andWhere('type')->eq($type)->fi()
-            ->groupBy('begin')
-            ->orderBy('begin_asc')
-            ->fetchAll('begin');
         foreach($dateList as $date)
         {
             $year  = substr($date->begin, 0, 4);
@@ -132,6 +150,12 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->exec();
 
+        if(!dao::isError())
+        {
+            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $trip->createdBy, 'trip', '', $trip);
+        }
+
         return $this->dao->lastInsertID();
     }
 
@@ -164,6 +188,12 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->where('id')->eq($id)
             ->exec();
+
+        if(!dao::isError())
+        {
+            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $oldTrip->createdBy, 'trip', '', $trip);
+        }
 
         return !dao::isError();
     }

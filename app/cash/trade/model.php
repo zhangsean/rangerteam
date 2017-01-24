@@ -216,12 +216,12 @@ class tradeModel extends model
         if($groupBy == 'industry') $list = $this->loadModel('tree')->getOptionMenu('industry', 0, true);
         if($groupBy == 'size')
         {
-            $this->app->loadLang('customer', 'crm');
+            $this->app->loadLang('customer');
             $list = $this->lang->customer->sizeNameList;
         }
         if($groupBy == 'line')
         {
-            $this->app->loadLang('product', 'crm');
+            $this->app->loadLang('product');
             $list = $this->lang->product->lineList;
         }
 
@@ -231,7 +231,7 @@ class tradeModel extends model
                 ->where('type')->eq($type)
                 ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                 ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
-                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
+                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))->fi()
                 ->groupBy($groupBy)
                 ->orderBy('value_desc')
                 ->fetchAll('name');
@@ -453,18 +453,25 @@ class tradeModel extends model
         {
             if(empty($type)) break;
             if(!$this->post->money[$key]) continue;
+
+            $depositor = $this->post->depositor[$key] == 'ditto' ? $depositor : $this->post->depositor[$key];
+            $category  = $this->post->category[$key]  == 'ditto' ? $category : $this->post->category[$key];
+            $dept      = $this->post->dept[$key]      == 'ditto' ? $dept : $this->post->dept[$key];
+            $trader    = $this->post->trader[$key]    == 'ditto' ? $trader : ($this->post->trader[$key] ? $this->post->trader[$key] : 0);
+            $product   = $this->post->product[$key]   == 'ditto' ? $product : $this->post->product[$key];
+
             $trade = new stdclass();
             $trade->type           = $type;
-            $trade->depositor      = $this->post->depositor[$key];
+            $trade->depositor      = $depositor;
             $trade->money          = $this->post->money[$key];
-            $trade->category       = $this->post->category[$key];
-            $trade->dept           = $this->post->dept[$key];
-            $trade->trader         = $this->post->trader[$key] ? $this->post->trader[$key] : 0;
+            $trade->category       = $category;
+            $trade->dept           = $dept;
+            $trade->trader         = $trader;
             $trade->createTrader   = isset($this->post->createTrader[$key]) ? $this->post->createTrader[$key] : false;
             $trade->createCustomer = false;
             $trade->traderName     = isset($this->post->traderName[$key]) ? $this->post->traderName[$key] : '';
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
-            $trade->product        = $this->post->product[$key];
+            $trade->product        = $product;
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags);
             $trade->currency       = isset($depositorList[$trade->depositor]) ? $depositorList[$trade->depositor]->currency : '';
@@ -488,7 +495,8 @@ class tradeModel extends model
 
         foreach($trades as $trade)
         {
-            $tradeID = $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName,createCustomer')->autoCheck()->exec();
+            $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName,createCustomer')->autoCheck()->exec();
+            $tradeID = $this->dao->lastInsertID();
             if(!dao::isError()) $this->action->create('trade', $tradeID, 'Created');
         }
 
@@ -1097,10 +1105,16 @@ class tradeModel extends model
             {
                 if($money['invest'] == 0 and $money['redeem'] == 0 and $money['in'] == 0 and $money['out'] == 0) continue;
 
+                $money['invest'] = round($money['invest'], 2);
+                $money['redeem'] = round($money['redeem'], 2);
+
                 $tidyMoneyInvest   = "<span title='" . $money['invest'] . "'>" . commonModel::tidyMoney($money['invest']) . '</span>';
                 $tidyMoneyRedeem   = "<span title='" . $money['redeem'] . "'>" . commonModel::tidyMoney($money['redeem']) . '</span>';
                 $tidyUnRedeemMoney = "<span title='" . ($money['invest'] - $money['redeem']) . "'>" .  commonModel::tidyMoney($money['invest'] - $money['redeem']) . '</span>';
             }
+
+            $money['in']  = round($money['in'], 2);
+            $money['out'] = round($money['out'], 2);
 
             $tidyMoneyIn  = "<span title='" . $money['in'] . "'>" . commonModel::tidyMoney($money['in']) . '</span>';
             $tidyMoneyOut = "<span title='" . $money['out'] . "'>" . commonModel::tidyMoney($money['out']) . '</span>';
@@ -1110,7 +1124,7 @@ class tradeModel extends model
 
             if($mode == 'all' or $mode == 'bysearch' or $mode == 'invest') 
             {
-                $profitsMoney = $money['in'] - $money['out'];
+                $profitsMoney = round(($money['in'] - $money['out']), 2);
                 if($profitsMoney > 0)  $profits = "<span title='$profitsMoney'>" . $this->lang->trade->profit . commonModel::tidyMoney($profitsMoney) . '</span>';
                 if($profitsMoney < 0)  $profits = "<span title='" . -$profitsMoney . "'>" . $this->lang->trade->loss . commonModel::tidyMoney(-$profitsMoney) . '</span>';
                 if($profitsMoney == 0) $profits = $this->lang->trade->balance;
@@ -1127,17 +1141,15 @@ class tradeModel extends model
      * @access public
      * @return void
      */
-    public function checkExpensePriv()
+    public function checkPriv($mode)
     {
         if($this->app->user->admin == 'super') return true;
-
+        
         $rights = $this->app->user->rights;
-        if(!isset($rights['tradebrowse']['out']))
-        {
-            $locate = helper::createLink('cash.index');
-            $errorLink = helper::createLink('sys.error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
-        }
+        if($mode == 'out' and !isset($rights['tradebrowse']['out'])) return false;
+        if(strpos(',all,in,', ',' . $mode . ',') !== false and !isset($rights['trade']['browse'])) return false;
+        if(strpos(',transfer,invest,loan,', ',' . $mode . ',') !== false and !isset($rights['trade'][$mode])) return false;
+        return true;
     }
 
     /**
@@ -1345,5 +1357,40 @@ class tradeModel extends model
         }
 
         return $datas;
+    }
+
+    public function getCompareDatas($selectYears = array(), &$incomeDatas = array(), &$expenseDatas = array(), &$profitDatas = array(), $currency = 'rmb')
+    {
+        foreach($selectYears as $year)
+        {
+            $trades = $this->getByYear($year, $currency);
+            $incomeDatas['all'][$year]  = 0; 
+            $expenseDatas['all'][$year] = 0; 
+            $profitDatas['all'][$year]  = 0; 
+            foreach($trades as $month => $monthTrades)
+            {
+                $incomeDatas[$month][$year]  = 0;
+                $expenseDatas[$month][$year] = 0;
+                $profitDatas[$month][$year]  = 0;
+                foreach($monthTrades as $trade)
+                {
+                    if($trade->type == 'in')  $incomeDatas[$month][$year]  += $trade->money;
+                    if($trade->type == 'out') $expenseDatas[$month][$year] += $trade->money;
+                }
+
+                $profitDatas[$month][$year]  = $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
+                $profitDatas['all'][$year]  += $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
+                $incomeDatas['all'][$year]  += $incomeDatas[$month][$year];
+                $expenseDatas['all'][$year] += $expenseDatas[$month][$year];
+            }
+        }
+
+        ksort($incomeDatas, SORT_STRING);
+        ksort($expenseDatas, SORT_STRING);
+        ksort($profitDatas, SORT_STRING);
+
+        foreach($incomeDatas as $month => $data)  foreach($data as $year => $money) $incomeDatas[$month][$year]  = round($money / (int)$this->lang->trade->report->ratio, 2);
+        foreach($expenseDatas as $month => $data) foreach($data as $year => $money) $expenseDatas[$month][$year] = round($money / (int)$this->lang->trade->report->ratio, 2);
+        foreach($profitDatas as $month => $data)  foreach($data as $year => $money) $profitDatas[$month][$year]  = round($money / (int)$this->lang->trade->report->ratio, 2);
     }
 }

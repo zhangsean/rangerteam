@@ -121,10 +121,10 @@ class block extends control
 
         $this->view->sso       = base64_decode($this->get->sso);
         $this->view->code      = $this->get->blockid;
-        $this->view->products  = $this->loadModel('product', 'crm')->getPairs();
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->products  = $this->loadModel('product')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
 
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe('view');
+        $customerIdList = $this->customer->getCustomersSawByMe('view');
 
         $this->view->orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('deleted')->eq(0)
@@ -208,8 +208,6 @@ class block extends control
      */
     public function printCustomerBlock()
     {
-        $this->app->loadLang('customer', 'crm');
-
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
         if(!isset($params->type)) $params->type = '';
@@ -219,7 +217,7 @@ class block extends control
         $this->session->set('customerList', $this->createLink('crm.dashboard', 'index'));
         if($this->get->app == 'sys') $this->session->set('customerList', 'javascript:$.openEntry("home")');
 
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList))
         {
             $customers = array();

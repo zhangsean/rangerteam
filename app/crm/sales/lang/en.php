@@ -1,10 +1,10 @@
 <?php
 if(!isset($lang->sales)) $lang->sales = new stdclass();
-$lang->sales->common = 'Sales Group';
-$lang->sales->admin  = 'Group Privileges';
+$lang->sales->common = 'Sales';
+$lang->sales->admin  = 'Privileges';
 $lang->sales->browse = 'Manage Groups';
-$lang->sales->list   = 'Sales Group List';
-$lang->sales->create = 'Create Group';
+$lang->sales->list   = 'Sales Team';
+$lang->sales->create = 'Create';
 $lang->sales->edit   = 'Edit';
 $lang->sales->delete = 'Delete';
 
@@ -13,8 +13,8 @@ $lang->sales->name   = 'Name';
 $lang->sales->desc   = 'Desciption';
 $lang->sales->users  = 'Users';
 
-$lang->sales->group  = 'Group';
-$lang->sales->priv   = 'Privilege';
+$lang->sales->group  = 'Groups';
+$lang->sales->priv   = 'Privileges';
 
 $lang->sales->viewTip      = 'view';
 $lang->sales->editTip      = 'edit';

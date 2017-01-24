@@ -49,6 +49,25 @@ class helper extends baseHelper
     }
 
     /**
+     * Encode json for $.parseJSON
+     * 
+     * @param  array  $data 
+     * @param  int    $options 
+     * @static
+     * @access public
+     * @return string
+     */
+    static public function jsonEncode4Parse($data, $options = 0)
+    {
+        $json = json_encode($data);
+        if($options) $json = str_replace(array("'", '"'), array('\u0027', '\u0022'), $json);
+
+        $escapers     = array("\\",  "/",   "\"", "'", "\n",  "\r",  "\t", "\x08", "\x0c", "\\\\u");
+        $replacements = array("\\\\", "\\/", "\\\"", "\'", "\\n", "\\r", "\\t",  "\\f",  "\\b", "\\u");
+        return str_replace($escapers, $replacements, $json);
+    }
+
+    /**
      * Unify string to standard chars.
      * 
      * @param  string    $string 
@@ -104,4 +123,147 @@ function formatTime($time, $format = '')
     if(trim($time) == '') return ;
     if($format) return date($format, strtotime($time));
     return trim($time);
+}
+
+$basical  = array(0 => "零","壹","贰","叁","肆","伍","陆","柒","捌","玖");
+$advanced = array(1 => "拾","佰","仟");
+ 
+/**
+ * Parse money from number to Chinese character. 
+ * 
+ * @param  int    $number 
+ * @static
+ * @access public
+ * @return void
+ */
+function parseNumber($number)
+{
+    $number = trim($number);
+    if ($number > 999999999999) return "数字太大，无法处理。抱歉！";
+    if ($number == 0) return "零";
+    if(strpos($number, '.'))
+    {
+        $number  = round($number, 2);
+        $data    = explode(".", $number);
+        $data[0] = parseInteger($data[0]);
+        if(count($data) > 1) 
+        {
+            $data[1] = parseDecimal($data[1]);
+            return $data[0] . $data[1];
+        }
+        return $data[0] . '整';
+    } 
+    else 
+    {
+      return parseInteger($number) . '整';
+    }
+}
+
+/**
+ * Parse the integer part of money. 
+ * 
+ * @param  int    $number 
+ * @static
+ * @access public
+ * @return void
+ */
+function parseInteger($number)
+{
+    global $basical;
+    global $advanced;
+    if($number == 0) return;
+    $arr      = array_reverse(str_split($number));
+    $data     = '';
+    $zero     = false;
+    $zero_num = 0;
+    foreach ($arr as $key => $value)
+    {
+        $_chinese = '';
+        $zero     = ($value == 0) ? true : false;
+        $index        = $key % 4;
+        if($index && $zero && $zero_num>1)continue;
+        switch($index)
+        {
+            case 0:
+                if($zero)
+                {
+                    $zero_num = 0;
+                } 
+                else 
+                {
+                    $_chinese = $basical[$value];
+                    $zero_num = 1;
+                }
+                if($key == 8)
+                {
+                    $_chinese .= '亿';
+                } 
+                elseif($key == 4)
+                {
+                    $_chinese .= '万';
+                }
+                break;  
+            default:
+                if($zero)
+                {
+                    if($zero_num == 1)
+                    {
+                        $_chinese = $basical[$value];
+                        $zero_num++;
+                    }
+                }
+                else
+                {
+                    $_chinese  = $basical[$value];
+                    $_chinese .= $advanced[$index];
+                }
+        }
+        $data = $_chinese . $data;
+    }
+    return $data . '元';
+}
+ 
+/**
+ * Parse the decimal part of money. 
+ * 
+ * @param  int    $number 
+ * @static
+ * @access public
+ * @return void
+ */
+function parseDecimal($number)
+{
+    global $basical;
+    if(strlen($number) < 2) $number .= '0';
+    $arr      = array_reverse(str_split($number));
+    $data     = '';
+    $zero_num = false;
+    foreach ($arr as $key => $value)
+    {
+        $zero     = ($value == 0) ? true : false;
+        $_chinese = '';
+        if($key == 0)
+        {
+            if(!$zero)
+            {
+                $_chinese  = $basical[$value];
+                $_chinese .= '分';
+                $zero_num  = true;
+            }
+        } 
+        else
+        {
+            if($zero)
+            {
+                if($zero_num) $_chinese = $basical[$value];
+            } 
+            else
+            {
+                $_chinese  = $basical[$value];
+                $_chinese .= '角';
+            }
+        }
+        $data = $_chinese . $data;
+    }
+    return $data;
 }

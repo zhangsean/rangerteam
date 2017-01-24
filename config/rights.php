@@ -46,13 +46,17 @@ $config->rights->member['misc']['qrcode']            = 'qrcode';
 $config->rights->member['misc']['about']             = 'about';
 $config->rights->member['contract']['getorder']      = 'getorder';
 $config->rights->member['contract']['getoptionmenu'] = 'getoptionmenu';
+$config->rights->member['customer']['index']         = 'index';
 $config->rights->member['customer']['getoptionmenu'] = 'getoptionmenu';
+$config->rights->member['provider']['index']         = 'index';
+$config->rights->member['product']['index']          = 'index';
 $config->rights->member['contact']['getoptionmenu']  = 'getoptionmenu';
 $config->rights->member['contact']['block']          = 'block';
 $config->rights->member['order']['sendmail']         = 'sendmail';
 $config->rights->member['thread']['locate']          = 'locate';
 $config->rights->member['tree']['redirect']          = 'redirect';
 
+$config->rights->member['apppriv']['proj']       = 'proj';
 $config->rights->member['project']['index']      = 'index';
 $config->rights->member['project']['create']     = 'create';
 $config->rights->member['project']['edit']       = 'edit';
@@ -118,11 +122,8 @@ $config->rights->member['file']['buildlist']      = 'buildlist';
 $config->rights->member['file']['printfiles']     = 'printfiles';
 $config->rights->member['file']['ajaxupload']     = 'ajaxupload';
 $config->rights->member['file']['browse']         = 'browse';
-$config->rights->member['file']['edit']           = 'edit';
 $config->rights->member['file']['upload']         = 'upload';
-$config->rights->member['file']['download']       = 'download';
 $config->rights->member['file']['senddownheader'] = 'senddownheader';
-$config->rights->member['file']['delete']         = 'delete';
 $config->rights->member['file']['ajaxpasteimage'] = 'ajaxpasteimage';
 $config->rights->member['file']['filemanager']    = 'filemanager';
 $config->rights->member['file']['sort']           = 'sort';
@@ -132,6 +133,7 @@ $config->rights->member['announce']['viewreaders'] = 'viewreaders';
 $config->rights->member['attend']['personal']         = 'personal';
 $config->rights->member['attend']['edit']             = 'edit';
 $config->rights->member['attend']['ajaxgetdeptusers'] = 'ajaxgetdeptusers';
+$config->rights->member['attend']['read']             = 'read';
 
 $config->rights->member['holiday']['browse']  = 'browse';
 
@@ -140,6 +142,7 @@ $config->rights->member['leave']['create']       = 'create';
 $config->rights->member['leave']['edit']         = 'edit';
 $config->rights->member['leave']['delete']       = 'delete';
 $config->rights->member['leave']['switchstatus'] = 'switchstatus';
+$config->rights->member['leave']['back']         = 'back';
 
 $config->rights->member['lieu']['personal']     = 'personal';
 $config->rights->member['lieu']['create']       = 'create';
@@ -155,9 +158,15 @@ $config->rights->member['overtime']['delete']       = 'delete';
 $config->rights->member['overtime']['switchstatus'] = 'switchstatus';
 
 $config->rights->member['trip']['personal'] = 'personal';
+$config->rights->member['trip']['view']     = 'view';
 $config->rights->member['trip']['create']   = 'create';
 $config->rights->member['trip']['edit']     = 'edit';
 $config->rights->member['trip']['delete']   = 'delete';
+
+$config->rights->member['egress']['personal'] = 'personal';
+$config->rights->member['egress']['create']   = 'create';
+$config->rights->member['egress']['edit']     = 'edit';
+$config->rights->member['egress']['delete']   = 'delete';
 
 $config->rights->member['out']['personal'] = 'personal';
 $config->rights->member['out']['create']   = 'create';

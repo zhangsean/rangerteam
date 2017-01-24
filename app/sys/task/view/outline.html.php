@@ -14,7 +14,7 @@
 <?php $this->loadModel('project')->setMenu($projects, $projectID, $orderBy);?>
 <?php js::set('groupBy', $groupBy);?>
 <?php js::set('backLink', $backLink);?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <div class='panel'>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>

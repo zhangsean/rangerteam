@@ -81,8 +81,8 @@ class trip extends control
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
-        $monthList    = $this->trip->getAllMonth($this->type);
-        $yearList     = array_reverse(array_keys($monthList));
+        $monthList    = $this->trip->getAllMonth($this->type, $mode);
+        $yearList     = array_keys($monthList);
         $deptList     = array();
 
         if($mode == 'personal')
@@ -109,7 +109,7 @@ class trip extends control
         $this->view->yearList     = $yearList;
         $this->view->deptList     = $deptList;
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customers    = $this->loadModel('customer')->getPairs();
         $this->view->tripList     = $tripList;
         $this->view->date         = $date;
         $this->view->orderBy      = $orderBy;
@@ -137,7 +137,7 @@ class trip extends control
                 $customers = trim(implode(',', $this->post->customers), ',');
                 if($customers)
                 {
-                    $customers = $this->loadModel('customer', 'crm')->getList($mode = 'query', $params = "id in ($customers)", $relation = '');
+                    $customers = $this->loadModel('customer')->getList($mode = 'query', $params = "id in ($customers)", $relation = '');
                     foreach($customers as $customer)
                     {
                         $this->action->create($customer->relation == 'provider' ? 'provider' : 'customer', $customer->id, "create{$this->type}", '', html::a(inlink('view', "tripID={$tripID}"), $this->post->name, "data-toggle='modal'"));
@@ -151,7 +151,7 @@ class trip extends control
         $this->app->loadModuleConfig('attend');
         $this->view->title     = $this->lang->{$this->type}->create;
         $this->view->type      = $this->type;
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->display('trip', 'create');
     }
 
@@ -185,7 +185,7 @@ class trip extends control
         $this->view->title     = $this->lang->{$this->type}->edit;
         $this->view->trip      = $trip;
         $this->view->type      = $this->type;
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->display('trip', 'edit');
     }
 
@@ -208,10 +208,10 @@ class trip extends control
 
     public function view($id)
     {
-        $this->view->title      = $this->lang->{$this->type}->view;
-        $this->view->trip       = $this->trip->getByID($id);
-        $this->view->type       = $this->type;
-        $this->view->customers  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->title     = $this->lang->{$this->type}->view;
+        $this->view->trip      = $this->trip->getByID($id);
+        $this->view->type      = $this->type;
+        $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->display('trip', 'view');
     }
 }

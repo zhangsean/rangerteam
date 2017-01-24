@@ -377,7 +377,11 @@ class actionModel extends model
             if($table != '`oa_todo`' and $table != '`cash_trade`')
             {
                 $objectNames[$objectType] = $this->dao->select("id, $field AS name")->from($table)->where('id')->in($objectIds)->fetchPairs();
-                if($objectType == 'order') $objectNames[$objectType] = $this->dao->select('o.id, concat(c.name, o.createdDate) as name')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->in($objectIds)->fetchPairs(); 
+                if($objectType == 'order') $objectNames[$objectType] = $this->dao->select('o.id, concat(c.name, o.createdDate) as name')
+                    ->from(TABLE_ORDER)->alias('o')
+                    ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+                    ->where('o.id')->in($objectIds)
+                    ->fetchPairs(); 
             }
             elseif($table == '`oa_todo`')
             {
@@ -388,7 +392,11 @@ class actionModel extends model
                     if($todo->type == 'customer') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_CUSTOMER)->fetch('name'); 
                     if($todo->type == 'order') 
                     {
-                        $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
+                        $order = $this->dao->select('c.name, o.createdDate')
+                            ->from(TABLE_ORDER)->alias('o')
+                            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+                            ->where('o.id')->eq($todo->idvalue)
+                            ->fetch(); 
                         $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
                     }
                     if(isset($this->lang->action->objectTypes[$todo->type])) $todo->name = $this->lang->action->objectTypes[$todo->type] . ':' . $todo->name;
@@ -839,7 +847,7 @@ class actionModel extends model
         if($action->customer)
         {
             static $customers = array();
-            if(empty($customers)) $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            if(empty($customers)) $customers = $this->loadModel('customer')->getCustomersSawByMe();
             if(!in_array($action->customer, $customers)) $canView = false;
         }
 
@@ -857,7 +865,7 @@ class actionModel extends model
             if(!in_array($action->objectID, $orders)) $canView = false;
         }
 
-        if($action->objectType == 'project' && !($this->loadModel('project', 'oa')->checkPriv($action->objectID))) $canView = false;
+        if($action->objectType == 'project' && !($this->loadModel('project', 'proj')->checkPriv($action->objectID))) $canView = false;
 
         if($action->objectType == 'task')
         {
@@ -880,13 +888,13 @@ class actionModel extends model
 
         if($action->objectType == 'doc')
         {
-            $doc     = $this->loadModel('doc', 'oa')->getById($action->objectID);
+            $doc     = $this->loadModel('doc', 'doc')->getById($action->objectID);
             $canView = $this->doc->hasRight($doc);
         }
 
         if($action->objectType == 'doclib')
         {
-            $lib     = $this->loadModel('doc', 'oa')->getLibById($action->objectID);
+            $lib     = $this->loadModel('doc', 'doc')->getLibById($action->objectID);
             $canView = $this->doc->hasRight($lib);
         }
 

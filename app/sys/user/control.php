@@ -81,7 +81,33 @@ class user extends control
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink, $this->post->referer) === false)
             {
-                $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
+                if($this->config->requestType == 'PATH_INFO')
+                {
+                    $path = substr($this->post->referer, strrpos($this->post->referer, '/') + 1);
+                    $path = rtrim($path, '.html');
+                    if(empty($path) or strpos($path, $this->config->requestFix) === false) $path = $this->config->requestFix;
+                    list($module, $method) = explode($this->config->requestFix, $path);
+                }
+                else
+                {
+                    $url   = html_entity_decode($this->post->referer);
+                    $param = substr($url, strrpos($url, '?') + 1);
+
+                    $module = $this->config->default->module;
+                    $method = $this->config->default->method;
+                    if(strpos($param, '&') !== false) list($module, $method) = explode('&', $param);
+                    $module = str_replace('m=', '', $module);
+                    $method = str_replace('f=', '', $method);
+                }
+
+                if(commonModel::hasPriv($module, $method))
+                {
+                    $this->send(array('result'=>'success', 'locate' => urldecode($this->post->referer)));
+                }
+                else
+                {
+                    $this->send(array('result'=>'success', 'locate' => $this->createLink('index', 'index')));
+                }
             }
             else
             {
@@ -296,6 +322,7 @@ class user extends control
      *  Admin users list.
      *
      * @param  int    $deptID
+     * @param  string $mode
      * @param  srting $query
      * @param  srting $orderBy
      * @param  int    $recTotal
@@ -304,16 +331,16 @@ class user extends control
      * @access public
      * @return void
      */
-    public function admin($deptID = 0, $query = '', $orderBy = 'id_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($deptID = 0, $mode = 'normal', $query = '', $orderBy = 'id_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
-        if($this->post->query) die($this->locate(inlink('admin', "deptID=$deptID&query={$this->post->query}&orderBy=$orderBy&recTotal=0&recPerPage=$recPerPage&pageID=1")));
+        if($this->post->query) die($this->locate(inlink('admin', "deptID=$deptID&mode=&query={$this->post->query}&orderBy=$orderBy&recTotal=0&recPerPage=$recPerPage&pageID=1")));
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
-        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
+        $this->view->users    = $this->user->getList($deptID, $mode, $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
@@ -345,7 +372,7 @@ class user extends control
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptColleagueLink'));
         $this->view->depts    = $this->tree->getPairs(0, 'dept');
-        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
+        $this->view->users    = $this->user->getList($deptID, $mode = 'normal', $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;

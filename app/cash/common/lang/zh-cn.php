@@ -34,11 +34,6 @@ if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 
-/* Menu of provider module. */
-if(!isset($lang->provider)) $lang->provider = new stdclass();
-$lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => '供应商列表|provider|browse|', 'alias' => 'create,edit,view');
-
 /* Menu of contact module. */
 if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
@@ -59,3 +54,4 @@ $lang->setting->menu->expend    = '支出科目|tree|browse|type=out|';
 $lang->setting->menu->currency  = '货币类型|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->schema    = '导入模板设置|schema|browse|';
 $lang->setting->menu->tradePriv = '支出浏览权限设置|group|managetradepriv|';
+include(dirname(__FILE__) . '/menuOrder.php');

@@ -48,13 +48,13 @@ class order extends control
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->order->search['actionURL'] = $this->createLink('order', 'browse', 'mode=bysearch');
-        $this->config->order->search['params']['o.customer']['values'] = $this->loadModel('customer', 'crm')->getPairs('client', true);
-        $this->config->order->search['params']['o.product']['values']  = array('' => '') + $this->loadModel('product', 'crm')->getPairs();
+        $this->config->order->search['params']['o.customer']['values'] = $this->loadModel('customer')->getPairs('client', true);
+        $this->config->order->search['params']['o.product']['values']  = array('' => '') + $this->loadModel('product')->getPairs();
         $this->search->setSearchParams($this->config->order->search);
 
         $this->view->title        = $this->lang->order->browse;
         $this->view->orders       = $orders;
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getList('client');
+        $this->view->customers    = $this->loadModel('customer')->getList('client');
         $this->view->users        = $this->loadModel('user', 'sys')->getPairs();
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
@@ -80,9 +80,9 @@ class order extends control
         }
 
         unset($this->lang->order->menu);
-        $products = $this->loadModel('product', 'crm')->getPairs($status = 'normal');
+        $products = $this->loadModel('product')->getPairs($status = 'normal');
         $this->view->products     = array( 0 => '') + $products;
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->title        = $this->lang->order->create;
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
@@ -125,8 +125,8 @@ class order extends control
 
         $this->view->title        = $this->lang->order->edit;
         $this->view->order        = $order;
-        $this->view->products     = $this->loadModel('product', 'crm')->getPairs();
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
@@ -148,8 +148,8 @@ class order extends control
         /* Set allowed edit order ID list. */
         $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', (array)$orderID)) . ',';
 
-        $this->app->loadLang('resume');
-        $this->app->loadLang('contract');
+        $this->app->loadLang('resume', 'crm');
+        $this->app->loadLang('contract', 'crm');
 
         $uri = $this->app->getURI(true);
         $this->session->set('customerList', $uri);
@@ -159,7 +159,7 @@ class order extends control
 
         $this->view->order        = $order;
         $this->view->title        = $this->lang->order->view;
-        $this->view->customer     = $this->loadModel('customer', 'crm')->getByID($order->customer);
+        $this->view->customer     = $this->loadModel('customer')->getByID($order->customer);
         $this->view->contract     = $this->order->getContract($orderID);
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
@@ -184,7 +184,7 @@ class order extends control
         if(!empty($_POST))
         {
             $this->order->close($orderID);
-            $this->loadModel('customer', 'crm')->updateEditedDate($order->customer);
+            $this->loadModel('customer')->updateEditedDate($order->customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('order', $orderID, 'Closed', $this->post->closedNote, $this->lang->order->closedReasonList[$this->post->closedReason]);
@@ -213,7 +213,7 @@ class order extends control
         if(!empty($_POST))
         {
             $this->order->activate($orderID);
-            $this->loadModel('customer', 'crm')->updateEditedDate($order->customer);
+            $this->loadModel('customer')->updateEditedDate($order->customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->loadModel('action')->create('order', $orderID, 'Activated', $this->post->comment);
             $this->loadModel('action')->create('customer', $order->customer, 'activateOrder', $this->post->comment, html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
@@ -270,7 +270,7 @@ class order extends control
         if($_POST)
         {
             $this->order->assign($orderID);
-            $this->loadModel('customer', 'crm')->updateEditedDate($order->customer);
+            $this->loadModel('customer')->updateEditedDate($order->customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             if($this->post->assignedTo)
@@ -390,7 +390,7 @@ class order extends control
 
             /* Get users, products and projects. */
             $users    = $this->loadModel('user')->getPairs();
-            $products = $this->loadModel('product', 'crm')->getPairs();
+            $products = $this->loadModel('product')->getPairs();
 
             foreach($orders as $order)
             {
@@ -450,8 +450,8 @@ class order extends control
     public function ajaxGetTodoList($account = '', $id = '', $type = 'select')
     {
         $this->app->loadClass('date', $static = true);
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
-        $products       = $this->loadModel('product', 'crm')->getPairs();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+        $products       = $this->loadModel('product')->getPairs();
         $thisWeek       = date::getThisWeek();
         $orders         = array();
         if($account == '') $account = $this->app->user->account;

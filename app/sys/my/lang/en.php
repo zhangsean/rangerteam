@@ -15,7 +15,6 @@ $lang->my->order->common = 'Order';
 
 $lang->my->contract->common = 'Contract';
 
-$lang->my->company = new stdclass();
 $lang->my->company->common  = 'Todo';
 $lang->my->company->dept    = 'Department';
 $lang->my->company->all     = 'All';

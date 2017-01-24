@@ -70,7 +70,7 @@
           <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
           <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
-          <td><?php echo $leave->backDate;?></td>
+          <td><?php echo formatTime($leave->backDate);?></td>
           <td class='visible-lg'><?php echo $leave->hours == 0 ? '' : $leave->hours;?></td>
           <td title='<?php echo $leave->desc;?>'><?php echo $leave->desc;?></td>
           <?php $status = ($leave->status == 'pass' and $leave->backDate != '0000-00-00 00:00:00' and $leave->backDate != $leave->end . ' ' . $leave->finish) ? 'back' : $leave->status;?>

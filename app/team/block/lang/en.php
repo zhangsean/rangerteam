@@ -9,16 +9,16 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->block->common   = 'Blocks';
-$lang->block->blog     = 'Latest Blog';
-$lang->block->lblBlock = 'Block';
-$lang->block->admin    = 'Manage Block';
+$lang->block->common   = 'Widgets';
+$lang->block->blog     = 'Latest Blogs';
+$lang->block->lblBlock = 'Widget';
+$lang->block->admin    = 'Manage';
 $lang->block->num      = 'Number';
 $lang->block->type     = 'Type';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->blog   = 'Latest Blog';
-$lang->block->availableBlocks->thread = 'Thread List';
+$lang->block->availableBlocks->thread = 'Threads';
 
 $lang->block->typeList->thread['new']   = 'latest Thread';
-$lang->block->typeList->thread['stick'] = 'Sticked Thread';
+$lang->block->typeList->thread['stick'] = 'Sticked Threads';

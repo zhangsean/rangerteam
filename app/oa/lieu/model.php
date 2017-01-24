@@ -38,7 +38,9 @@ class lieuModel extends model
      */
     public function getList($type = 'personal', $year = '', $month = '', $account = '', $dept = '', $status = '', $orderBy = 'id_desc')
     {
-        return $this->dao->select('t1.*, t2.realname, t2.dept')->from(TABLE_LIEU)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
+        return $this->dao->select('t1.*, t2.realname, t2.dept')
+            ->from(TABLE_LIEU)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
             ->where('1=1')
             ->beginIf($year != '')->andWhere('t1.year')->eq($year)->fi()
             ->beginIf($month != '')->andWhere('t1.begin')->like("%-$month-%")->fi()
@@ -66,13 +68,18 @@ class lieuModel extends model
     /**
      * Get all month of lieu's begin.
      * 
+     * @param  string $type
      * @access public
      * @return array
      */
-    public function getAllMonth()
+    public function getAllMonth($type)
     {
         $monthList = array();
-        $dateList  = $this->dao->select('begin')->from(TABLE_LIEU)->groupBy('begin')->orderBy('begin_asc')->fetchAll('begin');
+        $dateList  = $this->dao->select('begin')->from(TABLE_LIEU)
+            ->beginIF($type == 'personal')->where('createdBy')->eq($this->app->user->account)->fi()
+            ->groupBy('begin')
+            ->orderBy('begin_desc')
+            ->fetchAll('begin');
         foreach($dateList as $date)
         {
             $year  = substr($date->begin, 0, 4);
@@ -227,7 +234,15 @@ class lieuModel extends model
      */
     public function delete($id, $null = null)
     {
+        $oldLieu = $this->getByID($id);
         $this->dao->delete()->from(TABLE_LIEU)->where('id')->eq($id)->exec();
+
+        if(!dao::isError())
+        {
+            $oldDates = range(strtotime($oldLieu->begin), strtotime($oldLieu->end), 60*60*24);
+            $this->loadModel('attend', 'oa')->batchUpdate($oldDates, $oldLieu->createdBy, '');
+        }
+
         return !dao::isError();
     }
 

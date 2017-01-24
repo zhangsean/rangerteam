@@ -52,4 +52,4 @@ $lang->overtime->confirmReview['pass']   = 'Are you sure to pass it?';
 $lang->overtime->confirmReview['reject'] = 'Are you sure to reject it?';
 
 $lang->overtime->hoursTip = 'Hours';
-$lang->overtime->baseInfo = 'Base Information';
+$lang->overtime->baseInfo = 'Basic Info';

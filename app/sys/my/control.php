@@ -264,7 +264,7 @@ class my extends control
 
         $this->view->title        = $this->lang->order->browse;
         $this->view->orders       = $orders;
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getList('client');
+        $this->view->customers    = $this->loadModel('customer')->getList('client');
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->pager        = $pager;
         $this->view->type         = $type;
@@ -306,7 +306,7 @@ class my extends control
 
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->pager        = $pager;
         $this->view->type         = $type;
         $this->view->orderBy      = $orderBy;
@@ -354,7 +354,7 @@ class my extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->loadModel('project', 'oa');
+        $this->loadModel('project', 'proj');
         $this->view->title    = $this->lang->my->project->common;
         $this->view->projects = $this->project->getList('involved', $orderBy, $pager);
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed');

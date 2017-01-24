@@ -10,11 +10,11 @@ $(document).ready(function()
         var labels     = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         var datasets   = [];
 
-        var datasetIn  = {label: $table.find('thead .chart-label-1').text(), color: 'green', data: []};
-        var datasetOut = {label: $table.find('thead .chart-label-2').text(), color: 'primary', data: []};
+        var datasetIn  = {label: $table.find('thead .chart-label-1').text(), color: 'primary', data: []};
+        var datasetOut = {label: $table.find('thead .chart-label-2').text(), color: 'green', data: []};
         
-        $table.find('.chart-color-dot-1').css('color', 'green');
-        $table.find('.chart-color-dot-2').css('color', '#91B8F6');
+        $table.find('.chart-color-dot-1').css('color', '#91B8F6');
+        $table.find('.chart-color-dot-2').css('color', 'green');
         
         var chartLabels = [];
         $table.find('tbody .chart-label').each(function(){ chartLabels.push($(this).text()); })
@@ -27,7 +27,7 @@ $(document).ready(function()
                 {
                     if($(this).parent('tr').find('.chart-label').text() == value)
                     {
-                        datasetIn.data.push(parseInt($(this).text()));
+                        datasetIn.data.push(parseFloat($(this).text()));
                     }
                 })
 
@@ -35,14 +35,14 @@ $(document).ready(function()
                 {
                     if($(this).parent('tr').find('.chart-label').text() == value)
                     {
-                        datasetOut.data.push(parseInt($(this).text()));
+                        datasetOut.data.push(parseFloat($(this).text()));
                     }
                 })
             }
             else
             {
-                datasetIn.data.push(parseInt(0));
-                datasetOut.data.push(parseInt(0));
+                datasetIn.data.push(parseFloat(0));
+                datasetOut.data.push(parseFloat(0));
             }
         })
         

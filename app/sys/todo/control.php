@@ -23,7 +23,7 @@ class todo extends control
         $this->app->loadClass('date');
         $this->loadModel('task');
         $this->loadModel('order', 'crm');
-        $this->loadModel('customer', 'crm');
+        $this->loadModel('customer');
     }
 
     /**

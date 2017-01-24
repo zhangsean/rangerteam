@@ -42,19 +42,19 @@ class commonModel extends model
         $this->config->system   = isset($config['system']) ? $config['system'] : new stdclass();
         $this->config->personal = isset($config[$account]) ? $config[$account] : new stdclass();
 
-        //foreach($this->config->system as $module => $records)
-        //{
-        //    /* Overide the items defined in config/config.php and config/my.php. */
-        //    if(!isset($this->config->$module)) $this->config->$module = new stdclass();
-        //    if(isset($this->config->system->$module)) helper::mergeConfig($this->config->system->$module, $module);
-        //}
+        foreach($this->config->system as $module => $records)
+        {
+            /* Overide the items defined in config/config.php and config/my.php. */
+            if(!isset($this->config->$module)) $this->config->$module = new stdclass();
+            if(isset($this->config->system->$module)) helper::mergeConfig($this->config->system->$module, $module);
+        }
 
-        //foreach($this->config->personal as $module => $records)
-        //{
-        //    /* Overide the items defined in config/config.php and config/my.php. */
-        //    if(!isset($this->config->$module)) $this->config->$module = new stdclass();
-        //    if(isset($this->config->personal->$module)) helper::mergeConfig($this->config->personal->$module, $module);
-        //}
+        foreach($this->config->personal as $module => $records)
+        {
+            /* Overide the items defined in config/config.php and config/my.php. */
+            if(!isset($this->config->$module)) $this->config->$module = new stdclass();
+            if(isset($this->config->personal->$module)) helper::mergeConfig($this->config->personal->$module, $module);
+        }
         /* Overide the items defined in config/config.php and config/my.php. */
         if(isset($this->config->system->common)) helper::mergeConfig($this->config->system->common, 'common');
         if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
@@ -94,7 +94,7 @@ class commonModel extends model
     }
 
     /**
-     * Check the priviledge.
+     * Check the Privilege.
      * 
      * @access public
      * @return void
@@ -128,12 +128,12 @@ class commonModel extends model
             die(js::locate(helper::createLink('sys.user', 'login', "referer=$referer")));
         }
 
-        /* Check the priviledge. */
+        /* Check the Privilege. */
         if(!commonModel::hasPriv($module, $method)) $this->deny($module, $method);
     }
 
     /**
-     * Check current user has priviledge to the module's method or not.
+     * Check current user has Privilege to the module's method or not.
      * 
      * @param mixed $module     the module
      * @param mixed $method     the method
@@ -167,7 +167,7 @@ class commonModel extends model
     }
 
     /**
-     * Check current user has priviledge to the app or not.
+     * Check current user has Privilege to the app or not.
      * 
      * @param  string $appname 
      * @static
@@ -251,7 +251,7 @@ class commonModel extends model
     }
 
     /**
-     * Check priviledge by customer.
+     * Check Privilege by customer.
      * 
      * @param  int    $customerID 
      * @param  string $type 
@@ -260,7 +260,7 @@ class commonModel extends model
      */
     public function checkPrivByCustomer($customerID, $type = 'view')
     {
-        $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customers = $this->loadModel('customer')->getCustomersSawByMe($type);
         if(!in_array($customerID, $customers))
         {
             $locate = helper::safe64Encode(helper::createLink('crm.index'));
@@ -342,8 +342,33 @@ class commonModel extends model
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<ul class='nav navbar-nav'>\n" : '';
 
+        $menuOrder = isset($lang->{$app->appName}->menuOrder) ? $lang->{$app->appName}->menuOrder : array();  
+        $allMenus  = new stdclass(); 
+        if(!empty($menuOrder))
+        {
+            ksort($menuOrder);
+            foreach($lang->menu->{$app->appName} as $moduleName => $moduleMenu)
+            {
+                if(!in_array($moduleName, $menuOrder)) $menuOrder[] = $moduleName;
+            }
+
+            foreach($menuOrder as $name)
+            {
+                if(isset($lang->menu->{$app->appName}->$name)) $allMenus->$name = $lang->menu->{$app->appName}->$name;
+            }
+
+            foreach($lang->menu->{$app->appName} as $key => $value)
+            {
+                if(!isset($allMenus->$key)) $allMenus->$key = $value;
+            }
+        }
+        else
+        {
+            $allMenus = $lang->menu->{$app->appName};
+        }
+
         /* Print all main menus. */
-        foreach($lang->menu->{$app->appName} as $moduleName => $moduleMenu)
+        foreach($allMenus as $moduleName => $moduleMenu)
         {
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
@@ -355,7 +380,7 @@ class commonModel extends model
 
             if(!commonModel::isAvailable($module)) continue;
 
-            if(strpos(',tree,setting,schema,sales,', $module) != false and isset($lang->setting->menu)) 
+            if(strpos(',tree,setting,schema,sales,', ',' . $module . ',') != false and isset($lang->setting->menu)) 
             {
                 foreach($lang->setting->menu as $settingMenu)
                 {
@@ -405,10 +430,36 @@ class commonModel extends model
 
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
-        if(!$isMobile && strpos(',setting, tree, schema, sales, group,', $currentModule)) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
+        if(!$isMobile && strpos(',setting,tree,schema,sales,group,', ',' . $currentModule . ',') !== false) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
-        /* Get menus of current module and current method. */
-        $moduleMenus   = $lang->$currentModule->menu;  
+        $menuOrder = isset($lang->{$currentModule}->menuOrder) ? $lang->{$currentModule}->menuOrder : array();  
+
+        /* Get menus of current module. */
+        $moduleMenus = new stdclass(); 
+        if(!empty($menuOrder))
+        {
+            ksort($menuOrder);
+            foreach($lang->{$currentModule}->menuOrder as $methodName => $methodMenu)
+            {
+                if(!in_array($methodName, $menuOrder)) $menuOrder[] = $methodName;
+            }
+
+            foreach($menuOrder as $name)
+            {
+                if(isset($lang->{$currentModule}->menu->$name)) $moduleMenus->$name = $lang->{$currentModule}->menu->$name;
+            }
+
+            foreach($lang->{$currentModule}->menu as $key => $value)
+            {
+                if(!isset($moduleMenus->$key)) $moduleMenus->$key = $value;
+            }
+        }
+        else
+        {
+            $moduleMenus = $lang->$currentModule->menu;  
+        }
+
+        /* Get current method. */
         $currentMethod = $app->getMethodName();
 
         /* Cycling to print every menus of current module. */
@@ -427,7 +478,6 @@ class commonModel extends model
 
             /* Split the methodLink to label, module, method, vars. */
             list($label, $module, $method, $vars) = explode('|', $methodLink);
-            // $label .= '<i class="icon-chevron-right"></i>';
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -437,8 +487,8 @@ class commonModel extends model
                 }
 
                 $class = '';
-                if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
-                if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
+                if($module == $currentModule && strtolower($method) == $currentMethod) $class = " class='active'";
+                if($module == $currentModule && stripos($methodAlias, $currentMethod) !== false) $class = " class='active'";
                 $url  = helper::createLink($module, $method, $vars);
                 $link = html::a($url, $label);
                 if(strpos($string, "class='active'") != false)
@@ -471,14 +521,39 @@ class commonModel extends model
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<ul class='nav navbar-nav'>\n" : '';
 
+        $menuOrder = isset($lang->sys->dashboard->menuOrder) ? $lang->sys->dashboard->menuOrder : array();  
+        $allMenus  = new stdclass(); 
+        if(!empty($menuOrder))
+        {
+            ksort($menuOrder);
+            foreach($lang->menu->dashboard as $moduleName => $moduleMenu)
+            {
+                if(!in_array($moduleName, $menuOrder)) $menuOrder[] = $moduleName;
+            }
+
+            foreach($menuOrder as $name)
+            {
+                if(isset($lang->menu->dashboard->$name)) $allMenus->$name = $lang->menu->dashboard->$name;
+            }
+
+            foreach($lang->menu->dashboard as $key => $value)
+            {
+                if(!isset($allMenus->$key)) $allMenus->$key = $value;
+            }
+        }
+        else
+        {
+            $allMenus = $lang->menu->dashboard;
+        }
+
         $currentMethod = $app->getMethodName();
         $currentModule = $app->getModuleName();
-        foreach($lang->menu->dashboard as $moduleName => $moduleMenu)
+        foreach($allMenus as $moduleName => $moduleMenu)
         {
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
             $class = '';
-            if($currentMethod == $method or ($currentModule == 'todo' and $module == 'todo')) $class = "class='active'";
+            if($currentMethod == strtolower($method) or ($currentModule == 'todo' and $module == 'todo')) $class = "class='active'";
             $hasPriv = commonModel::hasPriv($module, $method);
             if($module == 'my' and $method == 'order')    $hasPriv = commonModel::hasPriv('order', 'browse');
             if($module == 'my' and $method == 'contract') $hasPriv = commonModel::hasPriv('contract', 'browse');

@@ -15,7 +15,7 @@ include '../../common/view/header.lite.html.php';
 js::import($jsRoot . 'md5.js');
 js::set('scriptName', $_SERVER['SCRIPT_NAME']);
 js::set('random', $this->session->random);
-js::set('notMd5Pwd', empty($config->notMd5Pwd) ? false : $config->notMd5Pwd);
+js::set('notEncryptedPwd', empty($config->notEncryptedPwd) ? false : $config->notEncryptedPwd);
 css::internal('body{background-color:#f6f5f5}');
 ?> 
 <div class='container'>
@@ -44,7 +44,7 @@ css::internal('body{background-color:#f6f5f5}');
             <table class='table table-form'>
               <tr>
                 <th><?php echo $lang->user->account;?></th>
-                <td><?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?></td>
+                <td><?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccount}'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->user->password;?></th>

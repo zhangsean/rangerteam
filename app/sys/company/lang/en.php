@@ -10,10 +10,10 @@
  * @link        http://www.ranzhico.com
  */
 $lang->company->common  = 'Company';
-$lang->company->index   = 'Index';
+$lang->company->index   = 'Home';
 
 $lang->company->name    = 'Name';
-$lang->company->desc    = 'Intro';
+$lang->company->desc    = 'Introduction';
 $lang->company->content = 'More';
 
 $lang->company->setBasic = 'Company Info';

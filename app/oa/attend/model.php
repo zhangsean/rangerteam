@@ -146,7 +146,9 @@ class attendModel extends model
         $this->processStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted,noforbidden', $deptID);
 
-        $attends = $this->dao->select('t1.*, t2.dept')->from(TABLE_ATTEND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
+        $attends = $this->dao->select('t1.*, t2.dept')
+            ->from(TABLE_ATTEND)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
             ->where('t1.account')->in(array_keys($users))
             ->beginIf($startDate != '')->andWhere('t1.date')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('t1.date')->le($endDate)->fi()
@@ -355,12 +357,30 @@ class attendModel extends model
      * Get all month data.
      * return array[year][month]
      * 
+     * @param  string $type
      * @access public
      * @return array
      */
-    public function getAllMonth()
+    public function getAllMonth($type = '')
     {
-        $dateList = $this->dao->select('date')->from(TABLE_ATTEND)->groupBy('date')->orderBy('date_asc')->fetchAll();
+        if($type == 'department')
+        {
+            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+            $dateList = $this->dao->select('date')->from(TABLE_ATTEND)->alias('t1')
+                ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account=t2.account')
+                ->where('t2.dept')->in(array_keys($deptList))
+                ->groupBy('date')
+                ->orderBy('date_desc')
+                ->fetchAll();
+        }
+        else
+        {
+            $dateList = $this->dao->select('date')->from(TABLE_ATTEND)
+                ->beginIF($type == 'personal')->where('account')->eq($this->app->user->account)->fi()
+                ->groupBy('date')
+                ->orderBy('date_desc')
+                ->fetchAll();
+        }
 
         $monthList = array();
         foreach($dateList as $date)
@@ -381,7 +401,9 @@ class attendModel extends model
     public function getNotice()
     {
         $account = $this->app->user->account;
-        if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false) return '';
+        $today   = helper::today();
+        if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false ||
+           (isset($this->config->attend->readers->{$today}) and strpos(',' . $this->config->attend->readers->{$today} . ',', ',' . $account . ',') !== false)) return '';
 
         $link    = helper::createLink('oa.attend', 'personal');
         $misc    = "class='app-btn alert-link' data-id='oa'";
@@ -389,7 +411,6 @@ class attendModel extends model
 
         $this->lang->attend->statusList['absent'] = $this->lang->attend->notice['absent'];
 
-        $today  = helper::today();
         $attend = $this->getByDate($today, $account);
         if(empty($attend)) $notice .= sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
         if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false and empty($attend->reason)) 
@@ -670,6 +691,8 @@ EOT;
         /* Compute status and remove signOut if date is today. */
         if($attend->date == helper::today()) 
         {
+            /* If the user did't quit system across a day, update signin time. */
+            if($attend->signIn == '00:00:00' && $attend->signOut > $this->config->attend->signInLimit) $attend->signIn = $this->config->attend->signInLimit;
             if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '00:00:00';
             $status = $this->computeStatus($attend);
             $attend->status = $status;
@@ -943,7 +966,7 @@ EOT;
      */
     public function checkIP()
     {
-        $ipParts  = explode('.', $_SERVER['REMOTE_ADDR']);
+        $ipParts  = explode('.', helper::getRemoteIp());
         $allowIPs = explode(',', $this->config->attend->ip);
 
         foreach($allowIPs as $allowIP)

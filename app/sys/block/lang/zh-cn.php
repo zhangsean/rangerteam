@@ -44,22 +44,22 @@ $lang->block->default['oa']['2']['grid']  = 4;
 
 $lang->block->default['oa']['2']['params']['num'] = 15;
 
-$lang->block->default['oa']['3']['title'] = '指派给我的任务';
-$lang->block->default['oa']['3']['block'] = 'task';
-$lang->block->default['oa']['3']['grid']  = 4;
+$lang->block->default['proj']['3']['title'] = '指派给我的任务';
+$lang->block->default['proj']['3']['block'] = 'task';
+$lang->block->default['proj']['3']['grid']  = 4;
 
-$lang->block->default['oa']['3']['params']['num']     = 15;
-$lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['3']['params']['status']  = array();
-$lang->block->default['oa']['3']['params']['type']    = 'assignedTo';
+$lang->block->default['proj']['3']['params']['num']     = 15;
+$lang->block->default['proj']['3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['proj']['3']['params']['status']  = array();
+$lang->block->default['proj']['3']['params']['type']    = 'assignedTo';
 
-$lang->block->default['oa']['4']['title'] = '项目列表';
-$lang->block->default['oa']['4']['block'] = 'project';
-$lang->block->default['oa']['4']['grid']  = 4;
+$lang->block->default['proj']['4']['title'] = '项目列表';
+$lang->block->default['proj']['4']['block'] = 'project';
+$lang->block->default['proj']['4']['grid']  = 4;
 
-$lang->block->default['oa']['4']['params']['num']     = 15;
-$lang->block->default['oa']['4']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['4']['params']['status']  = 'doing';
+$lang->block->default['proj']['4']['params']['num']     = 15;
+$lang->block->default['proj']['4']['params']['orderBy'] = 'id_desc';
+$lang->block->default['proj']['4']['params']['status']  = 'doing';
 
 $lang->block->default['crm']['1']['title'] = '我的订单';
 $lang->block->default['crm']['1']['block'] = 'order';
@@ -147,15 +147,18 @@ $lang->block->default['sys']['8'] = $lang->block->default['team']['2'];
 $lang->block->default['sys']['8']['source'] = 'team';
 
 $lang->block->moreLinkList = new stdclass();
-$lang->block->moreLinkList->order['assinedTo'] = '指派给我|sys|my|order|type=assinedTo';
-$lang->block->moreLinkList->order['createdBy'] = '由我创建|sys|my|order|type=createdBy';
-$lang->block->moreLinkList->order['signedBy']  = '由我签约|sys|my|order|type=signedBy';
+$lang->block->moreLinkList->order['assinedTo']    = '指派给我|sys|my|order|type=assinedTo';
+$lang->block->moreLinkList->order['createdBy']    = '由我创建|sys|my|order|type=createdBy';
+$lang->block->moreLinkList->order['signedBy']     = '由我签约|sys|my|order|type=signedBy';
+$lang->block->moreLinkList->order['normalstatus'] = '所有订单|crm|order|browse|mode=all';
+$lang->block->moreLinkList->order['signedstatus'] = '所有订单|crm|order|browse|mode=all';
+$lang->block->moreLinkList->order['closedstatus'] = '所有订单|crm|order|browse|mode=all';
 
 $lang->block->moreLinkList->contract['returnedBy']     = '由我回款|sys|my|contract|type=returnedBy';
 $lang->block->moreLinkList->contract['deliveredBy']    = '由我交付|sys|my|contract|type=deliveredBy';
-$lang->block->moreLinkList->contract['normalstatus']   = '未完成|sys|my|contract|type=unfinished';
-$lang->block->moreLinkList->contract['closedstatus']   = '已完成|sys|my|contract|type=finished';
-$lang->block->moreLinkList->contract['canceledstatus'] = '已取消|sys|my|contract|type=canceled';
+$lang->block->moreLinkList->contract['normalstatus']   = '未完成|crm|contract|browse|mode=unfinished';
+$lang->block->moreLinkList->contract['closedstatus']   = '已完成|crm|contract|browse|mode=finished';
+$lang->block->moreLinkList->contract['canceledstatus'] = '已取消|crm|contract|browse|mode=canceled';
 
 $lang->block->moreLinkList->customer['today']    = '今天联系|crm|customer|browse|type=today';
 $lang->block->moreLinkList->customer['thisweek'] = '本周联系|crm|customer|browse|type=thisweek';
@@ -173,9 +176,9 @@ $lang->block->moreLinkList->task['finishedBy'] = '由我完成|sys|my|task|type=
 $lang->block->moreLinkList->task['closedBy']   = '由我关闭|sys|my|task|type=closedBy';
 $lang->block->moreLinkList->task['canceledBy'] = '由我取消|sys|my|task|type=canceledBy';
 
-$lang->block->moreLinkList->project['doing']    = '进行中|oa|project|index|status=doing';
-$lang->block->moreLinkList->project['finished'] = '已完成|oa|project|index|status=finished';
-$lang->block->moreLinkList->project['suspend']  = '已挂起|oa|project|index|status=suspend';
+$lang->block->moreLinkList->project['doing']    = '进行中|proj|project|index|status=doing';
+$lang->block->moreLinkList->project['finished'] = '已完成|proj|project|index|status=finished';
+$lang->block->moreLinkList->project['suspend']  = '已挂起|proj|project|index|status=suspend';
 
 $lang->block->moreLinkList->blog = '最新博客|team|blog|index|';
 $lang->block->moreLinkList->thread['new']   = '最新帖子|team|forum|index|';

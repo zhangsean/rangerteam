@@ -9,6 +9,18 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+$lang->provider->browse      = '浏览供应商';
+$lang->provider->create      = '添加供应商';
+$lang->provider->edit        = '编辑供应商';
+$lang->provider->view        = '供应商详情';
+$lang->provider->delete      = '删除供应商';
+$lang->provider->list        = '供应商列表';
+$lang->provider->contact     = '联系人';
+$lang->provider->linkContact = '添加联系人';
+$lang->provider->basicInfo   = '基本信息';
+$lang->provider->moreInfo    = '更多信息';
+$lang->provider->setCategory = '维护类目';
+
 $lang->provider->common        = '供应商维护';
 $lang->provider->id            = '编号';
 $lang->provider->name          = '名称';
@@ -32,17 +44,9 @@ $lang->provider->editedBy      = '由谁编辑';
 $lang->provider->editedDate    = '编辑时间';
 $lang->provider->createContact = '新建联系人';
 
-$lang->provider->browse      = '浏览供应商';
-$lang->provider->create      = '添加供应商';
-$lang->provider->edit        = '编辑供应商';
-$lang->provider->view        = '供应商详情';
-$lang->provider->delete      = '删除供应商';
-$lang->provider->list        = '供应商列表';
-$lang->provider->contact     = '联系人';
-$lang->provider->linkContact = '添加联系人';
-$lang->provider->basicInfo   = '基本信息';
-$lang->provider->moreInfo    = '更多信息';
-$lang->provider->setCategory = '维护类目';
+$lang->provider->relationList['client']   = '客户';
+$lang->provider->relationList['provider'] = '供应商';
+$lang->provider->relationList['partner']  = '合作伙伴';
 
 $lang->provider->typeList['']           = '';
 $lang->provider->typeList['national']   = '国有企业';
@@ -58,7 +62,3 @@ $lang->provider->sizeList[1] = '大型(100人以上)';
 $lang->provider->sizeList[2] = '中型(50-100人)';
 $lang->provider->sizeList[3] = '小型(10人-50人)';
 $lang->provider->sizeList[4] = '微型(10人以下)';
-
-$lang->provider->relationList['client']   = '客户';
-$lang->provider->relationList['provider'] = '供应商';
-$lang->provider->relationList['partner']  = '合作伙伴';

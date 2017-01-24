@@ -23,32 +23,6 @@ $lang->menu->crm->leads     = '名單|leads|browse|mode=assignedTo';
 $lang->menu->crm->product   = '產品|product|browse|';
 $lang->menu->crm->setting   = '設置|setting|lang|module=product&field=statusList';
 
-/* Menu of customer module. */
-if(!isset($lang->customer)) $lang->customer = new stdclass();
-$lang->customer->menu = new stdclass();
-$lang->customer->menu->browse       = '所有客戶|customer|browse|mode=all';
-$lang->customer->menu->assignedTo   = '指派給我|customer|browse|mode=assignedTo';
-$lang->customer->menu->past         = '亟需聯繫|customer|browse|mode=past';
-$lang->customer->menu->today        = '今天聯繫|customer|browse|mode=today';
-$lang->customer->menu->tomorrow     = '明天聯繫|customer|browse|mode=tomorrow';
-$lang->customer->menu->thisweek     = '本週內聯繫|customer|browse|mode=thisweek';
-$lang->customer->menu->thismonth    = '本月內聯繫|customer|browse|mode=thismonth';
-$lang->customer->menu->public       = '客戶池|customer|browse|mode=public';
-$lang->customer->menu->report       = '報表|report|browse|module=customer';
-
-/* Menu of provider module. */
-if(!isset($lang->provider)) $lang->provider = new stdclass();
-$lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => '供應商列表|provider|browse|', 'alias' => 'create,edit,view');
-
-/* Menu of product module. */
-if(!isset($lang->product)) $lang->product = new stdclass();
-$lang->product->menu = new stdclass();
-$lang->product->menu->browse     = '所有產品|product|browse|mode=all';
-$lang->product->menu->normal     = '正常|product|browse|mode=normal';
-$lang->product->menu->developing = '研發中|product|browse|mode=developing';
-$lang->product->menu->offline    = '下線|product|browse|mode=offline';
-
 /* Menu of order module. */
 if(!isset($lang->order)) $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
@@ -96,12 +70,12 @@ $lang->contract->menu->report       = '報表|report|browse|module=contract';
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->product        = '產品狀態|setting|lang|module=product&field=statusList';
-$lang->setting->menu->productLine    = '產品綫|setting|lang|module=product&field=lineList';
-$lang->setting->menu->customerType   = '客戶類型|setting|lang|module=customer&field=typeList';
-$lang->setting->menu->customerSize   = '客戶規模|setting|lang|module=customer&field=sizeNameList';
-$lang->setting->menu->customerLevel  = '客戶等級|setting|lang|module=customer&field=levelNameList';
-$lang->setting->menu->customerStatus = '客戶狀態|setting|lang|module=customer&field=statusList';
+$lang->setting->menu->product        = '產品狀態|setting|lang|module=product&field=statusList&appName=sys';
+$lang->setting->menu->productLine    = '產品綫|setting|lang|module=product&field=lineList&appName=sys';
+$lang->setting->menu->customerType   = '客戶類型|setting|lang|module=customer&field=typeList&appName=sys';
+$lang->setting->menu->customerSize   = '客戶規模|setting|lang|module=customer&field=sizeNameList&appName=sys';
+$lang->setting->menu->customerLevel  = '客戶等級|setting|lang|module=customer&field=levelNameList&appName=sys';
+$lang->setting->menu->customerStatus = '客戶狀態|setting|lang|module=customer&field=statusList&appName=sys';
 $lang->setting->menu->area           = '區域設置|tree|browse|type=area|';
 $lang->setting->menu->industry       = '行業設置|tree|browse|type=industry|';
 $lang->setting->menu->currency       = '貨幣設置|setting|lang|module=common&field=currencyList';
@@ -115,3 +89,4 @@ $lang->sales->menu = $lang->setting->menu;
 $lang->dashboard = new stdclass();
 if(!isset($lang->resume))  $lang->resume  = new stdclass();
 if(!isset($lang->address)) $lang->address = new stdclass();
+include (dirname(__FILE__) . '/menuOrder.php');

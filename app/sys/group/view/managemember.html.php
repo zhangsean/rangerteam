@@ -11,12 +11,12 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><?php echo $lang->group->manageMember;?></strong>
-  </div>
-  <div class='panel-body'>
-    <form class='form-condensed pdb-20' method='post' id='ajaxForm'>
+<form class='form-condensed pdb-20' method='post' id='ajaxForm'>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <strong><?php echo $lang->group->manageMember;?></strong>
+    </div>
+    <div class='panel-body'>
       <table class='table table-form'> 
         <?php if($groupUsers):?>
         <tr>
@@ -45,6 +45,6 @@
       echo html::hidden('foo'); // Just a var, to make sure $_POST is not empty.
       ?>
     </div>
-  </form>
-</div>
+  </div>
+</form>
 <?php include '../../common/view/footer.html.php';?>

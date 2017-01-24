@@ -14,8 +14,11 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
-  <li><?php commonModel::printLink('provider', 'browse', '', $lang->provider->browse);?></li>
+  <li><?php commonModel::printLink('provider', 'browse', '', $lang->provider->list);?></li>
   <li class='divider angle'></li>
+  <li><?php commonModel::printLink('provider', 'view', "providerID={$provider->id}", $lang->provider->view);?></li>
+  <li class='divider angle'></li>
+  <li class='title'><?php echo $lang->provider->edit?></li>
 </ul>
 <div class='panel'>
   <div class='panel-heading'>

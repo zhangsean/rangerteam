@@ -343,41 +343,43 @@ class router extends baseRouter
 
         /* Merge from the db lang. */
         if(empty($appName)) $appName = $this->appName;
-        if(isset($lang->db->custom[$appName][$moduleName]))
+
+        $customLang = array();
+        if(isset($lang->db->custom[$appName][$moduleName])) $customLang += $lang->db->custom[$appName][$moduleName];
+        if(isset($lang->db->custom['sys'][$moduleName])) $customLang += $lang->db->custom['sys'][$moduleName];
+
+        foreach($customLang as $section => $fields)
         {
-            foreach($lang->db->custom[$appName][$moduleName] as $section => $fields)
+            if(empty($section))
             {
-                if(empty($section))
+                foreach($fields as $key => $value)
                 {
-                    foreach($fields as $key => $value)
+                    if($moduleName == 'common')
                     {
-                        if($moduleName == 'common')
-                        {
-                            unset($lang->{$key});
-                            $lang->{$key} = $value;
-                        }
-                        else
-                        {
-                            if(!isset($lang->{$moduleName})) $lang->{$moduleName} = new stdclass();
-                            unset($lang->{$moduleName}->{$key});
-                            $lang->{$moduleName}->{$key} = $value;
-                        }
+                        unset($lang->{$key});
+                        $lang->{$key} = $value;
+                    }
+                    else
+                    {
+                        if(!isset($lang->{$moduleName})) $lang->{$moduleName} = new stdclass();
+                        unset($lang->{$moduleName}->{$key});
+                        $lang->{$moduleName}->{$key} = $value;
                     }
                 }
-                else
+            }
+            else
+            {
+                foreach($fields as $key => $value)
                 {
-                    foreach($fields as $key => $value)
+                    if($moduleName == 'common')
                     {
-                        if($moduleName == 'common')
-                        {
-                            unset($lang->{$section}[$key]);
-                            $lang->{$section}[$key] = $value;
-                        }
-                        else
-                        {
-                            unset($lang->{$moduleName}->{$section}[$key]);
-                            $lang->{$moduleName}->{$section}[$key] = $value;
-                        }
+                        unset($lang->{$section}[$key]);
+                        $lang->{$section}[$key] = $value;
+                    }
+                    else
+                    {
+                        unset($lang->{$moduleName}->{$section}[$key]);
+                        $lang->{$moduleName}->{$section}[$key] = $value;
                     }
                 }
             }

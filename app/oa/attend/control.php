@@ -29,8 +29,8 @@ class attend extends control
         $weekNum      = (int)ceil($dayNum / 7);
 
         $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate > helper::today() ? helper::today() : $endDate);
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
+        $monthList = $this->attend->getAllMonth($type = 'personal');
+        $yearList  = array_keys($monthList);
 
         $this->view->title        = $this->lang->attend->personal;
         $this->view->attends      = $attends;
@@ -85,8 +85,8 @@ class attend extends control
 
         $dayNum    = (int)date('d', strtotime("$endDate -1 day"));
         $weekNum   = (int)ceil($dayNum / 7);
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
+        $monthList = $this->attend->getAllMonth($type = $company ? 'company' : 'department');
+        $yearList  = array_keys($monthList);
 
         /* Get deptList. */
         if($company) 
@@ -687,8 +687,8 @@ class attend extends control
             }
         }
 
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
+        $monthList = $this->attend->getAllMonth($type = 'stat');
+        $yearList  = array_keys($monthList);
 
         $this->view->title        = $this->lang->attend->stat;
         $this->view->mode         = $mode;
@@ -857,7 +857,7 @@ class attend extends control
         }
         $fileName .= $currentYear . $this->lang->year . $currentMonth . $this->lang->month . $this->lang->attend->detail;
 
-        $this->view->title        = $this->lang->attend->department;
+        $this->view->title        = $this->lang->attend->detail;
         $this->view->dept         = $deptID;
         $this->view->account      = $account;
         $this->view->date         = "{$currentYear}-{$currentMonth}-01";
@@ -938,5 +938,20 @@ class attend extends control
 
         $this->view->fileName = $fileName;
         $this->display('attend', 'export');
+    }
+
+    /**
+     * Read attend notice.
+     * 
+     * @access public
+     * @return void
+     */
+    public function read()
+    {
+        $today = helper::today();
+        if(!isset($this->config->attend->readers->$today)) $this->loadModel('setting')->deleteItems("owner=system&app=oa&module=attend&section=readers");
+
+        $readers = isset($this->config->attend->readers->$today) ? $this->config->attend->readers->$today . ',' . $this->app->user->account : $this->app->user->account;
+        $this->loadModel('setting')->setItem("system.oa.attend.readers.{$today}", $readers);
     }
 }

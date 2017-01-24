@@ -32,7 +32,7 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $status = 'normal', $origin = '',  $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $status = 'normal', $origin = '',  $orderBy = 't1.id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -43,7 +43,7 @@ class contact extends control
         $this->session->set('customerList', $this->app->getURI(true));
         $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', array_keys($contacts))) . ',';
 
-        $customers = $this->loadModel('customer', 'crm')->getPairs();
+        $customers = $this->loadModel('customer')->getPairs();
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -51,7 +51,7 @@ class contact extends control
         $this->config->contact->search['params']['t2.customer']['values'] = $customers;
         $this->search->setSearchParams($this->config->contact->search);
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
@@ -79,11 +79,11 @@ class contact extends control
             $this->send($return);
         }
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
         unset($this->lang->contact->menu);
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->sizeList  = $this->customer->combineSizeList();
         $this->view->levelList = $this->customer->combineLevelList();
         $this->display();
@@ -118,7 +118,7 @@ class contact extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->loadModel('customer', 'crm')->updateEditedDate($this->post->customer);
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
             $return = $this->contact->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
@@ -127,10 +127,10 @@ class contact extends control
             $this->send(array('result' => 'success', 'message' => $message, 'locate' => $locate));
         }
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         $this->view->title      = $this->lang->contact->edit;
-        $this->view->customers  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers  = $this->loadModel('customer')->getPairs();
         $this->view->contact    = $contact;
         $this->view->modalWidth = 1000;
 
@@ -162,7 +162,7 @@ class contact extends control
         $this->view->contact    = $this->contact->getByID($contactID, $status);
         $this->view->addresses  = $this->loadModel('address', 'crm')->getList('contact', $contactID);
         $this->view->resumes    = $this->loadModel('resume', 'crm')->getList($contactID);
-        $this->view->customers  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
         $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('contact', $contactID); 
         $this->view->fileList   = $fileList;
 
@@ -228,7 +228,7 @@ class contact extends control
     public function vcard($contactID)
     {
         $contact = $this->contact->getByID($contactID);
-        $customer = $this->loadModel('customer', 'crm')->getByID($contact->customer);
+        $customer = $this->loadModel('customer')->getByID($contact->customer);
         $addresses = $this->loadModel('address', 'crm')->getList('contact', $contactID);
 
         $fullAddress = '';
@@ -251,7 +251,7 @@ END:VCARD";
     /**
      * get data to export.
      * 
-     * @param  string $range 
+     * @param  string $type         contact | leads
      * @param  string $mode 
      * @param  string $orderBy 
      * @param  int    $recTotal 
@@ -260,7 +260,7 @@ END:VCARD";
      * @access public
      * @return void
      */
-    public function export($mode = 'all', $orderBy = 'id_desc')
+    public function export($type = 'contact', $mode = 'all', $orderBy = 'id_desc')
     { 
         if($_POST)
         {
@@ -277,22 +277,22 @@ END:VCARD";
             }
 
             $contacts = array();
+            $queryCondition = $this->session->{$type . 'QueryCondition'};
             if($mode == 'all')
             {
-                $contactQueryCondition = $this->session->contactQueryCondition;
-                if(strpos($contactQueryCondition, 'limit') !== false) $contactQueryCondition = substr($contactQueryCondition, 0, strpos($contactQueryCondition, 'limit'));
-                $stmt = $this->dbh->query($contactQueryCondition);
+                if(strpos($queryCondition, 'limit') !== false) $queryCondition = substr($queryCondition, 0, strpos($queryCondition, 'limit'));
+                $stmt = $this->dbh->query($queryCondition);
                 while($row = $stmt->fetch()) $contacts[$row->id] = $row;
             }
 
             if($mode == 'thisPage')
             {
-                $stmt = $this->dbh->query($this->session->contactQueryCondition);
+                $stmt = $this->dbh->query($queryCondition);
                 while($row = $stmt->fetch()) $contacts[$row->id] = $row;
             }
 
             $users     = $this->loadModel('user', 'sys')->getPairs();
-            $customers = $this->loadModel('customer', 'crm')->getPairs();
+            $customers = $this->loadModel('customer')->getPairs();
 
             $resumes     = $this->dao->select('*')->FROM(TABLE_RESUME)->where('deleted')->eq(0)->fetchGroup('contact');
             $addressList = $this->dao->select('*')->FROM(TABLE_ADDRESS)->fetchGroup('objectID');

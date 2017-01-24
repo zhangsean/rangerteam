@@ -34,7 +34,12 @@ class holidayModel extends model
     {
         return $this->dao->select('*')->from(TABLE_HOLIDAY)
             ->where('1')
-            ->beginIf($year != '')->andWhere('year')->eq($year)->fi()
+            ->beginIf($year != '')
+            ->andWhere('year', true)->eq($year)
+            ->orWhere('begin')->like("$year-%")
+            ->orWhere('end')->like("$year-%")
+            ->markright(1)
+            ->fi()
             ->beginIf($type != 'all' && $type)->andWhere('type')->eq($type)->fi()
             ->fetchAll('id');
     }

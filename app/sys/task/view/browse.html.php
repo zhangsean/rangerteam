@@ -12,13 +12,16 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php if($mode) js::set('mode', $mode);?>
+<?php js::set('projectID', $projectID);?>
+<?php if($projectID):?>
 <?php js::set('backLink', $backLink);?>
-<?php $this->loadModel('project', 'oa')->setMenu($projects, $projectID);?>
+<?php $this->loadModel('project', 'proj')->setMenu($projects, $projectID);?>
+<?php endif;?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
-<div class='row with-menu page-content'>
+<div class='row'>
   <div class='panel'>
     <?php if(commonModel::hasPriv('task', 'batchClose')):?>
-    <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.task', 'batchClose');?>">
+    <form id='ajaxForm' method='post' action="<?php echo $this->createLink('proj.task', 'batchClose');?>">
     <?php endif;?>
       <table class='table table-hover table-striped tablesorter table-data table-fixed' id='taskList'>
         <thead>

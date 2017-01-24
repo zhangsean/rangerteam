@@ -71,8 +71,8 @@ class leave extends control
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
-        $monthList    = $this->leave->getAllMonth();
-        $yearList     = array_reverse(array_keys($monthList));
+        $monthList    = $this->leave->getAllMonth($type);
+        $yearList     = array_keys($monthList);
         $deptList     = $this->loadModel('tree')->getPairs(0, 'dept');
         $leaveList    = array();
 
@@ -263,6 +263,7 @@ class leave extends control
 
         if($_POST)
         {
+            if($this->post->backDate < ($leave->begin . ' ' . $leave->start)) $this->send(array('result' => 'fail', 'message' => array('backDate' => $this->lang->leave->wrongBackDate)));
             $this->leave->back($id);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));

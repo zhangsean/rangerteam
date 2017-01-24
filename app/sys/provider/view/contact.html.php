@@ -36,8 +36,8 @@
     <td><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
     <td><?php echo $contact->qq;?></td>
     <td>
-      <?php commonModel::printLink('contact', 'edit', "contactID=$contact->id", $lang->edit, "class='loadInModal'");?>
-      <?php commonModel::printLink('contact', 'delete', "contactID=$contact->id", $lang->delete, "class='deleter'");?>
+      <?php commonModel::printLink('crm.contact', 'edit', "contactID=$contact->id", $lang->edit, "class='loadInModal'");?>
+      <?php commonModel::printLink('crm.contact', 'delete', "contactID=$contact->id", $lang->delete, "class='deleter'");?>
     </td>
   </tr>
   <?php endforeach;?>

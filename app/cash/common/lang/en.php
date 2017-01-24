@@ -34,28 +34,24 @@ if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 
-/* Menu of provider module. */
-if(!isset($lang->provider)) $lang->provider = new stdclass();
-$lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => 'Provider List|provider|browse|', 'alias' => 'create,edit,view');
-
 /* Menu of contact module. */
 if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse = array('link' => 'Contact List|contact|browse|', 'alias' => 'create,edit,view');
+$lang->contact->menu->browse = array('link' => 'Contacts|contact|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of report module. */
 if(!isset($lang->report)) $lang->report = new stdclass();
 $lang->report->menu = new stdclass();
-$lang->report->menu->annual  = 'Annual Income and Expense|trade|report|';
-$lang->report->menu->compare = 'Annual Compare|trade|compare|';
-$lang->report->menu->export  = 'Depositor Profit and Loss|trade|export2Excel|mode=depositor';
+$lang->report->menu->annual  = 'Annual balance sheet|trade|report|';
+$lang->report->menu->compare = 'Annual Comparison sheet|trade|compare|';
+$lang->report->menu->export  = 'Profit and loss statement|trade|export2Excel|mode=depositor';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->income    = 'Income|tree|browse|type=in|';
-$lang->setting->menu->expend    = 'Expend|tree|browse|type=out|';
+$lang->setting->menu->expend    = 'Expense|tree|browse|type=out|';
 $lang->setting->menu->currency  = 'Currency|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->schema    = 'Schema|schema|browse|';
-$lang->setting->menu->tradePriv = 'Expend Browse Privilege|group|managetradepriv|';
+$lang->setting->menu->schema    = 'Template|schema|browse|';
+$lang->setting->menu->tradePriv = 'View Expense|group|managetradepriv|';
+include(dirname(__FILE__) . '/menuOrder.php');

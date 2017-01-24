@@ -21,7 +21,6 @@ $lang->attend->export       = '导出';
 $lang->attend->stat         = '统计';
 $lang->attend->saveStat     = '保存考勤统计';
 $lang->attend->exportStat   = '导出考勤统计表';
-$lang->attend->detail       = '浏览考勤明细';
 $lang->attend->exportDetail = '导出考勤明细';
 $lang->attend->browseReview = '补录列表';
 

@@ -17,7 +17,7 @@ include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php if(!$isChildren) $this->loadModel('project')->setMenu($projects, $projectID);?>
-<div class='<?php echo $isChildren ? '' : 'with-menu';?> page-content'>
+<div class='page-content'>
   <form id='ajaxForm' method='post' action='<?php echo $this->createLink('task', 'batchCreate', "projectID=$projectID&parent=$parent");?>'>
     <div class='panel'>
       <table class='table table-form'>

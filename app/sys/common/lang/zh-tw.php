@@ -32,6 +32,7 @@ $lang->apps = new stdclass();
 $lang->apps->crm        = '客戶';
 $lang->apps->cash       = '財務';
 $lang->apps->oa         = '辦公';
+$lang->apps->doc        = '文檔';
 $lang->apps->sys        = '通用';
 $lang->apps->team       = '團隊';
 $lang->apps->superadmin = '後台';
@@ -73,7 +74,6 @@ $lang->link           = '友情連結';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '論壇';
 $lang->bookHome       = '手冊';
-$lang->dashboard      = '成員中心';
 $lang->register       = '註冊';
 $lang->logout         = '退出';
 $lang->login          = '登錄';
@@ -99,7 +99,7 @@ $lang->finish         = '完成';
 $lang->cancel         = '取消';
 $lang->import         = '導入';
 $lang->export         = '導出';
-$lang->setFileName    = '檔案名：';
+$lang->setFileName    = '檔案名';
 $lang->setFileNum     = '記錄數';
 $lang->setFileType    = '檔案類型';
 $lang->save           = '保存';
@@ -151,6 +151,8 @@ $lang->custom         = '自定義';
 $lang->exportAll      = '導出全部記錄';
 $lang->exportThisPage = '導出本頁記錄';
 $lang->exportTemplate = '導出模板';
+$lang->exportExcel    = '導出Excel';
+$lang->exportWord     = '導出Word';
 $lang->importFile     = '導入檔案';
 $lang->importSuccess  = '導入成功';
 $lang->importFail     = '導入失敗';
@@ -258,6 +260,32 @@ $lang->menu->dashboard->review   = '審批|my|review|';
 $lang->menu->dashboard->company  = '組織|my|company|';
 $lang->menu->dashboard->dynamic  = '動態|my|dynamic|';
 
+/* Menu of customer module. */
+if(!isset($lang->customer)) $lang->customer = new stdclass();
+$lang->customer->menu = new stdclass();
+$lang->customer->menu->browse       = '所有客戶|customer|browse|mode=all';
+$lang->customer->menu->assignedTo   = '指派給我|customer|browse|mode=assignedTo';
+$lang->customer->menu->past         = '亟需聯繫|customer|browse|mode=past';
+$lang->customer->menu->today        = '今天聯繫|customer|browse|mode=today';
+$lang->customer->menu->tomorrow     = '明天聯繫|customer|browse|mode=tomorrow';
+$lang->customer->menu->thisweek     = '本週內聯繫|customer|browse|mode=thisweek';
+$lang->customer->menu->thismonth    = '本月內聯繫|customer|browse|mode=thismonth';
+$lang->customer->menu->public       = '客戶池|customer|browse|mode=public';
+$lang->customer->menu->report       = '報表|report|browse|module=customer';
+
+/* Menu of provider module. */
+if(!isset($lang->provider)) $lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => '供應商列表|provider|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of product module. */
+if(!isset($lang->product)) $lang->product = new stdclass();
+$lang->product->menu = new stdclass();
+$lang->product->menu->browse     = '所有產品|product|browse|mode=all';
+$lang->product->menu->normal     = '正常|product|browse|mode=normal';
+$lang->product->menu->developing = '研發中|product|browse|mode=developing';
+$lang->product->menu->offline    = '下線|product|browse|mode=offline';
+
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
 $lang->todo->menu->calendar        = '日曆|todo|calendar|';
@@ -313,6 +341,8 @@ $lang->my->dynamic->menu->lastweek   = '上周|my|dynamic|period=lastweek';
 $lang->my->dynamic->menu->thismonth  = '本月|my|dynamic|period=thismonth';
 $lang->my->dynamic->menu->lastmonth  = '上月|my|dynamic|period=lastmonth';
 $lang->my->dynamic->menu->all        = '所有|my|dynamic|period=all';
+
+$lang->my->company = new stdclass();
 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
@@ -476,3 +506,5 @@ define('DT_DATE4',      'n月j日');
 define('DT_DATE5',      'Y年m月');
 define('DT_TIME1',      'H:i:s');
 define('DT_TIME2',      'H:i');
+
+include (dirname(__FILE__) . '/menuOrder.php');

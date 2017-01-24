@@ -14,7 +14,7 @@ class provider extends control
     public function __CONSTRUCT()
     {
         parent::__CONSTRUCT();
-        $this->loadModel('customer', 'crm');
+        $this->loadModel('customer');
         $this->loadModel('contact', 'crm');
         $this->loadModel('resume', 'crm');
     }
@@ -146,6 +146,7 @@ class provider extends control
      */
     public function contact($providerID)
     {
+        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit')) . ',';
         $this->view->title      = $this->lang->provider->contact;
         $this->view->contacts   = $this->contact->getList($providerID, 'provider');
         $this->view->providerID = $providerID;

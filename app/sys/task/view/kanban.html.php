@@ -15,7 +15,7 @@
 <?php js::set('groupBy', $groupBy);?>
 <?php js::set('backLink', $backLink);?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID, $groupBy);?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <div class='boards-container'>
     <div class='boards task-boards clearfix' id='taskKanban'>
     <?php foreach($tasks as $groupKey => $groupTasks):?>

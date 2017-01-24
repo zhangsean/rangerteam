@@ -29,7 +29,7 @@ $clientTheme  = $this->app->getClientTheme();
   js::exportConfigVars();
   if(isset($this->app->entry->id)) js::set('entryID', $this->app->entry->id);
   if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and ($this->app->user->admin == 'super')) js::set('entryID', 'superadmin');
-  if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and ($this->moduleName == 'my' or $this->moduleName == 'todo')) js::set('entryID', 'dashboard');
+  if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and (strpos($config->dashboard->modules, $this->moduleName) !== false)) js::set('entryID', 'dashboard');
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
@@ -71,4 +71,4 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 </head>
-<body class='m-<?php echo $this->app->getModuleName() . '-' . $this->app->getMethodName() ?>'>
+<body class='m-<?php echo $this->app->getModuleName() . '-' . $this->app->getMethodName() ?><?php if(isset($this->app->entry->code)) echo ' entry-' . $this->app->entry->code; ?>'>

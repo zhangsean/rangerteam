@@ -15,7 +15,7 @@ $lang->upgrade->common  = 'Upgrade';
 $lang->upgrade->result  = 'Result';
 $lang->upgrade->fail    = 'Failed';
 $lang->upgrade->success = 'Success';
-$lang->upgrade->tohome  = 'Go to index';
+$lang->upgrade->tohome  = 'Back to Home';
 
 $lang->upgrade->index         = 'Upgrad Ranzhi.';
 $lang->upgrade->backup        = 'Backup';
@@ -74,7 +74,9 @@ $lang->upgrade->fromVersions['3_3']      = '3.3';
 $lang->upgrade->fromVersions['3_4']      = '3.4';
 $lang->upgrade->fromVersions['3_5']      = '3.5';
 $lang->upgrade->fromVersions['3_6']      = '3.6';
+$lang->upgrade->fromVersions['3_7']      = '3.7';
 
 $lang->upgrade->deleteTips   = 'Need to delete some files. The commands in Linux are:<br />';
+$lang->upgrade->deleteDir    = '<code>rm -fr %s</code>';
 $lang->upgrade->deleteFile   = '<code>rm %s</code>';
 $lang->upgrade->afterDeleted = '<br />Refresh after delete.';

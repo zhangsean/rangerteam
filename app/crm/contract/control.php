@@ -71,7 +71,7 @@ class contract extends control
 
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
@@ -113,7 +113,7 @@ class contract extends control
         unset($this->lang->contract->menu);
         $this->view->title        = $this->lang->contract->create;
         $this->view->orderID      = $orderID;
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->users        = $this->loadModel('user', 'crm')->getPairs('nodeleted,noclosed');
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
@@ -172,7 +172,7 @@ class contract extends control
         $this->view->contract       = $contract; 
         $this->view->contractOrders = $this->loadModel('order', 'crm')->getByIdList($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'query', "customer={$contract->customer}");
-        $this->view->customers      = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers      = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts       = $this->loadModel('contact', 'crm')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user', 'sys')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->currencyList   = $this->loadModel('common', 'sys')->getCurrencyList();
@@ -198,12 +198,12 @@ class contract extends control
             if($this->post->finish)
             {
                 $this->loadModel('action', 'sys')->create('contract', $contractID, 'finishDelivered', $this->post->comment, '', $this->post->deliveredBy);
-                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+                $this->action->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
             }
             else
             {
                 $this->loadModel('action', 'sys')->create('contract', $contractID, 'Delivered', $this->post->comment, '', $this->post->deliveredBy);
-                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+                $this->action->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
@@ -302,7 +302,7 @@ class contract extends control
         $orderID = $this->dao->select('`order`')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetch('order');
         $order   = $this->loadModel('order', 'crm')->getByID($orderID);
 
-        $productList = $this->loadModel('product', 'crm')->getPairs();
+        $productList = $this->loadModel('product')->getPairs();
         if(isset($order->product))
         {
             $productList = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($order->product)->fetchPairs();
@@ -458,9 +458,9 @@ class contract extends control
 
         $this->view->title        = $this->lang->contract->view;
         $this->view->orders       = $this->loadModel('order', 'crm')->getByIdList($contract->order);
-        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts     = $this->loadModel('contact', 'crm')->getPairs($contract->customer);
-        $this->view->products     = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->products     = $this->loadModel('product')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->contract     = $contract;
         $this->view->actions      = $this->loadModel('action')->getList('contract', $contractID);
@@ -584,20 +584,24 @@ class contract extends control
             }
 
             $users        = $this->loadModel('user')->getPairs();
-            $customers    = $this->loadModel('customer', 'crm')->getPairs();
+            $customers    = $this->loadModel('customer')->getPairs();
             $contacts     = $this->loadModel('contact', 'crm')->getPairs();
             $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('contract')->andWhere('objectID')->in(@array_keys($contracts))->fetchGroup('objectID');
 
             $contractOrderList = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchGroup('contract');
             foreach($contracts as $id => $contract)
             {
-                $contract->order = array();
                 if(isset($contractOrderList[$id]))
                 {
+                    $contract->order = array();
                     foreach($contractOrderList[$id] as $contractOrder)
                     {
                         $contract->order[] = $contractOrder->order;
                     }
+                }
+                else
+                {
+                    $contract->order = '';
                 }
             }
 
@@ -608,7 +612,7 @@ class contract extends control
             foreach($orders as $key => $order)
             {
                 $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
-                $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $productName, date('Y-m-d', strtotime($order->createdDate))); 
+                $orderPairs[$key] = sprintf($this->lang->order->titleLBL, zget($customers, $order->customer), $productName, date('Y-m-d', strtotime($order->createdDate))); 
             }
 
             foreach($contracts as $contract)

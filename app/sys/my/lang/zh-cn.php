@@ -15,7 +15,6 @@ $lang->my->order->common = '任务';
 
 $lang->my->contract->common = '合同';
 
-$lang->my->company = new stdclass();
 $lang->my->company->common  = '组织待办';
 $lang->my->company->dept    = '部门';
 $lang->my->company->all     = '所有';

@@ -17,8 +17,8 @@ $lang->thread->board      = 'Board';
 $lang->thread->author     = 'Author';
 $lang->thread->content    = 'Content ';
 $lang->thread->file       = 'File ';
-$lang->thread->postedDate = 'Posted date';
-$lang->thread->replies    = 'Replies';
+$lang->thread->postedDate = 'Posted on';
+$lang->thread->replies    = 'Reply';
 $lang->thread->views      = 'Views';
 $lang->thread->lastReply  = 'Last reply';
 

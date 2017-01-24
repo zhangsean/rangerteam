@@ -67,6 +67,11 @@ $(document).ready(function()
 
     setMenu();
     initSearch();
+
+    $(document).on('click', '#noticeAttend .close', function()
+    {
+        $.get(createLink('oa.attend', 'read'));
+    });
 });
 
 $(document).on('keyup', function(e)
@@ -195,6 +200,17 @@ function setMenu()
         $menu.children('ul.nav:not(.pull-right)').hide();
         $menu.prepend($menuTitle.addClass('nav'));
     }
+}
+
+/* Remove 'ditto' in first row when batch create or edit. */
+function removeDitto()
+{
+    $firstTr = $('.table').find('tbody tr:first');
+    $firstTr.find('td select').each(function()
+    {    
+        $(this).find("option[value='ditto']").remove();
+        $(this).trigger("chosen:updated");
+    });  
 }
 
 /**

@@ -14,6 +14,7 @@
 /* Judge class config and function getWebRoot exists or not, make sure php shells can work. */
 if(!class_exists('config')){class config{}}
 if(!function_exists('getWebRoot')){function getWebRoot(){}}
+if(!isset($config)) $config = new stdclass();
 
 /* 系统框架配置。Framework settings. */
 $config->framework = new stdclass();
@@ -31,7 +32,7 @@ $config->framework->purifier       = false; // 是否对数据做purifier处理�
 $config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
 
 /* Basic settings. */
-$config->version      = '3.7';             // The version of ranzhi. Don't change it.
+$config->version      = '4.0';             // The version of ranzhi. Don't change it.
 $config->charset      = 'UTF-8';           // The charset of ranzhi.
 $config->cookieLife   = time() + 2592000;  // The cookie life time.
 $config->timezone     = 'Asia/Shanghai';   // The time zone setting, for more see http://www.php.net/manual/en/timezones.php
@@ -77,6 +78,9 @@ $config->default->lang   = 'en';          // Default language.
 $config->default->theme  = 'default';     // Default theme.
 $config->default->module = 'index';       // Default module.
 $config->default->method = 'index';       // Default method.
+
+$config->dashboard = new stdclass();
+$config->dashboard->modules = 'my,todo';
 
 /* Upload settings: danger files and max upload size. */
 $config->file = new stdclass();
@@ -156,6 +160,7 @@ define('TABLE_SALESPRIV',     '`crm_salespriv`');
 define('TABLE_TODO',       '`oa_todo`');
 define('TABLE_PROJECT',    '`oa_project`');
 define('TABLE_DOC',        '`oa_doc`');
+define('TABLE_DOCCONTENT', '`oa_doccontent`');
 define('TABLE_DOCLIB',     '`oa_doclib`');
 define('TABLE_ATTEND',     '`oa_attend`');
 define('TABLE_ATTENDSTAT', '`oa_attendstat`');

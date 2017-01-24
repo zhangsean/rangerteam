@@ -23,7 +23,7 @@ $(document).ready(function()
             {
                 if($(this).parent('tr').find('.chart-label').text() == value)
                 {
-                    datasetIn.data.push(parseInt($(this).text()));
+                    datasetIn.data.push(parseFloat($(this).text()));
                 }
             })
 
@@ -31,21 +31,21 @@ $(document).ready(function()
             {
                 if($(this).parent('tr').find('.chart-label').text() == value)
                 {
-                    datasetOut.data.push(parseInt($(this).text()));
+                    datasetOut.data.push(parseFloat($(this).text()));
                 }
             })
         }
         else
         {
-            datasetIn.data.push(parseInt(0));
-            datasetOut.data.push(parseInt(0));
+            datasetIn.data.push(parseFloat(0));
+            datasetOut.data.push(parseFloat(0));
         }
     })
     
     var data = {labels: labels, datasets: [datasetIn, datasetOut]};
     
     var options = {multiTooltipTemplate: "<%= datasetLabel %> <%= value %>"};
-    chart = $('#myBarChart').barChart(data, options);
+    chart = $('#chart-annual').barChart(data, options);
     
     $('#currency').change(function()
     {

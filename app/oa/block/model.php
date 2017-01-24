@@ -23,8 +23,8 @@ class oablockModel extends blockModel
     {
         foreach($this->lang->block->availableBlocks as $key => $block)
         {
-            $method = $key == 'project' ? 'index' : 'browse';
-            if($key == 'attend') $method = 'personal';
+            if($key == 'attend') continue;
+            $method = 'browse';
             if(!commonModel::hasPriv($key, $method)) unset($this->lang->block->availableBlocks->$key);
         }
         return json_encode($this->lang->block->availableBlocks);
@@ -42,89 +42,6 @@ class oablockModel extends blockModel
         $params->num['name']        = $this->lang->block->num;
         $params->num['default']     = 15; 
         $params->num['control']     = 'input';
-
-        return json_encode($params);
-    }
-
-    /**
-     * Get task params for created by me.
-     * 
-     * @access public
-     * @return string
-     */
-    public function getMyCreatedTaskParams()
-    {
-        return $this->getTaskParams();
-    }
-
-    /**
-     * Get task params for assigned to me.
-     * 
-     * @access public
-     * @return string
-     */
-    public function getAssignedMeTaskParams()
-    {
-        return $this->getTaskParams();
-    }
-
-    /**
-     * Get task params.
-     * 
-     * @access public
-     * @return string
-     */
-    public function getTaskParams()
-    {
-        $this->app->loadLang('task', 'sys');
-
-        $params = new stdclass();
-
-        $params->type['name']    = $this->lang->block->type;
-        $params->type['options'] = $this->lang->block->typeList->task;
-        $params->type['control'] = 'select';
-
-        $params->num['name']    = $this->lang->block->num;
-        $params->num['default'] = 15; 
-        $params->num['control'] = 'input';
-
-        $params->orderBy['name']    = $this->lang->block->orderBy;
-        $params->orderBy['default'] = 'id_desc';
-        $params->orderBy['options'] = $this->lang->block->orderByList->task;
-        $params->orderBy['control'] = 'select';
-
-        $this->lang->task->statusList = array_merge(array('unfinished' => $this->lang->block->waitTask), $this->lang->task->statusList);
-
-        $params->status['name']    = $this->lang->task->status;
-        $params->status['options'] = $this->lang->task->statusList;
-        $params->status['control'] = 'select';
-        $params->status['attr']    = 'multiple';
-
-        return json_encode($params);
-    }
-
-    /**
-     * Get project params.
-     * 
-     * @access public
-     * @return string
-     */
-    public function getProjectParams()
-    {
-        $params = new stdclass();
-
-        $params->status['name']    = $this->lang->block->status;
-        $params->status['options'] = $this->lang->block->statusList->project;
-        $params->status['control'] = 'select';
-
-        $params->num['name']    = $this->lang->block->num;
-        $params->num['default'] = 15; 
-        $params->num['control'] = 'input';
-
-        $params->orderBy['name']    = $this->lang->block->orderBy;
-        $params->orderBy['default'] = 'createdDate_desc';
-        $params->orderBy['options'] = $this->lang->block->orderByList->project;
-        $params->orderBy['control'] = 'select';
 
         return json_encode($params);
     }
