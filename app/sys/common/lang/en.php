@@ -128,15 +128,9 @@ $lang->loading        = 'Loading...';
 $lang->saveSuccess    = 'Saved.';
 $lang->setSuccess     = 'Saved.';
 $lang->sendSuccess    = 'Sent.';
-<<<<<<< HEAD
-$lang->fail           = 'Fail';
-$lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'for seo, use numbers and letters.';
-=======
 $lang->fail           = 'Failed.';
 $lang->noResultsMatch = 'No match found.';
 $lang->alias          = 'for SEO, use numbers and letters.';
->>>>>>> d5922087d0bc082bff9888ba87a7108ff6b9be09
 $lang->unfold         = '+';
 $lang->fold           = '-';
 $lang->files          = 'Files';
