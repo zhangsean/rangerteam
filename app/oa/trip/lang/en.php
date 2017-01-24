@@ -20,11 +20,15 @@ $lang->trip->from        = 'From';
 $lang->trip->to          = 'To';
 $lang->trip->desc        = 'Description';
 $lang->trip->createdBy   = 'Created By';
+<<<<<<< HEAD
+$lang->trip->createdDate = 'Created Date';
+=======
 $lang->trip->createdDate = 'Created On';
+>>>>>>> d5922087d0bc082bff9888ba87a7108ff6b9be09
 $lang->trip->date        = 'Date';
 $lang->trip->time        = 'Time';
 
-$lang->trip->denied    = 'access denied';
+$lang->trip->denied    = 'Access denied';
 $lang->trip->unique    = 'There was a record of trip in %s.';
 $lang->trip->wrongEnd  = 'End time should be greater than begin time.';
 $lang->trip->sameMonth = 'Trip must be in the same month.';
