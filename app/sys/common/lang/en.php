@@ -37,10 +37,10 @@ $lang->apps->team       = 'TEAM';
 $lang->apps->superadmin = 'ADMIN';
 
 /* Lang items for ranzhi. */
-$lang->ranzhi    = 'ranzhi';
-$lang->agreement = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.2</a>, <span class='text-danger'>and promise to keep the logo, link of RanZhi.</span>";
+$lang->ranzhi    = 'Ranger';
+$lang->agreement = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.2</a>, <span class='text-danger'>and will keep the logo and link of Ranger.</span>";
 $lang->poweredBy = "<a href='http://www.ranzhico.com/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
-$lang->ipLimited = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /></head><body>Sorry, current IP is limited by Administrator. Please contact the Administrator to lift the restrictions.</body></html>";
+$lang->ipLimited = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /></head><body>Sorry, your current IP is blocked. Please contact the Administrator to get privilege.</body></html>";
 
 /* IE6 alert.  */
 $lang->IE6Alert = <<<EOT
@@ -48,7 +48,7 @@ $lang->IE6Alert = <<<EOT
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>
       <p>Stop using IE6!</p>
-      <p>IE6 is too old, we should stop using it. <br/></p>
+      <p>IE6 is too outdated that we should stop using it. <br/></p>
       <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>Chrome</a>
       <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>Firefox</a>
       <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera</a>
@@ -63,7 +63,7 @@ $lang->themes['clear']   = 'Clear';
 
 /* Global lang items. */
 $lang->home           = 'Home';
-$lang->welcome        = '%s RanZhi';
+$lang->welcome        = '%s Ranger';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = 'Today is %s, ';
 $lang->today          = 'Today';
@@ -125,12 +125,12 @@ $lang->year           = 'Year';
 $lang->month          = 'Month';
 $lang->day            = 'Day';
 $lang->loading        = 'Loading...';
-$lang->saveSuccess    = 'Successfully saved.';
-$lang->setSuccess     = 'Successfully saved.';
-$lang->sendSuccess    = 'Successfully sended.';
+$lang->saveSuccess    = 'Saved.';
+$lang->setSuccess     = 'Saved.';
+$lang->sendSuccess    = 'Sent.';
 $lang->fail           = 'Fail';
 $lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'for seo, can use numbers, letters and words';
+$lang->alias          = 'for seo, use numbers and letters.';
 $lang->unfold         = '+';
 $lang->fold           = '-';
 $lang->files          = 'Files';
@@ -171,7 +171,7 @@ EOT;
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete         = 'Are sure to delete it?';
+$lang->js->confirmDelete         = 'Do you want to delete it?';
 $lang->js->deleteing             = 'Deleting...';
 $lang->js->doing                 = 'Processing...';
 $lang->js->timeout               = 'Timeout';
@@ -188,7 +188,7 @@ $lang->company->email     = 'Email';
 $lang->company->fax       = 'Fax';
 $lang->company->qq        = 'QQ';
 $lang->company->weibo     = 'Weibo';
-$lang->company->weixin    = 'Weichat';
+$lang->company->weixin    = 'Wechat';
 $lang->company->wangwang  = 'Wangwang';
 
 /* The main menus. */

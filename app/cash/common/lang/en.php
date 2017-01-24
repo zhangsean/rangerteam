@@ -16,14 +16,14 @@ $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = 'Home|dashboard|index|';
 $lang->menu->cash->all       = 'All|trade|browse|mode=all';
 $lang->menu->cash->in        = 'Income|trade|browse|mode=in';
-$lang->menu->cash->out       = 'Expenditure|trade|browse|mode=out';
+$lang->menu->cash->out       = 'Expense|trade|browse|mode=out';
 $lang->menu->cash->transfer  = 'Transfer|trade|browse|mode=transfer';
 $lang->menu->cash->invest    = 'Invest|trade|browse|mode=invest';
 $lang->menu->cash->loan      = 'Loan|trade|browse|mode=loan';
-$lang->menu->cash->check     = 'Checking|depositor|check|';
+$lang->menu->cash->check     = 'Reconcile|depositor|check|';
 $lang->menu->cash->report    = 'Report|trade|report|';
-$lang->menu->cash->depositor = 'Depositor|depositor|index|';
-$lang->menu->cash->provider  = 'Provider|provider|index|';
+$lang->menu->cash->depositor = 'Account|depositor|index|';
+$lang->menu->cash->provider  = 'Supplier|provider|index|';
 //$lang->menu->cash->contact   = 'Contact|contact|browse|';
 $lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 

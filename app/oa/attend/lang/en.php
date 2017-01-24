@@ -101,16 +101,16 @@ $lang->attend->reviewStatusList['wait']   = 'Wait';
 $lang->attend->reviewStatusList['pass']   = 'Pass';
 $lang->attend->reviewStatusList['reject'] = 'Reject';
 
-$lang->attend->inSuccess  = 'Sign in success';
-$lang->attend->inFail     = 'Sign in fail';
-$lang->attend->outSuccess = 'Sign out success';
-$lang->attend->outFail    = 'Sign out fail';
+$lang->attend->inSuccess  = 'Signed in.';
+$lang->attend->inFail     = 'Signin failed.';
+$lang->attend->outSuccess = 'Signed out.';
+$lang->attend->outFail    = 'Signout failed.';
 
 $lang->attend->signInLimit  = 'Latest time of sign in';
 $lang->attend->signOutLimit = 'Earlies time of sign out';
 $lang->attend->workingDays  = 'Working days per week';
 $lang->attend->workingHours = 'Working hours per day';
-$lang->attend->mustSignOut  = 'Must sign out';
+$lang->attend->mustSignOut  = 'Required Signout';
 
 $lang->attend->workingDaysList['5']  = "Monday ~ Friday";
 $lang->attend->workingDaysList['6']  = "Monday ~ Saturday";
@@ -118,24 +118,24 @@ $lang->attend->workingDaysList['7']  = "Monday ~ Sunday";
 $lang->attend->workingDaysList['12'] = "Sunday ~ Thursday";
 $lang->attend->workingDaysList['13'] = "Sunday ~ Friday";
 
-$lang->attend->mustSignOutList['yes'] = 'need';
-$lang->attend->mustSignOutList['no']  = 'not need';
+$lang->attend->mustSignOutList['yes'] = 'Yes';
+$lang->attend->mustSignOutList['no']  = 'No';
 
 $lang->attend->weeks = array('First week', 'Second week', 'Third week', 'Fourth week', 'Fifth week', 'Sixth week');
 
-$lang->attend->notice['today']    = "<p>Your yestoday's attendance is %s, <a href='%s' %s>Go to edit.</a></p>";
-$lang->attend->notice['yestoday'] = "<p>Your today's attendance is %s, <a href='%s' %s>Go to edit.</a></p>";
+$lang->attend->notice['today']    = "<p>Your attendance yesterday was %s, <a href='%s' %s> Click here to edit.</a></p>";
+$lang->attend->notice['yestoday'] = "<p>Your attendance today is %s, <a href='%s' %s> Click here to edit.</a></p>";
 $lang->attend->notice['absent']   = "No record";
 
-$lang->attend->confirmReview['pass']   = 'Are sure to pass it?';
-$lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
+$lang->attend->confirmReview['pass']   = 'Do you want to pass it?';
+$lang->attend->confirmReview['reject'] = 'Do you want to reject it?';
 
 $lang->attend->settings   = 'Normal Settings';
 $lang->attend->setManager = 'Department Manager Settings';
 $lang->attend->setDept    = 'Set Department';
 
 $lang->attend->note = new stdClass();
-$lang->attend->note->ip       = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";
+$lang->attend->note->ip       = "Use commas to separate IPs, and IP segment is OK, e.g. 192.168.1.*";
 $lang->attend->note->allip    = 'All IP';
 $lang->attend->note->IPDenied = 'IP denied.';
 
