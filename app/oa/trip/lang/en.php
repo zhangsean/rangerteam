@@ -20,11 +20,7 @@ $lang->trip->from        = 'From';
 $lang->trip->to          = 'To';
 $lang->trip->desc        = 'Description';
 $lang->trip->createdBy   = 'Created By';
-<<<<<<< HEAD
-$lang->trip->createdDate = 'Created Date';
-=======
 $lang->trip->createdDate = 'Created On';
->>>>>>> d5922087d0bc082bff9888ba87a7108ff6b9be09
 $lang->trip->date        = 'Date';
 $lang->trip->time        = 'Time';
 
