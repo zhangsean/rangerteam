@@ -105,19 +105,11 @@ $lang->attend->inFail     = 'Signin failed.';
 $lang->attend->outSuccess = 'Signed out.';
 $lang->attend->outFail    = 'Signout failed.';
 
-<<<<<<< HEAD
-$lang->attend->signInLimit  = 'Latest time of sign in';
-$lang->attend->signOutLimit = 'Earlies time of sign out';
-$lang->attend->workingDays  = 'Working days per week';
-$lang->attend->workingHours = 'Working hours per day';
-$lang->attend->mustSignOut  = 'Required Signout';
-=======
 $lang->attend->signInLimit  = 'Clock-in';
 $lang->attend->signOutLimit = 'Clock-out';
 $lang->attend->workingDays  = 'Working days';
 $lang->attend->workingHours = 'Working hours';
 $lang->attend->mustSignOut  = 'Required';
->>>>>>> d5922087d0bc082bff9888ba87a7108ff6b9be09
 
 $lang->attend->workingDaysList['5']  = "Monday ~ Friday";
 $lang->attend->workingDaysList['6']  = "Monday ~ Saturday";
@@ -130,15 +122,9 @@ $lang->attend->mustSignOutList['no']  = 'No';
 
 $lang->attend->weeks = array('1st week', '2nd week', '3rd week', '4th week', '5th week', '6th week');
 
-<<<<<<< HEAD
 $lang->attend->notice['today']    = "<p>Your attendance yesterday was %s, <a href='%s' %s> Click here to edit.</a></p>";
 $lang->attend->notice['yestoday'] = "<p>Your attendance today is %s, <a href='%s' %s> Click here to edit.</a></p>";
-$lang->attend->notice['absent']   = "No record";
-=======
-$lang->attend->notice['today']    = "<p>Your attendance yesterday is %s. <a href='%s' %s> Edit it.</a></p>";
-$lang->attend->notice['yestoday'] = "<p>Your attendance today is %s. <a href='%s' %s>Edit it.</a></p>";
 $lang->attend->notice['absent']   = "N/A";
->>>>>>> d5922087d0bc082bff9888ba87a7108ff6b9be09
 
 $lang->attend->confirmReview['pass']   = 'Do you want to pass it?';
 $lang->attend->confirmReview['reject'] = 'Do you want to reject it?';
@@ -148,13 +134,8 @@ $lang->attend->setManager = 'Department Manager Settings';
 $lang->attend->setDept    = 'Set Department';
 
 $lang->attend->note = new stdClass();
-<<<<<<< HEAD
 $lang->attend->note->ip       = "Use commas to separate IPs, and IP segment is OK, e.g. 192.168.1.*";
-$lang->attend->note->allip    = 'All IP';
-=======
-$lang->attend->note->ip       = "Use commas between IPs. IP segments are supported in Ranger, e.g. 192.168.1.*";
 $lang->attend->note->allip    = 'All IPs';
->>>>>>> d5922087d0bc082bff9888ba87a7108ff6b9be09
 $lang->attend->note->IPDenied = 'IP denied.';
 
 $lang->attend->h = 'hours';
