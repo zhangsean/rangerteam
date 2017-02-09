@@ -228,6 +228,7 @@ class blockModel extends model
 
         foreach($blocks as $key => $block)
         {
+            if($block->source && strpos('crm,oa,proj,doc,cash,team', $block->source) === false) continue;
             if(strpos('html,allEntries,dynamic,attend', $block->block) !== false) continue;
 
             $module = $block->block;
