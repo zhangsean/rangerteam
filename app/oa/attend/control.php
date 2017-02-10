@@ -388,7 +388,7 @@ class attend extends control
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $actionID = $this->loadModel('action')->create('attend', $attendID, 'reviewed', '', $reviewStatus);
         $this->sendmail($attendID, $actionID);
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**
