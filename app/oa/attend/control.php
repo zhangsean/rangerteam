@@ -313,8 +313,10 @@ class attend extends control
      * @access public
      * @return void
      */
-    public function edit($date)
+    public function edit($date = '')
     {
+        if(!$date) $date = date('Y-m-d');
+
         $account = $this->app->user->account;
         $attend  = $this->attend->getByDate($date, $account);
 
