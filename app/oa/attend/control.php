@@ -326,7 +326,7 @@ class attend extends control
             if(isset($attend->new)) $attend->id = $result;
             $actionID = $this->loadModel('action')->create('attend', $attend->id, 'commited');
             $this->sendmail($attend->id, $actionID);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         $this->view->title  = $this->lang->attend->edit;

@@ -145,7 +145,7 @@ class trip extends control
                 }
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         $this->app->loadModuleConfig('attend');

@@ -168,7 +168,7 @@ class lieu extends control
             $actionID = $this->loadModel('action')->create('lieu', $lieuID, 'created');
             $this->sendmail($lieuID, $actionID);
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         $overtimePairs = array();

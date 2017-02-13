@@ -206,7 +206,7 @@ class overtime extends control
             $actionID   = $this->loadModel('action')->create('overtime', $overtimeID, 'created');
             $this->sendmail($overtimeID, $actionID);
             
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         if($date)

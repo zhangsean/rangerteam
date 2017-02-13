@@ -186,7 +186,7 @@ class leave extends control
             $actionID = $this->loadModel('action')->create('leave', $leaveID, 'created');
             $this->sendmail($leaveID, $actionID);
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         if($date)
