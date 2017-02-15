@@ -989,7 +989,7 @@ CREATE TABLE `sys_user` (
   `address` char(120) NOT NULL DEFAULT '',
   `zipcode` char(10) NOT NULL DEFAULT '',
   `visits` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `ip` char(15) NOT NULL DEFAULT '',
+  `ip` char(50) NOT NULL DEFAULT '',
   `last` datetime NOT NULL,
   `ping` datetime NOT NULL,
   `fails` tinyint(3) unsigned NOT NULL DEFAULT '0',

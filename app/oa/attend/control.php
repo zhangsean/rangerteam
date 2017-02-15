@@ -313,8 +313,10 @@ class attend extends control
      * @access public
      * @return void
      */
-    public function edit($date)
+    public function edit($date = '')
     {
+        if(!$date) $date = date('Y-m-d');
+
         $account = $this->app->user->account;
         $attend  = $this->attend->getByDate($date, $account);
 
@@ -326,7 +328,7 @@ class attend extends control
             if(isset($attend->new)) $attend->id = $result;
             $actionID = $this->loadModel('action')->create('attend', $attend->id, 'commited');
             $this->sendmail($attend->id, $actionID);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         $this->view->title  = $this->lang->attend->edit;
