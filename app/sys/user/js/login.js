@@ -50,7 +50,7 @@ $('#submit').click(function()
     {
         contentType: 'application/x-www-form-urlencoded',
         type: "POST",
-        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&rawPassword=' + rawPassword + '&keepLogin=' + $('#keepLogin1').is(':checked'),
+        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&rawPassword=' + rawPassword + '&keepLogin=' + $('#keepLoginon').is(':checked'),
         url:$('#ajaxForm').attr('action'),
         dataType:'json',
         success:function(data)

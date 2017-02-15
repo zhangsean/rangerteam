@@ -54,7 +54,7 @@ css::internal('body{background-color:#f6f5f5}');
                 <th></th>
                 <td>
                   <?php echo html::submitButton($lang->login) . html::hidden('referer', $referer);?>
-                  <?php echo html::checkbox('keepLogin', array('on' => $lang->user->keepLogin));?>
+                  <?php echo html::checkbox('keepLogin', array('on' => $lang->user->keepLogin), $this->cookie->keepLogin ? $this->cookie->keepLogin : 'off');?>
                 </td>
               </tr>
             </table>
