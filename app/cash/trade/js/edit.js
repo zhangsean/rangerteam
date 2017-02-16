@@ -7,9 +7,8 @@ $(document).ready(function()
         $('#customer').trigger('chosen:updated');
     })
 
-    var contract = $('#contract').val();
     $('.contractTD select').empty().load(createLink('crm.contract', 'getOptionMenu', 'traderID=' + $('#trader').val()), function()
     {
-        $('#contract').val(contract);
+        $('#contract').val(v.contract);
     });
 })
