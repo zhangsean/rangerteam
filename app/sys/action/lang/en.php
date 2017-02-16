@@ -169,24 +169,24 @@ $lang->action->search = new stdclass();
 $lang->action->search->label = (array)$lang->action->label;
 
 /* Link of every action. */
-$lang->action->label->product   = 'Product|product|view|productID=%s';
-$lang->action->label->order     = 'Order|order|view|orderID=%s';
-$lang->action->label->task      = 'Task|task|view|taskID=%s';
-$lang->action->label->contract  = 'Contract|contract|view|contractID=%s';
 $lang->action->label->announce  = 'Announce|announce|view|announceID=%s';
-$lang->action->label->holiday   = 'Holiday|hiloday|browse|';
-$lang->action->label->customer  = 'Customer|customer|view|customerID=%s';
-$lang->action->label->provider  = 'Supplier|provider|view|providerID=%s';
-$lang->action->label->contact   = 'Contact|contact|view|contactID=%s';
-$lang->action->label->todo      = 'To-Do|todo|calendar|';
-$lang->action->label->project   = 'Project|task|browse|projectID=%s';
-$lang->action->label->depositor = 'Account|depositor|browse|';
 $lang->action->label->balance   = 'Balance|balance|browse|depositorID=%s';
-$lang->action->label->trade     = 'Trade|trade|browse|';
+$lang->action->label->contact   = 'Contact|contact|view|contactID=%s';
+$lang->action->label->contract  = 'Contract|contract|view|contractID=%s';
+$lang->action->label->customer  = 'Customer|customer|view|customerID=%s';
+$lang->action->label->depositor = 'Account|depositor|browse|';
 $lang->action->label->doc       = 'Document|doc|view|docID=%s';
 $lang->action->label->doclib    = 'Document Library|doc|browse|doclibID=%s';
+$lang->action->label->holiday   = 'Holiday|hiloday|browse|';
+$lang->action->label->order     = 'Order|order|view|orderID=%s';
+$lang->action->label->product   = 'Product|product|view|productID=%s';
+$lang->action->label->project   = 'Project|task|browse|projectID=%s';
+$lang->action->label->provider  = 'Supplier|provider|view|providerID=%s';
 $lang->action->label->schema    = 'Trade Template|schema|browse|';
 $lang->action->label->space     = ' ';
+$lang->action->label->task      = 'Task|task|view|taskID=%s';
+$lang->action->label->todo      = 'To-Do|todo|calendar|';
+$lang->action->label->trade     = 'Trade|trade|browse|';
 
 $lang->action->label->attend = array();
 $lang->action->label->attend['commited'] = 'attend review|attend|browsereview|';

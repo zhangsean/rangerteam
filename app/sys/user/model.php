@@ -27,8 +27,10 @@ class userModel extends model
     public function getList($dept = 0, $mode = 'normal', $query = '', $orderBy = 'id', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_USER)
-            ->where('deleted')->eq('0')
+            ->where(1)
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
+
+            ->beginIF($mode != 'all')->andWhere('deleted')->eq('0')->fi()
 
             ->beginIF($mode == 'normal')
             ->andWhere('locked', true)->eq('0000-00-00 00:00:00')
@@ -36,10 +38,7 @@ class userModel extends model
             ->markRight(1)
             ->fi()
 
-            ->beginIF($mode == 'forbid')
-            ->andWhere('locked', true)->ge(helper::now())
-            ->markRight(1)
-            ->fi()
+            ->beginIF($mode == 'forbid')->andWhere('locked')->ge(helper::now())->fi()
 
             ->beginIF($query != '')
             ->andWhere('account', true)->like("%$query%")

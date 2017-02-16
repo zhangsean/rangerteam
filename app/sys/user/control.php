@@ -341,10 +341,11 @@ class user extends control
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->view->users    = $this->user->getList($deptID, $mode, $query, $orderBy, $pager);
-        $this->view->query    = $query;
-        $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
+        $this->view->mode     = $mode;
+        $this->view->query    = $query;
         $this->view->orderBy  = $orderBy;
+        $this->view->pager    = $pager;
 
         $this->view->title = $this->lang->user->list;
         $this->display();
