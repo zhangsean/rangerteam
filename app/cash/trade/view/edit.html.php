@@ -15,6 +15,7 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php $mode = $trade->type == 'redeem' ? 'invest' : ($trade->type == 'repay' ? 'loan' : $trade->type);?>
 <?php js::set('mode', $mode);?>
+<?php js::set('contract', $trade->contract);?>
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('trade', 'browse', "mode=$mode", $lang->trade->browse);?></li>
   <li class='divider angle'></li>
