@@ -92,6 +92,8 @@ class blockModel extends model
             $link .= '?' . $parsedUrl['query'];
         }
 
+        $link = str_replace('-', '_', $link);
+
         /* Send login request. */
         $loginObj = "<iframe src=" . helper::createLink('sys.entry', 'visit', "entryID={$entry->id}") . "' class='hidden' />";
         return $loginObj . commonModel::http($link);
