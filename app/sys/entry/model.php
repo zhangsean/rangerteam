@@ -424,6 +424,7 @@ class entryModel extends model
             $link .= '?' . $parseUrl['query'];
         }
 
+        $link = str_replace('-', '_', $link);
         $blocks = commonModel::http($link);
         return json_decode($blocks, true);
     }
@@ -456,6 +457,8 @@ class entryModel extends model
             if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
             $link .= '?' . $parseUrl['query'];
         }
+
+        $link = str_replace('-', '_', $link);
         $params = commonModel::http($link);
 
         return json_decode($params, true);
