@@ -169,24 +169,24 @@ $lang->action->search = new stdclass();
 $lang->action->search->label = (array)$lang->action->label;
 
 /* 用来生成相应对象的链接。*/
-$lang->action->label->product   = '产品|product|view|productID=%s';
-$lang->action->label->order     = '订单|order|view|orderID=%s';
-$lang->action->label->task      = '任务|task|view|taskID=%s';
-$lang->action->label->contract  = '合同|contract|view|contractID=%s';
 $lang->action->label->announce  = '公告|announce|view|announceID=%s';
-$lang->action->label->holiday   = '放假安排|holiday|browse|';
-$lang->action->label->customer  = '客户|customer|view|customerID=%s';
-$lang->action->label->provider  = '供应商|provider|view|providerID=%s';
-$lang->action->label->contact   = '联系人|contact|view|contactID=%s';
-$lang->action->label->todo      = '待办|todo|calendar|';
-$lang->action->label->project   = '项目|task|browse|projectID=%s';
-$lang->action->label->depositor = '账户|depositor|browse|';
 $lang->action->label->balance   = '余额|balance|browse|depositorID=%s';
-$lang->action->label->trade     = '账目|trade|browse|';
 $lang->action->label->doc       = '文档|doc|view|docID=%s';
 $lang->action->label->doclib    = '文档库|doc|browse|doclibID=%s';
+$lang->action->label->contact   = '联系人|contact|view|contactID=%s';
+$lang->action->label->contract  = '合同|contract|view|contractID=%s';
+$lang->action->label->customer  = '客户|customer|view|customerID=%s';
+$lang->action->label->depositor = '账户|depositor|browse|';
+$lang->action->label->holiday   = '放假安排|holiday|browse|';
+$lang->action->label->order     = '订单|order|view|orderID=%s';
+$lang->action->label->product   = '产品|product|view|productID=%s';
+$lang->action->label->project   = '项目|task|browse|projectID=%s';
+$lang->action->label->provider  = '供应商|provider|view|providerID=%s';
 $lang->action->label->schema    = '记账模板|schema|browse|';
 $lang->action->label->space     = '　';
+$lang->action->label->task      = '任务|task|view|taskID=%s';
+$lang->action->label->todo      = '待办|todo|calendar|';
+$lang->action->label->trade     = '账目|trade|browse|';
 
 $lang->action->label->attend = array();
 $lang->action->label->attend['commited'] = '考勤审核|attend|browsereview|';

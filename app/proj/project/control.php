@@ -137,11 +137,22 @@ class project extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
-        $project = $this->project->getByID($projectID);
+        $userList = $this->loadModel('user')->getList($dept = 0, $mode = 'all');
+        $users    = array('' => '');
+        $members  = array('' => '');
+        foreach($userList as $user)
+        {
+            $members[$user->account] = $user->realname;
+            if($user->deleted == '0' && ($user->locked == '0000-00-00 00:00:00' or $user->locked < helper::now()))
+            {
+                $users[$user->account] = $user->realname;
+            }
+        }
 
         $this->view->title   = $this->lang->project->member;
-        $this->view->project = $project;
-        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
+        $this->view->project = $this->project->getByID($projectID);
+        $this->view->users   = $users;
+        $this->view->members = $members; 
         $this->display();
     }
 

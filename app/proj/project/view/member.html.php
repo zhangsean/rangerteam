@@ -18,7 +18,7 @@
     <?php foreach($project->members as $member):?>
     <?php if($member->role == 'manager') continue;?>
     <tr>
-      <td><?php echo html::select("member[$key]", $users, $member->account, "class='form-control chosen' onchange='updateMember()'")?></td>
+      <td><?php echo html::select("member[$key]", $members, $member->account, "class='form-control chosen' onchange='updateMember()'")?></td>
       <td class='w-180px'><?php echo html::select("role[$key]", $lang->project->roleList, $member->role, "class='form-control chosen'")?></td>
       <td class='w-100px'></td>
     </tr>

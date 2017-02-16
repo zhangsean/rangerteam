@@ -388,7 +388,7 @@ class task extends control
      */
     public function assignTo($taskID)
     {
-        $task    = $this->task->getByID($taskID);
+        $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'assignTo');
 
         $members = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
