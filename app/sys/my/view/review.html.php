@@ -60,6 +60,7 @@
         <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->leave->type);?></th>
         <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->begin);?></th>
         <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->end);?></th>
+        <th class='w-140px'><?php commonModel::printOrderLink('backDate', $orderBy, $vars, $lang->leave->backDate);?></th>
         <th><?php echo $lang->leave->desc;?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->leave->status);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('reviewedBy', $orderBy, $vars, $lang->leave->reviewedBy);?></th>
@@ -74,12 +75,17 @@
       <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
       <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
       <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
+      <td><?php echo formatTime($leave->backDate);?></td>
       <td title='<?php echo $leave->desc?>'><?php echo $leave->desc;?></td>
       <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
       <td><?php echo zget($users, $leave->reviewedBy);?></td>
       <td>
+        <?php if($leave->status == 'pass'):?>
+        <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=back"), $lang->leave->statusList['pass'] . $lang->leave->back, "data-status='pass' data-toggle='ajax'");?>
+        <?php else:?>
         <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=pass"), $lang->leave->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
         <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=reject"), $lang->leave->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
+        <?php endif;?>
       </td>
     </tr>
     <?php endforeach;?>
