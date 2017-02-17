@@ -236,9 +236,9 @@ class overtime extends control
         /* check privilage. */
         if($overtime->createdBy != $this->app->user->account) 
         {
-            $locate    = helper::safe64Encode(helper::createLink('oa.overtime', 'browse'));
-            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
+            $locate     = helper::safe64Encode(helper::createLink('oa.overtime', 'browse'));
+            $noticeLink = helper::createLink('notice', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($noticeLink));
         }
 
         if($_POST)

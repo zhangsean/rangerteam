@@ -212,9 +212,9 @@ class lieu extends control
         /* check privilage. */
         if($oldLieu->createdBy != $this->app->user->account) 
         {
-            $locate    = helper::safe64Encode(helper::createLink('oa.lieu', 'browse'));
-            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
+            $locate     = helper::safe64Encode(helper::createLink('oa.lieu', 'browse'));
+            $noticeLink = helper::createLink('notice', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($noticeLink));
         }
 
         if($_POST)

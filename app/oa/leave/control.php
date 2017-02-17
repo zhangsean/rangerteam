@@ -225,9 +225,9 @@ class leave extends control
 
         if($leave->createdBy != $this->app->user->account and $this->app->user->account != $reviewedBy) 
         {
-            $locate    = helper::safe64Encode(helper::createLink('oa.leave', 'browse'));
-            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
+            $locate     = helper::safe64Encode(helper::createLink('oa.leave', 'browse'));
+            $noticeLink = helper::createLink('notice', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($noticeLink));
         }
 
         if($_POST)
@@ -256,9 +256,9 @@ class leave extends control
         $leave = $this->leave->getByID($id);
         if($leave->createdBy != $this->app->user->account) 
         {
-            $locate    = helper::safe64Encode(helper::createLink('oa.leave', 'personal'));
-            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
+            $locate     = helper::safe64Encode(helper::createLink('oa.leave', 'personal'));
+            $noticeLink = helper::createLink('notice', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($noticeLink));
         }
 
         if($_POST)
