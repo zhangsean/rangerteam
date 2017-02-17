@@ -46,11 +46,19 @@ class leaveModel extends model
             ->beginIf($month != '')->andWhere('t1.begin')->like("%-$month-%")->fi()
             ->beginIf($account != '')->andWhere('t1.createdBy')->eq($account)->fi()
             ->beginIf($dept != '')->andWhere('t2.dept')->in($dept)->fi()
-            ->beginIf($status != '')->andWhere('t1.status')->eq($status)->fi()
+            ->beginIf($status != '')->andWhere('t1.status')->in($status)->fi()
             ->beginIf($type != 'personal')->andWhere('t1.status')->ne('draft')->fi()
             ->orderBy("t2.dept,t1.{$orderBy}")
             ->fetchAll();
         $this->session->set('leaveQueryCondition', $this->dao->get());
+
+        if($type == 'browseReview')
+        {
+            foreach($leaveList as $key => $leave)
+            {
+                if($leave->status == 'pass' and ($leave->backDate == '0000-00-00 00:00:00' or $leave->backDate == $leave->end . ' ' . $leave->finish)) unset($leaveList[$key]);
+            }
+        }
 
         return $leaveList;
     }

@@ -48,7 +48,7 @@ class my extends control
         
         /* Get leave list. */
         $leaves = array();
-        if($type == 'leave' and !empty($deptList)) $leaves = $this->leave->getList('browseReview', $year = '', $month = '', '', array_keys($deptList), $status = 'wait', $orderBy);
+        if($type == 'leave' and !empty($deptList)) $leaves = $this->leave->getList('browseReview', $year = '', $month = '', '', array_keys($deptList), $status = 'wait,pass', $orderBy);
 
         /* Get overtime list. */
         $overtimes = array();
