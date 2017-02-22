@@ -385,18 +385,23 @@ class excel extends model
      */
     public function writeSysData($dataCount = 0)
     {
-        if(!isset($this->rawExcelData->SysDataList)) return;
+        if(!isset($this->rawExcelData->sysDataList)) return;
         $this->hasSysData = true;
 
         $sheetIndex = $this->phpExcel->getSheetCount() - 1;
         $this->phpExcel->getSheet($sheetIndex)->setTitle($this->lang->excel->title->sysValue);
 
-        foreach($this->rawExcelData->SysDataList as $key)
+        foreach($this->rawExcelData->sysDataList as $key)
         {
             $colIndex = $this->setExcelField($this->sysDataColIndex);
             $key = $key . 'List';
             if(!isset($this->rawExcelData->$key)) continue;
-            foreach($this->rawExcelData->$key as $index => $value) $this->phpExcel->getSheet($sheetIndex)->setCellValueExplicit("$colIndex" . ($index + 1), $value, PHPExcel_Cell_DataType::TYPE_STRING);
+            $index = 1;
+            foreach($this->rawExcelData->$key as $value) 
+            {
+                $this->phpExcel->getSheet($sheetIndex)->setCellValueExplicit("$colIndex$index", $value, PHPExcel_Cell_DataType::TYPE_STRING);
+                $index++;
+            }
             $this->sysDataColIndex++;
         }
     }
@@ -414,7 +419,7 @@ class excel extends model
     public function buildList($excelSheet, $field, $row)
     {
         $listName = $field . 'List';
-        $index    = array_search($field, $this->rawExcelData->SysDataList);
+        $index    = array_search($field, $this->rawExcelData->sysDataList);
         $colIndex = $this->setExcelField($index);
         if(isset($this->rawExcelData->$listName))
         {
