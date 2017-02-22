@@ -13,9 +13,9 @@ $lang->app = new stdclass();
 $lang->app->name = 'DOC';
 
 $lang->menu->doc = new stdclass();
-$lang->menu->doc->doc     = 'Document|doc|index|';
-$lang->menu->doc->project = 'Project|doc|alllibs|type=project';
-$lang->menu->doc->custom  = 'Custom|doc|alllibs|type=custom';
+$lang->menu->doc->dashboard = 'Document|doc|index|';
+$lang->menu->doc->project   = 'Project|doc|alllibs|type=project';
+$lang->menu->doc->custom    = 'Custom|doc|alllibs|type=custom';
 
 $lang->dashboard = new stdclass();
 

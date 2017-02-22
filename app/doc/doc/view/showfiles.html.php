@@ -12,7 +12,8 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('libType', 'project');?>
-<?php $this->doc->setMenu($project->id, 0, 0, html::a(inlink('showfiles', "projectID=$project->id"), $lang->doc->fileLib));?>
+<?php if($this->session->docFrom == 'doc') $this->doc->setMenu($project->id, 0, 0, html::a(inlink('showfiles', "projectID=$project->id"), $lang->doc->fileLib));?>
+<?php if($this->session->docFrom == 'project') $this->loadModel('project', 'proj')->setMenu($projects, $project->id);?>
 <div class='with-menu page-content'>
   <div class='lib-files cards'>
     <?php foreach($files as $file):?>
@@ -44,7 +45,7 @@
           <i class='icon icon-download'></i>
         </a>
         <div class='card-heading'>
-          <a href='<?php echo $this->createLink($file->objectType, 'view', "objectID=$file->objectID");?>'><?php echo $file->title . '.' . $file->extension . ' [' . strtoupper($file->objectType) . ' #' . $file->objectID . ']';?></a>
+          <a href='<?php echo $this->createLink('proj.' . $file->objectType, 'view', "objectID=$file->objectID");?>'><?php echo $file->title . '.' . $file->extension . ' [' . strtoupper($file->objectType) . ' #' . $file->objectID . ']';?></a>
           <a href='<?php echo $this->createLink('file', 'delete', "fileID=$file->id"); ?>' target='hiddenwin' title='<?php echo $lang->delete?>' class='deleter pull-right'><i class='icon icon-remove'></i></a>
         </div>
       </div>

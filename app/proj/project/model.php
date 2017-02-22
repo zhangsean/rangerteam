@@ -53,7 +53,7 @@ class projectModel extends model
     public function getMemberPairs($projectID)
     {
         $members = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account');
-        $users = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($members)->orderBy('id_asc')->fetchPairs();
+        $users   = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($members)->orderBy('id_asc')->fetchPairs();
         foreach($users as $account => $realname) if($realname == '') $users[$account] = $account; 
         return array('' => '') + $users;
     }
@@ -213,13 +213,15 @@ class projectModel extends model
         /* Create doc lib. */
         $this->app->loadLang('doc', 'doc');
         $lib = new stdclass();
-        $lib->project = $projectID;
-        $lib->name    = $this->lang->doc->projectMainLib;
-        $lib->main    = '1';
-        $lib->private = 0;
+        $lib->project     = $projectID;
+        $lib->name        = $this->lang->doc->projectMainLib;
+        $lib->main        = '1';
+        $lib->private     = 0;
+        $lib->createdBy   = $this->app->user->account;
+        $lib->createdDate = helper::now(); 
 
         $teams = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account', 'account');
-        $lib->users  = join(',', $teams);
+        $lib->users  = ',' . join(',', $teams) . ',';
         $lib->groups = isset($project->whitelist) ? $project->whitelist : '';
         $this->dao->insert(TABLE_DOCLIB)->data($lib)->exec();
 
@@ -505,13 +507,15 @@ class projectModel extends model
         $methodName = $this->app->getMethodName();
         $moduleName = $this->app->getModuleName();
             
+        $this->app->loadLang('task', 'sys');
+
         $menu  = "<nav id='menu'><ul class='nav'>";
         $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\"><i class='icon-folder-open-alt'></i> <strong>{$currentProject->name}</strong> <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
 
         $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
         $this->lang->task->browse = $this->lang->task->list;
 
-        if($methodName ==  'browse' or $methodName == 'importtask')
+        if($methodName ==  'browse' or $methodName == 'importtask' or $moduleName == 'doc')
         {
             $menu .= '<li class="divider angle"></li>';
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=all", $this->lang->task->all, '', false, '', 'li');
@@ -520,7 +524,7 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=finishedBy", $this->lang->task->finishedByMe, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
-            $menu .= commonModel::printLink('doc.doc', 'projectLibs', "projectID=$projectID", $this->lang->project->doc, "class='doc'", false, '', 'li');
+            $menu .= commonModel::printLink('proj.doc', 'projectLibs', "projectID=$projectID", $this->lang->project->doc, '', false, '', 'li');
 
             if($this->app->user->admin == 'super' || $this->app->user->account == $project->createdBy || $this->app->user->account == $project->PM)
             {

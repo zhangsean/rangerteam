@@ -23,7 +23,7 @@
       ?>
     </ul>
   </div>
-  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
+  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
 </div>
 <div class='row with-menu page-content'>
   <div class='panel'>
@@ -32,7 +32,7 @@
       <?php echo $tree;?>
       <?php else:?>
       <?php echo $lang->pager->noRecord;?>
-      <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$projectID", $lang->doc->create);?>
+      <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&projectID=$lib->project", $lang->doc->create);?>
       <?php endif;?>
     </div>
   </div>

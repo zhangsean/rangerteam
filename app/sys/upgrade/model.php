@@ -125,10 +125,9 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('3.6'));
             case '3_7':
                 $this->execSQL($this->getUpgradeFile('3.7'));
-                $this->setDocEntryPrivileges();
+                $this->updateDocPrivileges();
                 $this->moveDocContent();
                 $this->addProjectDoc();
-                $this->updateDocPriv();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1179,7 +1178,7 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public function setDocEntryPrivileges()
+    public function updateDocPrivileges()
     {
         $groups = $this->dao->select('`group`')->from(TABLE_GROUPPRIV)->where('module')->eq('doc')->fetchPairs();
         foreach($groups as $group)
@@ -1190,7 +1189,6 @@ class upgradeModel extends model
             $data->method = 'doc';
             $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
 
-            $data = new stdclass();
             $data->module = 'doc';
             $data->method = 'index';
             $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();

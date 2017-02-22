@@ -14,7 +14,7 @@ js::set('locate', $locate);
 <div class='page-container' style='margin:50px auto;'>
   <div class='alert alert-danger'>
     <strong><?php echo $message;?></strong>
-    <p><?php printf($lang->error->jumping, $locate);?></p>
+    <p><?php printf($lang->notice->jumping, $locate);?></p>
   </div>
 </div>
 <?php js::execute($pageJS);?>

@@ -27,8 +27,10 @@ class userModel extends model
     public function getList($dept = 0, $mode = 'normal', $query = '', $orderBy = 'id', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_USER)
-            ->where('deleted')->eq('0')
+            ->where(1)
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
+
+            ->beginIF($mode != 'all')->andWhere('deleted')->eq('0')->fi()
 
             ->beginIF($mode == 'normal')
             ->andWhere('locked', true)->eq('0000-00-00 00:00:00')
@@ -36,10 +38,7 @@ class userModel extends model
             ->markRight(1)
             ->fi()
 
-            ->beginIF($mode == 'forbid')
-            ->andWhere('locked', true)->ge(helper::now())
-            ->markRight(1)
-            ->fi()
+            ->beginIF($mode == 'forbid')->andWhere('locked')->ge(helper::now())->fi()
 
             ->beginIF($query != '')
             ->andWhere('account', true)->like("%$query%")
@@ -326,10 +325,7 @@ class userModel extends model
         if(!$user) return false;
 
         /* Set keep login cookie info if keep login. */
-        if($this->post->keepLogin == 'true')
-        {
-            $this->keepLogin($user);
-        }
+        if($this->post->keepLogin) $this->keepLogin($user);
 
         $user->password = $this->post->rawPassword;
 
@@ -392,7 +388,7 @@ class userModel extends model
         if(!$this->compareHashPassword($password, $user))
         {
             $user->fails ++;
-            if($user->fails > 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
+            if($user->fails > 4) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
             $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }

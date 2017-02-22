@@ -85,7 +85,7 @@ class user extends control
                 {
                     $path = substr($this->post->referer, strrpos($this->post->referer, '/') + 1);
                     $path = rtrim($path, '.html');
-                    if(empty($path)) $path = $this->config->requestFix;
+                    if(empty($path) or strpos($path, $this->config->requestFix) === false) $path = $this->config->requestFix;
                     list($module, $method) = explode($this->config->requestFix, $path);
                 }
                 else
@@ -341,10 +341,11 @@ class user extends control
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->view->users    = $this->user->getList($deptID, $mode, $query, $orderBy, $pager);
-        $this->view->query    = $query;
-        $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
+        $this->view->mode     = $mode;
+        $this->view->query    = $query;
         $this->view->orderBy  = $orderBy;
+        $this->view->pager    = $pager;
 
         $this->view->title = $this->lang->user->list;
         $this->display();

@@ -108,7 +108,9 @@ class docModel extends model
         {
             $stmt = $this->dao->select('t1.*')->from(TABLE_DOCLIB)->alias('t1')
                 ->leftJoin(TABLE_PROJECT)->alias('t2')->on('t1.project=t2.id')
-                ->where('t1.deleted')->eq(0)->andWhere('t1.project')->ne(0)
+                ->where('t1.deleted')->eq(0)
+                ->andWhere('t1.project')->ne(0)
+                ->andWhere('t2.deleted')->eq(0)
                 ->orderBy('order, id desc')
                 ->query();
         }
@@ -372,7 +374,8 @@ class docModel extends model
             ->beginIF($libID == 'project')->andWhere('project')->in($keysOfProjects)->fi()
             ->beginIF($projectID > 0)->andWhere('project')->eq($projectID)->fi()
             ->beginIF((string)$projectID == 'int')->andWhere('project')->gt(0)->fi()
-            ->beginIF($module)->andWhere('module')->in($module)->fi()
+            ->beginIF(is_int($module))->andWhere('module')->eq($module)->fi()
+            ->beginIF(!is_int($module) and $module)->andWhere('module')->in($module)->fi()
             ->orderBy($orderBy)
             ->fetchAll();
 

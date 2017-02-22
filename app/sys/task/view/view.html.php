@@ -20,7 +20,7 @@
   <li class='divider angle'></li>
 </div>
 <?php endif;?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <div class='row-table'>
     <div class='col-main'>
       <div class='panel'>

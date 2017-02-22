@@ -158,6 +158,7 @@ $config->rights->member['overtime']['delete']       = 'delete';
 $config->rights->member['overtime']['switchstatus'] = 'switchstatus';
 
 $config->rights->member['trip']['personal'] = 'personal';
+$config->rights->member['trip']['view']     = 'view';
 $config->rights->member['trip']['create']   = 'create';
 $config->rights->member['trip']['edit']     = 'edit';
 $config->rights->member['trip']['delete']   = 'delete';

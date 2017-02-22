@@ -92,6 +92,8 @@ class blockModel extends model
             $link .= '?' . $parsedUrl['query'];
         }
 
+        $link = str_replace('-', '_', $link);
+
         /* Send login request. */
         $loginObj = "<iframe src=" . helper::createLink('sys.entry', 'visit', "entryID={$entry->id}") . "' class='hidden' />";
         return $loginObj . commonModel::http($link);
@@ -229,6 +231,9 @@ class blockModel extends model
         foreach($blocks as $key => $block)
         {
             if(strpos('html,allEntries,dynamic,attend', $block->block) !== false) continue;
+
+            $entry = $this->loadModel('entry')->getByCode($block->source);
+            if($entry && !$entry->buildin) continue;
 
             $module = $block->block;
             $method = 'browse';

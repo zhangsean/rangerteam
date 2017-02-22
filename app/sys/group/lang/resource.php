@@ -180,6 +180,7 @@ $lang->resource->customer->contract    = 'contract';
 $lang->resource->customer->export      = 'export';
 $lang->resource->customer->delete      = 'delete';
 $lang->resource->customer->batchAssign = 'batchAssign';
+$lang->resource->customer->merge       = 'merge';
 
 $lang->customer->methodOrder[5]  = 'browse';
 $lang->customer->methodOrder[15] = 'create';
@@ -193,6 +194,7 @@ $lang->customer->methodOrder[50] = 'export';
 $lang->customer->methodOrder[55] = 'delete';
 $lang->customer->methodOrder[60] = 'assign';
 $lang->customer->methodOrder[65] = 'batchAssign';
+$lang->customer->methodOrder[70] = 'merge';
 
 /* Contact. */
 $lang->resource->contact = new stdclass();

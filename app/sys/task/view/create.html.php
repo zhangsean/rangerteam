@@ -15,7 +15,7 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <form method='post' id='ajaxForm' enctype='multipart/form-data' action="<?php echo $this->createLink('task', 'create', "projectID=$projectID")?>">
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $lang->task->create;?></strong></div>

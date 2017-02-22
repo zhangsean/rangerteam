@@ -113,25 +113,6 @@ class entryModel extends model
             $newEntries = array();
             foreach($entries as $entry)
             {
-                switch ($entry->code)
-                {
-                    case 'crm':
-                        unset($entry->logo);
-                        $entry->icon = 'icon-phone';
-                        break;
-                    case 'oa':
-                        unset($entry->logo);
-                        $entry->icon = 'icon-check';
-                        break;
-                    case 'cash':
-                        unset($entry->logo);
-                        $entry->icon = 'icon-dollar';
-                        break;
-                    case 'team':
-                        unset($entry->logo);
-                        $entry->icon = 'icon-group';
-                        break;
-                }
                 if(empty($entry->url)) $entry->url = helper::createLink('entry', 'visit', "entryID=$entry->id");
                 $newEntries[$entry->id] = $entry;
             }
@@ -443,6 +424,7 @@ class entryModel extends model
             $link .= '?' . $parseUrl['query'];
         }
 
+        $link = str_replace('-', '_', $link);
         $blocks = commonModel::http($link);
         return json_decode($blocks, true);
     }
@@ -475,6 +457,8 @@ class entryModel extends model
             if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
             $link .= '?' . $parseUrl['query'];
         }
+
+        $link = str_replace('-', '_', $link);
         $params = commonModel::http($link);
 
         return json_decode($params, true);

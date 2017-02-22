@@ -15,7 +15,7 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php $this->loadModel('project', 'proj')->setMenu($projects, $projectID);?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <form method='post' id='ajaxForm' enctype='multipart/form-data'>
     <div class='row'>
       <div class='col-md-8'>

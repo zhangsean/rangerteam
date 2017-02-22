@@ -388,7 +388,7 @@ class task extends control
      */
     public function assignTo($taskID)
     {
-        $task    = $this->task->getByID($taskID);
+        $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'assignTo');
 
         $members = $this->loadModel('project', 'proj')->getMemberPairs($task->project);
@@ -931,14 +931,14 @@ class task extends control
             if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
             if($errorType == 'json')
             {
-                $this->app->loadLang('error');
-                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+                $this->app->loadLang('notice');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->notice->typeList['accessLimited']));
             }
             else
             {
                 $locate = helper::safe64Encode($this->server->http_referer);
-                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-                $this->locate($errorLink);
+                $noticeLink = helper::createLink('notice', 'index', "type=accessLimited&locate={$locate}");
+                $this->locate($noticeLink);
             }
         }
         return true;

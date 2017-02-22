@@ -45,9 +45,10 @@ class tree extends control
         }
         elseif(strpos($type, 'doc') !== false)
         {
-            $this->loadModel('doc', 'doc')->setMainMenu();
+            if($this->session->docFrom == 'doc') $this->loadModel('doc', 'doc')->setMainMenu();
             $this->lang->menuGroups->tree = 'doc';
-            $this->view->lib = $this->doc->getLibById($root);
+            $this->view->lib = $this->loadModel('doc', 'doc')->getLibById($root);
+            $this->view->projects = $this->loadModel('project', 'proj')->getPairs();
         }
 
         $this->view->title    = $this->lang->category->common;

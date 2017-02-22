@@ -23,8 +23,8 @@
       </div>
       <div class='panel-body'>
         <ul class='tree treeview'>
-          <?php foreach($lang->product->lineList as $key => $line):?>
-          <?php if(!empty($line)) echo "<li id='{$key}'>" . html::a(inlink('browse', "status={$status}&line={$key}"), $line) . "</li>";?>
+          <?php foreach($lang->product->lineList as $key => $productLine):?>
+          <?php if(!empty($productLine)) echo "<li id='{$key}'>" . html::a(inlink('browse', "status={$status}&line={$key}"), $productLine) . "</li>";?>
           <?php endforeach;?>
         </ul>
         <?php commonModel::printLink('crm.setting', 'lang', 'module=product&field=lineList', $lang->product->setline, "class='btn btn-primary setting'");?>
@@ -35,7 +35,7 @@
     <table class='table table-hover table-striped tablesorter table-data' id='productList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = "status={$status}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+          <?php $vars = "status={$status}&line={$line}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
           <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->product->id);?></th>
           <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->product->name);?></th>
           <th class='w-200px'><?php commonModel::printOrderLink('code',        $orderBy, $vars, $lang->product->code);?></th>

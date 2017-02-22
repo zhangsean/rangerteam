@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <?php js::set('mode', $mode);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
@@ -66,8 +67,8 @@
             echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
             commonModel::printLink('customer', 'order', "customerID=$customer->id", $lang->customer->order, "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('customer', 'contract', "customerID=$customer->id", $lang->customer->contract, "data-toggle='modal'", '', '', 'li');
-            commonModel::printLink('address',  'browse', "objectType=customer&objectID=$customer->id", $lang->customer->address, "data-toggle='modal'", '', '', 'li');
-            commonModel::printLink('customer',  'merge', "customerID=$customer->id", $lang->customer->merge, "data-toggle='modal'", '', '', 'li');
+            commonModel::printLink('crm.address', 'browse', "objectType=customer&objectID=$customer->id", $lang->customer->address, "data-toggle='modal'", '', '', 'li');
+            commonModel::printLink('customer', 'merge', "customerID=$customer->id", $lang->customer->merge, "data-toggle='modal'", '', '', 'li');
             commonModel::printLink('customer', 'delete', "customerID=$customer->id", $lang->delete, "class='deleter'", '', '', 'li');
             echo "</ul></div>";
             ?>

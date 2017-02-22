@@ -51,6 +51,10 @@ include '../../common/view/chosen.html.php';
 
 .outer > #querybox {margin: -20px -20px 20px; border-top: none; border-bottom: 1px solid #ddd}
 .table-form td + td, .table-form th + th {padding-left: 0;}
+.search-field input.date::-webkit-input-placeholder{color: #000000; opacity: 1;}
+.search-field input.date::-moz-placeholder{color: #000000; opacity: 1;} 
+.search-field input.date:-ms-input-placeholder{color: #000000; opacity: 1;}
+
 </style>
 <script language='Javascript'>
 var dtOptions = 
@@ -151,7 +155,7 @@ function setDateField(query, fieldNO, type)
         var $e = $(e.target);
         var ePos = $e.offset();
         $period.css({'left': ePos.left + 175, 'top': ePos.top + 29, 'min-height': $('.datetimepicker').outerHeight()}).show().data('target', $e.attr('id')).data('fieldNO', fieldNO).find('li.active').removeClass('active');
-        $period.find("li > a[href='" + $e.val().replace('$', '#') + "']").closest('li').addClass('active');
+        $period.find("li > a[href='" + $e.attr('placeholder').replace('$', '#') + "']").closest('li').addClass('active');
     }).on('changeDate', function()
     {
         var opt = $('#operator' + $period.data('fieldNO'));
@@ -354,8 +358,18 @@ foreach($fieldParams as $fieldName => $param)
           if($param['control'] == 'input') 
           {
               $fieldName  = $formSession["field$fieldNO"];
+              $fieldValue = $formSession["value$fieldNO"];
               $extraClass = isset($param['class']) ? $param['class'] : '';
-              echo html::input("value$fieldNO", $formSession["value$fieldNO"], "class='form-control $extraClass searchInput'");
+
+              if($fieldValue && strpos('$lastweek,$thisweek,$today,$yesterday,$thismonth,$lastmonth',$fieldValue) !== false)
+              {
+                  echo html::input("value$fieldNO", '', "class='form-control $extraClass searchInput' placeholder='{$fieldValue}'");
+                  echo html::hidden("value$fieldNO", $fieldValue);
+              }
+              else
+              {
+                  echo html::input("value$fieldNO", $fieldValue, "class='form-control $extraClass searchInput'");
+              }
           }
           echo '</td>';
 

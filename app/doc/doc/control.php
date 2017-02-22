@@ -21,6 +21,8 @@ class doc extends control
     {
         parent::__construct();
 
+        $this->session->set('docFrom', 'doc');
+
         $this->libs = $this->doc->getLibPairs();
         $this->loadModel('user');
         $this->loadModel('tree');
@@ -153,7 +155,7 @@ class doc extends control
             }
         }
 
-        if($this->cookie->browseType == 'bymenu')
+        if($this->cookie->browseType == 'bymenu' or $this->app->viewType === 'mhtml')
         {
             $this->view->modules = $this->doc->getDocMenu($libID, $moduleID, $orderBy == 'title_asc' ? 'name_asc' : 'id_desc');
             $this->view->parents = $this->loadModel('tree')->getFamily($moduleID);

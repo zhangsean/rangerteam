@@ -18,7 +18,7 @@ $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Back to Home';
 
 $lang->upgrade->index         = 'Upgrad Ranzhi.';
-$lang->upgrade->backup        = 'Backup';
+$lang->upgrade->backup        = 'Back Up';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';

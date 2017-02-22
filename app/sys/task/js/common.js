@@ -1,11 +1,5 @@
 $(function()
 {
-    $('.doc').click(function()
-    {
-        $.openEntry('doc', $(this).attr('href')); 
-        return false;
-    })
-
     if(v.backLink !== undefined) $('#menu .nav:first').append('<li>' + v.backLink + '</li>');
     if($.cookie('projectStatus') && v.projectID)
     {

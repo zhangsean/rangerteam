@@ -381,7 +381,7 @@ END:VCARD";
             $data->title       = $this->lang->contact->template;
             $data->customWidth = $this->config->contact->excelCustomWidth;
             $data->genderList  = array_values($this->lang->contact->genderList);
-            $data->SysDataList = $this->config->contact->listFields;
+            $data->sysDataList = $this->config->contact->listFields;
             $data->listStyle   = $this->config->contact->listFields;
 
             $excelData = new stdclass();

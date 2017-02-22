@@ -41,7 +41,7 @@ js::set('from', 'admin');
             <table class='table table-hover table-striped table-bordered tablesorter table-fixed'>
               <thead>
                 <tr class='text-center'>
-                  <?php $vars = "deptID=$deptID&query=$query&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+                  <?php $vars = "deptID=$deptID&mode=$mode&query=$query&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
                   <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->user->id);?></th>
                   <th class='w-120px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->user->realname);?></th>
                   <th><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->user->account);?></th>

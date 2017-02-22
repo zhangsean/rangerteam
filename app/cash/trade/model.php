@@ -1141,12 +1141,14 @@ class tradeModel extends model
      * @access public
      * @return void
      */
-    public function checkExpensePriv()
+    public function checkPriv($mode)
     {
         if($this->app->user->admin == 'super') return true;
-
+        
         $rights = $this->app->user->rights;
-        if(!isset($rights['tradebrowse']['out'])) return false;
+        if($mode == 'out' and !isset($rights['tradebrowse']['out'])) return false;
+        if(strpos(',all,in,', ',' . $mode . ',') !== false and !isset($rights['trade']['browse'])) return false;
+        if(strpos(',transfer,invest,loan,', ',' . $mode . ',') !== false and !isset($rights['trade'][$mode])) return false;
         return true;
     }
 

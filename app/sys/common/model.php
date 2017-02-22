@@ -264,8 +264,8 @@ class commonModel extends model
         if(!in_array($customerID, $customers))
         {
             $locate = helper::safe64Encode(helper::createLink('crm.index'));
-            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-            die(js::locate($errorLink));
+            $noticeLink = helper::createLink('notice', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($noticeLink));
         }
     }
 
@@ -314,7 +314,7 @@ class commonModel extends model
         if($module == 'misc' and $method == 'ignorenotice') return true;
         if($module == 'action' and $method == 'read') return true;
         if($module == 'block') return true;
-        if($module == 'error') return true;
+        if($module == 'notice') return true;
         if($module == 'sso' and strpos(',auth|check|gettodolist', $method)) return true;
         if($module == 'attend' and strpos(',signin|signout', $method)) return true;
         if($module == 'refund' and $method == 'createtrade') return true;

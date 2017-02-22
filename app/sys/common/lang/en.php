@@ -41,7 +41,7 @@ $lang->apps->superadmin = 'ADMIN';
 $lang->ranzhi    = 'Ranger';
 $lang->agreement = "I have read and agreed to  <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.2</a>, <span class='text-danger'>and will keep the logos and links of Ranger.</span>";
 $lang->poweredBy = "<a href='http://www.ranzhico.com/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
-$lang->ipLimited = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /></head><body>Sorry, current IP is limited by Administrator. Please contact the Administrator to lift the restrictions.</body></html>";
+$lang->ipLimited = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /></head><body>Sorry, your current IP is blocked. Please contact the Administrator to get privilege.</body></html>";
 
 /* IE6 alert.  */
 $lang->IE6Alert = <<<EOT
@@ -49,7 +49,7 @@ $lang->IE6Alert = <<<EOT
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>
       <p>Stop using IE6!</p>
-      <p>IE6 is too old, we should stop using it. <br/></p>
+      <p>IE6 is too outdated that we should stop using it. <br/></p>
       <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>Chrome</a>
       <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>Firefox</a>
       <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera</a>
@@ -173,7 +173,7 @@ EOT;
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete         = 'Are sure to delete it?';
+$lang->js->confirmDelete         = 'Do you want to delete it?';
 $lang->js->deleteing             = 'Deleting...';
 $lang->js->doing                 = 'Processing...';
 $lang->js->timeout               = 'Timeout';
@@ -190,7 +190,7 @@ $lang->company->email     = 'Email';
 $lang->company->fax       = 'Fax';
 $lang->company->qq        = 'QQ';
 $lang->company->weibo     = 'Weibo';
-$lang->company->weixin    = 'Weichat';
+$lang->company->weixin    = 'Wechat';
 $lang->company->wangwang  = 'Wangwang';
 
 /* The main menus. */
@@ -341,6 +341,8 @@ $lang->my->dynamic->menu->lastweek   = 'Last Week|my|dynamic|period=lastweek';
 $lang->my->dynamic->menu->thismonth  = 'This Month|my|dynamic|period=thismonth';
 $lang->my->dynamic->menu->lastmonth  = 'Last Month|my|dynamic|period=lastmonth';
 $lang->my->dynamic->menu->all        = 'All|my|dynamic|period=all';
+
+$lang->my->company = new stdclass();
 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
