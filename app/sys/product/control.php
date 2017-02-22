@@ -46,6 +46,7 @@ class product extends control
         $this->view->pager    = $pager;
         $this->view->orderBy  = $orderBy;
         $this->view->status   = $status;
+        $this->view->line     = $line;
         $this->display();
     }   
 
