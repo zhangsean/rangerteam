@@ -171,12 +171,12 @@ $lang->action->search->label = (array)$lang->action->label;
 /* Link of every action. */
 $lang->action->label->announce  = 'Announce|announce|view|announceID=%s';
 $lang->action->label->balance   = 'Balance|balance|browse|depositorID=%s';
+$lang->action->label->doc       = 'Document|doc|view|docID=%s';
+$lang->action->label->doclib    = 'Document Library|doc|browse|doclibID=%s';
 $lang->action->label->contact   = 'Contact|contact|view|contactID=%s';
 $lang->action->label->contract  = 'Contract|contract|view|contractID=%s';
 $lang->action->label->customer  = 'Customer|customer|view|customerID=%s';
 $lang->action->label->depositor = 'Account|depositor|browse|';
-$lang->action->label->doc       = 'Document|doc|view|docID=%s';
-$lang->action->label->doclib    = 'Document Library|doc|browse|doclibID=%s';
 $lang->action->label->holiday   = 'Holiday|hiloday|browse|';
 $lang->action->label->order     = 'Order|order|view|orderID=%s';
 $lang->action->label->product   = 'Product|product|view|productID=%s';
